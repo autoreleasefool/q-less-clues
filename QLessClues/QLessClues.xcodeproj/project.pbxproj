@@ -11,6 +11,7 @@
 		CA1867BB28C5095100DD75C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867BA28C5095100DD75C7 /* ContentView.swift */; };
 		CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BC28C5095200DD75C7 /* Assets.xcassets */; };
 		CA1867C028C5095200DD75C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BF28C5095200DD75C7 /* Preview Assets.xcassets */; };
+		CA1867D128C5103500DD75C7 /* Boutique in Frameworks */ = {isa = PBXBuildFile; productRef = CA1867D028C5103500DD75C7 /* Boutique */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA1867D128C5103500DD75C7 /* Boutique in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -100,6 +102,9 @@
 			dependencies = (
 			);
 			name = QLessClues;
+			packageProductDependencies = (
+				CA1867D028C5103500DD75C7 /* Boutique */,
+			);
 			productName = QLessClues;
 			productReference = CA1867B528C5095100DD75C7 /* QLessClues.app */;
 			productType = "com.apple.product-type.application";
@@ -128,6 +133,9 @@
 				Base,
 			);
 			mainGroup = CA1867AC28C5095100DD75C7;
+			packageReferences = (
+				CA1867CF28C5103500DD75C7 /* XCRemoteSwiftPackageReference "Boutique" */,
+			);
 			productRefGroup = CA1867B628C5095100DD75C7 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -380,6 +388,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		CA1867CF28C5103500DD75C7 /* XCRemoteSwiftPackageReference "Boutique" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/mergesort/Boutique";
+			requirement = {
+				branch = main;
+				kind = branch;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		CA1867D028C5103500DD75C7 /* Boutique */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA1867CF28C5103500DD75C7 /* XCRemoteSwiftPackageReference "Boutique" */;
+			productName = Boutique;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CA1867AD28C5095100DD75C7 /* Project object */;
 }
