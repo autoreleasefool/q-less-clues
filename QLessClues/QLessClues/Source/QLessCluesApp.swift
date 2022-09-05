@@ -11,7 +11,9 @@ import SwiftUI
 struct QLessCluesApp: App {
 	var body: some Scene {
 		WindowGroup {
-			ContentView()
+			NavigationStack {
+				StatisticsScreen()
+			}
 		}
 	}
 }

@@ -8,18 +8,28 @@
 
 /* Begin PBXBuildFile section */
 		CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */; };
-		CA1867BB28C5095100DD75C7 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867BA28C5095100DD75C7 /* ContentView.swift */; };
 		CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BC28C5095200DD75C7 /* Assets.xcassets */; };
 		CA1867C028C5095200DD75C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BF28C5095200DD75C7 /* Preview Assets.xcassets */; };
+		CA1867CE28C50FD000DD75C7 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867CD28C50FD000DD75C7 /* Play.swift */; };
 		CA1867D128C5103500DD75C7 /* Boutique in Frameworks */ = {isa = PBXBuildFile; productRef = CA1867D028C5103500DD75C7 /* Boutique */; };
+		CA1867D328C510ED00DD75C7 /* SolvedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867D228C510ED00DD75C7 /* SolvedState.swift */; };
+		CA1867D728C5195500DD75C7 /* StatisticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867D628C5195500DD75C7 /* StatisticsScreen.swift */; };
+		CA1867D928C5196F00DD75C7 /* PlaysController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867D828C5196F00DD75C7 /* PlaysController.swift */; };
+		CA6452A828C5C72900738762 /* LetterEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6452A728C5C72900738762 /* LetterEntry.swift */; };
+		CABF28C828C57C4E00A0C0E1 /* RecordPlayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABF28C728C57C4E00A0C0E1 /* RecordPlayScreen.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		CA1867B528C5095100DD75C7 /* QLessClues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLessClues.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLessCluesApp.swift; sourceTree = "<group>"; };
-		CA1867BA28C5095100DD75C7 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CA1867BC28C5095200DD75C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA1867BF28C5095200DD75C7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		CA1867CD28C50FD000DD75C7 /* Play.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
+		CA1867D228C510ED00DD75C7 /* SolvedState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolvedState.swift; sourceTree = "<group>"; };
+		CA1867D628C5195500DD75C7 /* StatisticsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsScreen.swift; sourceTree = "<group>"; };
+		CA1867D828C5196F00DD75C7 /* PlaysController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlaysController.swift; sourceTree = "<group>"; };
+		CA6452A728C5C72900738762 /* LetterEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEntry.swift; sourceTree = "<group>"; };
+		CABF28C728C57C4E00A0C0E1 /* RecordPlayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPlayScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,8 +82,8 @@
 		CA1867C628C5096A00DD75C7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				CA1867C928C50F3C00DD75C7 /* Features */,
 				CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */,
-				CA1867BA28C5095100DD75C7 /* ContentView.swift */,
 			);
 			path = Source;
 			sourceTree = "<group>";
@@ -83,6 +93,59 @@
 			children = (
 			);
 			path = Resources;
+			sourceTree = "<group>";
+		};
+		CA1867C928C50F3C00DD75C7 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				CABF28C628C57C2900A0C0E1 /* Record */,
+				CA1867CB28C50FBB00DD75C7 /* Statistics */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		CA1867CB28C50FBB00DD75C7 /* Statistics */ = {
+			isa = PBXGroup;
+			children = (
+				CA1867D428C5141800DD75C7 /* Controllers */,
+				CA1867CC28C50FC200DD75C7 /* Models */,
+				CA1867D628C5195500DD75C7 /* StatisticsScreen.swift */,
+			);
+			path = Statistics;
+			sourceTree = "<group>";
+		};
+		CA1867CC28C50FC200DD75C7 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CA1867CD28C50FD000DD75C7 /* Play.swift */,
+				CA1867D228C510ED00DD75C7 /* SolvedState.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		CA1867D428C5141800DD75C7 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CA1867D828C5196F00DD75C7 /* PlaysController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CA6452A628C5C71C00738762 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CA6452A728C5C72900738762 /* LetterEntry.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		CABF28C628C57C2900A0C0E1 /* Record */ = {
+			isa = PBXGroup;
+			children = (
+				CA6452A628C5C71C00738762 /* Views */,
+				CABF28C728C57C4E00A0C0E1 /* RecordPlayScreen.swift */,
+			);
+			path = Record;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -184,8 +247,13 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA1867BB28C5095100DD75C7 /* ContentView.swift in Sources */,
+				CA1867D928C5196F00DD75C7 /* PlaysController.swift in Sources */,
 				CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */,
+				CA1867D728C5195500DD75C7 /* StatisticsScreen.swift in Sources */,
+				CABF28C828C57C4E00A0C0E1 /* RecordPlayScreen.swift in Sources */,
+				CA1867D328C510ED00DD75C7 /* SolvedState.swift in Sources */,
+				CA6452A828C5C72900738762 /* LetterEntry.swift in Sources */,
+				CA1867CE28C50FD000DD75C7 /* Play.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
