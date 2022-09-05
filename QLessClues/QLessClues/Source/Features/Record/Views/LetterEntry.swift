@@ -31,7 +31,7 @@ struct LetterEntry: View {
 	}
 
 	private func captureLetters() {
-
+		fatalError("not implemented")
 	}
 
 	private func updateLetters(_ letters: String) {

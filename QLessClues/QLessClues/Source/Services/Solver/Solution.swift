@@ -7,36 +7,101 @@
 
 import Foundation
 
-struct Solution {
-	let entries: [Entry]
+struct Solution: Codable, Equatable, Hashable {
+	private typealias Size = (width: Int, height: Int)
 
-	init(entries: [Entry]) {
-		assert(!entries.isEmpty)
-		assert(entries.first?.intersection == nil)
-		assert(entries.dropFirst().allSatisfy { $0.intersection != nil })
+	let letters: [LetterPosition]
+	let words: [String]
 
-		self.entries = entries
-	}
+	init(letters: [LetterPosition]) {
+		self.letters = letters
 
-	var words: [String] {
-		entries.map(\.word)
+		var boardSize: Size = (width: 0, height: 0)
+		let positions: [Position: String] = letters.reduce(into: [:]) { pos, letter in
+			boardSize.width = max(boardSize.width, letter.position.column + 1)
+			boardSize.height = max(boardSize.height, letter.position.row + 1)
+			pos[letter.position] = letter.letter
+		}
+
+		self.words = (Self.findHorizontalWords(boardSize, positions) + Self.findVerticalWords(boardSize, positions))
+			.sorted()
 	}
 }
+
+// MARK: - Letter
 
 extension Solution {
-	struct Entry {
-		let intersection: Intersection?
-		let word: String
+	struct LetterPosition: Codable, Equatable, Hashable {
+		let letter: String
+		let position: Position
 	}
 }
 
-extension Solution.Entry {
-	struct Intersection {
-		// Index of the word in the `Solution.Entry` array that this entry intersects with
-		let intersectingEntryIndex: Int
-		// Index of the letter in the intersecting `Solution.Entry` that this entry specifically shares
-		let intersectingEntryLetterIndex: Int
-		// Index of the letter in _this_ entry that intersects the intersecting `Solution.Entry`
-		let selfIntersectingIndex: Int
+// MARK: - Position
+
+extension Solution {
+	struct Position: Codable, Equatable, Hashable {
+		let row: Int
+		let column: Int
+
+		init(row: Int, column: Int) {
+			self.row = row
+			self.column = column
+		}
+
+		init(_ row: Int, _ column: Int) {
+			self.row = row
+			self.column = column
+		}
+	}
+}
+
+// MARK: - Helpers
+
+private extension Solution {
+	private static func findVerticalWords(_ boardSize: Size, _ positions: [Position: String]) -> [String] {
+		var words: [String] = []
+		for column in 0..<boardSize.width {
+			var word = ""
+			for row in 0..<boardSize.height {
+				if let letter = positions[Position(row, column)] {
+					word += letter
+				} else {
+					if word.count > 1 {
+						words.append(word)
+					}
+					word = ""
+				}
+			}
+
+			if word.count > 1 {
+				words.append(word)
+			}
+		}
+
+		return words
+	}
+
+	private static func findHorizontalWords(_ boardSize: Size, _ positions: [Position: String]) -> [String] {
+		var words: [String] = []
+		for row in 0..<boardSize.height {
+			var word = ""
+			for column in 0..<boardSize.width {
+				if let letter = positions[Position(row, column)] {
+					word += letter
+				} else {
+					if word.count > 1 {
+						words.append(word)
+					}
+					word = ""
+				}
+			}
+
+			if word.count > 1 {
+				words.append(word)
+			}
+		}
+
+		return words
 	}
 }

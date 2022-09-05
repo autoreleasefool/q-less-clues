@@ -7,9 +7,9 @@
 
 import Foundation
 
-struct Dictionary {
+struct WordSet {
 
-	private static let dictionary: [String] = {
+	static let englishWords: [String] = {
 		guard let wordListUrl = Bundle.main.url(forResource: "words", withExtension: "txt"),
 					let wordList = try? String(contentsOf: wordListUrl) else {
 			fatalError("Could not load dictionary")
@@ -17,7 +17,7 @@ struct Dictionary {
 
 		return wordList
 			.split(separator: "\n")
-			.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+			.map { $0.trimmingCharacters(in: .whitespacesAndNewlines).uppercased() }
 			.filter { !$0.isEmpty }
 			.sorted {
 				return $0.count == $1.count ? $0 < $1 : $0.count > $1.count
@@ -27,7 +27,7 @@ struct Dictionary {
 	let words: [String]
 	let alphabet: String
 
-	init(alphabet: String, words: [String] = Self.dictionary) {
+	init(alphabet: String, words: [String] = Self.englishWords) {
 		self.alphabet = String(alphabet.sorted())
 		let letterSet = Set(alphabet)
 		self.words = words
@@ -35,7 +35,7 @@ struct Dictionary {
 		fatalError("not implemented")
 	}
 
-	func subtracting(_ letters: String) -> Dictionary? {
+	func subtracting(_ letters: String) -> WordSet? {
 		var newAlphabet = alphabet
 		for letter in letters {
 			guard let index = newAlphabet.firstIndex(of: letter) else {
