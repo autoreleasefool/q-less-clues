@@ -24,30 +24,14 @@ struct WordSet {
 			}
 	}()
 
-	let words: [String]
-	let alphabet: String
+	private(set) var words: [String]
+	private(set) var alphabet: String
 
 	init(alphabet: String, words: [String] = Self.englishWords) {
-		self.alphabet = String(alphabet.sorted())
-		let letterSet = Set(alphabet)
+		self.alphabet = String(alphabet.sorted()).uppercased()
+		let letterSet = Set(self.alphabet)
 		self.words = words
 			.filter { Set($0).subtracting(letterSet).isEmpty }
-		fatalError("not implemented")
+		// TODO: generate word set
 	}
-
-	func subtracting(_ letters: String) -> WordSet? {
-		var newAlphabet = alphabet
-		for letter in letters {
-			guard let index = newAlphabet.firstIndex(of: letter) else {
-				// We're trying to remove a letter that doesn't exist in the alphabet, so we haven't passed a valid word
-				// and cannot return a valid Dictionary
-				return nil
-			}
-
-			newAlphabet.remove(at: index)
-		}
-
-		fatalError("not implemented")
-	}
-
 }

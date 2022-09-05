@@ -21,6 +21,9 @@
 		CA1CEE5328C65AE100520C70 /* Solution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5028C65AE100520C70 /* Solution.swift */; };
 		CA1CEE5528C67BF200520C70 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5428C67BF200520C70 /* Validator.swift */; };
 		CA1CEE5828C67C2000520C70 /* BasicValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5728C67C2000520C70 /* BasicValidator.swift */; };
+		CA1CEE5B28C6AF0000520C70 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5A28C6AF0000520C70 /* Position.swift */; };
+		CA1CEE5D28C6B36A00520C70 /* LetterSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5C28C6B36A00520C70 /* LetterSet.swift */; };
+		CA1CEE5F28C6BA7D00520C70 /* Commonality.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5E28C6BA7D00520C70 /* Commonality.swift */; };
 		CA6452A828C5C72900738762 /* LetterEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6452A728C5C72900738762 /* LetterEntry.swift */; };
 		CA6452BE28C5DFA200738762 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = CA6452BD28C5DFA200738762 /* words.txt */; };
 		CABF28C828C57C4E00A0C0E1 /* RecordPlayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABF28C728C57C4E00A0C0E1 /* RecordPlayScreen.swift */; };
@@ -41,6 +44,9 @@
 		CA1CEE5028C65AE100520C70 /* Solution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Solution.swift; sourceTree = "<group>"; };
 		CA1CEE5428C67BF200520C70 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		CA1CEE5728C67C2000520C70 /* BasicValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicValidator.swift; sourceTree = "<group>"; };
+		CA1CEE5A28C6AF0000520C70 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
+		CA1CEE5C28C6B36A00520C70 /* LetterSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterSet.swift; sourceTree = "<group>"; };
+		CA1CEE5E28C6BA7D00520C70 /* Commonality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commonality.swift; sourceTree = "<group>"; };
 		CA6452A728C5C72900738762 /* LetterEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEntry.swift; sourceTree = "<group>"; };
 		CA6452BD28C5DFA200738762 /* words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words.txt; sourceTree = "<group>"; };
 		CABF28C728C57C4E00A0C0E1 /* RecordPlayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPlayScreen.swift; sourceTree = "<group>"; };
@@ -156,6 +162,15 @@
 			path = Validator;
 			sourceTree = "<group>";
 		};
+		CA1CEE5928C6AEF600520C70 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CA1CEE5028C65AE100520C70 /* Solution.swift */,
+				CA1CEE5A28C6AF0000520C70 /* Position.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CA6452A628C5C71C00738762 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -177,8 +192,8 @@
 		CA6452B228C5D44B00738762 /* Solver */ = {
 			isa = PBXGroup;
 			children = (
+				CA1CEE5928C6AEF600520C70 /* Models */,
 				CA1CEE4F28C65AE100520C70 /* BacktrackingSolver.swift */,
-				CA1CEE5028C65AE100520C70 /* Solution.swift */,
 				CA1CEE4E28C65AE100520C70 /* Solver.swift */,
 			);
 			path = Solver;
@@ -188,6 +203,8 @@
 			isa = PBXGroup;
 			children = (
 				CA1CEE4C28C65ADA00520C70 /* WordSet.swift */,
+				CA1CEE5C28C6B36A00520C70 /* LetterSet.swift */,
+				CA1CEE5E28C6BA7D00520C70 /* Commonality.swift */,
 			);
 			path = Dictionary;
 			sourceTree = "<group>";
@@ -301,6 +318,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA1CEE5B28C6AF0000520C70 /* Position.swift in Sources */,
 				CA1867D928C5196F00DD75C7 /* PlaysController.swift in Sources */,
 				CA1CEE4D28C65ADA00520C70 /* WordSet.swift in Sources */,
 				CA1CEE5128C65AE100520C70 /* Solver.swift in Sources */,
@@ -308,12 +326,14 @@
 				CA1CEE5528C67BF200520C70 /* Validator.swift in Sources */,
 				CA1CEE5328C65AE100520C70 /* Solution.swift in Sources */,
 				CA1867D728C5195500DD75C7 /* StatisticsScreen.swift in Sources */,
+				CA1CEE5F28C6BA7D00520C70 /* Commonality.swift in Sources */,
 				CABF28C828C57C4E00A0C0E1 /* RecordPlayScreen.swift in Sources */,
 				CA1CEE5228C65AE100520C70 /* BacktrackingSolver.swift in Sources */,
 				CA1867D328C510ED00DD75C7 /* SolvedState.swift in Sources */,
 				CA6452A828C5C72900738762 /* LetterEntry.swift in Sources */,
 				CA1867CE28C50FD000DD75C7 /* Play.swift in Sources */,
 				CA1CEE5828C67C2000520C70 /* BasicValidator.swift in Sources */,
+				CA1CEE5D28C6B36A00520C70 /* LetterSet.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

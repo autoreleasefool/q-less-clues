@@ -10,11 +10,18 @@ import Foundation
 struct Solution: Codable, Equatable, Hashable {
 	private typealias Size = (width: Int, height: Int)
 
-	let letters: [LetterPosition]
+	let letterPositions: [LetterPosition]
 	let words: [String]
+	var letters: [String] {
+		letterPositions.map { $0.letter }
+	}
+
+	init(board: [Position: String]) {
+		self.init(letters: board.map { LetterPosition(letter: $0.value, position: $0.key) })
+	}
 
 	init(letters: [LetterPosition]) {
-		self.letters = letters
+		self.letterPositions = letters
 
 		var boardSize: Size = (width: 0, height: 0)
 		let positions: [Position: String] = letters.reduce(into: [:]) { pos, letter in
@@ -34,25 +41,6 @@ extension Solution {
 	struct LetterPosition: Codable, Equatable, Hashable {
 		let letter: String
 		let position: Position
-	}
-}
-
-// MARK: - Position
-
-extension Solution {
-	struct Position: Codable, Equatable, Hashable {
-		let row: Int
-		let column: Int
-
-		init(row: Int, column: Int) {
-			self.row = row
-			self.column = column
-		}
-
-		init(_ row: Int, _ column: Int) {
-			self.row = row
-			self.column = column
-		}
 	}
 }
 
