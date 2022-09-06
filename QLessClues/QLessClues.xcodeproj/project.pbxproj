@@ -24,10 +24,22 @@
 		CA1CEE5B28C6AF0000520C70 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5A28C6AF0000520C70 /* Position.swift */; };
 		CA1CEE5D28C6B36A00520C70 /* LetterSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5C28C6B36A00520C70 /* LetterSet.swift */; };
 		CA1CEE5F28C6BA7D00520C70 /* Commonality.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5E28C6BA7D00520C70 /* Commonality.swift */; };
+		CA1CEE7328C6C07A00520C70 /* CommonalityTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE7228C6C07A00520C70 /* CommonalityTests.swift */; };
+		CA1CEE7628C6C74B00520C70 /* Boutique in Frameworks */ = {isa = PBXBuildFile; productRef = CA1CEE7528C6C74B00520C70 /* Boutique */; };
 		CA6452A828C5C72900738762 /* LetterEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6452A728C5C72900738762 /* LetterEntry.swift */; };
 		CA6452BE28C5DFA200738762 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = CA6452BD28C5DFA200738762 /* words.txt */; };
 		CABF28C828C57C4E00A0C0E1 /* RecordPlayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABF28C728C57C4E00A0C0E1 /* RecordPlayScreen.swift */; };
 /* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		CA1CEE6828C6C03C00520C70 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = CA1867AD28C5095100DD75C7 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = CA1867B428C5095100DD75C7;
+			remoteInfo = QLessClues;
+		};
+/* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
 		CA1867B528C5095100DD75C7 /* QLessClues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLessClues.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +59,8 @@
 		CA1CEE5A28C6AF0000520C70 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
 		CA1CEE5C28C6B36A00520C70 /* LetterSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterSet.swift; sourceTree = "<group>"; };
 		CA1CEE5E28C6BA7D00520C70 /* Commonality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Commonality.swift; sourceTree = "<group>"; };
+		CA1CEE6428C6C03C00520C70 /* QLessCluesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QLessCluesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		CA1CEE7228C6C07A00520C70 /* CommonalityTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommonalityTests.swift; sourceTree = "<group>"; };
 		CA6452A728C5C72900738762 /* LetterEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEntry.swift; sourceTree = "<group>"; };
 		CA6452BD28C5DFA200738762 /* words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words.txt; sourceTree = "<group>"; };
 		CABF28C728C57C4E00A0C0E1 /* RecordPlayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPlayScreen.swift; sourceTree = "<group>"; };
@@ -61,6 +75,14 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CA1CEE6128C6C03C00520C70 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA1CEE7628C6C74B00520C70 /* Boutique in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -68,7 +90,9 @@
 			isa = PBXGroup;
 			children = (
 				CA1867B728C5095100DD75C7 /* QLessClues */,
+				CA1CEE6528C6C03C00520C70 /* QLessCluesTests */,
 				CA1867B628C5095100DD75C7 /* Products */,
+				CA1CEE7428C6C74B00520C70 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -76,6 +100,7 @@
 			isa = PBXGroup;
 			children = (
 				CA1867B528C5095100DD75C7 /* QLessClues.app */,
+				CA1CEE6428C6C03C00520C70 /* QLessCluesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -171,6 +196,37 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
+		CA1CEE6528C6C03C00520C70 /* QLessCluesTests */ = {
+			isa = PBXGroup;
+			children = (
+				CA1CEE6D28C6C05400520C70 /* Services */,
+			);
+			path = QLessCluesTests;
+			sourceTree = "<group>";
+		};
+		CA1CEE6D28C6C05400520C70 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CA1CEE6E28C6C05A00520C70 /* Dictionary */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CA1CEE6E28C6C05A00520C70 /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				CA1CEE7228C6C07A00520C70 /* CommonalityTests.swift */,
+			);
+			path = Dictionary;
+			sourceTree = "<group>";
+		};
+		CA1CEE7428C6C74B00520C70 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		CA6452A628C5C71C00738762 /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -242,6 +298,27 @@
 			productReference = CA1867B528C5095100DD75C7 /* QLessClues.app */;
 			productType = "com.apple.product-type.application";
 		};
+		CA1CEE6328C6C03C00520C70 /* QLessCluesTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = CA1CEE6A28C6C03C00520C70 /* Build configuration list for PBXNativeTarget "QLessCluesTests" */;
+			buildPhases = (
+				CA1CEE6028C6C03C00520C70 /* Sources */,
+				CA1CEE6128C6C03C00520C70 /* Frameworks */,
+				CA1CEE6228C6C03C00520C70 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				CA1CEE6928C6C03C00520C70 /* PBXTargetDependency */,
+			);
+			name = QLessCluesTests;
+			packageProductDependencies = (
+				CA1CEE7528C6C74B00520C70 /* Boutique */,
+			);
+			productName = QLessCluesTests;
+			productReference = CA1CEE6428C6C03C00520C70 /* QLessCluesTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -254,6 +331,10 @@
 				TargetAttributes = {
 					CA1867B428C5095100DD75C7 = {
 						CreatedOnToolsVersion = 14.0;
+					};
+					CA1CEE6328C6C03C00520C70 = {
+						CreatedOnToolsVersion = 14.0;
+						TestTargetID = CA1867B428C5095100DD75C7;
 					};
 				};
 			};
@@ -274,6 +355,7 @@
 			projectRoot = "";
 			targets = (
 				CA1867B428C5095100DD75C7 /* QLessClues */,
+				CA1CEE6328C6C03C00520C70 /* QLessCluesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -286,6 +368,13 @@
 				CA1867C028C5095200DD75C7 /* Preview Assets.xcassets in Resources */,
 				CA6452BE28C5DFA200738762 /* words.txt in Resources */,
 				CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		CA1CEE6228C6C03C00520C70 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -337,7 +426,23 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
+		CA1CEE6028C6C03C00520C70 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				CA1CEE7328C6C07A00520C70 /* CommonalityTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 /* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		CA1CEE6928C6C03C00520C70 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = CA1867B428C5095100DD75C7 /* QLessClues */;
+			targetProxy = CA1CEE6828C6C03C00520C70 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CA1867C128C5095200DD75C7 /* Debug */ = {
@@ -514,6 +619,42 @@
 			};
 			name = Release;
 		};
+		CA1CEE6B28C6C03C00520C70 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3UBRXR267C;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.josephroque.QLessCluesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QLessClues.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QLessClues";
+			};
+			name = Debug;
+		};
+		CA1CEE6C28C6C03C00520C70 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 3UBRXR267C;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = ca.josephroque.QLessCluesTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QLessClues.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QLessClues";
+			};
+			name = Release;
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -535,6 +676,15 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
+		CA1CEE6A28C6C03C00520C70 /* Build configuration list for PBXNativeTarget "QLessCluesTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				CA1CEE6B28C6C03C00520C70 /* Debug */,
+				CA1CEE6C28C6C03C00520C70 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
@@ -550,6 +700,11 @@
 
 /* Begin XCSwiftPackageProductDependency section */
 		CA1867D028C5103500DD75C7 /* Boutique */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA1867CF28C5103500DD75C7 /* XCRemoteSwiftPackageReference "Boutique" */;
+			productName = Boutique;
+		};
+		CA1CEE7528C6C74B00520C70 /* Boutique */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CA1867CF28C5103500DD75C7 /* XCRemoteSwiftPackageReference "Boutique" */;
 			productName = Boutique;

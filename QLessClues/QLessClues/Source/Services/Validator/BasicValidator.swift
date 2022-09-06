@@ -8,7 +8,7 @@
 import Foundation
 
 class BasicValidator: Validator {
-	private let englishWords = Set(WordSet.englishWords)
+	private let englishWords = Set(WordSet.fullEnglishSet.words)
 
 	func validate(solution: Solution) -> Bool {
 		return solution.words.allSatisfy { englishWords.contains($0) }

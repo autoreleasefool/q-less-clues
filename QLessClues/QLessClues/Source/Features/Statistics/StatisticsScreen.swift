@@ -12,11 +12,6 @@ struct StatisticsScreen: View {
 	@StateObject private var playsController = PlaysController()
 	@State private var newPlay: Play?
 
-	init() {
-		print(LetterCommonality.sortedByLeastCommon)
-		print(LetterSet(letters: "vntobgjacyff").lettersByLeastCommonality)
-	}
-
 	var body: some View {
 		List(playsController.plays) { _ in
 			EmptyView()

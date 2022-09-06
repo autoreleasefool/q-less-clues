@@ -23,7 +23,7 @@ class BacktrackingSolver: Solver {
 		let subject = SolutionSubject()
 		dispatchQueue.async { [weak self] in
 			var letterSet = LetterSet(letters: letters)
-			var wordSet = WordSet(alphabet: letters)
+			var wordSet = WordSet(letterSet: letterSet)
 			var board: [Position: String] = [:]
 			self?.generateSolutions(remainingLetters: &letterSet, board: &board, wordSet: &wordSet, subject: subject)
 			subject.send(completion: .finished)

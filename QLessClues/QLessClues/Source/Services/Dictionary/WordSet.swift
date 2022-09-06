@@ -9,7 +9,7 @@ import Foundation
 
 struct WordSet {
 
-	static let englishWords: [String] = {
+	private static let englishWords: [String] = {
 		guard let wordListUrl = Bundle.main.url(forResource: "words", withExtension: "txt"),
 					let wordList = try? String(contentsOf: wordListUrl) else {
 			fatalError("Could not load dictionary")
@@ -24,13 +24,16 @@ struct WordSet {
 			}
 	}()
 
+	static let fullEnglishSet: WordSet = WordSet(letterSet: LetterSet(letters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+
 	private(set) var words: [String]
 	private(set) var alphabet: String
 
-	init(alphabet: String, words: [String] = Self.englishWords) {
-		self.alphabet = String(alphabet.sorted()).uppercased()
+	init(letterSet: LetterSet, words: [String] = Self.englishWords) {
+		self.alphabet = String(letterSet.letters.sorted()).uppercased()
 		let letterSet = Set(self.alphabet)
 		self.words = words
+			.map { $0.uppercased() }
 			.filter { Set($0).subtracting(letterSet).isEmpty }
 		// TODO: generate word set
 	}

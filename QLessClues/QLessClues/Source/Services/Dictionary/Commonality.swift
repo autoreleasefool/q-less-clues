@@ -7,23 +7,19 @@
 
 import Foundation
 
-enum LetterCommonality {
+struct LetterCommonality {
 
-	static let fullAlphabet = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
+	let commonality: [Character: Int]
 
-	static let commonality: [Character: Int] = {
-		var commonality: [Character: Int] = fullAlphabet.reduce(into: [:]) { $0[$1] = 0 }
-		commonality = WordSet.englishWords.reduce(into: commonality) { commonality, word in
+	init(letterSet: LetterSet, wordSet: WordSet) {
+		var commonality: [Character: Int] = letterSet.letters.reduce(into: [:]) { $0[$1] = 0 }
+		commonality = wordSet.words.reduce(into: commonality) { commonality, word in
 			word.forEach { commonality[$0] = commonality[$0]! + 1 }
 		}
-		return commonality
-	}()
+		self.commonality = commonality
+	}
 
-	static let sortedByLeastCommon: [Character] = {
-		fullAlphabet.sorted { commonality[$0]! < commonality[$1]! }
-	}()
-
-	static let sortedByMostCommon: [Character] = {
-		sortedByLeastCommon.reversed()
-	}()
+	func sortByCommonality(first: Character, second: Character) -> Bool {
+		return commonality[first]! < commonality[second]!
+	}
 }

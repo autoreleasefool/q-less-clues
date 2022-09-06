@@ -9,6 +9,8 @@ import Foundation
 
 struct LetterSet {
 
+	static let fullAlphabet = LetterSet(letters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ")
+
 	private var characterCounts: [Character: Int]
 
 	var letters: [Character] {
@@ -21,12 +23,11 @@ struct LetterSet {
 		Set(letters)
 	}
 
-	var lettersByLeastCommonality: [Character] {
-		letters.sorted {
-			LetterCommonality.sortedByLeastCommon.firstIndex(of: $0)! <
-				LetterCommonality.sortedByLeastCommon.firstIndex(of: $1)!
-		}
+	var isEmpty: Bool {
+		return characterCounts.isEmpty || characterCounts.allSatisfy { $0.value == 0 }
 	}
+
+	// MARK: Inita
 
 	init(letters: String) {
 		self.characterCounts = letters
@@ -40,9 +41,7 @@ struct LetterSet {
 			}
 	}
 
-	var isEmpty: Bool {
-		return characterCounts.isEmpty || characterCounts.allSatisfy { $0.value == 0 }
-	}
+	// MARK: Mutators
 
 	mutating func substract(letters toRemove: String) {
 		toRemove.forEach {
