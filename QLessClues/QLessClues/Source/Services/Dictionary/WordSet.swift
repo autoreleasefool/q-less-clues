@@ -31,10 +31,21 @@ struct WordSet {
 
 	init(letterSet: LetterSet, words: [String] = Self.englishWords) {
 		self.alphabet = String(letterSet.letters.sorted()).uppercased()
-		let letterSet = Set(self.alphabet)
+
 		self.words = words
 			.map { $0.uppercased() }
-			.filter { Set($0).subtracting(letterSet).isEmpty }
+			.filter { Set($0).subtracting(Set(letterSet.letters)).isEmpty }
+			.filter {
+				var count = letterSet.counts
+				for letter in $0 {
+					count[letter] = count[letter]! - 1
+					if count[letter]! < 0 {
+						return false
+					}
+				}
+
+				return true
+			}
 		// TODO: generate word set
 	}
 

@@ -20,6 +20,10 @@ struct LetterSet {
 			.flatMap { $0 }
 	}
 
+	var counts: [Character: Int] {
+		characterCounts
+	}
+
 	var characters: Set<Character> {
 		Set(letters)
 	}

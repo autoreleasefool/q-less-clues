@@ -33,9 +33,12 @@ class BacktrackingSolver: Solver {
 	}
 
 	private func generateSolutions(state: inout State, subject: SolutionSubject) {
+		print("So far: \(Solution(board: state.board).words)")
 		if state.remainingLetters.isEmpty {
 			let solution = Solution(board: state.board)
-			subject.send(solution)
+			if validator.validate(solution: solution) {
+				subject.send(solution)
+			}
 			return
 		}
 
@@ -81,29 +84,43 @@ class BacktrackingSolver: Solver {
 
 		switch rowColumn.direction {
 		case .horizontal:
-			minStartPosition = state.boardColumns.minColumn - (word.count - 1)
-			maxStartPosition = state.boardColumns.maxColumn
+			let columns = state.board.columns
+			minStartPosition = columns.min - (word.count - 1)
+			maxStartPosition = columns.max
 		case .vertical:
-			minStartPosition = state.boardRows.minRow - (word.count - 1)
-			maxStartPosition = state.boardRows.maxRow
+			let rows = state.board.rows
+			minStartPosition = rows.min - (word.count - 1)
+			maxStartPosition = rows.max
 		}
 
 		for startPosition in minStartPosition...maxStartPosition {
+			var counts = state.remainingLetters.counts
 			var lettersUsed: [LetterPosition] = []
+			var isValid = true
 			for wordPosition in startPosition..<(startPosition + word.count) {
 				let index = wordPosition - startPosition
 				let position = rowColumn.direction == .horizontal
 					? Position(rowColumn.index, wordPosition)
 					: Position(wordPosition, rowColumn.index)
 
+				let letter = word[word.index(word.startIndex, offsetBy: index)]
 				if state.board[position] == nil {
-					lettersUsed.append(LetterPosition(letter: word[word.index(word.startIndex, offsetBy: index)], position: position))
-				} else if state.board[position] != word[word.index(word.startIndex, offsetBy: index)] {
+					lettersUsed.append(LetterPosition(letter: letter, position: position))
+					if counts[letter]! > 0 {
+						counts[letter] = counts[letter]! - 1
+					} else {
+						isValid = false
+						break
+					}
+				} else if state.board[position] != letter {
+					isValid = false
 					break
 				}
 			}
 
-			insertions.append(lettersUsed)
+			if !lettersUsed.isEmpty && isValid {
+				insertions.append(lettersUsed)
+			}
 		}
 
 		return insertions
@@ -142,9 +159,12 @@ class BacktrackingSolver: Solver {
 		let letters = state.remainingLetters.letters.map { String($0) }
 		let letterGroup = "[\(letters.joined())]*"
 
-		for row in state.boardRows.minRow...state.boardRows.maxRow {
+		let rows = state.board.rows
+		let columns = state.board.columns
+
+		for row in rows.min...rows.max {
 			var rawRegex = "\(letterGroup)"
-			for column in state.boardColumns.minColumn...state.boardColumns.maxColumn {
+			for column in columns.min...columns.max {
 				if let letter = state.board[Position(row, column)] {
 					rawRegex += "\(letter)\(letterGroup)"
 				}
@@ -155,9 +175,9 @@ class BacktrackingSolver: Solver {
 			}
 		}
 
-		for column in state.boardColumns.minColumn...state.boardColumns.maxColumn {
+		for column in columns.min...columns.max {
 			var rawRegex = "\(letterGroup)"
-			for row in state.boardRows.minRow..<state.boardRows.maxRow {
+			for row in rows.min...rows.max {
 				if let letter = state.board[Position(row, column)] {
 					rawRegex += "\(letter)\(letterGroup)"
 				}
@@ -177,8 +197,6 @@ private extension BacktrackingSolver {
 		var remainingLetters: LetterSet
 		var wordSet: WordSet
 		var board: [Position: Character]
-		var boardRows: (minRow: Int, maxRow: Int) = (0, 0)
-		var boardColumns: (minColumn: Int, maxColumn: Int) = (0, 0)
 	}
 }
 
@@ -191,8 +209,28 @@ private extension BacktrackingSolver {
 }
 
 private extension BacktrackingSolver {
-	struct LetterPosition {
+	struct LetterPosition: CustomStringConvertible {
 		let letter: Character
 		let position: Position
+
+		var description: String {
+			"(\(position), \(letter))"
+		}
+	}
+}
+
+extension Dictionary where Key == Position, Value == Character {
+	var columns: (min: Int, max: Int) {
+		self.keys.reduce(into: (min: 0, max: 0)) { out, next in
+			out.max = Swift.max(out.max, next.column)
+			out.min = Swift.min(out.min, next.column)
+		}
+	}
+
+	var rows: (min: Int, max: Int) {
+		self.keys.reduce(into: (min: 0, max: 0)) { out, next in
+			out.max = Swift.max(out.max, next.row)
+			out.min = Swift.min(out.min, next.row)
+		}
 	}
 }

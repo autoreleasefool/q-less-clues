@@ -15,7 +15,7 @@ struct RecordPlayScreen: View {
 	@Environment(\.dismiss) private var dismiss
 
 	@StateObject private var playsController = PlaysController()
-	@StateObject private var vm = VM()
+	@StateObject private var viewModel = ViewModel()
 
 	@State private var newPlay: Play
 
@@ -39,17 +39,17 @@ struct RecordPlayScreen: View {
 	}
 }
 
-class VM: ObservableObject {
+class ViewModel: ObservableObject {
 	let solver = BacktrackingSolver(validator: BasicValidator())
 	private var cancellables: [AnyCancellable] = []
 
 	init() {
-		solver.generateSolutions(fromLetters: "zreoltwhmuck")
+		solver.generateSolutions(fromLetters: "rborknowlxlt")
 			.receive(on: DispatchQueue.main)
 			.sink(receiveCompletion: { _ in
 				print("Completed")
 			}, receiveValue: {
-				print("Solution: \($0.words)")
+				print("Solution: \($0.words), \($0.letterPositions)")
 			})
 			.store(in: &cancellables)
 	}

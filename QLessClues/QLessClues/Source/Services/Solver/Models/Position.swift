@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Position: Codable, Equatable, Hashable {
+struct Position: Codable, Equatable, Hashable, CustomStringConvertible {
 	let row: Int
 	let column: Int
 
@@ -19,5 +19,9 @@ struct Position: Codable, Equatable, Hashable {
 	init(_ row: Int, _ column: Int) {
 		self.row = row
 		self.column = column
+	}
+
+	var description: String {
+		"(\(row), \(column))"
 	}
 }

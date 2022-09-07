@@ -8,8 +8,6 @@
 import Foundation
 
 struct Solution: Codable, Equatable, Hashable {
-	private typealias Size = (width: Int, height: Int)
-
 	let letterPositions: [LetterPosition]
 	let words: [String]
 	var letters: [String] {
@@ -17,43 +15,37 @@ struct Solution: Codable, Equatable, Hashable {
 	}
 
 	init(board: [Position: Character]) {
-		self.init(letters: board.map { LetterPosition(letter: String($0.value), position: $0.key) })
-	}
-
-	init(letters: [LetterPosition]) {
-		self.letterPositions = letters
-
-		var boardSize: Size = (width: 0, height: 0)
-		let positions: [Position: String] = letters.reduce(into: [:]) { pos, letter in
-			boardSize.width = max(boardSize.width, letter.position.column + 1)
-			boardSize.height = max(boardSize.height, letter.position.row + 1)
-			pos[letter.position] = letter.letter
-		}
-
-		self.words = (Self.findHorizontalWords(boardSize, positions) + Self.findVerticalWords(boardSize, positions))
-			.sorted()
+		self.letterPositions = board.map { LetterPosition(letter: String($0.value), position: $0.key) }
+		self.words = (Self.findHorizontalWords(board) + Self.findVerticalWords(board)).sorted()
 	}
 }
 
 // MARK: - Letter
 
 extension Solution {
-	struct LetterPosition: Codable, Equatable, Hashable {
+	struct LetterPosition: Codable, Equatable, Hashable, CustomStringConvertible {
 		let letter: String
 		let position: Position
+
+		var description: String {
+			"(\(position), \(letter))"
+		}
 	}
 }
 
 // MARK: - Helpers
 
-private extension Solution {
-	private static func findVerticalWords(_ boardSize: Size, _ positions: [Position: String]) -> [String] {
+extension Solution {
+	private static func findVerticalWords(_ positions: [Position: Character]) -> [String] {
 		var words: [String] = []
-		for column in 0..<boardSize.width {
+		let columns = positions.columns
+		let rows = positions.rows
+
+		for column in columns.min...columns.max {
 			var word = ""
-			for row in 0..<boardSize.height {
+			for row in rows.min...rows.max {
 				if let letter = positions[Position(row, column)] {
-					word += letter
+					word += String(letter)
 				} else {
 					if word.count > 1 {
 						words.append(word)
@@ -70,13 +62,16 @@ private extension Solution {
 		return words
 	}
 
-	private static func findHorizontalWords(_ boardSize: Size, _ positions: [Position: String]) -> [String] {
+	private static func findHorizontalWords(_ positions: [Position: Character]) -> [String] {
 		var words: [String] = []
-		for row in 0..<boardSize.height {
+		let columns = positions.columns
+		let rows = positions.rows
+
+		for row in rows.min...rows.max {
 			var word = ""
-			for column in 0..<boardSize.width {
+			for column in columns.min...columns.max {
 				if let letter = positions[Position(row, column)] {
-					word += letter
+					word += String(letter)
 				} else {
 					if word.count > 1 {
 						words.append(word)
