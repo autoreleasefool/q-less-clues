@@ -37,4 +37,10 @@ struct WordSet {
 			.filter { Set($0).subtracting(letterSet).isEmpty }
 		// TODO: generate word set
 	}
+
+	func wordsContainingLeastCommonLetter(inSet letterSet: LetterSet) -> [String] {
+		let commonality = LetterCommonality(letterSet: letterSet, wordSet: self)
+		let leastCommonLetter = letterSet.letters.sorted(by: commonality.sortByCommonality).first!
+		return self.words.filter { $0.firstIndex(of: leastCommonLetter) != nil }
+	}
 }

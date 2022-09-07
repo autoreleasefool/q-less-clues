@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA12CA2728C6CA1500CD9876 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12CA2628C6CA1500CD9876 /* Direction.swift */; };
 		CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */; };
 		CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BC28C5095200DD75C7 /* Assets.xcassets */; };
 		CA1867C028C5095200DD75C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BF28C5095200DD75C7 /* Preview Assets.xcassets */; };
@@ -42,6 +43,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA12CA2628C6CA1500CD9876 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		CA1867B528C5095100DD75C7 /* QLessClues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLessClues.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLessCluesApp.swift; sourceTree = "<group>"; };
 		CA1867BC28C5095200DD75C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -192,6 +194,7 @@
 			children = (
 				CA1CEE5028C65AE100520C70 /* Solution.swift */,
 				CA1CEE5A28C6AF0000520C70 /* Position.swift */,
+				CA12CA2628C6CA1500CD9876 /* Direction.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -414,6 +417,7 @@
 				CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */,
 				CA1CEE5528C67BF200520C70 /* Validator.swift in Sources */,
 				CA1CEE5328C65AE100520C70 /* Solution.swift in Sources */,
+				CA12CA2728C6CA1500CD9876 /* Direction.swift in Sources */,
 				CA1867D728C5195500DD75C7 /* StatisticsScreen.swift in Sources */,
 				CA1CEE5F28C6BA7D00520C70 /* Commonality.swift in Sources */,
 				CABF28C828C57C4E00A0C0E1 /* RecordPlayScreen.swift in Sources */,

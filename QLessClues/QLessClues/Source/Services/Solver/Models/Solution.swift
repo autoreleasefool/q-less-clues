@@ -16,8 +16,8 @@ struct Solution: Codable, Equatable, Hashable {
 		letterPositions.map { $0.letter }
 	}
 
-	init(board: [Position: String]) {
-		self.init(letters: board.map { LetterPosition(letter: $0.value, position: $0.key) })
+	init(board: [Position: Character]) {
+		self.init(letters: board.map { LetterPosition(letter: String($0.value), position: $0.key) })
 	}
 
 	init(letters: [LetterPosition]) {

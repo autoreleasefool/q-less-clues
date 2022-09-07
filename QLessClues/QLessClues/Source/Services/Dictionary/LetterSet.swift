@@ -15,6 +15,7 @@ struct LetterSet {
 
 	var letters: [Character] {
 		characterCounts
+			.filter { $0.value > 0 }
 			.map { Array(repeating: $0.key, count: $0.value) }
 			.flatMap { $0 }
 	}
@@ -43,13 +44,13 @@ struct LetterSet {
 
 	// MARK: Mutators
 
-	mutating func substract(letters toRemove: String) {
+	mutating func substract(letters toRemove: [Character]) {
 		toRemove.forEach {
 			characterCounts[$0] = characterCounts[$0]! - 1
 		}
 	}
 
-	mutating func add(letters toAdd: String) {
+	mutating func add(letters toAdd: [Character]) {
 		toAdd.forEach {
 			characterCounts[$0] = characterCounts[$0]! + 1
 		}
