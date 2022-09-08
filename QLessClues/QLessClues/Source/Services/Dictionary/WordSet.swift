@@ -24,7 +24,7 @@ struct WordSet {
 			}
 	}()
 
-	static let fullEnglishSet: WordSet = WordSet(letterSet: .fullAlphabet)
+	static let englishSet: WordSet = WordSet(letterSet: .fullAlphabet)
 
 	private(set) var words: [String]
 	private(set) var alphabet: String

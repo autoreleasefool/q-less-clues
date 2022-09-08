@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		CA0BF46228C93C6400EE3E58 /* SolutionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0BF46128C93C6400EE3E58 /* SolutionsController.swift */; };
 		CA0BF46428C93FA600EE3E58 /* SolutionsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0BF46328C93FA600EE3E58 /* SolutionsListScreen.swift */; };
+		CA0BF46728C9AF6D00EE3E58 /* SolutionDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0BF46628C9AF6D00EE3E58 /* SolutionDetailsScreen.swift */; };
+		CA0BF46A28C9B11D00EE3E58 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0BF46928C9B11D00EE3E58 /* Tile.swift */; };
 		CA12CA2728C6CA1500CD9876 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12CA2628C6CA1500CD9876 /* Direction.swift */; };
 		CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */; };
 		CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BC28C5095200DD75C7 /* Assets.xcassets */; };
@@ -47,6 +49,8 @@
 /* Begin PBXFileReference section */
 		CA0BF46128C93C6400EE3E58 /* SolutionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionsController.swift; sourceTree = "<group>"; };
 		CA0BF46328C93FA600EE3E58 /* SolutionsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionsListScreen.swift; sourceTree = "<group>"; };
+		CA0BF46628C9AF6D00EE3E58 /* SolutionDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionDetailsScreen.swift; sourceTree = "<group>"; };
+		CA0BF46928C9B11D00EE3E58 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		CA12CA2628C6CA1500CD9876 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		CA1867B528C5095100DD75C7 /* QLessClues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLessClues.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLessCluesApp.swift; sourceTree = "<group>"; };
@@ -99,6 +103,23 @@
 				CA0BF46128C93C6400EE3E58 /* SolutionsController.swift */,
 			);
 			path = Controllers;
+			sourceTree = "<group>";
+		};
+		CA0BF46528C9AF5E00EE3E58 /* Solutions */ = {
+			isa = PBXGroup;
+			children = (
+				CA0BF46828C9B11500EE3E58 /* Views */,
+				CA0BF46628C9AF6D00EE3E58 /* SolutionDetailsScreen.swift */,
+			);
+			path = Solutions;
+			sourceTree = "<group>";
+		};
+		CA0BF46828C9B11500EE3E58 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				CA0BF46928C9B11D00EE3E58 /* Tile.swift */,
+			);
+			path = Views;
 			sourceTree = "<group>";
 		};
 		CA1867AC28C5095100DD75C7 = {
@@ -161,6 +182,7 @@
 		CA1867C928C50F3C00DD75C7 /* Features */ = {
 			isa = PBXGroup;
 			children = (
+				CA0BF46528C9AF5E00EE3E58 /* Solutions */,
 				CABF28C628C57C2900A0C0E1 /* Record */,
 				CA1867CB28C50FBB00DD75C7 /* Statistics */,
 			);
@@ -419,6 +441,7 @@
 				CA0BF46228C93C6400EE3E58 /* SolutionsController.swift in Sources */,
 				CA1CEE5B28C6AF0000520C70 /* Position.swift in Sources */,
 				CA1867D928C5196F00DD75C7 /* PlaysController.swift in Sources */,
+				CA0BF46A28C9B11D00EE3E58 /* Tile.swift in Sources */,
 				CA1CEE4D28C65ADA00520C70 /* WordSet.swift in Sources */,
 				CA1CEE5128C65AE100520C70 /* Solver.swift in Sources */,
 				CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */,
@@ -429,6 +452,7 @@
 				CA1CEE5F28C6BA7D00520C70 /* Frequency.swift in Sources */,
 				CABF28C828C57C4E00A0C0E1 /* RecordPlayScreen.swift in Sources */,
 				CA1CEE5228C65AE100520C70 /* BacktrackingSolver.swift in Sources */,
+				CA0BF46728C9AF6D00EE3E58 /* SolutionDetailsScreen.swift in Sources */,
 				CA1867D328C510ED00DD75C7 /* SolvedState.swift in Sources */,
 				CA6452A828C5C72900738762 /* LetterEntry.swift in Sources */,
 				CA0BF46428C93FA600EE3E58 /* SolutionsListScreen.swift in Sources */,

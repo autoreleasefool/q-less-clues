@@ -43,7 +43,6 @@ class BacktrackingSolver: Solver {
 			return
 		}
 
-		print("So far: \(Solution(board: state.board).words)")
 		if state.remainingLetters.isEmpty {
 			let solution = Solution(board: state.board)
 			if validator.validate(solution: solution) {
@@ -95,12 +94,12 @@ class BacktrackingSolver: Solver {
 		switch rowColumn.direction {
 		case .horizontal:
 			let columns = state.board.columns
-			minStartPosition = columns.min - (word.count - 1)
-			maxStartPosition = columns.max
+			minStartPosition = columns.lowerBound - (word.count - 1)
+			maxStartPosition = columns.upperBound
 		case .vertical:
 			let rows = state.board.rows
-			minStartPosition = rows.min - (word.count - 1)
-			maxStartPosition = rows.max
+			minStartPosition = rows.lowerBound - (word.count - 1)
+			maxStartPosition = rows.upperBound
 		}
 
 		for startPosition in minStartPosition...maxStartPosition {
@@ -169,12 +168,9 @@ class BacktrackingSolver: Solver {
 		let letters = state.remainingLetters.letters.map { String($0) }
 		let letterGroup = "[\(letters.joined())]*"
 
-		let rows = state.board.rows
-		let columns = state.board.columns
-
-		for row in rows.min...rows.max {
+		for row in state.board.rows {
 			var rawRegex = "\(letterGroup)"
-			for column in columns.min...columns.max {
+			for column in state.board.columns {
 				if let letter = state.board[Position(row, column)] {
 					rawRegex += "\(letter)\(letterGroup)"
 				}
@@ -185,9 +181,9 @@ class BacktrackingSolver: Solver {
 			}
 		}
 
-		for column in columns.min...columns.max {
+		for column in state.board.columns {
 			var rawRegex = "\(letterGroup)"
-			for row in rows.min...rows.max {
+			for row in state.board.rows {
 				if let letter = state.board[Position(row, column)] {
 					rawRegex += "\(letter)\(letterGroup)"
 				}
@@ -231,17 +227,21 @@ private extension BacktrackingSolver {
 }
 
 extension Dictionary where Key == Position, Value == Character {
-	var columns: (min: Int, max: Int) {
-		self.keys.reduce(into: (min: 0, max: 0)) { out, next in
+	var columns: ClosedRange<Int> {
+		let (min, max) = self.keys.reduce(into: (min: 0, max: 0)) { out, next in
 			out.max = Swift.max(out.max, next.column)
 			out.min = Swift.min(out.min, next.column)
 		}
+
+		return min...max
 	}
 
-	var rows: (min: Int, max: Int) {
-		self.keys.reduce(into: (min: 0, max: 0)) { out, next in
+	var rows: ClosedRange<Int> {
+		let (min, max) = self.keys.reduce(into: (min: 0, max: 0)) { out, next in
 			out.max = Swift.max(out.max, next.row)
 			out.min = Swift.min(out.min, next.row)
 		}
+
+		return min...max
 	}
 }

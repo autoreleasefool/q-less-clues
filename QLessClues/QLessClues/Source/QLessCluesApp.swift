@@ -14,6 +14,11 @@ struct QLessCluesApp: App {
 			NavigationStack {
 				StatisticsScreen()
 			}
+			.onAppear {
+				DispatchQueue.global().async {
+					_ = WordSet.englishSet
+				}
+			}
 		}
 	}
 }

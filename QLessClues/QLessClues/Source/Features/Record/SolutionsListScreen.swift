@@ -13,7 +13,11 @@ struct SolutionsListScreen: View {
 
 	var body: some View {
 		List(solutionsController.solutions, id: \.id) { solution in
-			Text(solution.words.joined(separator: ", "))
+			NavigationLink {
+				SolutionDetailsScreen(solution: solution)
+			} label: {
+				Text(solution.words.joined(separator: ", "))
+			}
 		}
 		.navigationTitle("Solutions")
 	}

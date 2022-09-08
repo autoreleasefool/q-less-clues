@@ -44,7 +44,7 @@ struct RecordPlayScreen: View {
 			}
 		}
 		.navigationTitle("New Play")
-		.onChange(of: newPlay.letters) { letters in
+		.onChange(of: newPlay.letters.uppercased()) { letters in
 			if letters.count == 12 {
 				solutionsController.generateSolutions(fromLetters: letters)
 			} else {

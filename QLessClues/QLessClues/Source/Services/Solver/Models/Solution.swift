@@ -9,16 +9,26 @@ import Foundation
 
 struct Solution: Identifiable, Codable, Equatable, Hashable {
 	let id: UUID
-	let letterPositions: [LetterPosition]
+	let letterPositions: [Position: String]
 	let words: [String]
+	let rows: ClosedRange<Int>
+	let columns: ClosedRange<Int>
+
 	var letters: [String] {
-		letterPositions.map { $0.letter }
+		Array(letterPositions.values)
 	}
 
 	init(board: [Position: Character]) {
 		self.id = UUID()
-		self.letterPositions = board.map { LetterPosition(letter: String($0.value), position: $0.key) }
+		self.letterPositions = board.reduce(into: [:]) { dict, entry in dict[entry.key] = String(entry.value) }
 		self.words = (Self.findHorizontalWords(board) + Self.findVerticalWords(board)).sorted()
+		self.rows = board.rows
+		self.columns = board.columns
+	}
+
+	func characterAt(row: Int, column: Int) -> Character {
+		let letter = letterPositions[Position(row, column)] ?? " "
+		return letter[letter.startIndex]
 	}
 }
 
@@ -40,12 +50,10 @@ extension Solution {
 extension Solution {
 	private static func findVerticalWords(_ positions: [Position: Character]) -> [String] {
 		var words: [String] = []
-		let columns = positions.columns
-		let rows = positions.rows
 
-		for column in columns.min...columns.max {
+		for column in positions.columns {
 			var word = ""
-			for row in rows.min...rows.max {
+			for row in positions.rows {
 				if let letter = positions[Position(row, column)] {
 					word += String(letter)
 				} else {
@@ -66,12 +74,10 @@ extension Solution {
 
 	private static func findHorizontalWords(_ positions: [Position: Character]) -> [String] {
 		var words: [String] = []
-		let columns = positions.columns
-		let rows = positions.rows
 
-		for row in rows.min...rows.max {
+		for row in positions.rows {
 			var word = ""
-			for column in columns.min...columns.max {
+			for column in positions.columns {
 				if let letter = positions[Position(row, column)] {
 					word += String(letter)
 				} else {
