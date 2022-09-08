@@ -24,7 +24,7 @@ struct WordSet {
 			}
 	}()
 
-	static let fullEnglishSet: WordSet = WordSet(letterSet:  .fullAlphabet)
+	static let fullEnglishSet: WordSet = WordSet(letterSet: .fullAlphabet)
 
 	private(set) var words: [String]
 	private(set) var alphabet: String
@@ -33,6 +33,7 @@ struct WordSet {
 		self.alphabet = String(letterSet.letters.sorted()).uppercased()
 
 		self.words = words
+			.map { $0.uppercased() }
 			.filter { Set($0).subtracting(Set(letterSet.letters)).isEmpty }
 			.filter {
 				var count = letterSet.counts
@@ -48,9 +49,9 @@ struct WordSet {
 		// TODO: generate word set
 	}
 
-	func wordsContainingLeastCommonLetter(inSet letterSet: LetterSet) -> [String] {
-		let commonality = LetterCommonality(letterSet: letterSet, wordSet: self)
-		let leastCommonLetter = letterSet.letters.sorted(by: commonality.sortByCommonality).first!
-		return self.words.filter { $0.firstIndex(of: leastCommonLetter) != nil }
+	func wordsContainingLeastFrequentLetter(inSet letterSet: LetterSet) -> [String] {
+		let frequency = LetterFrequency(letterSet: letterSet, wordSet: self)
+		let leastFrequentLetter = letterSet.letters.sorted(by: frequency.sortByFrequency).first!
+		return self.words.filter { $0.firstIndex(of: leastFrequentLetter) != nil }
 	}
 }

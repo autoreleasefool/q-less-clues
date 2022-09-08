@@ -53,7 +53,7 @@ class BacktrackingSolver: Solver {
 		}
 
 		if state.board.isEmpty {
-			for word in state.wordSet.wordsContainingLeastCommonLetter(inSet: state.remainingLetters) {
+			for word in state.wordSet.wordsContainingLeastFrequentLetter(inSet: state.remainingLetters) {
 				insertFirstWord(word, in: &state)
 				state.remainingLetters.substract(letters: Array(word))
 				// TODO: perf improvement - update wordset
