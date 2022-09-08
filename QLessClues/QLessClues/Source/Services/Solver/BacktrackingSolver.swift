@@ -14,25 +14,35 @@ class BacktrackingSolver: Solver {
 
 	private let dispatchQueue = DispatchQueue(label: "BacktrackingSolver")
 	private let validator: Validator
+	private var cancelledJobs: Set<UUID> = []
 
 	init(validator: Validator) {
 		self.validator = validator
 	}
 
-	func generateSolutions(fromLetters letters: String) -> AnyPublisher<Solution, Never> {
+	func generateSolutions(fromLetters letters: String) -> (UUID, AnyPublisher<Solution, Never>) {
 		let subject = SolutionSubject()
+		let id = UUID()
 		dispatchQueue.async { [weak self] in
 			print("Starting solving \(letters)")
 			let letterSet = LetterSet(letters: letters)
 			let wordSet = WordSet(letterSet: letterSet)
-			var state = State(remainingLetters: letterSet, wordSet: wordSet, board: [:])
+			var state = State(id: id, remainingLetters: letterSet, wordSet: wordSet, board: [:])
 			self?.generateSolutions(state: &state, subject: subject)
 			subject.send(completion: .finished)
 		}
-		return subject.eraseToAnyPublisher()
+		return (id, subject.eraseToAnyPublisher())
+	}
+
+	func cancelJob(id: UUID) {
+		cancelledJobs.insert(id)
 	}
 
 	private func generateSolutions(state: inout State, subject: SolutionSubject) {
+		if cancelledJobs.contains(state.id) {
+			return
+		}
+
 		print("So far: \(Solution(board: state.board).words)")
 		if state.remainingLetters.isEmpty {
 			let solution = Solution(board: state.board)
@@ -194,6 +204,7 @@ class BacktrackingSolver: Solver {
 
 private extension BacktrackingSolver {
 	struct State {
+		let id: UUID
 		var remainingLetters: LetterSet
 		var wordSet: WordSet
 		var board: [Position: Character]

@@ -1,37 +1,40 @@
 from collections import Counter
+from os import path
 
 # Manually verified max # of times a letter can appear
 max_letter_counts = {
-	'a': 2,
-	'b': 3,
-	'c': 2,
-	'd': 3,
-	'e': 2,
-	'f': 2,
-	'g': 2,
-	'h': 2,
-	'i': 2,
-	'j': 1,
-	'k': 2,
-	'l': 3,
-	'm': 2,
-	'n': 3,
-	'o': 3,
-	'p': 2,
-	'q': 0,
-	'r': 3,
-	's': 2,
-	't': 3,
-	'u': 1,
-	'v': 1,
-	'w': 2,
-	'x': 1,
-	'y': 1,
-	'z': 1
+	'A': 2,
+	'B': 3,
+	'C': 2,
+	'D': 3,
+	'E': 2,
+	'F': 2,
+	'G': 2,
+	'H': 2,
+	'I': 2,
+	'J': 1,
+	'K': 2,
+	'L': 3,
+	'M': 2,
+	'N': 3,
+	'O': 3,
+	'P': 2,
+	'Q': 0,
+	'R': 3,
+	'S': 2,
+	'T': 3,
+	'U': 1,
+	'V': 1,
+	'W': 2,
+	'X': 1,
+	'Y': 1,
+	'Z': 1
 }
 
-with open('./QLessClues/QLessClues/Resources/words.txt', 'r') as f:
-	words = [word.strip().lower() for word in f.readlines()]
+file_path = path.abspath(path.dirname(__file__))
+with open(path.join(file_path, 'words.txt'), 'r') as f:
+	words = [word.split()[0].strip().upper() for word in f.readlines()]
+
 
 def has_valid_length(word):
 	'''
@@ -60,5 +63,5 @@ def is_valid_word(word):
 	'''
 	return has_valid_length(word) and has_valid_letters(word) and has_valid_vowels(word)
 
-with open('./QLessClues/QLessClues/Resources/words.txt', 'w') as f:
-	[f.write(f"{word}\n") for word in words if is_valid_word(word)]
+with open(path.join(file_path, '..', 'QLessClues', 'QLessClues', 'Resources', 'words.txt'), 'w') as f:
+	[f.write(f"{word}\n") for word in sorted(words) if is_valid_word(word)]

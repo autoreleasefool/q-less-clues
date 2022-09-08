@@ -7,7 +7,8 @@
 
 import Foundation
 
-struct Solution: Codable, Equatable, Hashable {
+struct Solution: Identifiable, Codable, Equatable, Hashable {
+	let id: UUID
 	let letterPositions: [LetterPosition]
 	let words: [String]
 	var letters: [String] {
@@ -15,6 +16,7 @@ struct Solution: Codable, Equatable, Hashable {
 	}
 
 	init(board: [Position: Character]) {
+		self.id = UUID()
 		self.letterPositions = board.map { LetterPosition(letter: String($0.value), position: $0.key) }
 		self.words = (Self.findHorizontalWords(board) + Self.findVerticalWords(board)).sorted()
 	}

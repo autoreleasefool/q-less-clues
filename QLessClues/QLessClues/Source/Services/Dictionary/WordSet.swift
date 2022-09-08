@@ -17,14 +17,14 @@ struct WordSet {
 
 		return wordList
 			.split(separator: "\n")
-			.map { $0.trimmingCharacters(in: .whitespacesAndNewlines).uppercased() }
+			.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
 			.filter { !$0.isEmpty }
 			.sorted {
 				return $0.count == $1.count ? $0 < $1 : $0.count > $1.count
 			}
 	}()
 
-	static let fullEnglishSet: WordSet = WordSet(letterSet: LetterSet(letters: "ABCDEFGHIJKLMNOPQRSTUVWXYZ"))
+	static let fullEnglishSet: WordSet = WordSet(letterSet:  .fullAlphabet)
 
 	private(set) var words: [String]
 	private(set) var alphabet: String
@@ -33,7 +33,6 @@ struct WordSet {
 		self.alphabet = String(letterSet.letters.sorted()).uppercased()
 
 		self.words = words
-			.map { $0.uppercased() }
 			.filter { Set($0).subtracting(Set(letterSet.letters)).isEmpty }
 			.filter {
 				var count = letterSet.counts

@@ -15,7 +15,7 @@ struct RecordPlayScreen: View {
 	@Environment(\.dismiss) private var dismiss
 
 	@StateObject private var playsController = PlaysController()
-	@StateObject private var viewModel = ViewModel()
+	@StateObject private var solutionsController = SolutionsController()
 
 	@State private var newPlay: Play
 
@@ -30,27 +30,26 @@ struct RecordPlayScreen: View {
 			}
 
 			if newPlay.letters.count == 12 {
-				Section("Hints") {
-					Text("Here's a hint")
+				Section("Analysis") {
+					NavigationLink {
+						SolutionsListScreen(solutionsController: solutionsController)
+					} label: {
+						HStack {
+							Text("Solutions")
+							Spacer()
+							Text("\(solutionsController.solutions.count)")
+						}
+					}
 				}
 			}
 		}
 		.navigationTitle("New Play")
-	}
-}
-
-class ViewModel: ObservableObject {
-	let solver = BacktrackingSolver(validator: BasicValidator())
-	private var cancellables: [AnyCancellable] = []
-
-	init() {
-		solver.generateSolutions(fromLetters: "rborknowlxlt")
-			.receive(on: DispatchQueue.main)
-			.sink(receiveCompletion: { _ in
-				print("Completed")
-			}, receiveValue: {
-				print("Solution: \($0.words), \($0.letterPositions)")
-			})
-			.store(in: &cancellables)
+		.onChange(of: newPlay.letters) { letters in
+			if letters.count == 12 {
+				solutionsController.generateSolutions(fromLetters: letters)
+			} else {
+				solutionsController.cancel()
+			}
+		}
 	}
 }

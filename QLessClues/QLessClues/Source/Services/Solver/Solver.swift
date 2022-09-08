@@ -6,7 +6,9 @@
 //
 
 import Combine
+import Foundation
 
 protocol Solver {
-	func generateSolutions(fromLetters: String) -> AnyPublisher<Solution, Never>
+	func generateSolutions(fromLetters: String) -> (UUID, AnyPublisher<Solution, Never>)
+	func cancelJob(id: UUID)
 }

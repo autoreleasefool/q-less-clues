@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		CA0BF46228C93C6400EE3E58 /* SolutionsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0BF46128C93C6400EE3E58 /* SolutionsController.swift */; };
+		CA0BF46428C93FA600EE3E58 /* SolutionsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0BF46328C93FA600EE3E58 /* SolutionsListScreen.swift */; };
 		CA12CA2728C6CA1500CD9876 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12CA2628C6CA1500CD9876 /* Direction.swift */; };
 		CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */; };
 		CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BC28C5095200DD75C7 /* Assets.xcassets */; };
@@ -43,6 +45,8 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		CA0BF46128C93C6400EE3E58 /* SolutionsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionsController.swift; sourceTree = "<group>"; };
+		CA0BF46328C93FA600EE3E58 /* SolutionsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionsListScreen.swift; sourceTree = "<group>"; };
 		CA12CA2628C6CA1500CD9876 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		CA1867B528C5095100DD75C7 /* QLessClues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLessClues.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLessCluesApp.swift; sourceTree = "<group>"; };
@@ -88,6 +92,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		CA0BF46028C93C5000EE3E58 /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				CA1867D828C5196F00DD75C7 /* PlaysController.swift */,
+				CA0BF46128C93C6400EE3E58 /* SolutionsController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
 		CA1867AC28C5095100DD75C7 = {
 			isa = PBXGroup;
 			children = (
@@ -129,6 +142,7 @@
 		CA1867C628C5096A00DD75C7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
+				CA0BF46028C93C5000EE3E58 /* Controllers */,
 				CA6452B128C5D44700738762 /* Services */,
 				CA1867C928C50F3C00DD75C7 /* Features */,
 				CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */,
@@ -156,7 +170,6 @@
 		CA1867CB28C50FBB00DD75C7 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
-				CA1867D428C5141800DD75C7 /* Controllers */,
 				CA1867CC28C50FC200DD75C7 /* Models */,
 				CA1867D628C5195500DD75C7 /* StatisticsScreen.swift */,
 			);
@@ -170,14 +183,6 @@
 				CA1867D228C510ED00DD75C7 /* SolvedState.swift */,
 			);
 			path = Models;
-			sourceTree = "<group>";
-		};
-		CA1867D428C5141800DD75C7 /* Controllers */ = {
-			isa = PBXGroup;
-			children = (
-				CA1867D828C5196F00DD75C7 /* PlaysController.swift */,
-			);
-			path = Controllers;
 			sourceTree = "<group>";
 		};
 		CA1CEE5628C67C1200520C70 /* Validator */ = {
@@ -273,6 +278,7 @@
 			children = (
 				CA6452A628C5C71C00738762 /* Views */,
 				CABF28C728C57C4E00A0C0E1 /* RecordPlayScreen.swift */,
+				CA0BF46328C93FA600EE3E58 /* SolutionsListScreen.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
@@ -410,6 +416,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA0BF46228C93C6400EE3E58 /* SolutionsController.swift in Sources */,
 				CA1CEE5B28C6AF0000520C70 /* Position.swift in Sources */,
 				CA1867D928C5196F00DD75C7 /* PlaysController.swift in Sources */,
 				CA1CEE4D28C65ADA00520C70 /* WordSet.swift in Sources */,
@@ -424,6 +431,7 @@
 				CA1CEE5228C65AE100520C70 /* BacktrackingSolver.swift in Sources */,
 				CA1867D328C510ED00DD75C7 /* SolvedState.swift in Sources */,
 				CA6452A828C5C72900738762 /* LetterEntry.swift in Sources */,
+				CA0BF46428C93FA600EE3E58 /* SolutionsListScreen.swift in Sources */,
 				CA1867CE28C50FD000DD75C7 /* Play.swift in Sources */,
 				CA1CEE5828C67C2000520C70 /* BasicValidator.swift in Sources */,
 				CA1CEE5D28C6B36A00520C70 /* LetterSet.swift in Sources */,
