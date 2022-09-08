@@ -31,11 +31,6 @@ max_letter_counts = {
 	'Z': 1
 }
 
-file_path = path.abspath(path.dirname(__file__))
-with open(path.join(file_path, 'words.txt'), 'r') as f:
-	words = [word.split()[0].strip().upper() for word in f.readlines()]
-
-
 def has_valid_length(word):
 	'''
 	Words must be at least 3 letters long, and there are a max of 12 letters in the game
@@ -63,5 +58,17 @@ def is_valid_word(word):
 	'''
 	return has_valid_length(word) and has_valid_letters(word) and has_valid_vowels(word)
 
+file_path = path.abspath(path.dirname(__file__))
+with open(path.join(file_path, 'words.txt'), 'r') as f:
+	words = [word.split()[0].strip().upper() for word in f.readlines()]
+	words = set([word for word in words if is_valid_word(word)])
+
+
 with open(path.join(file_path, '..', 'QLessClues', 'QLessClues', 'Resources', 'words.txt'), 'w') as f:
-	[f.write(f"{word}\n") for word in sorted(words) if is_valid_word(word)]
+	[f.write(f"{word}\n") for word in sorted(words)]
+
+with open(path.join(file_path, 'freq.csv'), 'r') as f:
+	frequencies = [line.strip().upper().split(',') for line in f.readlines()]
+
+with open(path.join(file_path, '..', 'QLessClues', 'QLessClues', 'Resources', 'freq.csv'), 'w') as f:
+	[f.write(f"{freq[0]},{freq[1]}\n") for freq in frequencies if freq[0] in words]

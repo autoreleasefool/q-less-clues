@@ -11,6 +11,7 @@
 		CA0BF46428C93FA600EE3E58 /* SolutionsListScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0BF46328C93FA600EE3E58 /* SolutionsListScreen.swift */; };
 		CA0BF46728C9AF6D00EE3E58 /* SolutionDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0BF46628C9AF6D00EE3E58 /* SolutionDetailsScreen.swift */; };
 		CA0BF46A28C9B11D00EE3E58 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0BF46928C9B11D00EE3E58 /* Tile.swift */; };
+		CA0BF46C28C9C7ED00EE3E58 /* freq.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA0BF46B28C9C7ED00EE3E58 /* freq.csv */; };
 		CA12CA2728C6CA1500CD9876 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12CA2628C6CA1500CD9876 /* Direction.swift */; };
 		CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */; };
 		CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BC28C5095200DD75C7 /* Assets.xcassets */; };
@@ -51,6 +52,7 @@
 		CA0BF46328C93FA600EE3E58 /* SolutionsListScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionsListScreen.swift; sourceTree = "<group>"; };
 		CA0BF46628C9AF6D00EE3E58 /* SolutionDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionDetailsScreen.swift; sourceTree = "<group>"; };
 		CA0BF46928C9B11D00EE3E58 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
+		CA0BF46B28C9C7ED00EE3E58 /* freq.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = freq.csv; sourceTree = "<group>"; };
 		CA12CA2628C6CA1500CD9876 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
 		CA1867B528C5095100DD75C7 /* QLessClues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLessClues.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLessCluesApp.swift; sourceTree = "<group>"; };
@@ -174,6 +176,7 @@
 		CA1867C728C5096F00DD75C7 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				CA0BF46B28C9C7ED00EE3E58 /* freq.csv */,
 				CA6452BD28C5DFA200738762 /* words.txt */,
 			);
 			path = Resources;
@@ -396,6 +399,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA0BF46C28C9C7ED00EE3E58 /* freq.csv in Resources */,
 				CA1867C028C5095200DD75C7 /* Preview Assets.xcassets in Resources */,
 				CA6452BE28C5DFA200738762 /* words.txt in Resources */,
 				CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */,

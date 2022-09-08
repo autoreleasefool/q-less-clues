@@ -23,3 +23,34 @@ struct LetterFrequency {
 		return frequency[first]! < frequency[second]!
 	}
 }
+
+struct WordFrequency {
+
+	private static let englishWordFrequencies: [String: Int] = {
+		guard let freqListUrl = Bundle.main.url(forResource: "freq", withExtension: "csv"),
+					let freqList = try? String(contentsOf: freqListUrl) else {
+			fatalError("Could not load frequencyes")
+		}
+
+		return freqList
+			.split(separator: "\n")
+			.map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+			.filter { !$0.isEmpty }
+			.reduce(into: [:]) { freq, line in
+				let wordFreq = line.split(separator: ",")
+				freq[String(wordFreq[0])] = Int(wordFreq[1])
+			}
+	}()
+
+	static let englishFrequencies = WordFrequency(wordSet: .englishSet)
+
+	let frequency: [String: Int]
+
+	init(wordSet: WordSet) {
+		var frequency: [String: Int] = [:]
+		for word in wordSet.words {
+			frequency[word] = Self.englishWordFrequencies[word]
+		}
+		self.frequency = frequency
+	}
+}

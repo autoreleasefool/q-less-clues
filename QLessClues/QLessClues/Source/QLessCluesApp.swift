@@ -17,6 +17,7 @@ struct QLessCluesApp: App {
 			.onAppear {
 				DispatchQueue.global().async {
 					_ = WordSet.englishSet
+					_ = WordFrequency.englishFrequencies
 				}
 			}
 		}
