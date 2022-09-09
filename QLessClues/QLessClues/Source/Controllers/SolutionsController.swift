@@ -11,7 +11,7 @@ import Foundation
 final class SolutionsController: ObservableObject {
 
 	private var currentJob: UUID?
-	@Published var isFinished = false
+	@Published var isRunning = false
 	@Published var solutions: [Solution] = []
 	private var solutionsGenerated: Set<[String]> = []
 
@@ -26,13 +26,14 @@ final class SolutionsController: ObservableObject {
 	func generateSolutions(fromLetters letters: String) {
 		cancel()
 
+		isRunning = true
 		let (id, publisher) = solver.generateSolutions(fromLetters: letters)
 		currentJob = id
 		publisher
 			.receive(on: DispatchQueue.main)
 			.filter { !self.solutionsGenerated.contains($0.words) }
 			.sink(receiveCompletion: { _ in
-				self.isFinished = true
+				self.isRunning = false
 			}, receiveValue: {
 				self.solutionsGenerated.insert($0.words)
 				self.solutions.append($0)
@@ -41,7 +42,7 @@ final class SolutionsController: ObservableObject {
 	}
 
 	func cancel() {
-		isFinished = false
+		isRunning = false
 		solutions.removeAll()
 		solutionsGenerated.removeAll()
 		cancellables.removeAll()

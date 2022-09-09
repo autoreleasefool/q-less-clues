@@ -28,11 +28,12 @@ struct WordSet {
 
 	private(set) var words: [String]
 	private(set) var alphabet: String
+	private(set) lazy var frequency: WordFrequency = WordFrequency(words: words)
 
-	init(letterSet: LetterSet, words: [String] = Self.englishWords) {
-		self.alphabet = String(letterSet.letters.sorted()).uppercased()
+	init(letterSet: LetterSet) {
+		self.alphabet = String(Set(letterSet.letters).sorted()).uppercased()
 
-		self.words = words
+		let words = Self.englishWords
 			.map { $0.uppercased() }
 			.filter { Set($0).subtracting(Set(letterSet.letters)).isEmpty }
 			.filter {
@@ -46,12 +47,40 @@ struct WordSet {
 
 				return true
 			}
-		// TODO: generate word set
+		self.words = words
 	}
 
-	func wordsContainingLeastFrequentLetter(inSet letterSet: LetterSet) -> [String] {
+	private init(wordSet: WordSet) {
+		self.alphabet = wordSet.alphabet
+		self.words = wordSet.words
+	}
+
+	func limitBy(_ filter: Filter) -> WordSet {
+		var newSet = WordSet(wordSet: self)
+		switch filter {
+		case .containingLeastFrequentLetter:
+			newSet.words = wordsContainingLeastFrequentLetter(inSet: LetterSet(letters: alphabet))
+		case .mostPopular:
+			newSet.words = mostPopularWords()
+		}
+
+		return newSet
+	}
+
+	private func wordsContainingLeastFrequentLetter(inSet letterSet: LetterSet) -> [String] {
 		let frequency = LetterFrequency(letterSet: letterSet, wordSet: self)
 		let leastFrequentLetter = letterSet.letters.sorted(by: frequency.sortByFrequency).first!
 		return self.words.filter { $0.firstIndex(of: leastFrequentLetter) != nil }
+	}
+
+	private func mostPopularWords() -> [String] {
+		self.words.filter { (WordFrequency.englishFrequencies.ranking[$0] ?? Int.max) < 10_000 }
+	}
+}
+
+extension WordSet {
+	enum Filter {
+		case mostPopular
+		case containingLeastFrequentLetter
 	}
 }

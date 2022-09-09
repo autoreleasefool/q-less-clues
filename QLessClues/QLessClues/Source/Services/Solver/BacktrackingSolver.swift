@@ -52,7 +52,7 @@ class BacktrackingSolver: Solver {
 		}
 
 		if state.board.isEmpty {
-			for word in state.wordSet.wordsContainingLeastFrequentLetter(inSet: state.remainingLetters) {
+			for word in state.wordSet.limitBy(.containingLeastFrequentLetter).limitBy(.mostPopular).words {
 				insertFirstWord(word, in: &state)
 				state.remainingLetters.substract(letters: Array(word))
 				// TODO: perf improvement - update wordset
@@ -64,7 +64,7 @@ class BacktrackingSolver: Solver {
 		}
 
 		let expressions = enumerateRowsAndColumns(for: state)
-		for word in state.wordSet.words {
+		for word in state.wordSet.limitBy(.mostPopular).words {
 			for rowColumn in expressions {
 				guard word.firstMatch(of: rowColumn.regex) != nil else {
 					continue

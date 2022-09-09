@@ -29,6 +29,12 @@ struct RecordPlayScreen: View {
 				LetterEntry($newPlay.letters)
 			}
 
+			if solutionsController.isRunning {
+				Section {
+					ProgressView()
+				}
+			}
+
 			if newPlay.letters.count == 12 {
 				Section("Analysis") {
 					NavigationLink {

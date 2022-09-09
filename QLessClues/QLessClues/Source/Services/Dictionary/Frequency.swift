@@ -29,7 +29,7 @@ struct WordFrequency {
 	private static let englishWordFrequencies: [String: Int] = {
 		guard let freqListUrl = Bundle.main.url(forResource: "freq", withExtension: "csv"),
 					let freqList = try? String(contentsOf: freqListUrl) else {
-			fatalError("Could not load frequencyes")
+			fatalError("Could not load frequencies")
 		}
 
 		return freqList
@@ -42,15 +42,26 @@ struct WordFrequency {
 			}
 	}()
 
-	static let englishFrequencies = WordFrequency(wordSet: .englishSet)
+	static let englishFrequencies = WordFrequency(words: WordSet.englishSet.words)
 
 	let frequency: [String: Int]
+	let ranking: [String: Int]
 
-	init(wordSet: WordSet) {
+	init(words: [String]) {
 		var frequency: [String: Int] = [:]
-		for word in wordSet.words {
+		for word in words {
 			frequency[word] = Self.englishWordFrequencies[word]
 		}
+
+		var ranking: [String: Int] = [:]
+		for (index, word) in words
+			.sorted(by: {
+				(Self.englishWordFrequencies[$0] ?? Int.min) < (Self.englishWordFrequencies[$1] ?? Int.min)
+			}).reversed().enumerated() {
+			ranking[word] = index
+		}
+
 		self.frequency = frequency
+		self.ranking = ranking
 	}
 }
