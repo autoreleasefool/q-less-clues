@@ -31,7 +31,11 @@ struct RecordPlayScreen: View {
 
 			if solutionsController.isRunning {
 				Section {
-					ProgressView()
+					HStack {
+						Spacer()
+						ProgressView()
+						Spacer()
+					}
 				}
 			}
 

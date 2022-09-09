@@ -27,6 +27,7 @@ class BacktrackingSolver: Solver {
 			print("Starting solving \(letters)")
 			let letterSet = LetterSet(letters: letters)
 			let wordSet = WordSet(letterSet: letterSet)
+			print("Wordset: \(wordSet.words.count), in most popular: \(wordSet.limitBy(.mostPopular).words.count)")
 			var state = State(id: id, remainingLetters: letterSet, wordSet: wordSet, board: [:])
 			self?.generateSolutions(state: &state, subject: subject)
 			subject.send(completion: .finished)
