@@ -17,7 +17,6 @@
 		CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BC28C5095200DD75C7 /* Assets.xcassets */; };
 		CA1867C028C5095200DD75C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BF28C5095200DD75C7 /* Preview Assets.xcassets */; };
 		CA1867CE28C50FD000DD75C7 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867CD28C50FD000DD75C7 /* Play.swift */; };
-		CA1867D128C5103500DD75C7 /* Boutique in Frameworks */ = {isa = PBXBuildFile; productRef = CA1867D028C5103500DD75C7 /* Boutique */; };
 		CA1867D328C510ED00DD75C7 /* SolvedState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867D228C510ED00DD75C7 /* SolvedState.swift */; };
 		CA1867D728C5195500DD75C7 /* StatisticsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867D628C5195500DD75C7 /* StatisticsScreen.swift */; };
 		CA1867D928C5196F00DD75C7 /* PlaysController.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867D828C5196F00DD75C7 /* PlaysController.swift */; };
@@ -31,7 +30,6 @@
 		CA1CEE5D28C6B36A00520C70 /* LetterSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5C28C6B36A00520C70 /* LetterSet.swift */; };
 		CA1CEE5F28C6BA7D00520C70 /* Frequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5E28C6BA7D00520C70 /* Frequency.swift */; };
 		CA1CEE7328C6C07A00520C70 /* FrequencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE7228C6C07A00520C70 /* FrequencyTests.swift */; };
-		CA1CEE7628C6C74B00520C70 /* Boutique in Frameworks */ = {isa = PBXBuildFile; productRef = CA1CEE7528C6C74B00520C70 /* Boutique */; };
 		CA6452A828C5C72900738762 /* LetterEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6452A728C5C72900738762 /* LetterEntry.swift */; };
 		CA6452BE28C5DFA200738762 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = CA6452BD28C5DFA200738762 /* words.txt */; };
 		CABF28C828C57C4E00A0C0E1 /* RecordPlayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABF28C728C57C4E00A0C0E1 /* RecordPlayScreen.swift */; };
@@ -83,7 +81,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA1867D128C5103500DD75C7 /* Boutique in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -91,7 +88,6 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA1CEE7628C6C74B00520C70 /* Boutique in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -326,7 +322,6 @@
 			);
 			name = QLessClues;
 			packageProductDependencies = (
-				CA1867D028C5103500DD75C7 /* Boutique */,
 			);
 			productName = QLessClues;
 			productReference = CA1867B528C5095100DD75C7 /* QLessClues.app */;
@@ -347,7 +342,6 @@
 			);
 			name = QLessCluesTests;
 			packageProductDependencies = (
-				CA1CEE7528C6C74B00520C70 /* Boutique */,
 			);
 			productName = QLessCluesTests;
 			productReference = CA1CEE6428C6C03C00520C70 /* QLessCluesTests.xctest */;
@@ -382,7 +376,6 @@
 			);
 			mainGroup = CA1867AC28C5095100DD75C7;
 			packageReferences = (
-				CA1867CF28C5103500DD75C7 /* XCRemoteSwiftPackageReference "Boutique" */,
 			);
 			productRefGroup = CA1867B628C5095100DD75C7 /* Products */;
 			projectDirPath = "";
@@ -726,30 +719,6 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
-
-/* Begin XCRemoteSwiftPackageReference section */
-		CA1867CF28C5103500DD75C7 /* XCRemoteSwiftPackageReference "Boutique" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/mergesort/Boutique";
-			requirement = {
-				branch = main;
-				kind = branch;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
-/* Begin XCSwiftPackageProductDependency section */
-		CA1867D028C5103500DD75C7 /* Boutique */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CA1867CF28C5103500DD75C7 /* XCRemoteSwiftPackageReference "Boutique" */;
-			productName = Boutique;
-		};
-		CA1CEE7528C6C74B00520C70 /* Boutique */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CA1867CF28C5103500DD75C7 /* XCRemoteSwiftPackageReference "Boutique" */;
-			productName = Boutique;
-		};
-/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = CA1867AD28C5095100DD75C7 /* Project object */;
 }
