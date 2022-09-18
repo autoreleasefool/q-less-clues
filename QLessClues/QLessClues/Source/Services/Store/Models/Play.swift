@@ -19,12 +19,24 @@ struct Play: Codable, Equatable, Identifiable {
 		self.letters = letters
 		self.outcome = outcome
 	}
+
+	var isPlayable: Bool {
+		letters.count == 12
+	}
 }
 
 extension Play {
-	enum Outcome: Codable, Equatable {
+	enum Outcome: CaseIterable, Codable, Equatable {
+		case unsolved
 		case solved
 		case solvedWithHints
-		case unsolved
+
+		var label: String {
+			switch self {
+			case .unsolved: return "❌ Unsolved"
+			case .solved: return "✅ Solved"
+			case .solvedWithHints: return "📝 Solved (with hints)"
+			}
+		}
 	}
 }

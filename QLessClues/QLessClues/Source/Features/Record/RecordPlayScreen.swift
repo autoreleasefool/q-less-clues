@@ -24,30 +24,41 @@ struct RecordPlayScreen: View {
 		List {
 			Section("Game") {
 				LetterEntry($play.letters)
-			}
-
-			Section("Solutions") {
-				Button(action: findSolutions) {
-					if solutionsProvider.isRunning {
-						ProgressView()
-					} else {
-						Text("Find Solutions")
+				Picker("Outcome", selection: $play.outcome) {
+					ForEach(Play.Outcome.allCases, id: \.hashValue) {
+						Text($0.label).tag($0)
 					}
 				}
-				.disabled(play.letters.count != 12 || solutionsProvider.isRunning)
+			}
 
-				NavigationLink {
-					SolutionsListScreen(solutions: $solutionsProvider.solutions)
-				} label: {
-					HStack {
-						Text("Solutions")
-						Spacer()
-						Text("\(solutionsProvider.solutions.count)")
+			if play.isPlayable {
+				if solutionsProvider.isRunning {
+					ProgressView()
+				}
+
+				Section("Solutions") {
+					Button("Find Solutions", action: findSolutions)
+						.disabled(solutionsProvider.isRunning)
+
+					NavigationLink {
+						SolutionsListScreen(solutions: $solutionsProvider.solutions)
+					} label: {
+						HStack {
+							Text("Solutions")
+							Spacer()
+							Text("\(solutionsProvider.solutions.count)")
+						}
 					}
 				}
 			}
 		}
 		.navigationTitle("New Play")
+		.toolbar {
+			ToolbarItem(placement: .navigationBarTrailing) {
+				Button("Save", action: savePlay)
+					.disabled(!play.isPlayable)
+			}
+		}
 		.onDisappear {
 			solutionsProvider.cancel()
 		}
@@ -56,12 +67,18 @@ struct RecordPlayScreen: View {
 	private func findSolutions() {
 		solutionsProvider.solve(letters: play.letters)
 	}
+
+	private func savePlay() {
+
+	}
 }
 
 #if DEBUG
 struct RecordPlayScreenPreview: PreviewProvider {
 	static var previews: some View {
-		RecordPlayScreen()
+		NavigationStack {
+			RecordPlayScreen()
+		}
 	}
 }
 #endif
