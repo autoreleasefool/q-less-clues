@@ -215,7 +215,7 @@
 		CA1CEE6528C6C03C00520C70 /* QLessCluesTests */ = {
 			isa = PBXGroup;
 			children = (
-				CAB3CC2328D7D5500035DD1E /* Services */,
+				CAB3CC2328D7D5500035DD1E /* Libraries */,
 			);
 			path = QLessCluesTests;
 			sourceTree = "<group>";
@@ -238,6 +238,7 @@
 		CA24657128D69BBD001BFF71 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				CAB3CC2F28D7D8540035DD1E /* Dictionary */,
 				CA24657228D69BC7001BFF71 /* Extensions */,
 			);
 			path = Libraries;
@@ -300,25 +301,32 @@
 		CA6452BA28C5DEC900738762 /* Dictionary */ = {
 			isa = PBXGroup;
 			children = (
-				CA1CEE4C28C65ADA00520C70 /* WordSet.swift */,
-				CA1CEE5C28C6B36A00520C70 /* LetterSet.swift */,
-				CA1CEE5E28C6BA7D00520C70 /* Frequency.swift */,
 			);
 			path = Dictionary;
 			sourceTree = "<group>";
 		};
-		CAB3CC2328D7D5500035DD1E /* Services */ = {
+		CAB3CC2328D7D5500035DD1E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
 				CAB3CC2428D7D5560035DD1E /* Dictionary */,
 			);
-			path = Services;
+			path = Libraries;
 			sourceTree = "<group>";
 		};
 		CAB3CC2428D7D5560035DD1E /* Dictionary */ = {
 			isa = PBXGroup;
 			children = (
 				CAB3CC2528D7D5840035DD1E /* FrequencyTests.swift */,
+			);
+			path = Dictionary;
+			sourceTree = "<group>";
+		};
+		CAB3CC2F28D7D8540035DD1E /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				CA1CEE4C28C65ADA00520C70 /* WordSet.swift */,
+				CA1CEE5C28C6B36A00520C70 /* LetterSet.swift */,
+				CA1CEE5E28C6BA7D00520C70 /* Frequency.swift */,
 			);
 			path = Dictionary;
 			sourceTree = "<group>";
