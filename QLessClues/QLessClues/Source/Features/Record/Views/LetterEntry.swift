@@ -20,12 +20,12 @@ struct LetterEntry: View {
 			TextField("Letters", text: $letters)
 				.onChange(of: letters, perform: updateLetters)
 
-			Button(action: self.captureLetters) {
-				HStack {
-					Image(systemName: "camera.viewfinder")
-					Text("Capture")
-				}
-			}
+//			Button(action: self.captureLetters) {
+//				HStack {
+//					Image(systemName: "camera.viewfinder")
+//					Text("Capture")
+//				}
+//			}
 		}
 
 	}
@@ -43,3 +43,13 @@ struct LetterEntry: View {
 		self.letters = updatedLetters
 	}
 }
+
+#if DEBUG
+struct LetterEntryPreview: PreviewProvider {
+	static var previews: some View {
+		Form {
+			LetterEntry(.constant("ABC"))
+		}
+	}
+}
+#endif

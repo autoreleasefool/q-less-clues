@@ -8,7 +8,7 @@
 import Combine
 import Foundation
 
-protocol Solver {
-	func generateSolutions(fromLetters: String) -> (UUID, AnyPublisher<Solution, Never>)
-	func cancelJob(id: UUID)
+protocol SolutionGenerator {
+	var solutions: AnyPublisher<Solution, Never> { get }
+	var letters: String { get set }
 }

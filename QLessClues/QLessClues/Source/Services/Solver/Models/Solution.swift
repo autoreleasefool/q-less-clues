@@ -14,8 +14,8 @@ struct Solution: Identifiable, Codable, Equatable, Hashable {
 	let rows: ClosedRange<Int>
 	let columns: ClosedRange<Int>
 
-	var letters: [String] {
-		Array(letterPositions.values)
+	var letters: String {
+		Array(letterPositions.values).sorted().joined()
 	}
 
 	init(board: [Position: Character]) {

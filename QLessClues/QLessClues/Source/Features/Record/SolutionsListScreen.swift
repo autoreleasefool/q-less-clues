@@ -9,10 +9,14 @@ import SwiftUI
 
 struct SolutionsListScreen: View {
 
-	@ObservedObject var solutionsController: SolutionsController
+	@Binding private var solutions: [Solution]
+
+	init(solutions: Binding<[Solution]>) {
+		self._solutions = solutions
+	}
 
 	var body: some View {
-		List(solutionsController.solutions, id: \.id) { solution in
+		List(solutions, id: \.id) { solution in
 			NavigationLink {
 				SolutionDetailsScreen(solution: solution)
 			} label: {

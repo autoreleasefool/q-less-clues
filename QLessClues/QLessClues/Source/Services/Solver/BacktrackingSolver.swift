@@ -8,39 +8,46 @@
 import Combine
 import Foundation
 
-class BacktrackingSolver: Solver {
+class BacktrackingSolver: SolutionGenerator {
 
-	typealias SolutionSubject = PassthroughSubject<Solution, Never>
+	var letters: String = "" {
+		didSet {
+			generateSolutions(fromLetters: String(letters.sorted()))
+		}
+	}
+
+	private let subject = PassthroughSubject<Solution, Never>()
+	var solutions: AnyPublisher<Solution, Never> {
+		subject.filter { [weak self] in self?.letters == $0.letters }
+			.eraseToAnyPublisher()
+	}
 
 	private let dispatchQueue = DispatchQueue(label: "BacktrackingSolver")
 	private let validator: Validator
-	private var cancelledJobs: Set<UUID> = []
 
-	init(validator: Validator) {
+	init(validator: Validator = BasicValidator()) {
 		self.validator = validator
 	}
 
-	func generateSolutions(fromLetters letters: String) -> (UUID, AnyPublisher<Solution, Never>) {
-		let subject = SolutionSubject()
-		let id = UUID()
+	private func generateSolutions(fromLetters letters: String) {
+		guard !letters.isEmpty else {
+			return
+		}
+
 		dispatchQueue.async { [weak self] in
-			print("Starting solving \(letters)")
+			guard let self else { return }
 			let letterSet = LetterSet(letters: letters)
 			let wordSet = WordSet(letterSet: letterSet)
-			print("Wordset: \(wordSet.words.count), in most popular: \(wordSet.limitBy(.mostPopular).words.count)")
-			var state = State(id: id, remainingLetters: letterSet, wordSet: wordSet, board: [:])
-			self?.generateSolutions(state: &state, subject: subject)
-			subject.send(completion: .finished)
+
+			var state = State(initialLetters: letters, remainingLetters: letterSet, wordSet: wordSet, board: [:])
+
+			self.generateSolutions(state: &state)
+			self.subject.send(completion: .finished)
 		}
-		return (id, subject.eraseToAnyPublisher())
 	}
 
-	func cancelJob(id: UUID) {
-		cancelledJobs.insert(id)
-	}
-
-	private func generateSolutions(state: inout State, subject: SolutionSubject) {
-		if cancelledJobs.contains(state.id) {
+	private func generateSolutions(state: inout State) {
+		if state.initialLetters != letters {
 			return
 		}
 
@@ -57,7 +64,7 @@ class BacktrackingSolver: Solver {
 				insertFirstWord(word, in: &state)
 				state.remainingLetters.substract(letters: Array(word))
 				// TODO: perf improvement - update wordset
-				generateSolutions(state: &state, subject: subject)
+				generateSolutions(state: &state)
 				state.remainingLetters.add(letters: Array(word))
 				removeFirstWord(from: &state)
 			}
@@ -75,7 +82,7 @@ class BacktrackingSolver: Solver {
 					insert(lettersUsed, in: &state)
 					state.remainingLetters.substract(letters: lettersUsed.map { $0.letter })
 					// TODO: perf improvement - update wordset
-					generateSolutions(state: &state, subject: subject)
+					generateSolutions(state: &state)
 					state.remainingLetters.add(letters: lettersUsed.map { $0.letter })
 					remove(lettersUsed, in: &state)
 				}
@@ -201,7 +208,7 @@ class BacktrackingSolver: Solver {
 
 private extension BacktrackingSolver {
 	struct State {
-		let id: UUID
+		let initialLetters: String
 		var remainingLetters: LetterSet
 		var wordSet: WordSet
 		var board: [Position: Character]
@@ -224,25 +231,5 @@ private extension BacktrackingSolver {
 		var description: String {
 			"(\(position), \(letter))"
 		}
-	}
-}
-
-extension Dictionary where Key == Position, Value == Character {
-	var columns: ClosedRange<Int> {
-		let (min, max) = self.keys.reduce(into: (min: 0, max: 0)) { out, next in
-			out.max = Swift.max(out.max, next.column)
-			out.min = Swift.min(out.min, next.column)
-		}
-
-		return min...max
-	}
-
-	var rows: ClosedRange<Int> {
-		let (min, max) = self.keys.reduce(into: (min: 0, max: 0)) { out, next in
-			out.max = Swift.max(out.max, next.row)
-			out.min = Swift.min(out.min, next.row)
-		}
-
-		return min...max
 	}
 }

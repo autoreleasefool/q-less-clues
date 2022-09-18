@@ -9,26 +9,25 @@ import SwiftUI
 
 struct StatisticsScreen: View {
 
-	@StateObject private var playsController = PlaysController()
-	@State private var newPlay: Play?
+	@State private var addingPlay = false
 
 	var body: some View {
-		List(playsController.plays) { _ in
-			EmptyView()
+		Group {
+			Text("Statistics")
 		}
 		.navigationTitle("Statistics")
 		.toolbar {
 			ToolbarItemGroup(placement: .navigationBarTrailing) {
 				Button {
-					newPlay = playsController.new()
+					addingPlay = true
 				} label: {
 					Image(systemName: "plus")
 				}
 			}
 		}
-		.sheet(item: $newPlay) { newPlay in
+		.sheet(isPresented: $addingPlay) {
 			NavigationStack {
-				RecordPlayScreen(newPlay)
+				RecordPlayScreen()
 			}
 		}
 	}

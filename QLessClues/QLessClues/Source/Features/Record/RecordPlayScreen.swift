@@ -10,56 +10,58 @@ import SwiftUI
 
 struct RecordPlayScreen: View {
 
-	let solver = BacktrackingSolver(validator: BasicValidator())
-
 	@Environment(\.dismiss) private var dismiss
 
-	@StateObject private var playsController = PlaysController()
-	@StateObject private var solutionsController = SolutionsController()
+	@StateObject private var solutionsProvider: SolutionsProvider
+	@State private var solutions: [Solution] = []
+	@State private var play: Play = Play(letters: "")
 
-	@State private var newPlay: Play
-
-	init(_ play: Play) {
-		self._newPlay = .init(initialValue: play)
+	init(generator: SolutionGenerator = BacktrackingSolver()) {
+		self._solutionsProvider = .init(wrappedValue: .init(generator: generator))
 	}
 
 	var body: some View {
-		Form {
+		List {
 			Section("Game") {
-				LetterEntry($newPlay.letters)
+				LetterEntry($play.letters)
 			}
 
-			if solutionsController.isRunning {
-				Section {
-					HStack {
-						Spacer()
+			Section("Solutions") {
+				Button(action: findSolutions) {
+					if solutionsProvider.isRunning {
 						ProgressView()
-						Spacer()
+					} else {
+						Text("Find Solutions")
 					}
 				}
-			}
+				.disabled(play.letters.count != 12 || solutionsProvider.isRunning)
 
-			if newPlay.letters.count == 12 {
-				Section("Analysis") {
-					NavigationLink {
-						SolutionsListScreen(solutionsController: solutionsController)
-					} label: {
-						HStack {
-							Text("Solutions")
-							Spacer()
-							Text("\(solutionsController.solutions.count)")
-						}
+				NavigationLink {
+					SolutionsListScreen(solutions: $solutionsProvider.solutions)
+				} label: {
+					HStack {
+						Text("Solutions")
+						Spacer()
+						Text("\(solutionsProvider.solutions.count)")
 					}
 				}
 			}
 		}
 		.navigationTitle("New Play")
-		.onChange(of: newPlay.letters.uppercased()) { letters in
-			if letters.count == 12 {
-				solutionsController.generateSolutions(fromLetters: letters)
-			} else {
-				solutionsController.cancel()
-			}
+		.onDisappear {
+			solutionsProvider.cancel()
 		}
 	}
+
+	private func findSolutions() {
+		solutionsProvider.solve(letters: play.letters)
+	}
 }
+
+#if DEBUG
+struct RecordPlayScreenPreview: PreviewProvider {
+	static var previews: some View {
+		RecordPlayScreen()
+	}
+}
+#endif
