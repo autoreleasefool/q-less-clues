@@ -16,6 +16,23 @@ struct SolutionsListScreen: View {
 	}
 
 	var body: some View {
+		Group {
+			if solutions.isEmpty {
+				emptyState
+			} else {
+				solutionsList
+			}
+		}
+		.navigationTitle("Solutions")
+	}
+
+	private var emptyState: some View {
+		List {
+			Text("No solutions have been found yet.")
+		}
+	}
+
+	private var solutionsList: some View {
 		List(solutions, id: \.id) { solution in
 			NavigationLink {
 				SolutionDetailsScreen(solution: solution)
@@ -23,6 +40,5 @@ struct SolutionsListScreen: View {
 				Text(solution.words.joined(separator: ", "))
 			}
 		}
-		.navigationTitle("Solutions")
 	}
 }
