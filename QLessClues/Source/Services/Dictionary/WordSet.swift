@@ -30,10 +30,10 @@ struct WordSet {
 	private(set) var alphabet: String
 	private(set) lazy var frequency: WordFrequency = WordFrequency(words: words)
 
-	init(letterSet: LetterSet) {
+	init(letterSet: LetterSet, baseDictionary: [String] = WordSet.englishWords) {
 		self.alphabet = String(Set(letterSet.letters).sorted()).uppercased()
 
-		let words = Self.englishWords
+		let words = baseDictionary
 			.map { $0.uppercased() }
 			.filter { Set($0).subtracting(Set(letterSet.letters)).isEmpty }
 			.filter {

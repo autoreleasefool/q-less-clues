@@ -25,7 +25,6 @@
 		CA1CEE5B28C6AF0000520C70 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5A28C6AF0000520C70 /* Position.swift */; };
 		CA1CEE5D28C6B36A00520C70 /* LetterSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5C28C6B36A00520C70 /* LetterSet.swift */; };
 		CA1CEE5F28C6BA7D00520C70 /* Frequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5E28C6BA7D00520C70 /* Frequency.swift */; };
-		CA1CEE7328C6C07A00520C70 /* FrequencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE7228C6C07A00520C70 /* FrequencyTests.swift */; };
 		CA24656B28D6838F001BFF71 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CA24656A28D6838F001BFF71 /* Realm */; };
 		CA24656D28D6838F001BFF71 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CA24656C28D6838F001BFF71 /* RealmSwift */; };
 		CA24657028D68819001BFF71 /* SolutionsProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA24656F28D68819001BFF71 /* SolutionsProvider.swift */; };
@@ -33,6 +32,9 @@
 		CA24657828D6AF79001BFF71 /* Play.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA24657728D6AF79001BFF71 /* Play.swift */; };
 		CA6452A828C5C72900738762 /* LetterEntry.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA6452A728C5C72900738762 /* LetterEntry.swift */; };
 		CA6452BE28C5DFA200738762 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = CA6452BD28C5DFA200738762 /* words.txt */; };
+		CAB3CC2628D7D5840035DD1E /* FrequencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC2528D7D5840035DD1E /* FrequencyTests.swift */; };
+		CAB3CC2C28D7D5EA0035DD1E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC2B28D7D5EA0035DD1E /* Realm */; };
+		CAB3CC2E28D7D5EB0035DD1E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC2D28D7D5EA0035DD1E /* RealmSwift */; };
 		CABF28C828C57C4E00A0C0E1 /* RecordPlayScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABF28C728C57C4E00A0C0E1 /* RecordPlayScreen.swift */; };
 /* End PBXBuildFile section */
 
@@ -67,12 +69,12 @@
 		CA1CEE5C28C6B36A00520C70 /* LetterSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterSet.swift; sourceTree = "<group>"; };
 		CA1CEE5E28C6BA7D00520C70 /* Frequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frequency.swift; sourceTree = "<group>"; };
 		CA1CEE6428C6C03C00520C70 /* QLessCluesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QLessCluesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		CA1CEE7228C6C07A00520C70 /* FrequencyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FrequencyTests.swift; sourceTree = "<group>"; };
 		CA24656F28D68819001BFF71 /* SolutionsProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionsProvider.swift; sourceTree = "<group>"; };
 		CA24657328D69BD1001BFF71 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		CA24657728D6AF79001BFF71 /* Play.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
 		CA6452A728C5C72900738762 /* LetterEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEntry.swift; sourceTree = "<group>"; };
 		CA6452BD28C5DFA200738762 /* words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words.txt; sourceTree = "<group>"; };
+		CAB3CC2528D7D5840035DD1E /* FrequencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencyTests.swift; sourceTree = "<group>"; };
 		CABF28C728C57C4E00A0C0E1 /* RecordPlayScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPlayScreen.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -90,6 +92,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CAB3CC2E28D7D5EB0035DD1E /* RealmSwift in Frameworks */,
+				CAB3CC2C28D7D5EA0035DD1E /* Realm in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -211,25 +215,9 @@
 		CA1CEE6528C6C03C00520C70 /* QLessCluesTests */ = {
 			isa = PBXGroup;
 			children = (
-				CA1CEE6D28C6C05400520C70 /* Services */,
+				CAB3CC2328D7D5500035DD1E /* Services */,
 			);
 			path = QLessCluesTests;
-			sourceTree = "<group>";
-		};
-		CA1CEE6D28C6C05400520C70 /* Services */ = {
-			isa = PBXGroup;
-			children = (
-				CA1CEE6E28C6C05A00520C70 /* Dictionary */,
-			);
-			path = Services;
-			sourceTree = "<group>";
-		};
-		CA1CEE6E28C6C05A00520C70 /* Dictionary */ = {
-			isa = PBXGroup;
-			children = (
-				CA1CEE7228C6C07A00520C70 /* FrequencyTests.swift */,
-			);
-			path = Dictionary;
 			sourceTree = "<group>";
 		};
 		CA1CEE7428C6C74B00520C70 /* Frameworks */ = {
@@ -319,6 +307,22 @@
 			path = Dictionary;
 			sourceTree = "<group>";
 		};
+		CAB3CC2328D7D5500035DD1E /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				CAB3CC2428D7D5560035DD1E /* Dictionary */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		CAB3CC2428D7D5560035DD1E /* Dictionary */ = {
+			isa = PBXGroup;
+			children = (
+				CAB3CC2528D7D5840035DD1E /* FrequencyTests.swift */,
+			);
+			path = Dictionary;
+			sourceTree = "<group>";
+		};
 		CABF28C628C57C2900A0C0E1 /* Record */ = {
 			isa = PBXGroup;
 			children = (
@@ -369,6 +373,8 @@
 			);
 			name = QLessCluesTests;
 			packageProductDependencies = (
+				CAB3CC2B28D7D5EA0035DD1E /* Realm */,
+				CAB3CC2D28D7D5EA0035DD1E /* RealmSwift */,
 			);
 			productName = QLessCluesTests;
 			productReference = CA1CEE6428C6C03C00520C70 /* QLessCluesTests.xctest */;
@@ -389,6 +395,7 @@
 					};
 					CA1CEE6328C6C03C00520C70 = {
 						CreatedOnToolsVersion = 14.0;
+						LastSwiftMigration = 1400;
 						TestTargetID = CA1867B428C5095100DD75C7;
 					};
 				};
@@ -490,7 +497,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA1CEE7328C6C07A00520C70 /* FrequencyTests.swift in Sources */,
+				CAB3CC2628D7D5840035DD1E /* FrequencyTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -683,14 +690,24 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3UBRXR267C;
 				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.josephroque.QLessCluesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QLessClues.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QLessClues";
@@ -701,13 +718,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 3UBRXR267C;
 				GENERATE_INFOPLIST_FILE = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
 				MARKETING_VERSION = 1.0;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.josephroque.QLessCluesTests;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
 				SWIFT_EMIT_LOC_STRINGS = NO;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -765,6 +791,16 @@
 			productName = Realm;
 		};
 		CA24656C28D6838F001BFF71 /* RealmSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA24656928D6838F001BFF71 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = RealmSwift;
+		};
+		CAB3CC2B28D7D5EA0035DD1E /* Realm */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CA24656928D6838F001BFF71 /* XCRemoteSwiftPackageReference "realm-swift" */;
+			productName = Realm;
+		};
+		CAB3CC2D28D7D5EA0035DD1E /* RealmSwift */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CA24656928D6838F001BFF71 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;

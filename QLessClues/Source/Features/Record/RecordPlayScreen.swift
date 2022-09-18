@@ -14,7 +14,7 @@ struct RecordPlayScreen: View {
 
 	@StateObject private var solutionsProvider: SolutionsProvider
 	@State private var solutions: [Solution] = []
-	@State private var play: Play = Play(letters: "")
+	@State private var play: Play = Play()
 
 	init(generator: SolutionGenerator = BacktrackingSolver()) {
 		self._solutionsProvider = .init(wrappedValue: .init(generator: generator))
@@ -26,7 +26,7 @@ struct RecordPlayScreen: View {
 				LetterEntry($play.letters)
 				Picker("Outcome", selection: $play.outcome) {
 					ForEach(Play.Outcome.allCases, id: \.hashValue) {
-						Text($0.label).tag($0)
+						Text($0.rawValue).tag($0)
 					}
 				}
 			}
