@@ -9,10 +9,14 @@ import SwiftUI
 
 @main
 struct QLessCluesApp: App {
+
+	@StateObject var environment: AppEnvironment = .bootstrap()
+
 	var body: some Scene {
 		WindowGroup {
 			NavigationStack {
-				StatisticsScreen()
+				ContentView()
+					.environment(\.dependencies, environment.dependencies)
 			}
 			.onAppear {
 				DispatchQueue.global().async {

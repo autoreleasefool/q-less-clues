@@ -1,5 +1,5 @@
 //
-//  SolutionsListScreen.swift
+//  SolutionsList.swift
 //  QLessClues
 //
 //  Created by Joseph Roque on 2022-09-07.
@@ -7,20 +7,20 @@
 
 import SwiftUI
 
-struct SolutionsListScreen: View {
+struct SolutionsList: View {
 
-	@Binding private var solutions: [Solution]
+	@Binding private var solutions: Loadable<[Solution]>
 
-	init(solutions: Binding<[Solution]>) {
+	init(solutions: LoadableSubject<[Solution]>) {
 		self._solutions = solutions
 	}
 
 	var body: some View {
 		Group {
-			if solutions.isEmpty {
-				emptyState
-			} else {
+			if solutions.value?.isEmpty != false {
 				solutionsList
+			} else {
+				emptyState
 			}
 		}
 		.navigationTitle("Solutions")
@@ -33,7 +33,7 @@ struct SolutionsListScreen: View {
 	}
 
 	private var solutionsList: some View {
-		List(solutions, id: \.id) { solution in
+		List(solutions.value ?? [], id: \.id) { solution in
 			NavigationLink {
 				SolutionDetailsScreen(solution: solution)
 			} label: {

@@ -14,6 +14,8 @@ class Play: Object, ObjectKeyIdentifiable {
 	@Persisted var letters = ""
 	@Persisted var outcome: Outcome = .unsolved
 
+	@Persisted(originProperty: "plays") var group: LinkingObjects<PlayGroup>
+
 	var isPlayable: Bool {
 		letters.count == 12
 	}

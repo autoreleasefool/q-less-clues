@@ -8,19 +8,9 @@
 import Combine
 import Foundation
 
-class BacktrackingSolver: SolutionGenerator {
+class BacktrackingSolver: GameSolver {
 
-	var letters: String = "" {
-		didSet {
-			generateSolutions(fromLetters: String(letters.sorted()))
-		}
-	}
-
-	private let subject = PassthroughSubject<Solution, Never>()
-	var solutions: AnyPublisher<Solution, Never> {
-		subject.filter { [weak self] in self?.letters == $0.letters }
-			.eraseToAnyPublisher()
-	}
+	private var subject: PassthroughSubject<Solution, SolverError>?
 
 	private let dispatchQueue = DispatchQueue(label: "BacktrackingSolver")
 	private let validator: Validator
@@ -29,8 +19,23 @@ class BacktrackingSolver: SolutionGenerator {
 		self.validator = validator
 	}
 
-	private func generateSolutions(fromLetters letters: String) {
+	func solutions(forLetters letters: String) -> AnyPublisher<Solution, SolverError> {
+		subject?.send(completion: .failure(.cancelled))
+		let newSubject = PassthroughSubject<Solution, SolverError>()
+		self.subject = newSubject
+
+		DispatchQueue.main.async {
+			self.generateSolutions(fromLetters: letters, to: newSubject)
+		}
+
+		return newSubject
+			.filter { [weak self] _ in self?.subject === newSubject }
+			.eraseToAnyPublisher()
+	}
+
+	private func generateSolutions(fromLetters letters: String, to subject: any Subject<Solution, SolverError>) {
 		guard !letters.isEmpty else {
+			subject.send(completion: .finished)
 			return
 		}
 
@@ -41,15 +46,13 @@ class BacktrackingSolver: SolutionGenerator {
 
 			var state = State(initialLetters: letters, remainingLetters: letterSet, wordSet: wordSet, board: [:])
 
-			self.generateSolutions(state: &state)
-			self.subject.send(completion: .finished)
+			self.generateSolutions(state: &state, to: subject)
+			subject.send(completion: .finished)
 		}
 	}
 
-	private func generateSolutions(state: inout State) {
-		if state.initialLetters != letters {
-			return
-		}
+	private func generateSolutions(state: inout State, to subject: any Subject<Solution, SolverError>) {
+		guard subject === self.subject else { return }
 
 		if state.remainingLetters.isEmpty {
 			let solution = Solution(board: state.board)
@@ -64,7 +67,7 @@ class BacktrackingSolver: SolutionGenerator {
 				insertFirstWord(word, in: &state)
 				state.remainingLetters.substract(letters: Array(word))
 				// TODO: perf improvement - update wordset
-				generateSolutions(state: &state)
+				generateSolutions(state: &state, to: subject)
 				state.remainingLetters.add(letters: Array(word))
 				removeFirstWord(from: &state)
 			}
@@ -82,7 +85,7 @@ class BacktrackingSolver: SolutionGenerator {
 					insert(lettersUsed, in: &state)
 					state.remainingLetters.substract(letters: lettersUsed.map { $0.letter })
 					// TODO: perf improvement - update wordset
-					generateSolutions(state: &state)
+					generateSolutions(state: &state, to: subject)
 					state.remainingLetters.add(letters: lettersUsed.map { $0.letter })
 					remove(lettersUsed, in: &state)
 				}
