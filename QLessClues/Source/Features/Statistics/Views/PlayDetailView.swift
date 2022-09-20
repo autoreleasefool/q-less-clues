@@ -10,18 +10,61 @@ import SwiftUI
 
 struct PlayDetailView: View {
 
+	@Environment(\.dismiss) private var dismiss
+
 	@ObservedRealmObject var play: Play
+	@State private var isDeleting = false
 
 	var body: some View {
-		VStack {
-			Text(play.letters)
-			Button("Delete") {
-				if let deletable = play.thaw(), let realm = deletable.realm {
-					try? realm.write {
-						realm.delete(deletable)
-					}
+		List {
+			Section {
+				Text(play.letters)
+				LabeledContent("Outcome", value: play.outcome.rawValue)
+			}
+
+			Section {
+				Button(role: .destructive, action: promptDelete) {
+					Label("Delete", systemImage: "trash")
 				}
 			}
 		}
+		.confirmationDialog("Are you sure?", isPresented: $isDeleting) {
+			Button(role: .destructive, action: delete) {
+				Text("Delete")
+			}
+		} message: {
+			Text("You cannot undo this action")
+		}
 	}
 }
+
+// MARK: - Actions
+
+extension PlayDetailView {
+	private func promptDelete() {
+		isDeleting = true
+	}
+
+	private func delete() {
+		if let deletable = play.thaw(), let realm = deletable.realm {
+			try? realm.write {
+				realm.delete(deletable)
+			}
+			dismiss()
+		}
+	}
+}
+
+#if DEBUG
+struct PlayDetailViewPreview: PreviewProvider {
+	static let play: Play = {
+		let play = Play()
+		play.letters = "CULTORCHSYOF"
+		return play
+	}()
+
+	static var previews: some View {
+		PlayDetailView(play: play)
+	}
+}
+#endif
