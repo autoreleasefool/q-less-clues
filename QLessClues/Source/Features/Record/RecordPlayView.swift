@@ -43,11 +43,7 @@ struct RecordPlayView: View {
 					NavigationLink {
 						SolutionsList(solutions: $solutions)
 					} label: {
-						HStack {
-							Text("Solutions")
-							Spacer()
-							Text("\(solutions.value?.count ?? 0)")
-						}
+						LabeledContent("Solutions", value: totalSolutionsFound)
 					}
 				}
 			}
@@ -83,6 +79,15 @@ extension RecordPlayView {
 		case .isLoading, .loaded: return true
 		case .notRequested, .failed: return false
 		}
+	}
+
+	private var totalSolutionsFound: String {
+		switch solutions {
+		case .isLoading(let value, _): return "\(value?.count ?? 0)"
+		case .loaded(let value): return "\(value.count)"
+		case .notRequested, .failed: return "N/A"
+		}
+		solutions.value?.count ?? 0
 	}
 }
 
