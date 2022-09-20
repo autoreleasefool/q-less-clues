@@ -17,7 +17,7 @@ struct SolutionsList: View {
 
 	var body: some View {
 		Group {
-			if solutions.value?.isEmpty != false {
+			if solutions.value?.isEmpty == false {
 				solutionsList
 			} else {
 				emptyState
@@ -35,7 +35,7 @@ struct SolutionsList: View {
 	private var solutionsList: some View {
 		List(solutions.value ?? [], id: \.id) { solution in
 			NavigationLink {
-				SolutionDetailsScreen(solution: solution)
+				SolutionDetailView(solution: solution)
 			} label: {
 				Text(solution.words.joined(separator: ", "))
 			}

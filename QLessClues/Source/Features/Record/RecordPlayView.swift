@@ -16,10 +16,12 @@ struct RecordPlayView: View {
 	@Environment(\.realm) private var realm
 
 	@ObservedRealmObject var play: Play
+	@ObservedRealmObject var group: PlayGroup
 	@State private var solutions: Loadable<[Solution]>
 
-	init(play: Play, solutions: Loadable<[Solution]> = .notRequested) {
+	init(play: Play, group: PlayGroup, solutions: Loadable<[Solution]> = .notRequested) {
 		self.play = play
+		self.group = group
 		self._solutions = .init(initialValue: solutions)
 	}
 
@@ -93,6 +95,7 @@ extension RecordPlayView {
 	}
 
 	private func save() {
+		$group.plays.append(play)
 		dismiss()
 	}
 }
@@ -103,7 +106,7 @@ extension RecordPlayView {
 struct RecordPlayViewPreview: PreviewProvider {
 	static var previews: some View {
 		NavigationStack {
-			RecordPlayView(play: Play())
+			RecordPlayView(play: Play(), group: PlayGroup())
 		}
 	}
 }

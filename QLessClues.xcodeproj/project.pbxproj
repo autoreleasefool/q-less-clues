@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		CA0BF46428C93FA600EE3E58 /* SolutionsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0BF46328C93FA600EE3E58 /* SolutionsList.swift */; };
-		CA0BF46728C9AF6D00EE3E58 /* SolutionDetailsScreen.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0BF46628C9AF6D00EE3E58 /* SolutionDetailsScreen.swift */; };
+		CA0BF46728C9AF6D00EE3E58 /* SolutionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0BF46628C9AF6D00EE3E58 /* SolutionDetailView.swift */; };
 		CA0BF46A28C9B11D00EE3E58 /* Tile.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA0BF46928C9B11D00EE3E58 /* Tile.swift */; };
 		CA0BF46C28C9C7ED00EE3E58 /* freq.csv in Resources */ = {isa = PBXBuildFile; fileRef = CA0BF46B28C9C7ED00EE3E58 /* freq.csv */; };
 		CA12CA2728C6CA1500CD9876 /* Direction.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA12CA2628C6CA1500CD9876 /* Direction.swift */; };
@@ -59,7 +59,7 @@
 
 /* Begin PBXFileReference section */
 		CA0BF46328C93FA600EE3E58 /* SolutionsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionsList.swift; sourceTree = "<group>"; };
-		CA0BF46628C9AF6D00EE3E58 /* SolutionDetailsScreen.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionDetailsScreen.swift; sourceTree = "<group>"; };
+		CA0BF46628C9AF6D00EE3E58 /* SolutionDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionDetailView.swift; sourceTree = "<group>"; };
 		CA0BF46928C9B11D00EE3E58 /* Tile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tile.swift; sourceTree = "<group>"; };
 		CA0BF46B28C9C7ED00EE3E58 /* freq.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = freq.csv; sourceTree = "<group>"; };
 		CA12CA2628C6CA1500CD9876 /* Direction.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Direction.swift; sourceTree = "<group>"; };
@@ -122,7 +122,7 @@
 			isa = PBXGroup;
 			children = (
 				CA0BF46828C9B11500EE3E58 /* Views */,
-				CA0BF46628C9AF6D00EE3E58 /* SolutionDetailsScreen.swift */,
+				CA0BF46628C9AF6D00EE3E58 /* SolutionDetailView.swift */,
 			);
 			path = Solutions;
 			sourceTree = "<group>";
@@ -558,7 +558,7 @@
 				CABF28C828C57C4E00A0C0E1 /* RecordPlayView.swift in Sources */,
 				CAB3CC4828D7F8490035DD1E /* AppEnvironment.swift in Sources */,
 				CA1CEE5228C65AE100520C70 /* BacktrackingSolver.swift in Sources */,
-				CA0BF46728C9AF6D00EE3E58 /* SolutionDetailsScreen.swift in Sources */,
+				CA0BF46728C9AF6D00EE3E58 /* SolutionDetailView.swift in Sources */,
 				CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */,
 				CAB3CC3A28D7E6B10035DD1E /* PlayRow.swift in Sources */,
 				CA6452A828C5C72900738762 /* LetterEntry.swift in Sources */,

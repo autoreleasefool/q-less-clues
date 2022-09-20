@@ -29,14 +29,22 @@ struct StatisticsView: View {
 		}
 		.sheet(item: $newPlay) { newPlay in
 			NavigationStack {
-				RecordPlayView(play: newPlay)
+				RecordPlayView(play: newPlay, group: group)
 			}
 		}
 	}
 
 	private func addNewPlay() {
-		let newPlay = Play()
-		$group.plays.append(newPlay)
-		self.newPlay = newPlay
+		self.newPlay = Play()
 	}
 }
+
+#if DEBUG
+struct StatisticsViewPreview: PreviewProvider {
+	static var previews: some View {
+		NavigationStack {
+			StatisticsView(group: PlayGroup())
+		}
+	}
+}
+#endif

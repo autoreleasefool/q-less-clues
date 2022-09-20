@@ -1,5 +1,5 @@
 //
-//  SolutionDetailsScreen.swift
+//  SolutionDetailView.swift
 //  QLessClues
 //
 //  Created by Joseph Roque on 2022-09-07.
@@ -7,7 +7,7 @@
 
 import SwiftUI
 
-struct SolutionDetailsScreen: View {
+struct SolutionDetailView: View {
 
 	let solution: Solution
 
