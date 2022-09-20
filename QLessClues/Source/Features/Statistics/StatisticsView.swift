@@ -15,9 +15,15 @@ struct StatisticsView: View {
 
 	var body: some View {
 		List {
-			ForEach(group.plays) { play in
-				PlayRow(play: play)
-			}.onDelete(perform: $group.plays.remove)
+			statistics(Statistics(group: group))
+
+			Section("Recent Plays") {
+				if group.plays.isEmpty {
+					emptyState
+				} else {
+					playsList
+				}
+			}
 		}
 		.navigationTitle("Statistics")
 		.toolbar {
@@ -36,6 +42,42 @@ struct StatisticsView: View {
 
 	private func addNewPlay() {
 		self.newPlay = Play()
+	}
+}
+
+// MARK: - Content
+
+extension StatisticsView {
+	@ViewBuilder private func statistics(_ stats: Statistics) -> some View {
+		HStack {
+			Spacer()
+			VStack(alignment: .center) {
+				Text(stats.pureWinPercentage)
+					.font(.largeTitle)
+				Text("Wins")
+			}
+			Spacer()
+			VStack(alignment: .center) {
+				Text(stats.overallWinPercentage)
+					.font(.largeTitle)
+				Text("With hints")
+			}
+			Spacer()
+		}
+		LabeledContent("Wins", value: "\(stats.pureWins)")
+		LabeledContent("Wins (with hints)", value: "\(stats.winsWithHints)")
+		LabeledContent("Losses", value: "\(stats.losses)")
+		LabeledContent("Total Plays", value: "\(stats.totalPlays)")
+	}
+
+	private var emptyState: some View {
+		Text("You haven't added any plays yet")
+	}
+
+	private var playsList: some View {
+		ForEach(group.plays) { play in
+			PlayRow(play: play)
+		}.onDelete(perform: $group.plays.remove)
 	}
 }
 

@@ -44,6 +44,7 @@
 		CAB3CC4828D7F8490035DD1E /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC4728D7F8490035DD1E /* AppEnvironment.swift */; };
 		CAB3CC4B28D800EB0035DD1E /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC4A28D800EB0035DD1E /* Loadable.swift */; };
 		CAB3CC4D28D801180035DD1E /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC4C28D801180035DD1E /* CancelBag.swift */; };
+		CAB3CC5228D97E1B0035DD1E /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC5128D97E1B0035DD1E /* Statistics.swift */; };
 		CABF28C828C57C4E00A0C0E1 /* RecordPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABF28C728C57C4E00A0C0E1 /* RecordPlayView.swift */; };
 /* End PBXBuildFile section */
 
@@ -93,6 +94,7 @@
 		CAB3CC4728D7F8490035DD1E /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		CAB3CC4A28D800EB0035DD1E /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		CAB3CC4C28D801180035DD1E /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
+		CAB3CC5128D97E1B0035DD1E /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 		CABF28C728C57C4E00A0C0E1 /* RecordPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPlayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -207,6 +209,7 @@
 		CA1867CB28C50FBB00DD75C7 /* Statistics */ = {
 			isa = PBXGroup;
 			children = (
+				CAB3CC5028D97E0D0035DD1E /* Utilities */,
 				CAB3CC3828D7E6AB0035DD1E /* Views */,
 				CA1867D628C5195500DD75C7 /* StatisticsView.swift */,
 			);
@@ -390,6 +393,14 @@
 			path = Loadable;
 			sourceTree = "<group>";
 		};
+		CAB3CC5028D97E0D0035DD1E /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				CAB3CC5128D97E1B0035DD1E /* Statistics.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
 		CABF28C628C57C2900A0C0E1 /* Record */ = {
 			isa = PBXGroup;
 			children = (
@@ -545,6 +556,7 @@
 				CAB3CC3C28D7E74A0035DD1E /* PlayDetailView.swift in Sources */,
 				CA1CEE5128C65AE100520C70 /* GameSolver.swift in Sources */,
 				CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */,
+				CAB3CC5228D97E1B0035DD1E /* Statistics.swift in Sources */,
 				CAB3CC4D28D801180035DD1E /* CancelBag.swift in Sources */,
 				CA1CEE5528C67BF200520C70 /* Validator.swift in Sources */,
 				CAB3CC3F28D7F2340035DD1E /* Dependencies.swift in Sources */,

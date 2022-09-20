@@ -95,6 +95,7 @@ extension RecordPlayView {
 	}
 
 	private func save() {
+		play.letters = String(play.letters.sorted())
 		$group.plays.append(play)
 		dismiss()
 	}
