@@ -24,4 +24,8 @@ struct Position: Codable, Equatable, Hashable, CustomStringConvertible {
 	var description: String {
 		"(\(row), \(column))"
 	}
+
+	var surrounding: [Position] {
+		[Position(row - 1, column), Position(row, column + 1), Position(row + 1, column), Position(row, column - 1)]
+	}
 }
