@@ -19,6 +19,16 @@ class Play: Object, ObjectKeyIdentifiable {
 	var isPlayable: Bool {
 		letters.count == 12
 	}
+
+	var createdAtRelative: String {
+		Calendar.current.startOfDay(for: createdAt).formattedRelative
+	}
+
+	private static let formatter: RelativeDateTimeFormatter = {
+		let formatter = RelativeDateTimeFormatter()
+		formatter.dateTimeStyle = .named
+		return formatter
+	}()
 }
 
 extension Play {

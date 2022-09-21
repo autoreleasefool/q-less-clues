@@ -5,6 +5,7 @@
 //  Created by Joseph Roque on 2022-09-04.
 //
 
+import Foundation
 import RealmSwift
 import SwiftUI
 
@@ -17,12 +18,12 @@ struct StatisticsView: View {
 		List {
 			statistics(Statistics(group: group))
 
-			Section("Recent Plays") {
-				if group.plays.isEmpty {
+			if group.plays.isEmpty {
+				Section("Recent Plays") {
 					emptyState
-				} else {
-					playsList
 				}
+			} else {
+				playsList
 			}
 		}
 		.navigationTitle("Statistics")
@@ -75,9 +76,13 @@ extension StatisticsView {
 	}
 
 	private var playsList: some View {
-		ForEach(group.plays) { play in
-			PlayRow(play: play)
-		}.onDelete(perform: $group.plays.remove)
+		ForEach(group.plays.sectioned(by: \.createdAtRelative, ascending: false)) { section in
+			Section(section.key) {
+				ForEach(section) { play in
+					PlayRow(play: play)
+				}.onDelete(perform: $group.plays.remove)
+			}
+		}
 	}
 }
 

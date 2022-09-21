@@ -45,6 +45,7 @@
 		CAB3CC4B28D800EB0035DD1E /* Loadable.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC4A28D800EB0035DD1E /* Loadable.swift */; };
 		CAB3CC4D28D801180035DD1E /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC4C28D801180035DD1E /* CancelBag.swift */; };
 		CAB3CC5228D97E1B0035DD1E /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC5128D97E1B0035DD1E /* Statistics.swift */; };
+		CAB3CC5428DA926E0035DD1E /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC5328DA926E0035DD1E /* Date+Extensions.swift */; };
 		CABF28C828C57C4E00A0C0E1 /* RecordPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABF28C728C57C4E00A0C0E1 /* RecordPlayView.swift */; };
 /* End PBXBuildFile section */
 
@@ -95,6 +96,7 @@
 		CAB3CC4A28D800EB0035DD1E /* Loadable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Loadable.swift; sourceTree = "<group>"; };
 		CAB3CC4C28D801180035DD1E /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
 		CAB3CC5128D97E1B0035DD1E /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
+		CAB3CC5328DA926E0035DD1E /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
 		CABF28C728C57C4E00A0C0E1 /* RecordPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPlayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -265,6 +267,7 @@
 			isa = PBXGroup;
 			children = (
 				CA24657328D69BD1001BFF71 /* Dictionary+Extensions.swift */,
+				CAB3CC5328DA926E0035DD1E /* Date+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -557,6 +560,7 @@
 				CA1CEE5128C65AE100520C70 /* GameSolver.swift in Sources */,
 				CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */,
 				CAB3CC5228D97E1B0035DD1E /* Statistics.swift in Sources */,
+				CAB3CC5428DA926E0035DD1E /* Date+Extensions.swift in Sources */,
 				CAB3CC4D28D801180035DD1E /* CancelBag.swift in Sources */,
 				CA1CEE5528C67BF200520C70 /* Validator.swift in Sources */,
 				CAB3CC3F28D7F2340035DD1E /* Dependencies.swift in Sources */,
