@@ -16,7 +16,7 @@ struct QLessCluesApp: App {
 		WindowGroup {
 			NavigationStack {
 				ContentView()
-					.environment(\.dependencies, environment.dependencies)
+					.environment(\.container, environment.container)
 			}
 			.onAppear {
 				DispatchQueue.global().async {

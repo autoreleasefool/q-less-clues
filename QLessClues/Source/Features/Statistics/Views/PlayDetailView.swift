@@ -23,7 +23,7 @@ struct PlayDetailView: View {
 			}
 
 			Section {
-				Button(role: .destructive, action: promptDelete) {
+				Button(role: .destructive, action: toggleDeletePrompt) {
 					Label("Delete", systemImage: "trash")
 				}
 			}
@@ -41,8 +41,8 @@ struct PlayDetailView: View {
 // MARK: - Actions
 
 extension PlayDetailView {
-	private func promptDelete() {
-		isDeleting = true
+	private func toggleDeletePrompt() {
+		isDeleting.toggle()
 	}
 
 	private func delete() {

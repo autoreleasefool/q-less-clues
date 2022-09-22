@@ -12,7 +12,7 @@ import SwiftUI
 struct RecordPlayView: View {
 
 	@Environment(\.dismiss) private var dismiss
-	@Environment(\.dependencies) private var dependencies
+	@Environment(\.container) private var container
 	@Environment(\.realm) private var realm
 
 	@ObservedRealmObject var play: Play
@@ -95,7 +95,7 @@ extension RecordPlayView {
 
 extension RecordPlayView {
 	private func findSolutions() {
-		dependencies.interactors.solutionsInteractor
+		container.interactors.solutionsInteractor
 			.solutions(forLetters: play.letters, solutions: $solutions)
 	}
 

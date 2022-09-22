@@ -38,7 +38,7 @@
 		CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3628D7E6380035DD1E /* ContentView.swift */; };
 		CAB3CC3A28D7E6B10035DD1E /* PlayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */; };
 		CAB3CC3C28D7E74A0035DD1E /* PlayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3B28D7E74A0035DD1E /* PlayDetailView.swift */; };
-		CAB3CC3F28D7F2340035DD1E /* Dependencies.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3E28D7F2340035DD1E /* Dependencies.swift */; };
+		CAB3CC3F28D7F2340035DD1E /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3E28D7F2340035DD1E /* Container.swift */; };
 		CAB3CC4128D7F2540035DD1E /* Interactors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC4028D7F2540035DD1E /* Interactors.swift */; };
 		CAB3CC4528D7F2860035DD1E /* SolutionsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC4428D7F2860035DD1E /* SolutionsInteractor.swift */; };
 		CAB3CC4828D7F8490035DD1E /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC4728D7F8490035DD1E /* AppEnvironment.swift */; };
@@ -89,7 +89,7 @@
 		CAB3CC3628D7E6380035DD1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayRow.swift; sourceTree = "<group>"; };
 		CAB3CC3B28D7E74A0035DD1E /* PlayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayDetailView.swift; sourceTree = "<group>"; };
-		CAB3CC3E28D7F2340035DD1E /* Dependencies.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dependencies.swift; sourceTree = "<group>"; };
+		CAB3CC3E28D7F2340035DD1E /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		CAB3CC4028D7F2540035DD1E /* Interactors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactors.swift; sourceTree = "<group>"; };
 		CAB3CC4428D7F2860035DD1E /* SolutionsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionsInteractor.swift; sourceTree = "<group>"; };
 		CAB3CC4728D7F8490035DD1E /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
@@ -301,7 +301,6 @@
 			isa = PBXGroup;
 			children = (
 				CAB3CC4228D7F2770035DD1E /* Interactors */,
-				CAB3CC3D28D7F2280035DD1E /* Dependencies */,
 				CA24657528D6AF6F001BFF71 /* Store */,
 				CA6452B228C5D44B00738762 /* Solver */,
 				CA1CEE5628C67C1200520C70 /* Validator */,
@@ -354,18 +353,10 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		CAB3CC3D28D7F2280035DD1E /* Dependencies */ = {
-			isa = PBXGroup;
-			children = (
-				CAB3CC3E28D7F2340035DD1E /* Dependencies.swift */,
-				CAB3CC4028D7F2540035DD1E /* Interactors.swift */,
-			);
-			path = Dependencies;
-			sourceTree = "<group>";
-		};
 		CAB3CC4228D7F2770035DD1E /* Interactors */ = {
 			isa = PBXGroup;
 			children = (
+				CAB3CC4028D7F2540035DD1E /* Interactors.swift */,
 				CAB3CC4328D7F27C0035DD1E /* Solutions */,
 			);
 			path = Interactors;
@@ -383,6 +374,7 @@
 			isa = PBXGroup;
 			children = (
 				CAB3CC4728D7F8490035DD1E /* AppEnvironment.swift */,
+				CAB3CC3E28D7F2340035DD1E /* Container.swift */,
 			);
 			path = Environment;
 			sourceTree = "<group>";
@@ -563,7 +555,7 @@
 				CAB3CC5428DA926E0035DD1E /* Date+Extensions.swift in Sources */,
 				CAB3CC4D28D801180035DD1E /* CancelBag.swift in Sources */,
 				CA1CEE5528C67BF200520C70 /* Validator.swift in Sources */,
-				CAB3CC3F28D7F2340035DD1E /* Dependencies.swift in Sources */,
+				CAB3CC3F28D7F2340035DD1E /* Container.swift in Sources */,
 				CA24657428D69BD1001BFF71 /* Dictionary+Extensions.swift in Sources */,
 				CAB3CC4128D7F2540035DD1E /* Interactors.swift in Sources */,
 				CA1CEE5328C65AE100520C70 /* Solution.swift in Sources */,

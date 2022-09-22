@@ -8,10 +8,10 @@
 import Foundation
 
 final class AppEnvironment: ObservableObject {
-	let dependencies: Dependencies
+	let container: Container
 
-	init(dependencies: Dependencies) {
-		self.dependencies = dependencies
+	init(container: Container) {
+		self.container = container
 	}
 }
 
@@ -19,9 +19,9 @@ extension AppEnvironment {
 
 	static func bootstrap() -> AppEnvironment {
 		let interactors = configuredInteractors()
-		let dependencies = configuredDependencies(interactors: interactors)
+		let container = configuredContainer(interactors: interactors)
 
-		return AppEnvironment(dependencies: dependencies)
+		return AppEnvironment(container: container)
 	}
 
 	private static func configuredInteractors() -> Interactors {
@@ -32,7 +32,7 @@ extension AppEnvironment {
 		return Interactors(solutionsInteractor: solutionsInteractor)
 	}
 
-	private static func configuredDependencies(interactors: Interactors) -> Dependencies {
-		return Dependencies(interactors: interactors)
+	private static func configuredContainer(interactors: Interactors) -> Container {
+		return Container(interactors: interactors)
 	}
 }
