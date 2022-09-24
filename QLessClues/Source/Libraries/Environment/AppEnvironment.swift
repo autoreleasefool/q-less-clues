@@ -30,7 +30,9 @@ extension AppEnvironment {
 		let solver = BacktrackingSolver(validator: validator)
 		let solutionsInteractor = SolutionsInteractorImpl(solver: solver)
 
-		return Interactors(solutionsInteractor: solutionsInteractor)
+		let analysisInteractor = AnalysisInteractorImpl(solutionsInteractor: solutionsInteractor)
+
+		return Interactors(solutionsInteractor: solutionsInteractor, analysisInteractor: analysisInteractor)
 	}
 
 	private static func configuredContainer(appState: Store<AppState>, interactors: Interactors) -> Container {

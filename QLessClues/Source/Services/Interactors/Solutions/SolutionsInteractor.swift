@@ -9,7 +9,8 @@ import Combine
 import Foundation
 
 protocol SolutionsInteractor {
-	func solutions(forLetters: String, solutions: LoadableSubject<[Solution]>)
+	func solutions(forLetters: String, solutions: LoadableSubject<[Solution]>, progress: LoadableSubject<Float>?)
+	func cancel()
 }
 
 struct SolutionsInteractorImpl: SolutionsInteractor {
@@ -20,8 +21,25 @@ struct SolutionsInteractorImpl: SolutionsInteractor {
 		self.solver = solver
 	}
 
-	func solutions(forLetters letters: String, solutions: LoadableSubject<[Solution]>) {
+	func cancel() {
+		solver.stop()
+	}
+
+	func solutions(
+		forLetters letters: String,
+		solutions: LoadableSubject<[Solution]>,
+		progress: LoadableSubject<Float>? = nil
+	) {
 		let cancelBag = CancelBag()
+
+		startSolver(forLetters: letters, solutions: solutions, cancelBag: cancelBag)
+
+		guard let progress else { return }
+
+		trackProgress(forLetters: letters, progress: progress, cancelBag: cancelBag)
+	}
+
+	private func startSolver(forLetters letters: String, solutions: LoadableSubject<[Solution]>, cancelBag: CancelBag) {
 		solutions.wrappedValue.setIsLoading(cancelBag: cancelBag)
 
 		var existingSolutions: Set<[String]> = []
@@ -40,10 +58,31 @@ struct SolutionsInteractorImpl: SolutionsInteractor {
 			}
 			.store(in: cancelBag)
 	}
+
+	private func trackProgress(forLetters letters: String, progress: LoadableSubject<Float>, cancelBag: CancelBag) {
+		progress.wrappedValue.setIsLoading(cancelBag: cancelBag)
+
+		solver.progress(forLetters: letters)
+			.receive(on: DispatchQueue.main)
+			.sink {
+				print("Progress outcome: \($0)")
+				if case let .failure(error) = $0 {
+					progress.wrappedValue = .failed(error)
+				} else {
+					progress.wrappedValue = .loaded(1)
+				}
+			} receiveValue: {
+				progress.wrappedValue = .isLoading(last: $0, cancelBag: cancelBag)
+			}
+			.store(in: cancelBag)
+	}
 }
 
 struct SolutionsInteractorStub: SolutionsInteractor {
-	func solutions(forLetters: String, solutions: LoadableSubject<[Solution]>) {
+	func solutions(forLetters: String, solutions: LoadableSubject<[Solution]>, progress: LoadableSubject<Float>? = nil) {
 		solutions.wrappedValue = .loaded([])
+		progress?.wrappedValue = .loaded(1)
 	}
+
+	func cancel() {}
 }

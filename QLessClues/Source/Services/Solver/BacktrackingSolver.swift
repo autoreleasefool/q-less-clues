@@ -10,66 +10,116 @@ import Foundation
 
 class BacktrackingSolver: GameSolver {
 
-	private var subject: PassthroughSubject<Solution, SolverError>?
-
-	private let dispatchQueue = DispatchQueue(label: "BacktrackingSolver")
 	private let validator: Validator
+
+	private let queue = DispatchQueue(label: "BacktrackingSolver")
+	private var queue_searchInProgress: State?
 
 	init(validator: Validator = BasicValidator()) {
 		self.validator = validator
 	}
 
+	func stop() {
+		queue.async {
+			self.queue_cancelSearchInProgress()
+		}
+	}
+
 	func solutions(forLetters letters: String) -> AnyPublisher<Solution, SolverError> {
-		subject?.send(completion: .failure(.cancelled))
-		let newSubject = PassthroughSubject<Solution, SolverError>()
-		self.subject = newSubject
-
-		DispatchQueue.main.async {
-			self.generateSolutions(fromLetters: letters, to: newSubject)
+		queue.sync {
+			self.queue_cancelSearchInProgress()
 		}
 
-		return newSubject
-			.filter { [weak self] _ in self?.subject === newSubject }
-			.eraseToAnyPublisher()
-	}
+		let solutionsSubject = PassthroughSubject<Solution, SolverError>()
+		let progressSubject = CurrentValueSubject<Float, SolverError>(0)
 
-	private func generateSolutions(fromLetters letters: String, to subject: any Subject<Solution, SolverError>) {
-		guard !letters.isEmpty else {
-			subject.send(completion: .finished)
-			return
+		let state = State(
+			solutionsSubject: solutionsSubject,
+			progressSubject: progressSubject,
+			initialLetters: letters
+		)
+
+		queue.sync {
+			self.queue_searchInProgress = state
 		}
 
-		dispatchQueue.async { [weak self] in
+		DispatchQueue.global().async { [weak self] in
 			guard let self else { return }
-			let letterSet = LetterSet(letters: letters)
-			let wordSet = WordSet(letterSet: letterSet)
+			guard !letters.isEmpty else {
+				self.stop()
+				return
+			}
 
-			var state = State(initialLetters: letters, remainingLetters: letterSet, wordSet: wordSet, board: [:])
+			state.remainingLetters = LetterSet(letters: letters)
+			state.wordSet = WordSet(letterSet: state.remainingLetters)
 
-			self.generateSolutions(state: &state, to: subject)
-			subject.send(completion: .finished)
+			self.generateSolutions(state: state)
+
+			state.solutionsSubject.send(completion: .finished)
+			state.progressSubject.send(completion: .finished)
 		}
+
+		return solutionsSubject.eraseToAnyPublisher()
 	}
 
-	private func generateSolutions(state: inout State, to subject: any Subject<Solution, SolverError>) {
-		guard subject === self.subject else { return }
+	func progress(forLetters letters: String) -> AnyPublisher<Float, SolverError> {
+		var searchInProgress: State?
+		queue.sync {
+			searchInProgress = self.queue_searchInProgress
+		}
+
+		guard let searchInProgress, letters == searchInProgress.initialLetters else {
+			return Just(1)
+				.setFailureType(to: SolverError.self)
+				.eraseToAnyPublisher()
+		}
+
+		let subject = searchInProgress.progressSubject
+
+		return subject.eraseToAnyPublisher()
+	}
+
+	private func queue_cancelSearchInProgress() {
+		queue_searchInProgress?.progressSubject.send(completion: .failure(.cancelled))
+		queue_searchInProgress?.solutionsSubject.send(completion: .failure(.cancelled))
+		queue_searchInProgress = nil
+	}
+
+	private func generateSolutions(state: State) {
+		var searchInProgress: State?
+		queue.sync {
+			searchInProgress = queue_searchInProgress
+		}
+
+		guard state === searchInProgress else { return }
 
 		if state.remainingLetters.isEmpty {
 			let solution = Solution(board: state.board)
 			if validator.validate(solution: solution) {
-				subject.send(solution)
+				state.solutionsSubject.send(solution)
 			}
 			return
 		}
 
 		if state.board.isEmpty {
-			for word in state.wordSet.limitBy(.containingLeastFrequentLetter).limitBy(.mostPopular).words {
-				insertFirstWord(word, in: &state)
+
+			let firstWords = state.wordSet
+				.limitBy(.containingLeastFrequentLetter)
+				.limitBy(.mostPopular)
+				.words
+
+			print("Total first words: \(firstWords.count)")
+
+			for (index, word) in firstWords.enumerated() {
+				print("Solving with firstWord \(index)")
+				insertFirstWord(word, in: state)
 				state.remainingLetters.substract(letters: Array(word))
 				// TODO: perf improvement - update wordset
-				generateSolutions(state: &state, to: subject)
+				generateSolutions(state: state)
 				state.remainingLetters.add(letters: Array(word))
-				removeFirstWord(from: &state)
+				removeFirstWord(from: state)
+
+				state.progressSubject.send(Float(index + 1) / Float(firstWords.count))
 			}
 			return
 		}
@@ -81,13 +131,13 @@ class BacktrackingSolver: GameSolver {
 					continue
 				}
 
-				for lettersUsed in getInsertionsOf(word, at: rowColumn, in: &state) {
-					insert(lettersUsed, in: &state)
+				for lettersUsed in getInsertionsOf(word, at: rowColumn, in: state) {
+					insert(lettersUsed, in: state)
 					state.remainingLetters.substract(letters: lettersUsed.map { $0.letter })
 					// TODO: perf improvement - update wordset
-					generateSolutions(state: &state, to: subject)
+					generateSolutions(state: state)
 					state.remainingLetters.add(letters: lettersUsed.map { $0.letter })
-					remove(lettersUsed, in: &state)
+					remove(lettersUsed, in: state)
 				}
 			}
 		}
@@ -96,7 +146,7 @@ class BacktrackingSolver: GameSolver {
 	private func getInsertionsOf(
 		_ word: String,
 		at rowColumn: RowColumn,
-		in state: inout State
+		in state: State
 	) -> [[LetterPosition]] {
 		var insertions: [[LetterPosition]] = []
 		let minStartPosition: Int
@@ -148,7 +198,7 @@ class BacktrackingSolver: GameSolver {
 
 	private func insert(
 		_ letters: [LetterPosition],
-		in state: inout State
+		in state: State
 	) {
 		for letter in letters {
 			state.board[letter.position] = letter.letter
@@ -157,20 +207,20 @@ class BacktrackingSolver: GameSolver {
 
 	private func remove(
 		_ letters: [LetterPosition],
-		in state: inout State
+		in state: State
 	) {
 		for letter in letters {
 			state.board[letter.position] = nil
 		}
 	}
 
-	private func insertFirstWord(_ word: String, in state: inout State) {
+	private func insertFirstWord(_ word: String, in state: State) {
 		for (index, letter) in word.enumerated() {
 			state.board[Position(0, index)] = letter
 		}
 	}
 
-	private func removeFirstWord(from state: inout State) {
+	private func removeFirstWord(from state: State) {
 		state.board.removeAll()
 	}
 
@@ -210,11 +260,25 @@ class BacktrackingSolver: GameSolver {
 }
 
 private extension BacktrackingSolver {
-	struct State {
+	class State {
+		let solutionsSubject: PassthroughSubject<Solution, SolverError>
+		let progressSubject: CurrentValueSubject<Float, SolverError>
+
 		let initialLetters: String
-		var remainingLetters: LetterSet
-		var wordSet: WordSet
-		var board: [Position: Character]
+
+		var board: [Position: Character] = [:]
+		var remainingLetters: LetterSet!
+		var wordSet: WordSet!
+
+		init(
+			solutionsSubject: PassthroughSubject<Solution, SolverError>,
+			progressSubject: CurrentValueSubject<Float, SolverError>,
+			initialLetters: String
+		) {
+			self.solutionsSubject = solutionsSubject
+			self.progressSubject = progressSubject
+			self.initialLetters = initialLetters
+		}
 	}
 }
 

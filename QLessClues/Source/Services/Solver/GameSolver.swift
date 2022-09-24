@@ -14,4 +14,6 @@ enum SolverError: Error {
 
 protocol GameSolver {
 	func solutions(forLetters: String) -> AnyPublisher<Solution, SolverError>
+	func progress(forLetters: String) -> AnyPublisher<Float, SolverError>
+	func stop()
 }

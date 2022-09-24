@@ -9,11 +9,8 @@ import SwiftUI
 
 struct LetterEntry: View {
 
-	@Binding private var letters: String
-
-	init(_ letters: Binding<String>) {
-		self._letters = letters
-	}
+	@Binding var entry: String
+	@State private var letters = ""
 
 	var body: some View {
 		Group {
@@ -41,6 +38,7 @@ struct LetterEntry: View {
 			updatedLetters = String(letters.prefix(12))
 		}
 		self.letters = updatedLetters
+		self.entry = updatedLetters
 	}
 }
 
@@ -48,7 +46,7 @@ struct LetterEntry: View {
 struct LetterEntryPreview: PreviewProvider {
 	static var previews: some View {
 		Form {
-			LetterEntry(.constant("ABC"))
+			LetterEntry(entry: .constant("ABC"))
 		}
 	}
 }

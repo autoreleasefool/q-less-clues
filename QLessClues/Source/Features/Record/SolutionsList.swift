@@ -9,15 +9,11 @@ import SwiftUI
 
 struct SolutionsList: View {
 
-	@Binding private var solutions: Loadable<[Solution]>
-
-	init(solutions: LoadableSubject<[Solution]>) {
-		self._solutions = solutions
-	}
+	let solutions: [Solution]
 
 	var body: some View {
 		Group {
-			if solutions.value?.isEmpty == false {
+			if solutions.isEmpty == false {
 				solutionsList
 			} else {
 				emptyState
@@ -33,7 +29,7 @@ struct SolutionsList: View {
 	}
 
 	private var solutionsList: some View {
-		List(solutions.value ?? [], id: \.id) { solution in
+		List(solutions, id: \.id) { solution in
 			NavigationLink {
 				SolutionDetailView(solution: solution)
 			} label: {

@@ -13,6 +13,7 @@ class Play: Object, ObjectKeyIdentifiable {
 	@Persisted var createdAt = Date()
 	@Persisted var letters = ""
 	@Persisted var outcome: Outcome = .unsolved
+	@Persisted var difficulty: Difficulty?
 
 	@Persisted(originProperty: "plays") var group: LinkingObjects<PlayGroup>
 

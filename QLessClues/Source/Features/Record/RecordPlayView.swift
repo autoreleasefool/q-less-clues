@@ -17,18 +17,18 @@ struct RecordPlayView: View {
 
 	@ObservedRealmObject var play: Play
 	@ObservedRealmObject var group: PlayGroup
-	@State private var solutions: Loadable<[Solution]>
+	@State private var analysis: Loadable<Analysis>
 
-	init(play: Play, group: PlayGroup, solutions: Loadable<[Solution]> = .notRequested) {
+	init(play: Play, group: PlayGroup, analysis: Loadable<Analysis> = .notRequested) {
 		self.play = play
 		self.group = group
-		self._solutions = .init(initialValue: solutions)
+		self._analysis = .init(initialValue: analysis)
 	}
 
 	var body: some View {
 		List {
 			Section("Game") {
-				LetterEntry($play.letters)
+				LetterEntry(entry: $play.letters)
 				Picker("Outcome", selection: $play.outcome) {
 					ForEach(Play.Outcome.allCases, id: \.hashValue) {
 						Text($0.rawValue).tag($0)
@@ -36,12 +36,18 @@ struct RecordPlayView: View {
 				}
 			}
 
-			if play.isPlayable {
-				Section("Solutions") {
-					findSolutionsButton
+			Section {
+				Button("Analyze", action: beginAnalysis)
+					.frame(maxWidth: .infinity)
+					.disabled(analysisButtonDisabled)
+			}
 
+			if shouldShowAnalysis {
+				Section("Analysis") {
+					ProgressView(value: analysis.value?.progress)
+					LabeledContent("Difficulty", value: difficulty)
 					NavigationLink {
-						SolutionsList(solutions: $solutions)
+						SolutionsList(solutions: analysis.value?.solutions ?? [])
 					} label: {
 						LabeledContent("Solutions", value: totalSolutionsFound)
 					}
@@ -55,48 +61,67 @@ struct RecordPlayView: View {
 					.disabled(!play.isPlayable)
 			}
 		}
+		.onChange(of: play.letters) { _ in resetAnalysis() }
 	}
 }
 
 // MARK: - Content
 
 extension RecordPlayView {
-	private var findSolutionsButton: some View {
-		Button(findSolutionsText, action: findSolutions)
-			.disabled(findSolutionsButtonDisabled)
-	}
-
-	private var findSolutionsText: String {
-		switch solutions {
-		case .isLoading: return "Finding..."
-		case .loaded: return "Finished"
-		case .notRequested, .failed: return "Find Solutions"
+	private var shouldShowAnalysis: Bool {
+		guard play.isPlayable else { return false }
+		switch analysis {
+		case .isLoading, .loaded: return true
+		case .failed, .notRequested: return false
 		}
 	}
 
-	private var findSolutionsButtonDisabled: Bool {
-		switch solutions {
+	private var analysisButtonDisabled: Bool {
+		guard play.isPlayable else { return true }
+
+		switch analysis {
 		case .isLoading, .loaded: return true
 		case .notRequested, .failed: return false
 		}
 	}
 
+	private var analysisButtonText: String {
+		switch analysis {
+		case .isLoading: return "Analyzing..."
+		case .loaded: return "Analysis Complete"
+		case .notRequested, .failed: return "Analyze"
+		}
+	}
+
 	private var totalSolutionsFound: String {
-		switch solutions {
-		case .isLoading(let value, _): return "\(value?.count ?? 0)"
-		case .loaded(let value): return "\(value.count)"
+		switch analysis {
+		case .isLoading(let value, _): return "\(value?.solutions.count ?? 0)"
+		case .loaded(let value): return "\(value.solutions.count)"
 		case .notRequested, .failed: return "N/A"
 		}
-		solutions.value?.count ?? 0
+	}
+
+	private var difficulty: String {
+		guard let difficulty = analysis.value?.difficulty else {
+			return "❓ Undetermined"
+		}
+
+		return difficulty.rawValue
 	}
 }
 
 // MARK: - Actions
 
 extension RecordPlayView {
-	private func findSolutions() {
-		container.interactors.solutionsInteractor
-			.solutions(forLetters: play.letters, solutions: $solutions)
+	private func beginAnalysis() {
+		container.interactors.analysisInteractor
+			.analyze(letters: play.letters, analysis: $analysis)
+	}
+
+	private func resetAnalysis() {
+		container.interactors.analysisInteractor
+			.cancel()
+		analysis = .notRequested
 	}
 
 	private func save() {
