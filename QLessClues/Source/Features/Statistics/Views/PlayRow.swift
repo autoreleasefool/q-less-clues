@@ -15,6 +15,16 @@ struct PlayRow: View {
 	var body: some View {
 		NavigationLink(destination: PlayDetailView(play: play)) {
 			Text(play.letters)
+				.frame(maxWidth: .infinity, alignment: .leading)
+			Text(outcome)
 		}
+	}
+}
+
+// MARK: - Content
+
+extension PlayRow {
+	private var outcome: String {
+		String(play.outcome.rawValue.first ?? "❓")
 	}
 }
