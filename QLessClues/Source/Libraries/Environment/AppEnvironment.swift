@@ -18,8 +18,9 @@ final class AppEnvironment: ObservableObject {
 extension AppEnvironment {
 
 	static func bootstrap() -> AppEnvironment {
+		let appState = Store(AppState())
 		let interactors = configuredInteractors()
-		let container = configuredContainer(interactors: interactors)
+		let container = configuredContainer(appState: appState, interactors: interactors)
 
 		return AppEnvironment(container: container)
 	}
@@ -32,7 +33,7 @@ extension AppEnvironment {
 		return Interactors(solutionsInteractor: solutionsInteractor)
 	}
 
-	private static func configuredContainer(interactors: Interactors) -> Container {
-		return Container(interactors: interactors)
+	private static func configuredContainer(appState: Store<AppState>, interactors: Interactors) -> Container {
+		return Container(appState: appState, interactors: interactors)
 	}
 }

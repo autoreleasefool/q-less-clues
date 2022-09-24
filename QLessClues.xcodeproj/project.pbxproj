@@ -46,6 +46,13 @@
 		CAB3CC4D28D801180035DD1E /* CancelBag.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC4C28D801180035DD1E /* CancelBag.swift */; };
 		CAB3CC5228D97E1B0035DD1E /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC5128D97E1B0035DD1E /* Statistics.swift */; };
 		CAB3CC5428DA926E0035DD1E /* Date+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC5328DA926E0035DD1E /* Date+Extensions.swift */; };
+		CAB3CC7428DC2C970035DD1E /* Account.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC7328DC2C970035DD1E /* Account.swift */; };
+		CAB3CC7C28DC3E100035DD1E /* AccountInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC7B28DC3E100035DD1E /* AccountInteractor.swift */; };
+		CAB3CC8028DC3FB20035DD1E /* AccountRepository.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC7F28DC3FB20035DD1E /* AccountRepository.swift */; };
+		CAB3CC8328DC41A00035DD1E /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC8228DC41A00035DD1E /* KeychainAccess */; };
+		CAB3CC8528DC43370035DD1E /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC8428DC43370035DD1E /* Store.swift */; };
+		CAB3CC8728DC43620035DD1E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC8628DC43620035DD1E /* AppState.swift */; };
+		CAB3CC8928DC441F0035DD1E /* Publisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC8828DC441F0035DD1E /* Publisher+Extensions.swift */; };
 		CABF28C828C57C4E00A0C0E1 /* RecordPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABF28C728C57C4E00A0C0E1 /* RecordPlayView.swift */; };
 /* End PBXBuildFile section */
 
@@ -97,6 +104,12 @@
 		CAB3CC4C28D801180035DD1E /* CancelBag.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelBag.swift; sourceTree = "<group>"; };
 		CAB3CC5128D97E1B0035DD1E /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 		CAB3CC5328DA926E0035DD1E /* Date+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Extensions.swift"; sourceTree = "<group>"; };
+		CAB3CC7328DC2C970035DD1E /* Account.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Account.swift; sourceTree = "<group>"; };
+		CAB3CC7B28DC3E100035DD1E /* AccountInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountInteractor.swift; sourceTree = "<group>"; };
+		CAB3CC7F28DC3FB20035DD1E /* AccountRepository.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccountRepository.swift; sourceTree = "<group>"; };
+		CAB3CC8428DC43370035DD1E /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
+		CAB3CC8628DC43620035DD1E /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
+		CAB3CC8828DC441F0035DD1E /* Publisher+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Publisher+Extensions.swift"; sourceTree = "<group>"; };
 		CABF28C728C57C4E00A0C0E1 /* RecordPlayView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecordPlayView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -107,6 +120,7 @@
 			files = (
 				CA24656D28D6838F001BFF71 /* RealmSwift in Frameworks */,
 				CA24656B28D6838F001BFF71 /* Realm in Frameworks */,
+				CAB3CC8328DC41A00035DD1E /* KeychainAccess in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -201,8 +215,8 @@
 		CA1867C928C50F3C00DD75C7 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				CA0BF46528C9AF5E00EE3E58 /* Solutions */,
 				CABF28C628C57C2900A0C0E1 /* Record */,
+				CA0BF46528C9AF5E00EE3E58 /* Solutions */,
 				CA1867CB28C50FBB00DD75C7 /* Statistics */,
 			);
 			path = Features;
@@ -268,6 +282,7 @@
 			children = (
 				CA24657328D69BD1001BFF71 /* Dictionary+Extensions.swift */,
 				CAB3CC5328DA926E0035DD1E /* Date+Extensions.swift */,
+				CAB3CC8828DC441F0035DD1E /* Publisher+Extensions.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -275,7 +290,10 @@
 		CA24657528D6AF6F001BFF71 /* Store */ = {
 			isa = PBXGroup;
 			children = (
+				CAB3CC7E28DC3FA50035DD1E /* Repositories */,
+				CAB3CC7228DC2C8E0035DD1E /* Account */,
 				CA24657628D6AF73001BFF71 /* Models */,
+				CAB3CC8428DC43370035DD1E /* Store.swift */,
 			);
 			path = Store;
 			sourceTree = "<group>";
@@ -358,6 +376,7 @@
 			children = (
 				CAB3CC4028D7F2540035DD1E /* Interactors.swift */,
 				CAB3CC4328D7F27C0035DD1E /* Solutions */,
+				CAB3CC7A28DC3E070035DD1E /* Account */,
 			);
 			path = Interactors;
 			sourceTree = "<group>";
@@ -374,6 +393,7 @@
 			isa = PBXGroup;
 			children = (
 				CAB3CC4728D7F8490035DD1E /* AppEnvironment.swift */,
+				CAB3CC8628DC43620035DD1E /* AppState.swift */,
 				CAB3CC3E28D7F2340035DD1E /* Container.swift */,
 			);
 			path = Environment;
@@ -394,6 +414,30 @@
 				CAB3CC5128D97E1B0035DD1E /* Statistics.swift */,
 			);
 			path = Utilities;
+			sourceTree = "<group>";
+		};
+		CAB3CC7228DC2C8E0035DD1E /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				CAB3CC7328DC2C970035DD1E /* Account.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		CAB3CC7A28DC3E070035DD1E /* Account */ = {
+			isa = PBXGroup;
+			children = (
+				CAB3CC7B28DC3E100035DD1E /* AccountInteractor.swift */,
+			);
+			path = Account;
+			sourceTree = "<group>";
+		};
+		CAB3CC7E28DC3FA50035DD1E /* Repositories */ = {
+			isa = PBXGroup;
+			children = (
+				CAB3CC7F28DC3FB20035DD1E /* AccountRepository.swift */,
+			);
+			path = Repositories;
 			sourceTree = "<group>";
 		};
 		CABF28C628C57C2900A0C0E1 /* Record */ = {
@@ -426,6 +470,7 @@
 			packageProductDependencies = (
 				CA24656A28D6838F001BFF71 /* Realm */,
 				CA24656C28D6838F001BFF71 /* RealmSwift */,
+				CAB3CC8228DC41A00035DD1E /* KeychainAccess */,
 			);
 			productName = QLessClues;
 			productReference = CA1867B528C5095100DD75C7 /* QLessClues.app */;
@@ -484,6 +529,7 @@
 			mainGroup = CA1867AC28C5095100DD75C7;
 			packageReferences = (
 				CA24656928D6838F001BFF71 /* XCRemoteSwiftPackageReference "realm-swift" */,
+				CAB3CC8128DC41A00035DD1E /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 			);
 			productRefGroup = CA1867B628C5095100DD75C7 /* Products */;
 			projectDirPath = "";
@@ -555,6 +601,7 @@
 				CAB3CC5428DA926E0035DD1E /* Date+Extensions.swift in Sources */,
 				CAB3CC4D28D801180035DD1E /* CancelBag.swift in Sources */,
 				CA1CEE5528C67BF200520C70 /* Validator.swift in Sources */,
+				CAB3CC7C28DC3E100035DD1E /* AccountInteractor.swift in Sources */,
 				CAB3CC3F28D7F2340035DD1E /* Container.swift in Sources */,
 				CA24657428D69BD1001BFF71 /* Dictionary+Extensions.swift in Sources */,
 				CAB3CC4128D7F2540035DD1E /* Interactors.swift in Sources */,
@@ -562,16 +609,21 @@
 				CA12CA2728C6CA1500CD9876 /* Direction.swift in Sources */,
 				CA1867D728C5195500DD75C7 /* StatisticsView.swift in Sources */,
 				CA24657828D6AF79001BFF71 /* Play.swift in Sources */,
+				CAB3CC8728DC43620035DD1E /* AppState.swift in Sources */,
 				CA1CEE5F28C6BA7D00520C70 /* Frequency.swift in Sources */,
 				CABF28C828C57C4E00A0C0E1 /* RecordPlayView.swift in Sources */,
+				CAB3CC7428DC2C970035DD1E /* Account.swift in Sources */,
 				CAB3CC4828D7F8490035DD1E /* AppEnvironment.swift in Sources */,
+				CAB3CC8928DC441F0035DD1E /* Publisher+Extensions.swift in Sources */,
 				CA1CEE5228C65AE100520C70 /* BacktrackingSolver.swift in Sources */,
 				CA0BF46728C9AF6D00EE3E58 /* SolutionDetailView.swift in Sources */,
+				CAB3CC8028DC3FB20035DD1E /* AccountRepository.swift in Sources */,
 				CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */,
 				CAB3CC3A28D7E6B10035DD1E /* PlayRow.swift in Sources */,
 				CA6452A828C5C72900738762 /* LetterEntry.swift in Sources */,
 				CA0BF46428C93FA600EE3E58 /* SolutionsList.swift in Sources */,
 				CA1CEE5828C67C2000520C70 /* BasicValidator.swift in Sources */,
+				CAB3CC8528DC43370035DD1E /* Store.swift in Sources */,
 				CA1CEE5D28C6B36A00520C70 /* LetterSet.swift in Sources */,
 				CAB3CC3228D7E51C0035DD1E /* PlayGroup.swift in Sources */,
 			);
@@ -868,6 +920,14 @@
 				minimumVersion = 10.29.0;
 			};
 		};
+		CAB3CC8128DC41A00035DD1E /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.2.2;
+			};
+		};
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
@@ -890,6 +950,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CA24656928D6838F001BFF71 /* XCRemoteSwiftPackageReference "realm-swift" */;
 			productName = RealmSwift;
+		};
+		CAB3CC8228DC41A00035DD1E /* KeychainAccess */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = CAB3CC8128DC41A00035DD1E /* XCRemoteSwiftPackageReference "KeychainAccess" */;
+			productName = KeychainAccess;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
