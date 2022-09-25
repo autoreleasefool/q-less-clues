@@ -15,14 +15,21 @@ struct AnalysisView: View {
 	@ObservedRealmObject var play: Play
 	@State private var analysis: Loadable<Analysis>
 
-	init(play: Play, analysis: Loadable<Analysis> = .notRequested) {
+	private let hideDifficulty: Bool
+
+	init(play: Play, hideDifficulty: Bool = false, analysis: Loadable<Analysis> = .notRequested) {
 		self.play = play
+		self.hideDifficulty = hideDifficulty
 		self._analysis = .init(initialValue: analysis)
 	}
 
 	var body: some View {
 		content
 			.onChange(of: play.letters) { _ in resetAnalysis() }
+			.onChange(of: analysis.value?.difficulty) { difficulty in
+				guard !hideDifficulty else { return }
+				play.difficulty = difficulty
+			}
 	}
 
 	@ViewBuilder private var content: some View {
@@ -35,7 +42,9 @@ struct AnalysisView: View {
 		if shouldShowAnalysis {
 			Section("Analysis") {
 				ProgressView(value: analysis.value?.progress)
-				LabeledContent("Difficulty", value: difficulty)
+				if !hideDifficulty {
+					DifficultyView(difficulty: analysis.value?.difficulty)
+				}
 				NavigationLink {
 					SolutionsList(solutions: analysis.value?.solutions ?? [])
 				} label: {
@@ -81,14 +90,6 @@ extension AnalysisView {
 		case .loaded(let value): return "\(value.solutions.count)"
 		case .notRequested, .failed: return "N/A"
 		}
-	}
-
-	private var difficulty: String {
-		guard let difficulty = analysis.value?.difficulty else {
-			return "❓ Undetermined"
-		}
-
-		return difficulty.rawValue
 	}
 }
 

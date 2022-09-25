@@ -35,6 +35,7 @@
 		CAB2751D28DE9925002AF19D /* Analysis.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2751C28DE9925002AF19D /* Analysis.swift */; };
 		CAB2751F28DE994B002AF19D /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2751E28DE994B002AF19D /* Difficulty.swift */; };
 		CAB2752628DF8718002AF19D /* AnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2752528DF8718002AF19D /* AnalysisView.swift */; };
+		CAB2752828DFFAED002AF19D /* DifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2752728DFFAED002AF19D /* DifficultyView.swift */; };
 		CAB3CC2628D7D5840035DD1E /* FrequencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC2528D7D5840035DD1E /* FrequencyTests.swift */; };
 		CAB3CC2C28D7D5EA0035DD1E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC2B28D7D5EA0035DD1E /* Realm */; };
 		CAB3CC2E28D7D5EB0035DD1E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC2D28D7D5EA0035DD1E /* RealmSwift */; };
@@ -99,6 +100,7 @@
 		CAB2751C28DE9925002AF19D /* Analysis.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Analysis.swift; sourceTree = "<group>"; };
 		CAB2751E28DE994B002AF19D /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		CAB2752528DF8718002AF19D /* AnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisView.swift; sourceTree = "<group>"; };
+		CAB2752728DFFAED002AF19D /* DifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyView.swift; sourceTree = "<group>"; };
 		CAB3CC2528D7D5840035DD1E /* FrequencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencyTests.swift; sourceTree = "<group>"; };
 		CAB3CC3128D7E51C0035DD1E /* PlayGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGroup.swift; sourceTree = "<group>"; };
 		CAB3CC3628D7E6380035DD1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -375,6 +377,7 @@
 			isa = PBXGroup;
 			children = (
 				CAB2752528DF8718002AF19D /* AnalysisView.swift */,
+				CAB2752728DFFAED002AF19D /* DifficultyView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -666,6 +669,7 @@
 				CAB3CC8028DC3FB20035DD1E /* AccountRepository.swift in Sources */,
 				CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */,
 				CAB3CC3A28D7E6B10035DD1E /* PlayRow.swift in Sources */,
+				CAB2752828DFFAED002AF19D /* DifficultyView.swift in Sources */,
 				CA6452A828C5C72900738762 /* LetterEntry.swift in Sources */,
 				CA0BF46428C93FA600EE3E58 /* SolutionsList.swift in Sources */,
 				CA1CEE5828C67C2000520C70 /* BasicValidator.swift in Sources */,

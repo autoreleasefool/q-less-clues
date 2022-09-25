@@ -20,9 +20,10 @@ struct PlayDetailView: View {
 			Section {
 				Text(play.letters)
 				LabeledContent("Outcome", value: play.outcome.rawValue)
+				DifficultyView(difficulty: play.difficulty)
 			}
 
-			AnalysisView(play: play)
+			AnalysisView(play: play, hideDifficulty: true)
 
 			Section {
 				Button("Delete", role: .destructive, action: toggleDeletePrompt)
