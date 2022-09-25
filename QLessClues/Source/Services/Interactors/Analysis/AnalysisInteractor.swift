@@ -42,7 +42,6 @@ struct AnalysisInteractorImpl: AnalysisInteractor {
 			progressLoadable
 		} set: {
 			progressLoadable = $0
-			print("Progress: \($0)")
 			updateAnalysis(analysis, solutions: solutionsLoadable, progress: $0, cancelBag: cancelBag)
 		}
 

@@ -16,8 +16,8 @@ struct QLessCluesApp: App {
 		WindowGroup {
 			NavigationStack {
 				ContentView()
-					.environment(\.container, environment.container)
 			}
+			.environment(\.container, environment.container)
 			.onAppear {
 				DispatchQueue.global().async {
 					_ = WordSet.englishSet

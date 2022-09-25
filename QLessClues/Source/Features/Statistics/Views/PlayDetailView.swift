@@ -22,10 +22,11 @@ struct PlayDetailView: View {
 				LabeledContent("Outcome", value: play.outcome.rawValue)
 			}
 
+			AnalysisView(play: play)
+
 			Section {
-				Button(role: .destructive, action: toggleDeletePrompt) {
-					Label("Delete", systemImage: "trash")
-				}
+				Button("Delete", role: .destructive, action: toggleDeletePrompt)
+					.frame(maxWidth: .infinity)
 			}
 		}
 		.confirmationDialog("Are you sure?", isPresented: $isDeleting) {

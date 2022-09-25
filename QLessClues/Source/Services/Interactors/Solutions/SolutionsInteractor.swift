@@ -65,7 +65,6 @@ struct SolutionsInteractorImpl: SolutionsInteractor {
 		solver.progress(forLetters: letters)
 			.receive(on: DispatchQueue.main)
 			.sink {
-				print("Progress outcome: \($0)")
 				if case let .failure(error) = $0 {
 					progress.wrappedValue = .failed(error)
 				} else {
