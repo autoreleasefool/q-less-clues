@@ -157,6 +157,7 @@
 			children = (
 				CA0BF46828C9B11500EE3E58 /* Views */,
 				CA0BF46628C9AF6D00EE3E58 /* SolutionDetailView.swift */,
+				CA0BF46328C93FA600EE3E58 /* SolutionsList.swift */,
 			);
 			path = Solutions;
 			sourceTree = "<group>";
@@ -164,6 +165,7 @@
 		CA0BF46828C9B11500EE3E58 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				CAB2752F28E432D0002AF19D /* SolutionRow.swift */,
 				CA0BF46928C9B11D00EE3E58 /* Tile.swift */,
 			);
 			path = Views;
@@ -328,7 +330,6 @@
 			isa = PBXGroup;
 			children = (
 				CA6452A728C5C72900738762 /* LetterEntry.swift */,
-				CAB2752F28E432D0002AF19D /* SolutionRow.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -517,7 +518,6 @@
 			children = (
 				CA6452A628C5C71C00738762 /* Views */,
 				CABF28C728C57C4E00A0C0E1 /* RecordPlayView.swift */,
-				CA0BF46328C93FA600EE3E58 /* SolutionsList.swift */,
 			);
 			path = Record;
 			sourceTree = "<group>";
