@@ -47,14 +47,23 @@ struct AnalysisView: View {
 		}
 
 		if shouldShowHints {
-			Section("Hints") {
+			Section {
 				ForEach(hint.value?.words ?? [], id: \.self) {
 					Text($0)
 				}
 
-				Button("New Hint", action: addHint)
-					.frame(maxWidth: .infinity)
-					.disabled(!moreHintsAvailable)
+				if moreHintsAvailable {
+					Button("New Hint", action: addHint)
+						.frame(maxWidth: .infinity)
+				}
+			} header: {
+				Text("Hints")
+			} footer: {
+				Text(
+					"Each hint is a word that appears in one potential solution. " +
+					"You can request additional hints, until there's only word unrevealed word remaining in the solution. " +
+					"Then, it's up to you."
+				)
 			}
 		}
 
