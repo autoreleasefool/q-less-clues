@@ -18,6 +18,10 @@ struct Solution: Identifiable, Codable, Equatable, Hashable {
 		Array(letterPositions.values).sorted().joined()
 	}
 
+	var description: String {
+		words.joined(separator: ", ")
+	}
+
 	init(board: [Position: Character]) {
 		self.id = UUID()
 		self.letterPositions = board.reduce(into: [:]) { dict, entry in dict[entry.key] = String(entry.value) }

@@ -10,6 +10,7 @@ import SwiftUI
 struct SolutionsList: View {
 
 	let solutions: [Solution]
+	@State private var search = ""
 
 	var body: some View {
 		Group {
@@ -29,12 +30,19 @@ struct SolutionsList: View {
 	}
 
 	private var solutionsList: some View {
-		List(solutions, id: \.id) { solution in
-			NavigationLink {
-				SolutionDetailView(solution: solution)
-			} label: {
-				Text(solution.words.joined(separator: ", "))
-			}
+		List(filteredSolutions, id: \.id) {
+			SolutionRow(solution: $0)
 		}
+		.searchable(text: $search)
+	}
+}
+
+// MARK: - Content
+
+extension SolutionsList {
+	private var filteredSolutions: [Solution] {
+		let filter = search.uppercased()
+		return solutions
+			.filter { filter.isEmpty || $0.description.contains(filter) }
 	}
 }
