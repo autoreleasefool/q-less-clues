@@ -8,13 +8,23 @@
 struct Interactors {
 	let solutionsInteractor: SolutionsInteractor
 	let analysisInteractor: AnalysisInteractor
+	let hintsInteractor: HintsInteractor
 
-	init(solutionsInteractor: SolutionsInteractor, analysisInteractor: AnalysisInteractor) {
+	init(
+		solutionsInteractor: SolutionsInteractor,
+		analysisInteractor: AnalysisInteractor,
+		hintsInteractor: HintsInteractor
+	) {
 		self.solutionsInteractor = solutionsInteractor
 		self.analysisInteractor = analysisInteractor
+		self.hintsInteractor = hintsInteractor
 	}
 
 	static var stub: Self {
-		.init(solutionsInteractor: SolutionsInteractorStub(), analysisInteractor: AnalysisInteractorStub())
+		.init(
+			solutionsInteractor: SolutionsInteractorStub(),
+			analysisInteractor: AnalysisInteractorStub(),
+			hintsInteractor: HintsInteractorStub()
+		)
 	}
 }

@@ -108,7 +108,7 @@ class BacktrackingSolver: GameSolver {
 				.limitBy(.mostPopular)
 				.words
 
-			print("Total first words: \(firstWords.count)")
+			print("Total first words: \(firstWords.count), \(firstWords)")
 
 			for (index, word) in firstWords.enumerated() {
 				print("Solving with firstWord \(index)")
@@ -125,6 +125,7 @@ class BacktrackingSolver: GameSolver {
 		}
 
 		let expressions = enumerateRowsAndColumns(for: state)
+
 		for word in state.wordSet.limitBy(.mostPopular).words {
 			for rowColumn in expressions {
 				guard word.firstMatch(of: rowColumn.regex) != nil else {

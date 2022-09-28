@@ -14,13 +14,20 @@ struct AnalysisView: View {
 
 	@ObservedRealmObject var play: Play
 	@State private var analysis: Loadable<Analysis>
+	@State private var hint: Loadable<Hint>
 
 	private let hideDifficulty: Bool
 
-	init(play: Play, hideDifficulty: Bool = false, analysis: Loadable<Analysis> = .notRequested) {
+	init(
+		play: Play,
+		hideDifficulty: Bool = false,
+		analysis: Loadable<Analysis> = .notRequested,
+		hint: Loadable<Hint> = .notRequested
+	) {
 		self.play = play
 		self.hideDifficulty = hideDifficulty
 		self._analysis = .init(initialValue: analysis)
+		self._hint = .init(initialValue: hint)
 	}
 
 	var body: some View {
@@ -37,6 +44,18 @@ struct AnalysisView: View {
 			Button("Analyze", action: beginAnalysis)
 				.frame(maxWidth: .infinity)
 				.disabled(analysisButtonDisabled)
+		}
+
+		if shouldShowHints {
+			Section("Hints") {
+				ForEach(hint.value?.words ?? [], id: \.self) {
+					Text($0)
+				}
+
+				Button("New Hint", action: addHint)
+					.frame(maxWidth: .infinity)
+					.disabled(!moreHintsAvailable)
+			}
 		}
 
 		if shouldShowAnalysis {
@@ -58,6 +77,23 @@ struct AnalysisView: View {
 // MARK: - Content
 
 extension AnalysisView {
+	private var shouldShowHints: Bool {
+		analysis.value?.solutions.isEmpty == false
+	}
+
+	private var moreHintsAvailable: Bool {
+		switch hint {
+		case .notRequested:
+			return analysis.value?.solutions.isEmpty == false
+		case .isLoading(let hint, _):
+			return hint?.moreHintsAvailable ?? false
+		case .loaded(let hint):
+			return hint.moreHintsAvailable
+		case .failed:
+			return false
+		}
+	}
+
 	private var shouldShowAnalysis: Bool {
 		guard play.isPlayable else { return false }
 
@@ -96,6 +132,11 @@ extension AnalysisView {
 // MARK: - Actions
 
 extension AnalysisView {
+	private func addHint() {
+		container.interactors.hintsInteractor
+			.receiveHint(from: analysis.value?.solutions ?? [], hint: $hint)
+	}
+
 	private func beginAnalysis() {
 		container.interactors.analysisInteractor
 			.analyze(letters: play.letters, analysis: $analysis)

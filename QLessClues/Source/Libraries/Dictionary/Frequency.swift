@@ -46,11 +46,14 @@ struct WordFrequency {
 
 	let frequency: [String: Int]
 	let ranking: [String: Int]
+	let totalFrequency: Int
 
 	init(words: [String]) {
 		var frequency: [String: Int] = [:]
+		var totalFrequency = 0
 		for word in words {
 			frequency[word] = Self.englishWordFrequencies[word]
+			totalFrequency += (Self.englishWordFrequencies[word] ?? 0)
 		}
 
 		var ranking: [String: Int] = [:]
@@ -63,5 +66,6 @@ struct WordFrequency {
 
 		self.frequency = frequency
 		self.ranking = ranking
+		self.totalFrequency = totalFrequency
 	}
 }

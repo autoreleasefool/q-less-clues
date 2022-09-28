@@ -32,7 +32,13 @@ extension AppEnvironment {
 
 		let analysisInteractor = AnalysisInteractorImpl(solutionsInteractor: solutionsInteractor)
 
-		return Interactors(solutionsInteractor: solutionsInteractor, analysisInteractor: analysisInteractor)
+		let hintsInteractor = HintsInteractorImpl()
+
+		return Interactors(
+			solutionsInteractor: solutionsInteractor,
+			analysisInteractor: analysisInteractor,
+			hintsInteractor: hintsInteractor
+		)
 	}
 
 	private static func configuredContainer(appState: Store<AppState>, interactors: Interactors) -> Container {

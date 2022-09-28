@@ -36,6 +36,8 @@
 		CAB2751F28DE994B002AF19D /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2751E28DE994B002AF19D /* Difficulty.swift */; };
 		CAB2752628DF8718002AF19D /* AnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2752528DF8718002AF19D /* AnalysisView.swift */; };
 		CAB2752828DFFAED002AF19D /* DifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2752728DFFAED002AF19D /* DifficultyView.swift */; };
+		CAB2752B28E005B7002AF19D /* HintsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2752A28E005B7002AF19D /* HintsInteractor.swift */; };
+		CAB2752E28E0AC7F002AF19D /* Hint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2752D28E0AC7F002AF19D /* Hint.swift */; };
 		CAB3CC2628D7D5840035DD1E /* FrequencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC2528D7D5840035DD1E /* FrequencyTests.swift */; };
 		CAB3CC2C28D7D5EA0035DD1E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC2B28D7D5EA0035DD1E /* Realm */; };
 		CAB3CC2E28D7D5EB0035DD1E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC2D28D7D5EA0035DD1E /* RealmSwift */; };
@@ -101,6 +103,8 @@
 		CAB2751E28DE994B002AF19D /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		CAB2752528DF8718002AF19D /* AnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisView.swift; sourceTree = "<group>"; };
 		CAB2752728DFFAED002AF19D /* DifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyView.swift; sourceTree = "<group>"; };
+		CAB2752A28E005B7002AF19D /* HintsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsInteractor.swift; sourceTree = "<group>"; };
+		CAB2752D28E0AC7F002AF19D /* Hint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hint.swift; sourceTree = "<group>"; };
 		CAB3CC2528D7D5840035DD1E /* FrequencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencyTests.swift; sourceTree = "<group>"; };
 		CAB3CC3128D7E51C0035DD1E /* PlayGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGroup.swift; sourceTree = "<group>"; };
 		CAB3CC3628D7E6380035DD1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -382,6 +386,23 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
+		CAB2752928E005A8002AF19D /* Hints */ = {
+			isa = PBXGroup;
+			children = (
+				CAB2752C28E0AC74002AF19D /* Models */,
+				CAB2752A28E005B7002AF19D /* HintsInteractor.swift */,
+			);
+			path = Hints;
+			sourceTree = "<group>";
+		};
+		CAB2752C28E0AC74002AF19D /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				CAB2752D28E0AC7F002AF19D /* Hint.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		CAB3CC2328D7D5500035DD1E /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
@@ -422,6 +443,7 @@
 			children = (
 				CAB3CC4028D7F2540035DD1E /* Interactors.swift */,
 				CAB2751628DE9868002AF19D /* Analysis */,
+				CAB2752928E005A8002AF19D /* Hints */,
 				CAB3CC4328D7F27C0035DD1E /* Solutions */,
 				CAB3CC7A28DC3E070035DD1E /* Account */,
 			);
@@ -656,11 +678,13 @@
 				CA1CEE5328C65AE100520C70 /* Solution.swift in Sources */,
 				CA12CA2728C6CA1500CD9876 /* Direction.swift in Sources */,
 				CA1867D728C5195500DD75C7 /* StatisticsView.swift in Sources */,
+				CAB2752E28E0AC7F002AF19D /* Hint.swift in Sources */,
 				CA24657828D6AF79001BFF71 /* Play.swift in Sources */,
 				CAB3CC8728DC43620035DD1E /* AppState.swift in Sources */,
 				CA1CEE5F28C6BA7D00520C70 /* Frequency.swift in Sources */,
 				CABF28C828C57C4E00A0C0E1 /* RecordPlayView.swift in Sources */,
 				CAB3CC7428DC2C970035DD1E /* Account.swift in Sources */,
+				CAB2752B28E005B7002AF19D /* HintsInteractor.swift in Sources */,
 				CAB3CC4828D7F8490035DD1E /* AppEnvironment.swift in Sources */,
 				CAB3CC8928DC441F0035DD1E /* Publisher+Extensions.swift in Sources */,
 				CA1CEE5228C65AE100520C70 /* BacktrackingSolver.swift in Sources */,
