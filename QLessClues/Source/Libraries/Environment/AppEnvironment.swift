@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import KeychainAccess
 
 final class AppEnvironment: ObservableObject {
 	let container: Container
@@ -19,13 +20,20 @@ extension AppEnvironment {
 
 	static func bootstrap() -> AppEnvironment {
 		let appState = Store(AppState())
-		let interactors = configuredInteractors()
+		let repositories = configuredRepositories()
+		let interactors = configuredInteractors(repositories: repositories, appState: appState)
 		let container = configuredContainer(appState: appState, interactors: interactors)
 
 		return AppEnvironment(container: container)
 	}
 
-	private static func configuredInteractors() -> Interactors {
+	private static func configuredRepositories() -> Container.Repositories {
+		let accountRepository = AccountRepositoryImpl(keychain: Keychain())
+
+		return Container.Repositories(accountRepository: accountRepository)
+	}
+
+	private static func configuredInteractors(repositories: Container.Repositories, appState: Store<AppState>) -> Interactors {
 		let validator = BasicValidator()
 		let solver = BacktrackingSolver(validator: validator)
 		let solutionsInteractor = SolutionsInteractorImpl(solver: solver)
@@ -34,14 +42,23 @@ extension AppEnvironment {
 
 		let hintsInteractor = HintsInteractorImpl()
 
+		let accountInteractor = AccountInteractorImpl(repository: repositories.accountRepository, appState: appState)
+
 		return Interactors(
 			solutionsInteractor: solutionsInteractor,
 			analysisInteractor: analysisInteractor,
-			hintsInteractor: hintsInteractor
+			hintsInteractor: hintsInteractor,
+			accountInteractor: accountInteractor
 		)
 	}
 
 	private static func configuredContainer(appState: Store<AppState>, interactors: Interactors) -> Container {
 		return Container(appState: appState, interactors: interactors)
+	}
+}
+
+private extension Container {
+	struct Repositories {
+		let accountRepository: AccountRepository
 	}
 }

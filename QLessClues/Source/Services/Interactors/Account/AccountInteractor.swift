@@ -35,3 +35,17 @@ struct AccountInteractorImpl: AccountInteractor {
 		repository.remove()
 	}
 }
+
+// MARK: - Stub
+
+struct AccountInteractorStub: AccountInteractor {
+	let appState: Store<AppState>
+
+	func load() {
+		appState[\.account] = .loaded(Account(id: UUID(uuidString: "ff8d9f90-9fa2-4943-a653-92e9bdb5be99")!, token: "token"))
+	}
+
+	func remove() {
+		appState[\.account] = .notRequested
+	}
+}

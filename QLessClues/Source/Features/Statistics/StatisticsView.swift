@@ -13,6 +13,7 @@ struct StatisticsView: View {
 
 	@ObservedRealmObject var group: PlayGroup
 	@State private var newPlay: Play?
+	@State private var settingsOpen = false
 
 	var body: some View {
 		List {
@@ -28,6 +29,12 @@ struct StatisticsView: View {
 		}
 		.navigationTitle("Statistics")
 		.toolbar {
+			ToolbarItem(placement: .navigationBarLeading) {
+				Button(action: openSettings) {
+					Image(systemName: "gear")
+				}
+			}
+
 			ToolbarItem(placement: .navigationBarTrailing) {
 				Button(action: addNewPlay) {
 					Image(systemName: "plus")
@@ -39,10 +46,11 @@ struct StatisticsView: View {
 				RecordPlayView(play: newPlay, group: group)
 			}
 		}
-	}
-
-	private func addNewPlay() {
-		self.newPlay = Play()
+		.sheet(isPresented: $settingsOpen) {
+			NavigationStack {
+				SettingsView()
+			}
+		}
 	}
 }
 
@@ -83,6 +91,18 @@ extension StatisticsView {
 				}.onDelete(perform: $group.plays.remove)
 			}
 		}
+	}
+}
+
+// MARK: - Actions
+
+extension StatisticsView {
+	private func openSettings() {
+		settingsOpen.toggle()
+	}
+
+	private func addNewPlay() {
+		newPlay = Play()
 	}
 }
 
