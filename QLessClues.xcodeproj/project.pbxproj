@@ -176,7 +176,7 @@
 		CA1867AC28C5095100DD75C7 = {
 			isa = PBXGroup;
 			children = (
-				CA1867B728C5095100DD75C7 /* QLessClues */,
+				CA1867B728C5095100DD75C7 /* QLessCluesApp */,
 				CA1CEE6528C6C03C00520C70 /* QLessCluesTests */,
 				CA1867B628C5095100DD75C7 /* Products */,
 				CA1CEE7428C6C74B00520C70 /* Frameworks */,
@@ -192,7 +192,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		CA1867B728C5095100DD75C7 /* QLessClues */ = {
+		CA1867B728C5095100DD75C7 /* QLessCluesApp */ = {
 			isa = PBXGroup;
 			children = (
 				CA1867BC28C5095200DD75C7 /* Assets.xcassets */,
@@ -200,7 +200,7 @@
 				CA1867C728C5096F00DD75C7 /* Resources */,
 				CA1867C628C5096A00DD75C7 /* Source */,
 			);
-			path = QLessClues;
+			path = QLessCluesApp;
 			sourceTree = "<group>";
 		};
 		CA1867BE28C5095200DD75C7 /* Preview Content */ = {
