@@ -61,7 +61,7 @@
 		CAB3CC8928DC441F0035DD1E /* Publisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC8828DC441F0035DD1E /* Publisher+Extensions.swift */; };
 		CABF28C828C57C4E00A0C0E1 /* RecordPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABF28C728C57C4E00A0C0E1 /* RecordPlayView.swift */; };
 		CADCCD8B28EB74A700059DFD /* AppCore in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD8A28EB74A700059DFD /* AppCore */; };
-		CADCCD8D28EC1A2A00059DFD /* Dictionary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD8C28EC1A2A00059DFD /* Dictionary */; };
+		CADCCD8F28EC1BC100059DFD /* DictionaryLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD8E28EC1BC100059DFD /* DictionaryLibrary */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -133,9 +133,9 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CADCCD8F28EC1BC100059DFD /* DictionaryLibrary in Frameworks */,
 				CA24656D28D6838F001BFF71 /* RealmSwift in Frameworks */,
 				CADCCD8B28EB74A700059DFD /* AppCore in Frameworks */,
-				CADCCD8D28EC1A2A00059DFD /* Dictionary in Frameworks */,
 				CA24656B28D6838F001BFF71 /* Realm in Frameworks */,
 				CAB3CC8328DC41A00035DD1E /* KeychainAccess in Frameworks */,
 			);
@@ -544,7 +544,7 @@
 				CA24656C28D6838F001BFF71 /* RealmSwift */,
 				CAB3CC8228DC41A00035DD1E /* KeychainAccess */,
 				CADCCD8A28EB74A700059DFD /* AppCore */,
-				CADCCD8C28EC1A2A00059DFD /* Dictionary */,
+				CADCCD8E28EC1BC100059DFD /* DictionaryLibrary */,
 			);
 			productName = QLessClues;
 			productReference = CA1867B528C5095100DD75C7 /* QLessClues.app */;
@@ -1040,9 +1040,9 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = AppCore;
 		};
-		CADCCD8C28EC1A2A00059DFD /* Dictionary */ = {
+		CADCCD8E28EC1BC100059DFD /* DictionaryLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = Dictionary;
+			productName = DictionaryLibrary;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

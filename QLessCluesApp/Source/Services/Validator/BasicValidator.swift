@@ -5,7 +5,7 @@
 //  Created by Joseph Roque on 2022-09-05.
 //
 
-import Dictionary
+import DictionaryLibrary
 import Foundation
 
 class BasicValidator: Validator {

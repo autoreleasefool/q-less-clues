@@ -10,7 +10,7 @@ let package = Package(
 	products: [
 		.library(name: "AppCore", targets: ["AppCore"]),
 //		.library(name: "Validator", targets: ["Validator"]),
-		.library(name: "Dictionary", targets: ["Dictionary"]),
+		.library(name: "DictionaryLibrary", targets: ["DictionaryLibrary"]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.40.2"),
@@ -35,12 +35,12 @@ let package = Package(
 //			dependencies: ["Validator"]
 //		),
 		.target(
-			name: "Dictionary",
+			name: "DictionaryLibrary",
 			dependencies: []
 		),
 		.testTarget(
-			name: "DictionaryTests",
-			dependencies: ["Dictionary"]
+			name: "DictionaryLibraryTests",
+			dependencies: ["DictionaryLibrary"]
 		),
 	]
 )

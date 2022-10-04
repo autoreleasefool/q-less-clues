@@ -1,4 +1,4 @@
-import Dictionary
+import DictionaryLibrary
 import XCTest
 
 final class FrequencyTests: XCTestCase {
