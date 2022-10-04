@@ -18,7 +18,7 @@ Next, Q-Less Clues uses the [Google Web Trillion Word Corpus](https://ai.googleb
 
 ### Backtracking Solver
 
-Q-Less Clues uses a backtracking algorithm to discover solutions for a single game. Most of the code can be found in [BacktrackingSolver.swift](/QLessClues/QLessClues/Source/Services/Solver/BacktrackingSolver.swift).
+Q-Less Clues uses a backtracking algorithm to discover solutions for a single game. Most of the code can be found in [BacktrackingSolver.swift](/QLessCluesApp/Source/Services/Solver/BacktrackingSolver.swift).
 
 For the first word, it finds the least frequent letter among the available words, and attempts to start the game with only those words. This reduces the overall time complexity, since we'll definitely need to use that letter in our solution, and we would rather not solve most of the board only to be left with that single letter at the end of the game, with nowhere to place it. By consuming it first, we avoid a lot of extra wasted searches.
 

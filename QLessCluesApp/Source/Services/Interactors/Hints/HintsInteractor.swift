@@ -5,6 +5,7 @@
 //  Created by Joseph Roque on 2022-09-24.
 //
 
+import Dictionary
 import Foundation
 
 enum HintsError: Error {

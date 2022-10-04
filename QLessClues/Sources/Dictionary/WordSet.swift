@@ -1,15 +1,8 @@
-//
-//  Dictionary.swift
-//  QLessClues
-//
-//  Created by Joseph Roque on 2022-09-05.
-//
-
 import Foundation
 
-struct WordSet {
+public struct WordSet {
 
-	private static let englishWords: [String] = {
+	public static let englishWords: [String] = {
 		guard let wordListUrl = Bundle.main.url(forResource: "words", withExtension: "txt"),
 					let wordList = try? String(contentsOf: wordListUrl) else {
 			fatalError("Could not load dictionary")
@@ -24,13 +17,13 @@ struct WordSet {
 			}
 	}()
 
-	static let englishSet: WordSet = WordSet(letterSet: .fullAlphabet)
+	public static let englishSet: WordSet = WordSet(letterSet: .fullAlphabet)
 
-	private(set) var words: [String]
-	private(set) var alphabet: String
-	private(set) lazy var frequency: WordFrequency = WordFrequency(words: words)
+	public private(set) var words: [String]
+	public private(set) var alphabet: String
+	public private(set) lazy var frequency: WordFrequency = WordFrequency(words: words)
 
-	init(letterSet: LetterSet, baseDictionary: [String] = WordSet.englishWords) {
+	public init(letterSet: LetterSet, baseDictionary: [String] = WordSet.englishWords) {
 		self.alphabet = String(Set(letterSet.letters).sorted()).uppercased()
 
 		let words = baseDictionary
@@ -55,7 +48,7 @@ struct WordSet {
 		self.words = wordSet.words
 	}
 
-	func limitBy(_ filter: Filter) -> WordSet {
+	public func limitBy(_ filter: Filter) -> WordSet {
 		var newSet = WordSet(wordSet: self)
 		switch filter {
 		case .containingLeastFrequentLetter:
@@ -79,7 +72,7 @@ struct WordSet {
 }
 
 extension WordSet {
-	enum Filter {
+	public enum Filter {
 		case mostPopular
 		case containingLeastFrequentLetter
 	}

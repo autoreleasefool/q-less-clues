@@ -33,7 +33,10 @@ extension AppEnvironment {
 		return Container.Repositories(accountRepository: accountRepository)
 	}
 
-	private static func configuredInteractors(repositories: Container.Repositories, appState: Store<AppState>) -> Interactors {
+	private static func configuredInteractors(
+		repositories: Container.Repositories,
+		appState: Store<AppState>
+	) -> Interactors {
 		let validator = BasicValidator()
 		let solver = BacktrackingSolver(validator: validator)
 		let solutionsInteractor = SolutionsInteractorImpl(solver: solver)

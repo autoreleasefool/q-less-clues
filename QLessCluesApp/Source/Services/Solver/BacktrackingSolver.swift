@@ -6,6 +6,7 @@
 //
 
 import Combine
+import Dictionary
 import Foundation
 
 class BacktrackingSolver: GameSolver {

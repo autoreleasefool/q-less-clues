@@ -16,15 +16,12 @@
 		CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BC28C5095200DD75C7 /* Assets.xcassets */; };
 		CA1867C028C5095200DD75C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BF28C5095200DD75C7 /* Preview Assets.xcassets */; };
 		CA1867D728C5195500DD75C7 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867D628C5195500DD75C7 /* StatisticsView.swift */; };
-		CA1CEE4D28C65ADA00520C70 /* WordSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE4C28C65ADA00520C70 /* WordSet.swift */; };
 		CA1CEE5128C65AE100520C70 /* GameSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE4E28C65AE100520C70 /* GameSolver.swift */; };
 		CA1CEE5228C65AE100520C70 /* BacktrackingSolver.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE4F28C65AE100520C70 /* BacktrackingSolver.swift */; };
 		CA1CEE5328C65AE100520C70 /* Solution.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5028C65AE100520C70 /* Solution.swift */; };
 		CA1CEE5528C67BF200520C70 /* Validator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5428C67BF200520C70 /* Validator.swift */; };
 		CA1CEE5828C67C2000520C70 /* BasicValidator.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5728C67C2000520C70 /* BasicValidator.swift */; };
 		CA1CEE5B28C6AF0000520C70 /* Position.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5A28C6AF0000520C70 /* Position.swift */; };
-		CA1CEE5D28C6B36A00520C70 /* LetterSet.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5C28C6B36A00520C70 /* LetterSet.swift */; };
-		CA1CEE5F28C6BA7D00520C70 /* Frequency.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1CEE5E28C6BA7D00520C70 /* Frequency.swift */; };
 		CA24656B28D6838F001BFF71 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CA24656A28D6838F001BFF71 /* Realm */; };
 		CA24656D28D6838F001BFF71 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CA24656C28D6838F001BFF71 /* RealmSwift */; };
 		CA24657428D69BD1001BFF71 /* Dictionary+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA24657328D69BD1001BFF71 /* Dictionary+Extensions.swift */; };
@@ -63,6 +60,8 @@
 		CAB3CC8728DC43620035DD1E /* AppState.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC8628DC43620035DD1E /* AppState.swift */; };
 		CAB3CC8928DC441F0035DD1E /* Publisher+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC8828DC441F0035DD1E /* Publisher+Extensions.swift */; };
 		CABF28C828C57C4E00A0C0E1 /* RecordPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABF28C728C57C4E00A0C0E1 /* RecordPlayView.swift */; };
+		CADCCD8B28EB74A700059DFD /* AppCore in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD8A28EB74A700059DFD /* AppCore */; };
+		CADCCD8D28EC1A2A00059DFD /* Dictionary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD8C28EC1A2A00059DFD /* Dictionary */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -86,18 +85,16 @@
 		CA1867BC28C5095200DD75C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA1867BF28C5095200DD75C7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		CA1867D628C5195500DD75C7 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
-		CA1CEE4C28C65ADA00520C70 /* WordSet.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WordSet.swift; sourceTree = "<group>"; };
 		CA1CEE4E28C65AE100520C70 /* GameSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSolver.swift; sourceTree = "<group>"; };
 		CA1CEE4F28C65AE100520C70 /* BacktrackingSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BacktrackingSolver.swift; sourceTree = "<group>"; };
 		CA1CEE5028C65AE100520C70 /* Solution.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Solution.swift; sourceTree = "<group>"; };
 		CA1CEE5428C67BF200520C70 /* Validator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Validator.swift; sourceTree = "<group>"; };
 		CA1CEE5728C67C2000520C70 /* BasicValidator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BasicValidator.swift; sourceTree = "<group>"; };
 		CA1CEE5A28C6AF0000520C70 /* Position.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Position.swift; sourceTree = "<group>"; };
-		CA1CEE5C28C6B36A00520C70 /* LetterSet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterSet.swift; sourceTree = "<group>"; };
-		CA1CEE5E28C6BA7D00520C70 /* Frequency.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Frequency.swift; sourceTree = "<group>"; };
 		CA1CEE6428C6C03C00520C70 /* QLessCluesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QLessCluesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA24657328D69BD1001BFF71 /* Dictionary+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Dictionary+Extensions.swift"; sourceTree = "<group>"; };
 		CA24657728D6AF79001BFF71 /* Play.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
+		CA57989F28EB7302006B9BF7 /* QLessClues */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = QLessClues; sourceTree = "<group>"; };
 		CA6452A728C5C72900738762 /* LetterEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEntry.swift; sourceTree = "<group>"; };
 		CA6452BD28C5DFA200738762 /* words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words.txt; sourceTree = "<group>"; };
 		CAB2751728DE9879002AF19D /* AnalysisInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisInteractor.swift; sourceTree = "<group>"; };
@@ -137,6 +134,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA24656D28D6838F001BFF71 /* RealmSwift in Frameworks */,
+				CADCCD8B28EB74A700059DFD /* AppCore in Frameworks */,
+				CADCCD8D28EC1A2A00059DFD /* Dictionary in Frameworks */,
 				CA24656B28D6838F001BFF71 /* Realm in Frameworks */,
 				CAB3CC8328DC41A00035DD1E /* KeychainAccess in Frameworks */,
 			);
@@ -176,6 +175,7 @@
 		CA1867AC28C5095100DD75C7 = {
 			isa = PBXGroup;
 			children = (
+				CA57989F28EB7302006B9BF7 /* QLessClues */,
 				CA1867B728C5095100DD75C7 /* QLessCluesApp */,
 				CA1CEE6528C6C03C00520C70 /* QLessCluesTests */,
 				CA1867B628C5095100DD75C7 /* Products */,
@@ -292,7 +292,6 @@
 			isa = PBXGroup;
 			children = (
 				CAB3CC4928D800E40035DD1E /* Loadable */,
-				CAB3CC2F28D7D8540035DD1E /* Dictionary */,
 				CAB3CC4628D7F83D0035DD1E /* Environment */,
 				CA24657228D69BC7001BFF71 /* Extensions */,
 			);
@@ -434,16 +433,6 @@
 			path = Dictionary;
 			sourceTree = "<group>";
 		};
-		CAB3CC2F28D7D8540035DD1E /* Dictionary */ = {
-			isa = PBXGroup;
-			children = (
-				CA1CEE4C28C65ADA00520C70 /* WordSet.swift */,
-				CA1CEE5C28C6B36A00520C70 /* LetterSet.swift */,
-				CA1CEE5E28C6BA7D00520C70 /* Frequency.swift */,
-			);
-			path = Dictionary;
-			sourceTree = "<group>";
-		};
 		CAB3CC3828D7E6AB0035DD1E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -554,6 +543,8 @@
 				CA24656A28D6838F001BFF71 /* Realm */,
 				CA24656C28D6838F001BFF71 /* RealmSwift */,
 				CAB3CC8228DC41A00035DD1E /* KeychainAccess */,
+				CADCCD8A28EB74A700059DFD /* AppCore */,
+				CADCCD8C28EC1A2A00059DFD /* Dictionary */,
 			);
 			productName = QLessClues;
 			productReference = CA1867B528C5095100DD75C7 /* QLessClues.app */;
@@ -678,7 +669,6 @@
 				CAB3CC4B28D800EB0035DD1E /* Loadable.swift in Sources */,
 				CAB3CC4528D7F2860035DD1E /* SolutionsInteractor.swift in Sources */,
 				CA0BF46A28C9B11D00EE3E58 /* Tile.swift in Sources */,
-				CA1CEE4D28C65ADA00520C70 /* WordSet.swift in Sources */,
 				CAB3CC3C28D7E74A0035DD1E /* PlayDetailView.swift in Sources */,
 				CA1CEE5128C65AE100520C70 /* GameSolver.swift in Sources */,
 				CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */,
@@ -697,7 +687,6 @@
 				CAB2752E28E0AC7F002AF19D /* Hint.swift in Sources */,
 				CA24657828D6AF79001BFF71 /* Play.swift in Sources */,
 				CAB3CC8728DC43620035DD1E /* AppState.swift in Sources */,
-				CA1CEE5F28C6BA7D00520C70 /* Frequency.swift in Sources */,
 				CABF28C828C57C4E00A0C0E1 /* RecordPlayView.swift in Sources */,
 				CAB3CC7428DC2C970035DD1E /* Account.swift in Sources */,
 				CAB2752B28E005B7002AF19D /* HintsInteractor.swift in Sources */,
@@ -716,7 +705,6 @@
 				CAB2751F28DE994B002AF19D /* Difficulty.swift in Sources */,
 				CAB3CC8528DC43370035DD1E /* Store.swift in Sources */,
 				CAB2752628DF8718002AF19D /* AnalysisView.swift in Sources */,
-				CA1CEE5D28C6B36A00520C70 /* LetterSet.swift in Sources */,
 				CAB3CC3228D7E51C0035DD1E /* PlayGroup.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -861,7 +849,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_ASSET_PATHS = "\"QLessClues/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"QLessCluesApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 3UBRXR267C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -892,7 +880,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 2;
-				DEVELOPMENT_ASSET_PATHS = "\"QLessClues/Preview Content\"";
+				DEVELOPMENT_ASSET_PATHS = "\"QLessCluesApp/Preview Content\"";
 				DEVELOPMENT_TEAM = 3UBRXR267C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
@@ -1047,6 +1035,14 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CAB3CC8128DC41A00035DD1E /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
+		};
+		CADCCD8A28EB74A700059DFD /* AppCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = AppCore;
+		};
+		CADCCD8C28EC1A2A00059DFD /* Dictionary */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Dictionary;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};
