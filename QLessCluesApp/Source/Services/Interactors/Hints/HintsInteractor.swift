@@ -7,6 +7,7 @@
 
 import DictionaryLibrary
 import Foundation
+import NetworkingService
 import SharedModelsLibrary
 
 enum HintsError: Error {

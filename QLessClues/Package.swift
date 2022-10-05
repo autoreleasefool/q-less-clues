@@ -12,6 +12,7 @@ let package = Package(
 //		.library(name: "Validator", targets: ["Validator"]),
 		.library(name: "DictionaryLibrary", targets: ["DictionaryLibrary"]),
 		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
+		.library(name: "NetworkingService", targets: ["NetworkingService"]),
 		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
 	],
 	dependencies: [
@@ -51,6 +52,14 @@ let package = Package(
 		.testTarget(
 			name: "ExtensionsLibraryTests",
 			dependencies: ["ExtensionsLibrary"]
+		),
+		.target(
+			name: "NetworkingService",
+			dependencies: []
+		),
+		.testTarget(
+			name: "NetworkingServiceTests",
+			dependencies: ["NetworkingService"]
 		),
 		.target(
 			name: "SharedModelsLibrary",

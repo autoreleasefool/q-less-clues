@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import NetworkingService
 import SharedModelsLibrary
 
 protocol AnalysisInteractor {

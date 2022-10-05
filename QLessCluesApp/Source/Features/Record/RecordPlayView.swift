@@ -6,6 +6,7 @@
 //
 
 import Combine
+import NetworkingService
 import RealmSwift
 import SwiftUI
 

@@ -6,6 +6,7 @@
 //
 
 import AuthenticationServices
+import NetworkingService
 import SwiftUI
 
 struct SettingsView: View {

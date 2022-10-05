@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import NetworkingService
 
 protocol AccountInteractor {
 	func load()

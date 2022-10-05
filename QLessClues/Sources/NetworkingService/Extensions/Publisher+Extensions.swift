@@ -1,6 +1,6 @@
 import Combine
 
-extension Publisher {
+public extension Publisher {
 	func sinkToLoadable(_ completion: @escaping (Loadable<Output>) -> Void) -> AnyCancellable {
 		return sink(
 			receiveCompletion: {
@@ -14,7 +14,7 @@ extension Publisher {
 	}
 }
 
-extension Subscribers.Completion {
+public extension Subscribers.Completion {
 	var error: Failure? {
 		switch self {
 		case let .failure(error): return error

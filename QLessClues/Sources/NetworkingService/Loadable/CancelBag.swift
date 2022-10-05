@@ -1,21 +1,16 @@
-//
-//  CancelBag.swift
-//  QLessClues
-//
-//  Created by Joseph Roque on 2022-09-18.
-//
-
 import Combine
 
-final class CancelBag {
+public final class CancelBag {
 	fileprivate(set) var subscriptions = Set<AnyCancellable>()
 
-	func cancel() {
+	public init() {}
+
+	public func cancel() {
 		subscriptions.removeAll()
 	}
 }
 
-extension AnyCancellable {
+public extension AnyCancellable {
 	func store(in cancelBag: CancelBag) {
 		cancelBag.subscriptions.insert(self)
 	}
