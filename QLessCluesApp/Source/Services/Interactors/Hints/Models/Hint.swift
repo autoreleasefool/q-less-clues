@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SharedModelsLibrary
 
 struct Hint {
 	let solution: Solution

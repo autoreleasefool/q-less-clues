@@ -1,10 +1,3 @@
-//
-//  Publisher+Extensions.swift
-//  QLessClues
-//
-//  Created by Joseph Roque on 2022-09-22.
-//
-
 import Combine
 
 extension Publisher {

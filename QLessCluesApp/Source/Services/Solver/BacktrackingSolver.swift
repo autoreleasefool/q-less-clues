@@ -8,6 +8,7 @@
 import Combine
 import DictionaryLibrary
 import Foundation
+import SharedModelsLibrary
 
 class BacktrackingSolver: GameSolver {
 

@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import SharedModelsLibrary
 
 protocol AnalysisInteractor {
 	func analyze(letters: String, analysis: LoadableSubject<Analysis>)

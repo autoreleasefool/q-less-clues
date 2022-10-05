@@ -7,6 +7,7 @@
 
 import DictionaryLibrary
 import Foundation
+import SharedModelsLibrary
 
 class BasicValidator: Validator {
 	private lazy var englishWords = Set(WordSet.englishSet.words)

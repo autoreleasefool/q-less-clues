@@ -7,6 +7,7 @@
 
 import DictionaryLibrary
 import Foundation
+import SharedModelsLibrary
 
 enum HintsError: Error {
 	case noSolutions

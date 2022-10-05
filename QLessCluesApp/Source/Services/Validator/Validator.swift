@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SharedModelsLibrary
 
 protocol Validator {
 	func validate(solution: Solution) -> Bool

@@ -5,6 +5,7 @@
 //  Created by Joseph Roque on 2022-09-07.
 //
 
+import SharedModelsLibrary
 import SwiftUI
 
 struct SolutionsList: View {

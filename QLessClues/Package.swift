@@ -11,6 +11,8 @@ let package = Package(
 		.library(name: "AppCore", targets: ["AppCore"]),
 //		.library(name: "Validator", targets: ["Validator"]),
 		.library(name: "DictionaryLibrary", targets: ["DictionaryLibrary"]),
+		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
+		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.40.2"),
@@ -41,6 +43,22 @@ let package = Package(
 		.testTarget(
 			name: "DictionaryLibraryTests",
 			dependencies: ["DictionaryLibrary"]
+		),
+		.target(
+			name: "ExtensionsLibrary",
+			dependencies: []
+		),
+		.testTarget(
+			name: "ExtensionsLibraryTests",
+			dependencies: ["ExtensionsLibrary"]
+		),
+		.target(
+			name: "SharedModelsLibrary",
+			dependencies: ["ExtensionsLibrary"]
+		),
+		.testTarget(
+			name: "SharedModelsLibraryTests",
+			dependencies: ["SharedModelsLibrary"]
 		),
 	]
 )

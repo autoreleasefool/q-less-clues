@@ -7,6 +7,7 @@
 
 import Combine
 import Foundation
+import SharedModelsLibrary
 
 protocol SolutionsInteractor {
 	func solutions(forLetters: String, solutions: LoadableSubject<[Solution]>, progress: LoadableSubject<Float>?)

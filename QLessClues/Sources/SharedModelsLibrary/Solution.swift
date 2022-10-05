@@ -1,28 +1,22 @@
-//
-//  Solution.swift
-//  QLessClues
-//
-//  Created by Joseph Roque on 2022-09-04.
-//
-
 import Foundation
+import ExtensionsLibrary
 
-struct Solution: Identifiable, Codable, Equatable, Hashable {
-	let id: UUID
-	let letterPositions: [Position: String]
-	let words: [String]
-	let rows: ClosedRange<Int>
-	let columns: ClosedRange<Int>
+public struct Solution: Identifiable, Codable, Equatable, Hashable {
+	public let id: UUID
+	public let letterPositions: [Position: String]
+	public let words: [String]
+	public let rows: ClosedRange<Int>
+	public let columns: ClosedRange<Int>
 
-	var letters: String {
+	public var letters: String {
 		Array(letterPositions.values).sorted().joined()
 	}
 
-	var description: String {
+	public var description: String {
 		words.joined(separator: ", ")
 	}
 
-	init(board: [Position: Character]) {
+	public init(board: [Position: Character]) {
 		self.id = UUID()
 		self.letterPositions = board.reduce(into: [:]) { dict, entry in dict[entry.key] = String(entry.value) }
 		self.words = (Self.findHorizontalWords(board) + Self.findVerticalWords(board)).sorted()
@@ -30,7 +24,7 @@ struct Solution: Identifiable, Codable, Equatable, Hashable {
 		self.columns = board.columns
 	}
 
-	func characterAt(row: Int, column: Int) -> Character {
+	public func characterAt(row: Int, column: Int) -> Character {
 		let letter = letterPositions[Position(row, column)] ?? " "
 		return letter[letter.startIndex]
 	}
@@ -39,11 +33,11 @@ struct Solution: Identifiable, Codable, Equatable, Hashable {
 // MARK: - Letter
 
 extension Solution {
-	struct LetterPosition: Codable, Equatable, Hashable, CustomStringConvertible {
-		let letter: String
-		let position: Position
+	public struct LetterPosition: Codable, Equatable, Hashable, CustomStringConvertible {
+		public let letter: String
+		public let position: Position
 
-		var description: String {
+		public var description: String {
 			"(\(position), \(letter))"
 		}
 	}
@@ -98,5 +92,27 @@ extension Solution {
 		}
 
 		return words
+	}
+}
+
+// MARK: - Dictionary
+
+extension Dictionary where Key == Position, Value == Character {
+	public var columns: ClosedRange<Int> {
+		let (min, max) = self.keys.reduce(into: (min: 0, max: 0)) { out, next in
+			out.max = Swift.max(out.max, next.column)
+			out.min = Swift.min(out.min, next.column)
+		}
+
+		return min...max
+	}
+
+	public var rows: ClosedRange<Int> {
+		let (min, max) = self.keys.reduce(into: (min: 0, max: 0)) { out, next in
+			out.max = Swift.max(out.max, next.row)
+			out.min = Swift.min(out.min, next.row)
+		}
+
+		return min...max
 	}
 }
