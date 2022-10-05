@@ -5,9 +5,9 @@ final class SolutionTests: XCTestCase {
 
 	let mockSolution = Solution(board: [
 		Position(0, 0): "R",
-		 Position(0, 1): "A",
-		 Position(0, 2): "T",
-	 ])
+		Position(0, 1): "A",
+		Position(0, 2): "T",
+	])
 
 	func testCharacterAtIsCorrect() {
 		XCTAssertEqual(mockSolution.characterAt(row: 0, column: 0), "R")

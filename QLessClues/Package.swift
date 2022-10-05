@@ -9,11 +9,11 @@ let package = Package(
 	],
 	products: [
 		.library(name: "AppCore", targets: ["AppCore"]),
-//		.library(name: "Validator", targets: ["Validator"]),
 		.library(name: "DictionaryLibrary", targets: ["DictionaryLibrary"]),
 		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
 		.library(name: "NetworkingService", targets: ["NetworkingService"]),
 		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
+		.library(name: "ValidatorService", targets: ["ValidatorService"]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.40.2"),
@@ -29,14 +29,6 @@ let package = Package(
 			name: "AppCoreTests",
 			dependencies: ["AppCore"]
 		),
-//		.target(
-//			name: "Validator",
-//			dependencies: ["Dictionary"]
-//		),
-//		.testTarget(
-//			name: "ValidatorTests",
-//			dependencies: ["Validator"]
-//		),
 		.target(
 			name: "DictionaryLibrary",
 			dependencies: []
@@ -68,6 +60,14 @@ let package = Package(
 		.testTarget(
 			name: "SharedModelsLibraryTests",
 			dependencies: ["SharedModelsLibrary"]
+		),
+		.target(
+			name: "ValidatorService",
+			dependencies: ["DictionaryLibrary", "SharedModelsLibrary"]
+		),
+		.testTarget(
+			name: "ValidatorServiceTests",
+			dependencies: ["ValidatorService"]
 		),
 	]
 )

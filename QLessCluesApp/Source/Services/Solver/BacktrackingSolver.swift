@@ -9,6 +9,7 @@ import Combine
 import DictionaryLibrary
 import Foundation
 import SharedModelsLibrary
+import ValidatorService
 
 class BacktrackingSolver: GameSolver {
 

@@ -1,18 +1,17 @@
-//
-//  BasicValidator.swift
-//  QLessClues
-//
-//  Created by Joseph Roque on 2022-09-05.
-//
-
 import DictionaryLibrary
 import Foundation
 import SharedModelsLibrary
 
-class BasicValidator: Validator {
+public class BasicValidator: Validator {
 	private lazy var englishWords = Set(WordSet.englishSet.words)
 
-	func validate(solution: Solution) -> Bool {
+	public init() {}
+
+	init(overridingDictionaryWith words: [String]) {
+		self.englishWords = Set(words)
+	}
+
+	public func validate(solution: Solution) -> Bool {
 		allWordsValid(in: solution) && allLettersConnected(in: solution)
 	}
 

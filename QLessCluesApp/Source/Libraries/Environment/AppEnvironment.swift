@@ -7,6 +7,7 @@
 
 import Foundation
 import KeychainAccess
+import ValidatorService
 
 final class AppEnvironment: ObservableObject {
 	let container: Container
