@@ -1,14 +1,6 @@
-//
-//  Tile.swift
-//  QLessClues
-//
-//  Created by Joseph Roque on 2022-09-07.
-//
-
 import SwiftUI
 
 struct Tile: View {
-
 	let character: Character
 
 	var body: some View {

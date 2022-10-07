@@ -13,6 +13,7 @@ let package = Package(
 		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
 		.library(name: "NetworkingService", targets: ["NetworkingService"]),
 		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
+		.library(name: "SolutionsListFeature", targets: ["SolutionsListFeature"]),
 		.library(name: "ValidatorService", targets: ["ValidatorService"]),
 	],
 	dependencies: [
@@ -60,6 +61,17 @@ let package = Package(
 		.testTarget(
 			name: "SharedModelsLibraryTests",
 			dependencies: ["SharedModelsLibrary"]
+		),
+		.target(
+			name: "SolutionsListFeature",
+			dependencies: [
+				"SharedModelsLibrary",
+				.product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+			]
+		),
+		.testTarget(
+			name: "SolutionsListFeatureTests",
+			dependencies: ["SolutionsListFeature"]
 		),
 		.target(
 			name: "ValidatorService",

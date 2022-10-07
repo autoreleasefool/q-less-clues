@@ -1,15 +1,7 @@
-//
-//  SolutionDetailView.swift
-//  QLessClues
-//
-//  Created by Joseph Roque on 2022-09-07.
-//
-
 import SharedModelsLibrary
 import SwiftUI
 
-struct SolutionDetailView: View {
-
+struct SolutionDetailsView: View {
 	let solution: Solution
 
 	var body: some View {

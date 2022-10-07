@@ -5,9 +5,11 @@
 //  Created by Joseph Roque on 2022-09-24.
 //
 
+import ComposableArchitecture
 import NetworkingService
 import RealmSwift
 import SwiftUI
+import SolutionsListFeature
 
 struct AnalysisView: View {
 
@@ -75,7 +77,11 @@ struct AnalysisView: View {
 					DifficultyView(difficulty: analysis.value?.difficulty)
 				}
 				NavigationLink {
-					SolutionsList(solutions: analysis.value?.solutions ?? [])
+					SolutionsList(store: ComposableArchitecture.Store(
+						initialState: SolutionsListState(solutions: analysis.value?.solutions ?? []),
+						reducer: solutionsListReducer,
+						environment: SolutionsListEnvironment()
+					))
 				} label: {
 					LabeledContent("Solutions", value: totalSolutionsFound)
 				}
