@@ -38,7 +38,7 @@ extension AppEnvironment {
 		return Interactors(
 			solutionsInteractor: solutionsInteractor,
 			analysisInteractor: analysisInteractor,
-			hintsInteractor: hintsInteractor,
+			hintsInteractor: hintsInteractor
 		)
 	}
 
