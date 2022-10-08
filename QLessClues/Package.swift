@@ -8,6 +8,7 @@ let package = Package(
 		.iOS(.v16),
 	],
 	products: [
+		.library(name: "AnalysisFeature", targets: ["AnalysisFeature"]),
 		.library(name: "DictionaryLibrary", targets: ["DictionaryLibrary"]),
 		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
 		.library(name: "HintsFeature", targets: ["HintsFeature"]),
@@ -24,6 +25,21 @@ let package = Package(
 		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.40.2"),
 	],
 	targets: [
+		.target(
+			name: "AnalysisFeature",
+			dependencies: [
+				"HintsFeature",
+				"SolutionsListFeature",
+				"SolverServiceInterface",
+			]
+		),
+		.testTarget(
+			name: "AnalysisFeatureTests",
+			dependencies: [
+				"AnalysisFeature",
+				"SharedModelsLibraryMocks"
+			]
+		),
 		.target(
 			name: "DictionaryLibrary",
 			dependencies: []
@@ -54,7 +70,6 @@ let package = Package(
 			dependencies: [
 				"HintsFeature",
 				"SharedModelsLibraryMocks",
-				.product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
 			]
 		),
 		.target(

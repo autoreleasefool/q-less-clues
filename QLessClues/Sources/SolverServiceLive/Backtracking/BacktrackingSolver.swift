@@ -18,6 +18,7 @@ struct BacktrackingSolver {
 
 		var state = State(initialLetters: letters, continuation: continuation)
 
+		continuation.yield(.progress(0))
 		await generateSolutions(state: &state)
 
 		continuation.finish()
