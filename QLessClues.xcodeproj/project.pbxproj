@@ -16,10 +16,8 @@
 		CA24656D28D6838F001BFF71 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CA24656C28D6838F001BFF71 /* RealmSwift */; };
 		CA61328A28F050970095A972 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = CA61328928F050970095A972 /* ComposableArchitecture */; };
 		CA6452BE28C5DFA200738762 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = CA6452BD28C5DFA200738762 /* words.txt */; };
-		CAB2752828DFFAED002AF19D /* DifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2752728DFFAED002AF19D /* DifficultyView.swift */; };
 		CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3628D7E6380035DD1E /* ContentView.swift */; };
 		CAB3CC3A28D7E6B10035DD1E /* PlayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */; };
-		CAB3CC3C28D7E74A0035DD1E /* PlayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3B28D7E74A0035DD1E /* PlayDetailView.swift */; };
 		CAB3CC5228D97E1B0035DD1E /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC5128D97E1B0035DD1E /* Statistics.swift */; };
 		CAB3CC8328DC41A00035DD1E /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC8228DC41A00035DD1E /* KeychainAccess */; };
 		CADCCD8F28EC1BC100059DFD /* DictionaryLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD8E28EC1BC100059DFD /* DictionaryLibrary */; };
@@ -38,10 +36,8 @@
 		CA1867D628C5195500DD75C7 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		CA57989F28EB7302006B9BF7 /* QLessClues */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = QLessClues; sourceTree = "<group>"; };
 		CA6452BD28C5DFA200738762 /* words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words.txt; sourceTree = "<group>"; };
-		CAB2752728DFFAED002AF19D /* DifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyView.swift; sourceTree = "<group>"; };
 		CAB3CC3628D7E6380035DD1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayRow.swift; sourceTree = "<group>"; };
-		CAB3CC3B28D7E74A0035DD1E /* PlayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayDetailView.swift; sourceTree = "<group>"; };
 		CAB3CC5128D97E1B0035DD1E /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -124,7 +120,6 @@
 		CA1867C928C50F3C00DD75C7 /* Features */ = {
 			isa = PBXGroup;
 			children = (
-				CAB2752328DF870A002AF19D /* Analysis */,
 				CA1867CB28C50FBB00DD75C7 /* Statistics */,
 			);
 			path = Features;
@@ -147,27 +142,10 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
-		CAB2752328DF870A002AF19D /* Analysis */ = {
-			isa = PBXGroup;
-			children = (
-				CAB2752428DF8710002AF19D /* Views */,
-			);
-			path = Analysis;
-			sourceTree = "<group>";
-		};
-		CAB2752428DF8710002AF19D /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				CAB2752728DFFAED002AF19D /* DifficultyView.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		CAB3CC3828D7E6AB0035DD1E /* Views */ = {
 			isa = PBXGroup;
 			children = (
 				CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */,
-				CAB3CC3B28D7E74A0035DD1E /* PlayDetailView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -291,13 +269,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAB3CC3C28D7E74A0035DD1E /* PlayDetailView.swift in Sources */,
 				CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */,
 				CAB3CC5228D97E1B0035DD1E /* Statistics.swift in Sources */,
 				CA1867D728C5195500DD75C7 /* StatisticsView.swift in Sources */,
 				CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */,
 				CAB3CC3A28D7E6B10035DD1E /* PlayRow.swift in Sources */,
-				CAB2752828DFFAED002AF19D /* DifficultyView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
