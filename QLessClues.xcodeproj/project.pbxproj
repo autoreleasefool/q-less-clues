@@ -49,7 +49,6 @@
 		CADCCD9528ED831000059DFD /* SharedModelsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD9428ED831000059DFD /* SharedModelsLibrary */; };
 		CADCCD9728ED831400059DFD /* ExtensionsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD9628ED831400059DFD /* ExtensionsLibrary */; };
 		CADCCD9928ED8A1500059DFD /* NetworkingService in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD9828ED8A1500059DFD /* NetworkingService */; };
-		CADCCD9B28ED8CE600059DFD /* ValidatorService in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD9A28ED8CE600059DFD /* ValidatorService */; };
 		CADCCD9D28ED8F7C00059DFD /* SolutionsListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD9C28ED8F7C00059DFD /* SolutionsListFeature */; };
 /* End PBXBuildFile section */
 
@@ -106,7 +105,6 @@
 				CAB3CC8328DC41A00035DD1E /* KeychainAccess in Frameworks */,
 				CADCCD9528ED831000059DFD /* SharedModelsLibrary in Frameworks */,
 				CADCCD9D28ED8F7C00059DFD /* SolutionsListFeature in Frameworks */,
-				CADCCD9B28ED8CE600059DFD /* ValidatorService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -436,7 +434,6 @@
 				CADCCD9428ED831000059DFD /* SharedModelsLibrary */,
 				CADCCD9628ED831400059DFD /* ExtensionsLibrary */,
 				CADCCD9828ED8A1500059DFD /* NetworkingService */,
-				CADCCD9A28ED8CE600059DFD /* ValidatorService */,
 				CADCCD9C28ED8F7C00059DFD /* SolutionsListFeature */,
 				CA61328928F050970095A972 /* ComposableArchitecture */,
 			);
@@ -824,10 +821,6 @@
 		CADCCD9828ED8A1500059DFD /* NetworkingService */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = NetworkingService;
-		};
-		CADCCD9A28ED8CE600059DFD /* ValidatorService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ValidatorService;
 		};
 		CADCCD9C28ED8F7C00059DFD /* SolutionsListFeature */ = {
 			isa = XCSwiftPackageProductDependency;

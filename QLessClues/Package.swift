@@ -14,7 +14,8 @@ let package = Package(
 		.library(name: "NetworkingService", targets: ["NetworkingService"]),
 		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
 		.library(name: "SolutionsListFeature", targets: ["SolutionsListFeature"]),
-		.library(name: "ValidatorService", targets: ["ValidatorService"]),
+		.library(name: "ValidatorServiceInterface", targets: ["ValidatorServiceInterface"]),
+		.library(name: "ValidatorServiceLive", targets: ["ValidatorServiceLive"]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.40.2"),
@@ -75,12 +76,23 @@ let package = Package(
 			dependencies: ["SolutionsListFeature"]
 		),
 		.target(
-			name: "ValidatorService",
-			dependencies: ["DictionaryLibrary", "SharedModelsLibrary"]
+			name: "ValidatorServiceInterface",
+			dependencies: [
+				"DictionaryLibrary",
+				"SharedModelsLibrary",
+			]
+		),
+		.target(
+			name: "ValidatorServiceLive",
+			dependencies: [
+				"DictionaryLibrary",
+				"SharedModelsLibrary",
+				"ValidatorServiceInterface",
+			]
 		),
 		.testTarget(
-			name: "ValidatorServiceTests",
-			dependencies: ["ValidatorService"]
+			name: "ValidatorServiceLiveTests",
+			dependencies: ["ValidatorServiceLive"]
 		),
 	]
 )

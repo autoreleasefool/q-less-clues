@@ -1,6 +1,6 @@
 import Foundation
 
-public struct WordFrequency {
+public struct WordFrequency: Sendable {
 
 	private static let englishWordFrequencies: [String: Int] = {
 		guard let freqListUrl = Bundle.main.url(forResource: "freq", withExtension: "csv"),
@@ -24,7 +24,7 @@ public struct WordFrequency {
 	public let ranking: [String: Int]
 	public let totalFrequency: Int
 
-	public init(words: [String]) {
+	public init(words: Set<String>) {
 		var frequency: [String: Int] = [:]
 		var totalFrequency = 0
 		for word in words {

@@ -1,6 +1,6 @@
 import Foundation
 
-public struct WordSet {
+public struct WordSet: Sendable {
 
 	public static let englishWords: [String] = {
 		guard let wordListUrl = Bundle.main.url(forResource: "words", withExtension: "txt"),
@@ -19,7 +19,7 @@ public struct WordSet {
 
 	public static let englishSet: WordSet = WordSet(letterSet: .fullAlphabet)
 
-	public private(set) var words: [String]
+	public private(set) var words: Set<String>
 	public private(set) var alphabet: String
 	public private(set) lazy var frequency: WordFrequency = WordFrequency(words: words)
 
@@ -40,12 +40,16 @@ public struct WordSet {
 
 				return true
 			}
-		self.words = words
+		self.words = Set(words)
 	}
 
 	private init(wordSet: WordSet) {
 		self.alphabet = wordSet.alphabet
 		self.words = wordSet.words
+	}
+
+	public func contains(_ word: String) -> Bool {
+		words.contains(word)
 	}
 
 	public func limitBy(_ filter: Filter) -> WordSet {
@@ -60,14 +64,14 @@ public struct WordSet {
 		return newSet
 	}
 
-	private func wordsContainingLeastFrequentLetter(inSet letterSet: LetterSet) -> [String] {
+	private func wordsContainingLeastFrequentLetter(inSet letterSet: LetterSet) -> Set<String> {
 		let frequency = LetterFrequency(letterSet: letterSet, wordSet: self)
 		let leastFrequentLetter = letterSet.letters.sorted(by: frequency.sortByFrequency).first!
-		return self.words.filter { $0.firstIndex(of: leastFrequentLetter) != nil }
+		return words.subtracting(words.filter { $0.firstIndex(of: leastFrequentLetter) == nil })
 	}
 
-	private func mostPopularWords() -> [String] {
-		self.words.filter { (WordFrequency.englishFrequencies.ranking[$0] ?? Int.max) < 10_000 }
+	private func mostPopularWords() -> Set<String> {
+		words.subtracting(words.filter { (WordFrequency.englishFrequencies.ranking[$0] ?? Int.max) > 10_000 })
 	}
 }
 

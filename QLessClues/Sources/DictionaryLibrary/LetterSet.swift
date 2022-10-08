@@ -1,6 +1,8 @@
 public struct LetterSet {
 
-	static let fullAlphabet = LetterSet(letters: Array(repeating: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", count: 3).joined())
+	public static let fullAlphabet = LetterSet(
+		letters: Array(repeating: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", count: 3).joined()
+	)
 
 	private var characterCounts: [Character: Int]
 
