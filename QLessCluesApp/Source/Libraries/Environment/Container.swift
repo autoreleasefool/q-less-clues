@@ -8,11 +8,10 @@
 import SwiftUI
 
 struct Container: EnvironmentKey {
-	let appState: Store<AppState>
 	let interactors: Interactors
 
 	static var defaultValue: Self { Self.default }
-	private static let `default` = Self(appState: Store(AppState()), interactors: .stub)
+	private static let `default` = Self(interactors: .stub)
 }
 
 extension EnvironmentValues {
