@@ -18,6 +18,7 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.40.2"),
+		.package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "0.4.1"),
 	],
 	targets: [
 		.target(
