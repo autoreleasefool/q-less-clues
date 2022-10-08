@@ -14,9 +14,11 @@ let package = Package(
 		.library(name: "HintsFeature", targets: ["HintsFeature"]),
 		.library(name: "NetworkingService", targets: ["NetworkingService"]),
 		.library(name: "PlayFeature", targets: ["PlayFeature"]),
+		.library(name: "PlaysListFeature", targets: ["PlaysListFeature"]),
 		.library(name: "RecordPlayFeature", targets: ["RecordPlayFeature"]),
 		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
 		.library(name: "SharedModelsLibraryMocks", targets: ["SharedModelsLibraryMocks"]),
+		.library(name: "StatisticsFeature", targets: ["StatisticsFeature"]),
 		.library(name: "SolverServiceInterface", targets: ["SolverServiceInterface"]),
 		.library(name: "SolverServiceLive", targets: ["SolverServiceLive"]),
 		.library(name: "SolutionsListFeature", targets: ["SolutionsListFeature"]),
@@ -94,6 +96,20 @@ let package = Package(
 			]
 		),
 		.target(
+			name: "PlaysListFeature",
+			dependencies: [
+				"PlayFeature",
+				"RecordPlayFeature",
+			]
+		),
+		.testTarget(
+			name: "PlaysListFeatureTests",
+			dependencies: [
+				"PlaysListFeature",
+				"SharedModelsLibraryMocks",
+			]
+		),
+		.target(
 			name: "RecordPlayFeature",
 			dependencies: ["AnalysisFeature"]
 		),
@@ -113,6 +129,20 @@ let package = Package(
 			name: "SharedModelsLibraryTests",
 			dependencies: [
 				"SharedModelsLibrary",
+				"SharedModelsLibraryMocks",
+			]
+		),
+		.target(
+			name: "StatisticsFeature",
+			dependencies: [
+				"PlaysListFeature",
+				"RecordPlayFeature",
+			]
+		),
+		.testTarget(
+			name: "StatisticsFeatureTests",
+			dependencies: [
+				"StatisticsFeature",
 				"SharedModelsLibraryMocks",
 			]
 		),

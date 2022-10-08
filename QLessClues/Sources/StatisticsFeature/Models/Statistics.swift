@@ -1,13 +1,7 @@
-//
-//  StatisticsCalculator.swift
-//  QLessClues
-//
-//  Created by Joseph Roque on 2022-09-19.
-//
-
 import Foundation
+import SharedModelsLibrary
 
-struct Statistics {
+public struct Statistics: Equatable {
 
 	private static let formatter: NumberFormatter = {
 		let formatter = NumberFormatter()
@@ -37,9 +31,9 @@ struct Statistics {
 		pureWins + winsWithHints + losses
 	}
 
-	init(group: PlayGroup) {
-		pureWins = group.plays.where({ $0.outcome.equals(.solved) }).count
-		winsWithHints = group.plays.where({ $0.outcome.equals(.solvedWithHints) }).count
-		losses = group.plays.where({ $0.outcome.equals(.unsolved) }).count
+	init(plays: [Play]) {
+		pureWins = plays.filter { $0.outcome == .solved }.count
+		winsWithHints = plays.filter { $0.outcome == .solvedWithHints }.count
+		losses = plays.filter { $0.outcome == .unsolved }.count
 	}
 }

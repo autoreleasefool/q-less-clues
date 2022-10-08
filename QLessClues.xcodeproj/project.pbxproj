@@ -18,7 +18,6 @@
 		CA6452BE28C5DFA200738762 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = CA6452BD28C5DFA200738762 /* words.txt */; };
 		CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3628D7E6380035DD1E /* ContentView.swift */; };
 		CAB3CC3A28D7E6B10035DD1E /* PlayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */; };
-		CAB3CC5228D97E1B0035DD1E /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC5128D97E1B0035DD1E /* Statistics.swift */; };
 		CAB3CC8328DC41A00035DD1E /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC8228DC41A00035DD1E /* KeychainAccess */; };
 		CADCCD8F28EC1BC100059DFD /* DictionaryLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD8E28EC1BC100059DFD /* DictionaryLibrary */; };
 		CADCCD9528ED831000059DFD /* SharedModelsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD9428ED831000059DFD /* SharedModelsLibrary */; };
@@ -38,7 +37,6 @@
 		CA6452BD28C5DFA200738762 /* words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words.txt; sourceTree = "<group>"; };
 		CAB3CC3628D7E6380035DD1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayRow.swift; sourceTree = "<group>"; };
-		CAB3CC5128D97E1B0035DD1E /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,7 +151,6 @@
 		CAB3CC5028D97E0D0035DD1E /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
-				CAB3CC5128D97E1B0035DD1E /* Statistics.swift */,
 			);
 			path = Utilities;
 			sourceTree = "<group>";
@@ -270,7 +267,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */,
-				CAB3CC5228D97E1B0035DD1E /* Statistics.swift in Sources */,
 				CA1867D728C5195500DD75C7 /* StatisticsView.swift in Sources */,
 				CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */,
 				CAB3CC3A28D7E6B10035DD1E /* PlayRow.swift in Sources */,
