@@ -8,7 +8,6 @@ let package = Package(
 		.iOS(.v16),
 	],
 	products: [
-		.library(name: "AppCore", targets: ["AppCore"]),
 		.library(name: "DictionaryLibrary", targets: ["DictionaryLibrary"]),
 		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
 		.library(name: "NetworkingService", targets: ["NetworkingService"]),
@@ -23,16 +22,6 @@ let package = Package(
 		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.40.2"),
 	],
 	targets: [
-		.target(
-			name: "AppCore",
-			dependencies: [
-				.product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
-			]
-		),
-		.testTarget(
-			name: "AppCoreTests",
-			dependencies: ["AppCore"]
-		),
 		.target(
 			name: "DictionaryLibrary",
 			dependencies: []

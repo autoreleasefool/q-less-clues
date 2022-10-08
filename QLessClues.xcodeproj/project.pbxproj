@@ -41,7 +41,6 @@
 		CAB3CC8328DC41A00035DD1E /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC8228DC41A00035DD1E /* KeychainAccess */; };
 		CAB3CC8528DC43370035DD1E /* Store.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC8428DC43370035DD1E /* Store.swift */; };
 		CABF28C828C57C4E00A0C0E1 /* RecordPlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CABF28C728C57C4E00A0C0E1 /* RecordPlayView.swift */; };
-		CADCCD8B28EB74A700059DFD /* AppCore in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD8A28EB74A700059DFD /* AppCore */; };
 		CADCCD8F28EC1BC100059DFD /* DictionaryLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD8E28EC1BC100059DFD /* DictionaryLibrary */; };
 		CADCCD9528ED831000059DFD /* SharedModelsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD9428ED831000059DFD /* SharedModelsLibrary */; };
 		CADCCD9728ED831400059DFD /* ExtensionsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD9628ED831400059DFD /* ExtensionsLibrary */; };
@@ -94,7 +93,6 @@
 				CA61328A28F050970095A972 /* ComposableArchitecture in Frameworks */,
 				CADCCD9928ED8A1500059DFD /* NetworkingService in Frameworks */,
 				CA24656D28D6838F001BFF71 /* RealmSwift in Frameworks */,
-				CADCCD8B28EB74A700059DFD /* AppCore in Frameworks */,
 				CA24656B28D6838F001BFF71 /* Realm in Frameworks */,
 				CAB3CC8328DC41A00035DD1E /* KeychainAccess in Frameworks */,
 				CADCCD9528ED831000059DFD /* SharedModelsLibrary in Frameworks */,
@@ -404,7 +402,6 @@
 				CA24656A28D6838F001BFF71 /* Realm */,
 				CA24656C28D6838F001BFF71 /* RealmSwift */,
 				CAB3CC8228DC41A00035DD1E /* KeychainAccess */,
-				CADCCD8A28EB74A700059DFD /* AppCore */,
 				CADCCD8E28EC1BC100059DFD /* DictionaryLibrary */,
 				CADCCD9428ED831000059DFD /* SharedModelsLibrary */,
 				CADCCD9628ED831400059DFD /* ExtensionsLibrary */,
@@ -773,10 +770,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CAB3CC8128DC41A00035DD1E /* XCRemoteSwiftPackageReference "KeychainAccess" */;
 			productName = KeychainAccess;
-		};
-		CADCCD8A28EB74A700059DFD /* AppCore */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = AppCore;
 		};
 		CADCCD8E28EC1BC100059DFD /* DictionaryLibrary */ = {
 			isa = XCSwiftPackageProductDependency;
