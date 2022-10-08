@@ -13,6 +13,7 @@ let package = Package(
 		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
 		.library(name: "HintsFeature", targets: ["HintsFeature"]),
 		.library(name: "NetworkingService", targets: ["NetworkingService"]),
+		.library(name: "RecordPlayFeature", targets: ["RecordPlayFeature"]),
 		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
 		.library(name: "SharedModelsLibraryMocks", targets: ["SharedModelsLibraryMocks"]),
 		.library(name: "SolverServiceInterface", targets: ["SolverServiceInterface"]),
@@ -79,6 +80,14 @@ let package = Package(
 		.testTarget(
 			name: "NetworkingServiceTests",
 			dependencies: ["NetworkingService"]
+		),
+		.target(
+			name: "RecordPlayFeature",
+			dependencies: ["AnalysisFeature"]
+		),
+		.testTarget(
+			name: "RecordPlayFeatureTests",
+			dependencies: ["RecordPlayFeature"]
 		),
 		.target(
 			name: "SharedModelsLibrary",

@@ -57,6 +57,8 @@ public struct AnalysisEnvironment: Sendable {
 	}
 }
 
+public enum AnalysisTearDown {}
+
 public let analysisReducer = Reducer<AnalysisState, AnalysisAction, AnalysisEnvironment>.combine(
 	solutionsListReducer
 		.pullback(
@@ -72,11 +74,9 @@ public let analysisReducer = Reducer<AnalysisState, AnalysisAction, AnalysisEnvi
 			environment: { _ in .init() }
 		),
 	.init { state, action, environment in
-		enum CancelID {}
-
 		switch action {
 		case .analysisCancelled:
-			return .cancel(id: CancelID.self)
+			return .cancel(id: AnalysisTearDown.self)
 
 		case .beginButtonTapped:
 			state.mode = .solving(progress: 0)
@@ -87,7 +87,7 @@ public let analysisReducer = Reducer<AnalysisState, AnalysisAction, AnalysisEnvi
 
 				await send(.solverServiceFinished)
 			}
-			.cancellable(id: CancelID.self)
+			.cancellable(id: AnalysisTearDown.self)
 
 		case .solverServiceFinished:
 			state.mode = .solved
