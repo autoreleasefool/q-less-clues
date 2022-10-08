@@ -23,15 +23,12 @@
 		CAB2751F28DE994B002AF19D /* Difficulty.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2751E28DE994B002AF19D /* Difficulty.swift */; };
 		CAB2752628DF8718002AF19D /* AnalysisView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2752528DF8718002AF19D /* AnalysisView.swift */; };
 		CAB2752828DFFAED002AF19D /* DifficultyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2752728DFFAED002AF19D /* DifficultyView.swift */; };
-		CAB2752B28E005B7002AF19D /* HintsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2752A28E005B7002AF19D /* HintsInteractor.swift */; };
-		CAB2752E28E0AC7F002AF19D /* Hint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2752D28E0AC7F002AF19D /* Hint.swift */; };
 		CAB3CC3228D7E51C0035DD1E /* PlayGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3128D7E51C0035DD1E /* PlayGroup.swift */; };
 		CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3628D7E6380035DD1E /* ContentView.swift */; };
 		CAB3CC3A28D7E6B10035DD1E /* PlayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */; };
 		CAB3CC3C28D7E74A0035DD1E /* PlayDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3B28D7E74A0035DD1E /* PlayDetailView.swift */; };
 		CAB3CC3F28D7F2340035DD1E /* Container.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3E28D7F2340035DD1E /* Container.swift */; };
 		CAB3CC4128D7F2540035DD1E /* Interactors.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC4028D7F2540035DD1E /* Interactors.swift */; };
-		CAB3CC4528D7F2860035DD1E /* SolutionsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC4428D7F2860035DD1E /* SolutionsInteractor.swift */; };
 		CAB3CC4828D7F8490035DD1E /* AppEnvironment.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC4728D7F8490035DD1E /* AppEnvironment.swift */; };
 		CAB3CC5228D97E1B0035DD1E /* Statistics.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC5128D97E1B0035DD1E /* Statistics.swift */; };
 		CAB3CC8328DC41A00035DD1E /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC8228DC41A00035DD1E /* KeychainAccess */; };
@@ -60,15 +57,12 @@
 		CAB2751E28DE994B002AF19D /* Difficulty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Difficulty.swift; sourceTree = "<group>"; };
 		CAB2752528DF8718002AF19D /* AnalysisView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnalysisView.swift; sourceTree = "<group>"; };
 		CAB2752728DFFAED002AF19D /* DifficultyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DifficultyView.swift; sourceTree = "<group>"; };
-		CAB2752A28E005B7002AF19D /* HintsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsInteractor.swift; sourceTree = "<group>"; };
-		CAB2752D28E0AC7F002AF19D /* Hint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hint.swift; sourceTree = "<group>"; };
 		CAB3CC3128D7E51C0035DD1E /* PlayGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGroup.swift; sourceTree = "<group>"; };
 		CAB3CC3628D7E6380035DD1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayRow.swift; sourceTree = "<group>"; };
 		CAB3CC3B28D7E74A0035DD1E /* PlayDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayDetailView.swift; sourceTree = "<group>"; };
 		CAB3CC3E28D7F2340035DD1E /* Container.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Container.swift; sourceTree = "<group>"; };
 		CAB3CC4028D7F2540035DD1E /* Interactors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Interactors.swift; sourceTree = "<group>"; };
-		CAB3CC4428D7F2860035DD1E /* SolutionsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SolutionsInteractor.swift; sourceTree = "<group>"; };
 		CAB3CC4728D7F8490035DD1E /* AppEnvironment.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppEnvironment.swift; sourceTree = "<group>"; };
 		CAB3CC5128D97E1B0035DD1E /* Statistics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Statistics.swift; sourceTree = "<group>"; };
 		CAB3CC8428DC43370035DD1E /* Store.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Store.swift; sourceTree = "<group>"; };
@@ -95,21 +89,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		CA0BF46528C9AF5E00EE3E58 /* Solutions */ = {
-			isa = PBXGroup;
-			children = (
-				CA0BF46828C9B11500EE3E58 /* Views */,
-			);
-			path = Solutions;
-			sourceTree = "<group>";
-		};
-		CA0BF46828C9B11500EE3E58 /* Views */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
 		CA1867AC28C5095100DD75C7 = {
 			isa = PBXGroup;
 			children = (
@@ -173,7 +152,6 @@
 			children = (
 				CAB2752328DF870A002AF19D /* Analysis */,
 				CABF28C628C57C2900A0C0E1 /* Record */,
-				CA0BF46528C9AF5E00EE3E58 /* Solutions */,
 				CA1867CB28C50FBB00DD75C7 /* Statistics */,
 			);
 			path = Features;
@@ -274,23 +252,6 @@
 			path = Views;
 			sourceTree = "<group>";
 		};
-		CAB2752928E005A8002AF19D /* Hints */ = {
-			isa = PBXGroup;
-			children = (
-				CAB2752C28E0AC74002AF19D /* Models */,
-				CAB2752A28E005B7002AF19D /* HintsInteractor.swift */,
-			);
-			path = Hints;
-			sourceTree = "<group>";
-		};
-		CAB2752C28E0AC74002AF19D /* Models */ = {
-			isa = PBXGroup;
-			children = (
-				CAB2752D28E0AC7F002AF19D /* Hint.swift */,
-			);
-			path = Models;
-			sourceTree = "<group>";
-		};
 		CAB3CC3828D7E6AB0035DD1E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -305,18 +266,8 @@
 			children = (
 				CAB3CC4028D7F2540035DD1E /* Interactors.swift */,
 				CAB2751628DE9868002AF19D /* Analysis */,
-				CAB2752928E005A8002AF19D /* Hints */,
-				CAB3CC4328D7F27C0035DD1E /* Solutions */,
 			);
 			path = Interactors;
-			sourceTree = "<group>";
-		};
-		CAB3CC4328D7F27C0035DD1E /* Solutions */ = {
-			isa = PBXGroup;
-			children = (
-				CAB3CC4428D7F2860035DD1E /* SolutionsInteractor.swift */,
-			);
-			path = Solutions;
 			sourceTree = "<group>";
 		};
 		CAB3CC4628D7F83D0035DD1E /* Environment */ = {
@@ -456,7 +407,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CAB3CC4528D7F2860035DD1E /* SolutionsInteractor.swift in Sources */,
 				CAB3CC3C28D7E74A0035DD1E /* PlayDetailView.swift in Sources */,
 				CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */,
 				CAB3CC5228D97E1B0035DD1E /* Statistics.swift in Sources */,
@@ -464,10 +414,8 @@
 				CAB3CC4128D7F2540035DD1E /* Interactors.swift in Sources */,
 				CAB2751828DE9879002AF19D /* AnalysisInteractor.swift in Sources */,
 				CA1867D728C5195500DD75C7 /* StatisticsView.swift in Sources */,
-				CAB2752E28E0AC7F002AF19D /* Hint.swift in Sources */,
 				CA24657828D6AF79001BFF71 /* Play.swift in Sources */,
 				CABF28C828C57C4E00A0C0E1 /* RecordPlayView.swift in Sources */,
-				CAB2752B28E005B7002AF19D /* HintsInteractor.swift in Sources */,
 				CAB3CC4828D7F8490035DD1E /* AppEnvironment.swift in Sources */,
 				CAB2751D28DE9925002AF19D /* Analysis.swift in Sources */,
 				CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */,

@@ -27,19 +27,9 @@ extension AppEnvironment {
 	}
 
 	private static func configuredInteractors() -> Interactors {
-		let validator = BasicValidator()
-		let solver = BacktrackingSolver(validator: validator)
-		let solutionsInteractor = SolutionsInteractorImpl(solver: solver)
-
 		let analysisInteractor = AnalysisInteractorImpl(solutionsInteractor: solutionsInteractor)
 
-		let hintsInteractor = HintsInteractorImpl()
-
-		return Interactors(
-			solutionsInteractor: solutionsInteractor,
-			analysisInteractor: analysisInteractor,
-			hintsInteractor: hintsInteractor
-		)
+		return Interactors(analysisInteractor: analysisInteractor)
 	}
 
 	private static func configuredContainer(interactors: Interactors) -> Container {
