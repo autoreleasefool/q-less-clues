@@ -2,7 +2,7 @@ import Foundation
 
 public struct WordFrequency: Sendable {
 
-	private static let englishWordFrequencies: [String: Int] = {
+	public static let englishWordFrequencies: [String: Int] = {
 		guard let freqListUrl = Bundle.main.url(forResource: "freq", withExtension: "csv"),
 					let freqList = try? String(contentsOf: freqListUrl) else {
 			fatalError("Could not load frequencies")
@@ -24,18 +24,18 @@ public struct WordFrequency: Sendable {
 	public let ranking: [String: Int]
 	public let totalFrequency: Int
 
-	public init(words: Set<String>) {
+	public init(words: Set<String>, baseFrequencies: [String: Int] = Self.englishWordFrequencies) {
 		var frequency: [String: Int] = [:]
 		var totalFrequency = 0
 		for word in words {
-			frequency[word] = Self.englishWordFrequencies[word]
-			totalFrequency += (Self.englishWordFrequencies[word] ?? 0)
+			frequency[word] = baseFrequencies[word]
+			totalFrequency += (baseFrequencies[word] ?? 0)
 		}
 
 		var ranking: [String: Int] = [:]
 		for (index, word) in words
 			.sorted(by: {
-				(Self.englishWordFrequencies[$0] ?? Int.min) < (Self.englishWordFrequencies[$1] ?? Int.min)
+				(baseFrequencies[$0] ?? Int.min) < (baseFrequencies[$1] ?? Int.min)
 			}).reversed().enumerated() {
 			ranking[word] = index
 		}

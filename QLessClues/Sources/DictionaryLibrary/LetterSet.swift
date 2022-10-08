@@ -4,7 +4,11 @@ public struct LetterSet {
 		letters: Array(repeating: "ABCDEFGHIJKLMNOPQRSTUVWXYZ", count: 3).joined()
 	)
 
+	// MARK: Properties
+
 	private var characterCounts: [Character: Int]
+
+	// MARK: Computed
 
 	public var letters: [Character] {
 		characterCounts
@@ -25,7 +29,7 @@ public struct LetterSet {
 		return characterCounts.isEmpty || characterCounts.allSatisfy { $0.value == 0 }
 	}
 
-	// MARK: Inita
+	// MARK: Init
 
 	public init(letters: String) {
 		self.characterCounts = letters

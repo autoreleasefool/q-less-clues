@@ -10,8 +10,10 @@ let package = Package(
 	products: [
 		.library(name: "DictionaryLibrary", targets: ["DictionaryLibrary"]),
 		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
+		.library(name: "HintsFeature", targets: ["HintsFeature"]),
 		.library(name: "NetworkingService", targets: ["NetworkingService"]),
 		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
+		.library(name: "SharedModelsLibraryMocks", targets: ["SharedModelsLibraryMocks"]),
 		.library(name: "SolverServiceInterface", targets: ["SolverServiceInterface"]),
 		.library(name: "SolverServiceLive", targets: ["SolverServiceLive"]),
 		.library(name: "SolutionsListFeature", targets: ["SolutionsListFeature"]),
@@ -37,6 +39,23 @@ let package = Package(
 		.testTarget(
 			name: "ExtensionsLibraryTests",
 			dependencies: ["ExtensionsLibrary"]
+			
+		),
+		.target(
+			name: "HintsFeature",
+			dependencies: [
+				"DictionaryLibrary",
+				"SharedModelsLibrary",
+				.product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+			]
+		),
+		.testTarget(
+			name: "HintsFeatureTests",
+			dependencies: [
+				"HintsFeature",
+				"SharedModelsLibraryMocks",
+				.product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+			]
 		),
 		.target(
 			name: "NetworkingService",
@@ -50,9 +69,16 @@ let package = Package(
 			name: "SharedModelsLibrary",
 			dependencies: ["ExtensionsLibrary"]
 		),
+		.target(
+			name: "SharedModelsLibraryMocks",
+			dependencies: ["SharedModelsLibrary"]
+		),
 		.testTarget(
 			name: "SharedModelsLibraryTests",
-			dependencies: ["SharedModelsLibrary"]
+			dependencies: [
+				"SharedModelsLibrary",
+				"SharedModelsLibraryMocks",
+			]
 		),
 		.target(
 			name: "SolverServiceInterface",

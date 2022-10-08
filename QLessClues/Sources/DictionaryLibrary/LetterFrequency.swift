@@ -1,5 +1,4 @@
 public struct LetterFrequency {
-
 	public let frequency: [Character: Int]
 
 	public init(letterSet: LetterSet, wordSet: WordSet) {
