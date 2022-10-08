@@ -28,9 +28,6 @@
 		CAB2752B28E005B7002AF19D /* HintsInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2752A28E005B7002AF19D /* HintsInteractor.swift */; };
 		CAB2752E28E0AC7F002AF19D /* Hint.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2752D28E0AC7F002AF19D /* Hint.swift */; };
 		CAB2753328E43582002AF19D /* SettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB2753228E43582002AF19D /* SettingsView.swift */; };
-		CAB3CC2628D7D5840035DD1E /* FrequencyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC2528D7D5840035DD1E /* FrequencyTests.swift */; };
-		CAB3CC2C28D7D5EA0035DD1E /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC2B28D7D5EA0035DD1E /* Realm */; };
-		CAB3CC2E28D7D5EB0035DD1E /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC2D28D7D5EA0035DD1E /* RealmSwift */; };
 		CAB3CC3228D7E51C0035DD1E /* PlayGroup.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3128D7E51C0035DD1E /* PlayGroup.swift */; };
 		CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3628D7E6380035DD1E /* ContentView.swift */; };
 		CAB3CC3A28D7E6B10035DD1E /* PlayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */; };
@@ -56,16 +53,6 @@
 		CADCCD9D28ED8F7C00059DFD /* SolutionsListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD9C28ED8F7C00059DFD /* SolutionsListFeature */; };
 /* End PBXBuildFile section */
 
-/* Begin PBXContainerItemProxy section */
-		CA1CEE6828C6C03C00520C70 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = CA1867AD28C5095100DD75C7 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = CA1867B428C5095100DD75C7;
-			remoteInfo = QLessClues;
-		};
-/* End PBXContainerItemProxy section */
-
 /* Begin PBXFileReference section */
 		CA0BF46B28C9C7ED00EE3E58 /* freq.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = freq.csv; sourceTree = "<group>"; };
 		CA1867B528C5095100DD75C7 /* QLessClues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLessClues.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -75,7 +62,6 @@
 		CA1867D628C5195500DD75C7 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		CA1CEE4E28C65AE100520C70 /* GameSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GameSolver.swift; sourceTree = "<group>"; };
 		CA1CEE4F28C65AE100520C70 /* BacktrackingSolver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BacktrackingSolver.swift; sourceTree = "<group>"; };
-		CA1CEE6428C6C03C00520C70 /* QLessCluesTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = QLessCluesTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA24657728D6AF79001BFF71 /* Play.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Play.swift; sourceTree = "<group>"; };
 		CA57989F28EB7302006B9BF7 /* QLessClues */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = QLessClues; sourceTree = "<group>"; };
 		CA6452A728C5C72900738762 /* LetterEntry.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LetterEntry.swift; sourceTree = "<group>"; };
@@ -88,7 +74,6 @@
 		CAB2752A28E005B7002AF19D /* HintsInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HintsInteractor.swift; sourceTree = "<group>"; };
 		CAB2752D28E0AC7F002AF19D /* Hint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hint.swift; sourceTree = "<group>"; };
 		CAB2753228E43582002AF19D /* SettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SettingsView.swift; sourceTree = "<group>"; };
-		CAB3CC2528D7D5840035DD1E /* FrequencyTests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrequencyTests.swift; sourceTree = "<group>"; };
 		CAB3CC3128D7E51C0035DD1E /* PlayGroup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayGroup.swift; sourceTree = "<group>"; };
 		CAB3CC3628D7E6380035DD1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
 		CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayRow.swift; sourceTree = "<group>"; };
@@ -125,15 +110,6 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CA1CEE6128C6C03C00520C70 /* Frameworks */ = {
-			isa = PBXFrameworksBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CAB3CC2E28D7D5EB0035DD1E /* RealmSwift in Frameworks */,
-				CAB3CC2C28D7D5EA0035DD1E /* Realm in Frameworks */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
@@ -157,7 +133,6 @@
 			children = (
 				CA57989F28EB7302006B9BF7 /* QLessClues */,
 				CA1867B728C5095100DD75C7 /* QLessCluesApp */,
-				CA1CEE6528C6C03C00520C70 /* QLessCluesTests */,
 				CA1867B628C5095100DD75C7 /* Products */,
 				CA1CEE7428C6C74B00520C70 /* Frameworks */,
 			);
@@ -167,7 +142,6 @@
 			isa = PBXGroup;
 			children = (
 				CA1867B528C5095100DD75C7 /* QLessClues.app */,
-				CA1CEE6428C6C03C00520C70 /* QLessCluesTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -232,14 +206,6 @@
 				CA1867D628C5195500DD75C7 /* StatisticsView.swift */,
 			);
 			path = Statistics;
-			sourceTree = "<group>";
-		};
-		CA1CEE6528C6C03C00520C70 /* QLessCluesTests */ = {
-			isa = PBXGroup;
-			children = (
-				CAB3CC2328D7D5500035DD1E /* Libraries */,
-			);
-			path = QLessCluesTests;
 			sourceTree = "<group>";
 		};
 		CA1CEE7428C6C74B00520C70 /* Frameworks */ = {
@@ -364,22 +330,6 @@
 			path = Settings;
 			sourceTree = "<group>";
 		};
-		CAB3CC2328D7D5500035DD1E /* Libraries */ = {
-			isa = PBXGroup;
-			children = (
-				CAB3CC2428D7D5560035DD1E /* Dictionary */,
-			);
-			path = Libraries;
-			sourceTree = "<group>";
-		};
-		CAB3CC2428D7D5560035DD1E /* Dictionary */ = {
-			isa = PBXGroup;
-			children = (
-				CAB3CC2528D7D5840035DD1E /* FrequencyTests.swift */,
-			);
-			path = Dictionary;
-			sourceTree = "<group>";
-		};
 		CAB3CC3828D7E6AB0035DD1E /* Views */ = {
 			isa = PBXGroup;
 			children = (
@@ -494,28 +444,6 @@
 			productReference = CA1867B528C5095100DD75C7 /* QLessClues.app */;
 			productType = "com.apple.product-type.application";
 		};
-		CA1CEE6328C6C03C00520C70 /* QLessCluesTests */ = {
-			isa = PBXNativeTarget;
-			buildConfigurationList = CA1CEE6A28C6C03C00520C70 /* Build configuration list for PBXNativeTarget "QLessCluesTests" */;
-			buildPhases = (
-				CA1CEE6028C6C03C00520C70 /* Sources */,
-				CA1CEE6128C6C03C00520C70 /* Frameworks */,
-				CA1CEE6228C6C03C00520C70 /* Resources */,
-			);
-			buildRules = (
-			);
-			dependencies = (
-				CA1CEE6928C6C03C00520C70 /* PBXTargetDependency */,
-			);
-			name = QLessCluesTests;
-			packageProductDependencies = (
-				CAB3CC2B28D7D5EA0035DD1E /* Realm */,
-				CAB3CC2D28D7D5EA0035DD1E /* RealmSwift */,
-			);
-			productName = QLessCluesTests;
-			productReference = CA1CEE6428C6C03C00520C70 /* QLessCluesTests.xctest */;
-			productType = "com.apple.product-type.bundle.unit-test";
-		};
 /* End PBXNativeTarget section */
 
 /* Begin PBXProject section */
@@ -528,11 +456,6 @@
 				TargetAttributes = {
 					CA1867B428C5095100DD75C7 = {
 						CreatedOnToolsVersion = 14.0;
-					};
-					CA1CEE6328C6C03C00520C70 = {
-						CreatedOnToolsVersion = 14.0;
-						LastSwiftMigration = 1400;
-						TestTargetID = CA1867B428C5095100DD75C7;
 					};
 				};
 			};
@@ -555,7 +478,6 @@
 			projectRoot = "";
 			targets = (
 				CA1867B428C5095100DD75C7 /* QLessClues */,
-				CA1CEE6328C6C03C00520C70 /* QLessCluesTests */,
 			);
 		};
 /* End PBXProject section */
@@ -569,13 +491,6 @@
 				CA1867C028C5095200DD75C7 /* Preview Assets.xcassets in Resources */,
 				CA6452BE28C5DFA200738762 /* words.txt in Resources */,
 				CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
-		CA1CEE6228C6C03C00520C70 /* Resources */ = {
-			isa = PBXResourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -640,23 +555,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
-		CA1CEE6028C6C03C00520C70 /* Sources */ = {
-			isa = PBXSourcesBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-				CAB3CC2628D7D5840035DD1E /* FrequencyTests.swift in Sources */,
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXTargetDependency section */
-		CA1CEE6928C6C03C00520C70 /* PBXTargetDependency */ = {
-			isa = PBXTargetDependency;
-			target = CA1867B428C5095100DD75C7 /* QLessClues */;
-			targetProxy = CA1CEE6828C6C03C00520C70 /* PBXContainerItemProxy */;
-		};
-/* End PBXTargetDependency section */
 
 /* Begin XCBuildConfiguration section */
 		CA1867C128C5095200DD75C7 /* Debug */ = {
@@ -835,61 +734,6 @@
 			};
 			name = Release;
 		};
-		CA1CEE6B28C6C03C00520C70 /* Debug */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3UBRXR267C;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ca.josephroque.QLessCluesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QLessClues.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QLessClues";
-			};
-			name = Debug;
-		};
-		CA1CEE6C28C6C03C00520C70 /* Release */ = {
-			isa = XCBuildConfiguration;
-			buildSettings = {
-				BUNDLE_LOADER = "$(TEST_HOST)";
-				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_STYLE = Automatic;
-				CURRENT_PROJECT_VERSION = 1;
-				DEVELOPMENT_TEAM = 3UBRXR267C;
-				GENERATE_INFOPLIST_FILE = YES;
-				LD_RUNPATH_SEARCH_PATHS = (
-					"$(inherited)",
-					"@executable_path/Frameworks",
-					"@loader_path/Frameworks",
-				);
-				MARKETING_VERSION = 1.0;
-				PRODUCT_BUNDLE_IDENTIFIER = ca.josephroque.QLessCluesTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
-				SUPPORTS_MACCATALYST = NO;
-				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = YES;
-				SWIFT_EMIT_LOC_STRINGS = NO;
-				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/QLessClues.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/QLessClues";
-			};
-			name = Release;
-		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
@@ -907,15 +751,6 @@
 			buildConfigurations = (
 				CA1867C428C5095200DD75C7 /* Debug */,
 				CA1867C528C5095200DD75C7 /* Release */,
-			);
-			defaultConfigurationIsVisible = 0;
-			defaultConfigurationName = Release;
-		};
-		CA1CEE6A28C6C03C00520C70 /* Build configuration list for PBXNativeTarget "QLessCluesTests" */ = {
-			isa = XCConfigurationList;
-			buildConfigurations = (
-				CA1CEE6B28C6C03C00520C70 /* Debug */,
-				CA1CEE6C28C6C03C00520C70 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
@@ -964,16 +799,6 @@
 			isa = XCSwiftPackageProductDependency;
 			package = CA61328828F050970095A972 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
-		};
-		CAB3CC2B28D7D5EA0035DD1E /* Realm */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CA24656928D6838F001BFF71 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
-		};
-		CAB3CC2D28D7D5EA0035DD1E /* RealmSwift */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CA24656928D6838F001BFF71 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
 		};
 		CAB3CC8228DC41A00035DD1E /* KeychainAccess */ = {
 			isa = XCSwiftPackageProductDependency;
