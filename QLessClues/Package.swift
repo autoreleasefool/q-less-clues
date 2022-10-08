@@ -13,13 +13,14 @@ let package = Package(
 		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
 		.library(name: "NetworkingService", targets: ["NetworkingService"]),
 		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
+		.library(name: "SolverServiceInterface", targets: ["SolverServiceInterface"]),
+		.library(name: "SolverServiceLive", targets: ["SolverServiceLive"]),
 		.library(name: "SolutionsListFeature", targets: ["SolutionsListFeature"]),
 		.library(name: "ValidatorServiceInterface", targets: ["ValidatorServiceInterface"]),
 		.library(name: "ValidatorServiceLive", targets: ["ValidatorServiceLive"]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.40.2"),
-		.package(url: "https://github.com/pointfreeco/xctest-dynamic-overlay", from: "0.4.1"),
 	],
 	targets: [
 		.target(
@@ -65,6 +66,21 @@ let package = Package(
 			dependencies: ["SharedModelsLibrary"]
 		),
 		.target(
+			name: "SolverServiceInterface",
+			dependencies: ["ValidatorServiceInterface"]
+		),
+		.target(
+			name: "SolverServiceLive",
+			dependencies: [
+				"SolverServiceInterface",
+				"ValidatorServiceLive",
+			]
+		),
+		.testTarget(
+			name: "SolverServiceLiveTests",
+			dependencies: ["SolverServiceLive"]
+		),
+		.target(
 			name: "SolutionsListFeature",
 			dependencies: [
 				"SharedModelsLibrary",
@@ -84,11 +100,7 @@ let package = Package(
 		),
 		.target(
 			name: "ValidatorServiceLive",
-			dependencies: [
-				"DictionaryLibrary",
-				"SharedModelsLibrary",
-				"ValidatorServiceInterface",
-			]
+			dependencies: ["ValidatorServiceInterface"]
 		),
 		.testTarget(
 			name: "ValidatorServiceLiveTests",
