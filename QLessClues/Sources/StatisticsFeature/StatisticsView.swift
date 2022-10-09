@@ -17,6 +17,10 @@ public struct StatisticsView: View {
 		case onAppear
 	}
 
+	public init(store: Store<StatisticsState, StatisticsAction>) {
+		self.store = store
+	}
+
 	public var body: some View {
 		WithViewStore(store, observe: ViewState.init, send: StatisticsAction.init) { viewStore in
 			List {

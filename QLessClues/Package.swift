@@ -9,6 +9,7 @@ let package = Package(
 	],
 	products: [
 		.library(name: "AnalysisFeature", targets: ["AnalysisFeature"]),
+		.library(name: "AppFeature", targets: ["AppFeature"]),
 		.library(name: "DictionaryLibrary", targets: ["DictionaryLibrary"]),
 		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
 		.library(name: "HintsFeature", targets: ["HintsFeature"]),
@@ -41,8 +42,16 @@ let package = Package(
 			name: "AnalysisFeatureTests",
 			dependencies: [
 				"AnalysisFeature",
-				"SharedModelsLibraryMocks"
+				"SharedModelsLibraryMocks",
 			]
+		),
+		.target(
+			name: "AppFeature",
+			dependencies: ["StatisticsFeature"]
+		),
+		.testTarget(
+			name: "AppFeatureTests",
+			dependencies: ["AppFeature"]
 		),
 		.target(
 			name: "DictionaryLibrary",
@@ -59,7 +68,6 @@ let package = Package(
 		.testTarget(
 			name: "ExtensionsLibraryTests",
 			dependencies: ["ExtensionsLibrary"]
-			
 		),
 		.target(
 			name: "HintsFeature",

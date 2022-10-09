@@ -11,19 +11,12 @@
 		CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */; };
 		CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BC28C5095200DD75C7 /* Assets.xcassets */; };
 		CA1867C028C5095200DD75C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BF28C5095200DD75C7 /* Preview Assets.xcassets */; };
-		CA1867D728C5195500DD75C7 /* StatisticsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867D628C5195500DD75C7 /* StatisticsView.swift */; };
-		CA24656B28D6838F001BFF71 /* Realm in Frameworks */ = {isa = PBXBuildFile; productRef = CA24656A28D6838F001BFF71 /* Realm */; };
-		CA24656D28D6838F001BFF71 /* RealmSwift in Frameworks */ = {isa = PBXBuildFile; productRef = CA24656C28D6838F001BFF71 /* RealmSwift */; };
+		CA5F51D528F2DC9C000FC561 /* AppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = CA5F51D428F2DC9C000FC561 /* AppFeature */; };
+		CA5F51D728F2DEB1000FC561 /* SolverServiceLive in Frameworks */ = {isa = PBXBuildFile; productRef = CA5F51D628F2DEB1000FC561 /* SolverServiceLive */; };
+		CA5F51D928F2DEB1000FC561 /* ValidatorServiceLive in Frameworks */ = {isa = PBXBuildFile; productRef = CA5F51D828F2DEB1000FC561 /* ValidatorServiceLive */; };
 		CA61328A28F050970095A972 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = CA61328928F050970095A972 /* ComposableArchitecture */; };
 		CA6452BE28C5DFA200738762 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = CA6452BD28C5DFA200738762 /* words.txt */; };
 		CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3628D7E6380035DD1E /* ContentView.swift */; };
-		CAB3CC3A28D7E6B10035DD1E /* PlayRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */; };
-		CAB3CC8328DC41A00035DD1E /* KeychainAccess in Frameworks */ = {isa = PBXBuildFile; productRef = CAB3CC8228DC41A00035DD1E /* KeychainAccess */; };
-		CADCCD8F28EC1BC100059DFD /* DictionaryLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD8E28EC1BC100059DFD /* DictionaryLibrary */; };
-		CADCCD9528ED831000059DFD /* SharedModelsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD9428ED831000059DFD /* SharedModelsLibrary */; };
-		CADCCD9728ED831400059DFD /* ExtensionsLibrary in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD9628ED831400059DFD /* ExtensionsLibrary */; };
-		CADCCD9928ED8A1500059DFD /* NetworkingService in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD9828ED8A1500059DFD /* NetworkingService */; };
-		CADCCD9D28ED8F7C00059DFD /* SolutionsListFeature in Frameworks */ = {isa = PBXBuildFile; productRef = CADCCD9C28ED8F7C00059DFD /* SolutionsListFeature */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -32,11 +25,9 @@
 		CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLessCluesApp.swift; sourceTree = "<group>"; };
 		CA1867BC28C5095200DD75C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		CA1867BF28C5095200DD75C7 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
-		CA1867D628C5195500DD75C7 /* StatisticsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StatisticsView.swift; sourceTree = "<group>"; };
 		CA57989F28EB7302006B9BF7 /* QLessClues */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = QLessClues; sourceTree = "<group>"; };
 		CA6452BD28C5DFA200738762 /* words.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = words.txt; sourceTree = "<group>"; };
 		CAB3CC3628D7E6380035DD1E /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
-		CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayRow.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -44,15 +35,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CADCCD9728ED831400059DFD /* ExtensionsLibrary in Frameworks */,
-				CADCCD8F28EC1BC100059DFD /* DictionaryLibrary in Frameworks */,
 				CA61328A28F050970095A972 /* ComposableArchitecture in Frameworks */,
-				CADCCD9928ED8A1500059DFD /* NetworkingService in Frameworks */,
-				CA24656D28D6838F001BFF71 /* RealmSwift in Frameworks */,
-				CA24656B28D6838F001BFF71 /* Realm in Frameworks */,
-				CAB3CC8328DC41A00035DD1E /* KeychainAccess in Frameworks */,
-				CADCCD9528ED831000059DFD /* SharedModelsLibrary in Frameworks */,
-				CADCCD9D28ED8F7C00059DFD /* SolutionsListFeature in Frameworks */,
+				CA5F51D528F2DC9C000FC561 /* AppFeature in Frameworks */,
+				CA5F51D728F2DEB1000FC561 /* SolverServiceLive in Frameworks */,
+				CA5F51D928F2DEB1000FC561 /* ValidatorServiceLive in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -99,7 +85,6 @@
 		CA1867C628C5096A00DD75C7 /* Source */ = {
 			isa = PBXGroup;
 			children = (
-				CA1867C928C50F3C00DD75C7 /* Features */,
 				CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */,
 				CAB3CC3628D7E6380035DD1E /* ContentView.swift */,
 			);
@@ -115,44 +100,11 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
-		CA1867C928C50F3C00DD75C7 /* Features */ = {
-			isa = PBXGroup;
-			children = (
-				CA1867CB28C50FBB00DD75C7 /* Statistics */,
-			);
-			path = Features;
-			sourceTree = "<group>";
-		};
-		CA1867CB28C50FBB00DD75C7 /* Statistics */ = {
-			isa = PBXGroup;
-			children = (
-				CAB3CC5028D97E0D0035DD1E /* Utilities */,
-				CAB3CC3828D7E6AB0035DD1E /* Views */,
-				CA1867D628C5195500DD75C7 /* StatisticsView.swift */,
-			);
-			path = Statistics;
-			sourceTree = "<group>";
-		};
 		CA1CEE7428C6C74B00520C70 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			name = Frameworks;
-			sourceTree = "<group>";
-		};
-		CAB3CC3828D7E6AB0035DD1E /* Views */ = {
-			isa = PBXGroup;
-			children = (
-				CAB3CC3928D7E6B10035DD1E /* PlayRow.swift */,
-			);
-			path = Views;
-			sourceTree = "<group>";
-		};
-		CAB3CC5028D97E0D0035DD1E /* Utilities */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utilities;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -173,15 +125,10 @@
 			);
 			name = QLessClues;
 			packageProductDependencies = (
-				CA24656A28D6838F001BFF71 /* Realm */,
-				CA24656C28D6838F001BFF71 /* RealmSwift */,
-				CAB3CC8228DC41A00035DD1E /* KeychainAccess */,
-				CADCCD8E28EC1BC100059DFD /* DictionaryLibrary */,
-				CADCCD9428ED831000059DFD /* SharedModelsLibrary */,
-				CADCCD9628ED831400059DFD /* ExtensionsLibrary */,
-				CADCCD9828ED8A1500059DFD /* NetworkingService */,
-				CADCCD9C28ED8F7C00059DFD /* SolutionsListFeature */,
 				CA61328928F050970095A972 /* ComposableArchitecture */,
+				CA5F51D428F2DC9C000FC561 /* AppFeature */,
+				CA5F51D628F2DEB1000FC561 /* SolverServiceLive */,
+				CA5F51D828F2DEB1000FC561 /* ValidatorServiceLive */,
 			);
 			productName = QLessClues;
 			productReference = CA1867B528C5095100DD75C7 /* QLessClues.app */;
@@ -267,9 +214,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */,
-				CA1867D728C5195500DD75C7 /* StatisticsView.swift in Sources */,
 				CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */,
-				CAB3CC3A28D7E6B10035DD1E /* PlayRow.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -503,45 +448,22 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CA24656A28D6838F001BFF71 /* Realm */ = {
+		CA5F51D428F2DC9C000FC561 /* AppFeature */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CA24656928D6838F001BFF71 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = Realm;
+			productName = AppFeature;
 		};
-		CA24656C28D6838F001BFF71 /* RealmSwift */ = {
+		CA5F51D628F2DEB1000FC561 /* SolverServiceLive */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = CA24656928D6838F001BFF71 /* XCRemoteSwiftPackageReference "realm-swift" */;
-			productName = RealmSwift;
+			productName = SolverServiceLive;
+		};
+		CA5F51D828F2DEB1000FC561 /* ValidatorServiceLive */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ValidatorServiceLive;
 		};
 		CA61328928F050970095A972 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CA61328828F050970095A972 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
-		};
-		CAB3CC8228DC41A00035DD1E /* KeychainAccess */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CAB3CC8128DC41A00035DD1E /* XCRemoteSwiftPackageReference "KeychainAccess" */;
-			productName = KeychainAccess;
-		};
-		CADCCD8E28EC1BC100059DFD /* DictionaryLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = DictionaryLibrary;
-		};
-		CADCCD9428ED831000059DFD /* SharedModelsLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SharedModelsLibrary;
-		};
-		CADCCD9628ED831400059DFD /* ExtensionsLibrary */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ExtensionsLibrary;
-		};
-		CADCCD9828ED8A1500059DFD /* NetworkingService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = NetworkingService;
-		};
-		CADCCD9C28ED8F7C00059DFD /* SolutionsListFeature */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SolutionsListFeature;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

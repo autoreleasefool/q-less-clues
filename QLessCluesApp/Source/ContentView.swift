@@ -1,25 +1,20 @@
-//
-//  ContentView.swift
-//  QLessClues
-//
-//  Created by Joseph Roque on 2022-09-18.
-//
-
-import RealmSwift
+import AppFeature
+import ComposableArchitecture
+import SolverServiceLive
 import SwiftUI
+import ValidatorServiceLive
 
 struct ContentView: View {
-
-	@ObservedResults(PlayGroup.self) var groups
+	let store = Store(
+		initialState: AppState(),
+		reducer: appReducer,
+		environment: AppEnvironment(
+			solverService: .live,
+			validatorService: .live
+		)
+	)
 
 	var body: some View {
-		if let group = groups.first {
-			StatisticsView(group: group)
-		} else {
-			ProgressView()
-				.onAppear {
-					$groups.append(PlayGroup())
-				}
-		}
+		AppView(store: store)
 	}
 }
