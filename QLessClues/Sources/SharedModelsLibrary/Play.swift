@@ -2,14 +2,14 @@ import ExtensionsLibrary
 import Foundation
 
 public struct Play: Identifiable, Equatable {
-	public let id: UUID
+	public let id: String
 	public let createdAt: Date
 	public let letters: String
 	public let outcome: Outcome
 	public let difficulty: Difficulty?
 
 	public init(
-		id: UUID = UUID(),
+		id: String = UUID().uuidString,
 		createdAt: Date = Date(),
 		letters: String,
 		outcome: Outcome,
@@ -32,5 +32,13 @@ extension Play {
 		case unsolved = "❌ Unsolved"
 		case solved = "✅ Solved"
 		case solvedWithHints = "📝 Solved (with hints)"
+	}
+}
+
+extension Play {
+	public enum Difficulty: String {
+		case novice = "🟢 Novice"
+		case intermediate = "🟡 Intermediate"
+		case advanced = "🔴 Advanced"
 	}
 }

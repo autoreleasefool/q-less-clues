@@ -7,12 +7,9 @@ import XCTest
 @MainActor
 final class RecordPlayFeatureTests: XCTestCase {
 	let mockEnvironment: RecordPlayEnvironment = .init(
-		solverService: .init { _, _ in
+		solverService: .init { _ in
 			XCTFail("Unimplemented")
 			return AsyncStream<SolverService.Event>.streamWithContinuation().stream
-		}, validatorService: .init { _, _ in
-			XCTFail("Unimplemented")
-			return false
 		}
 	)
 

@@ -19,11 +19,9 @@ public enum StatisticsAction: Equatable {
 
 public struct StatisticsEnvironment: Sendable {
 	public var solverService: SolverService
-	public var validatorService: ValidatorService
 
-	public init(solverService: SolverService, validatorService: ValidatorService) {
+	public init(solverService: SolverService) {
 		self.solverService = solverService
-		self.validatorService = validatorService
 	}
 }
 
@@ -34,10 +32,7 @@ public let statisticsReducer = Reducer<StatisticsState, StatisticsAction, Statis
 			state: \.playsList,
 			action: /StatisticsAction.playsList,
 			environment: {
-				PlaysListEnvironment(
-					solverService: $0.solverService,
-					validatorService: $0.validatorService
-				)
+				PlaysListEnvironment(solverService: $0.solverService)
 			}
 		),
 	.init { state, action, _ in

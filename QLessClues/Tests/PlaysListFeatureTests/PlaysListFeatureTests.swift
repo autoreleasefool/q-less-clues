@@ -9,12 +9,9 @@ import XCTest
 @MainActor
 final class PlaysListFeatureTests: XCTestCase {
 	let mockEnvironment: PlaysListEnvironment = .init(
-		solverService: .init { _, _ in
+		solverService: .init { _ in
 			XCTFail("Unimplemented")
 			return AsyncStream<SolverService.Event>.streamWithContinuation().stream
-		}, validatorService: .init { _, _ in
-			XCTFail("Unimplemented")
-			return false
 		}
 	)
 

@@ -9,7 +9,7 @@ struct ContentView: View {
 		initialState: AppState(),
 		reducer: appReducer,
 		environment: AppEnvironment(
-			solverService: .live,
+			solverService: .live(solverServiceLive: .init(validatorService: .live)),
 			validatorService: .live
 		)
 	)

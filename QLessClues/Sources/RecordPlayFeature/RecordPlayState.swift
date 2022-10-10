@@ -21,11 +21,9 @@ public enum RecordPlayAction: Equatable {
 
 public struct RecordPlayEnvironment: Sendable {
 	public var solverService: SolverService
-	public var validatorService: ValidatorService
 
-	public init(solverService: SolverService, validatorService: ValidatorService) {
+	public init(solverService: SolverService) {
 		self.solverService = solverService
-		self.validatorService = validatorService
 	}
 }
 
@@ -36,10 +34,7 @@ public let recordPlayReducer = Reducer<RecordPlayState, RecordPlayAction, Record
 			state: \.analysisState,
 			action: /RecordPlayAction.analysis,
 			environment: {
-				AnalysisEnvironment(
-					solverService: $0.solverService,
-					validatorService: $0.validatorService
-				)
+				AnalysisEnvironment(solverService: $0.solverService)
 			}
 		),
 	.init { state, action, _ in

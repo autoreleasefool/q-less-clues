@@ -1,16 +1,27 @@
 import SharedModelsLibrary
 import SolverServiceInterface
+import ValidatorServiceInterface
 import ValidatorServiceLive
 
-extension SolverService {
-	public static let live = Self(
-		findSolutions: { letters, validator in
-			.init { continuation in
-				Task {
-					await BacktrackingSolver(validator: validator)
-						.findSolutions(forLetters: letters, to: continuation)
-				}
+public struct SolverServiceLive {
+	private let validatorService: ValidatorService
+
+	public init(validatorService: ValidatorService) {
+		self.validatorService = validatorService
+	}
+
+	@Sendable public func findSolutions(letters: String) -> AsyncStream<SolverService.Event> {
+		.init { continutation in
+			Task {
+				await BacktrackingSolver(validator: validatorService)
+					.findSolutions(forLetters: letters, to: continutation)
 			}
 		}
-	)
+	}
+}
+
+extension SolverService {
+	public static func live(solverServiceLive: SolverServiceLive) -> Self {
+		.init(findSolutions: solverServiceLive.findSolutions(letters:))
+	}
 }

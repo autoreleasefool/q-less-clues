@@ -23,11 +23,9 @@ public enum PlayAction: Equatable {
 
 public struct PlayEnvironment: Sendable {
 	public var solverService: SolverService
-	public var validatorService: ValidatorService
 
-	public init(solverService: SolverService, validatorService: ValidatorService) {
+	public init(solverService: SolverService) {
 		self.solverService = solverService
-		self.validatorService = validatorService
 	}
 }
 
@@ -37,10 +35,7 @@ public let playReducer = Reducer<PlayState, PlayAction, PlayEnvironment>.combine
 			state: \.analysis,
 			action: /PlayAction.analysis,
 			environment: {
-				AnalysisEnvironment(
-					solverService: $0.solverService,
-					validatorService: $0.validatorService
-				)
+				AnalysisEnvironment(solverService: $0.solverService)
 			}
 		),
 	.init { state, action, _ in

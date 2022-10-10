@@ -9,7 +9,7 @@ public struct AnalysisView: View {
 
 	struct ViewState: Equatable {
 		var solutions: [Solution]
-		var difficulty: Difficulty?
+		var difficulty: Play.Difficulty?
 		var progress: Double
 		var hasStarted: Bool
 

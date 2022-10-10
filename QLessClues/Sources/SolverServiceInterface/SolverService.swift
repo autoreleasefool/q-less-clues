@@ -3,9 +3,9 @@ import SharedModelsLibrary
 import ValidatorServiceInterface
 
 public struct SolverService: Sendable {
-	public var findSolutions: @Sendable (String, ValidatorService) -> AsyncStream<Event>
+	public var findSolutions: @Sendable (String) -> AsyncStream<Event>
 
-	public init(findSolutions: @escaping @Sendable (String, ValidatorService) -> AsyncStream<Event>) {
+	public init(findSolutions: @escaping @Sendable (String) -> AsyncStream<Event>) {
 		self.findSolutions = findSolutions
 	}
 

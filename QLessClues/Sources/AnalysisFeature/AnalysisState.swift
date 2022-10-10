@@ -9,7 +9,7 @@ public struct AnalysisState: Equatable {
 	public var letters: String
 	public var solutions: [Solution] = []
 	public var mode: Mode = .notStarted
-	public var difficulty: Difficulty?
+	public var difficulty: Play.Difficulty?
 	public var hints: HintsState?
 	public var solutionsList: SolutionsListState = .init(solutions: [])
 
@@ -49,11 +49,9 @@ public enum AnalysisAction: Equatable {
 
 public struct AnalysisEnvironment: Sendable {
 	public var solverService: SolverService
-	public var validatorService: ValidatorService
 
-	public init(solverService: SolverService, validatorService: ValidatorService) {
+	public init(solverService: SolverService) {
 		self.solverService = solverService
-		self.validatorService = validatorService
 	}
 }
 
@@ -81,7 +79,7 @@ public let analysisReducer = Reducer<AnalysisState, AnalysisAction, AnalysisEnvi
 		case .beginButtonTapped:
 			state.mode = .solving(progress: 0)
 			return .run { [letters = state.letters] send in
-				for await event in environment.solverService.findSolutions(letters, environment.validatorService) {
+				for await event in environment.solverService.findSolutions(letters) {
 					await send(.solverService(event))
 				}
 

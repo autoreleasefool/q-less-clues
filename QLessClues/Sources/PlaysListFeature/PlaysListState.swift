@@ -25,11 +25,9 @@ public enum PlaysListAction: Equatable {
 
 public struct PlaysListEnvironment: Sendable {
 	public var solverService: SolverService
-	public var validatorService: ValidatorService
 
-	public init(solverService: SolverService, validatorService: ValidatorService) {
+	public init(solverService: SolverService) {
 		self.solverService = solverService
-		self.validatorService = validatorService
 	}
 }
 
@@ -40,10 +38,7 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 			state: \.recordPlay,
 			action: /PlaysListAction.recordPlay,
 			environment: {
-				RecordPlayEnvironment(
-					solverService: $0.solverService,
-					validatorService: $0.validatorService
-				)
+				RecordPlayEnvironment(solverService: $0.solverService)
 			}
 		),
 	playReducer
@@ -52,10 +47,7 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 			state: \.play,
 			action: /PlaysListAction.play,
 			environment: {
-				PlayEnvironment(
-					solverService: $0.solverService,
-					validatorService: $0.validatorService
-				)
+				PlayEnvironment(solverService: $0.solverService)
 			}
 		),
 	.init { state, action, _ in

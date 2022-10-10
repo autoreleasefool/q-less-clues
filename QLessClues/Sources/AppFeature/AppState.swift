@@ -31,13 +31,10 @@ public let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
 			state: \.statistics,
 			action: /AppAction.statistics,
 			environment: {
-				StatisticsEnvironment(
-					solverService: $0.solverService,
-					validatorService: $0.validatorService
-				)
+				StatisticsEnvironment(solverService: $0.solverService)
 			}
 		),
-	.init { state, action, _ in
+	.init { _, action, _ in
 		switch action {
 		case .onAppear:
 			return .fireAndForget {
