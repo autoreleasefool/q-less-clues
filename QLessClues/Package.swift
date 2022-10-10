@@ -14,6 +14,7 @@ let package = Package(
 		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
 		.library(name: "HintsFeature", targets: ["HintsFeature"]),
 		.library(name: "NetworkingService", targets: ["NetworkingService"]),
+		.library(name: "PersistentModelsLibrary", targets: ["PersistentModelsLibrary"]),
 		.library(name: "PlayFeature", targets: ["PlayFeature"]),
 		.library(name: "PlaysListFeature", targets: ["PlaysListFeature"]),
 		.library(name: "RecordPlayFeature", targets: ["RecordPlayFeature"]),
@@ -92,6 +93,13 @@ let package = Package(
 		.testTarget(
 			name: "NetworkingServiceTests",
 			dependencies: ["NetworkingService"]
+		),
+		.target(
+			name: "PersistentModelsLibrary",
+			dependencies: [
+				"SharedModelsLibrary",
+				.product(name: "RealmSwift", package: "realm-swift"),
+			]
 		),
 		.target(
 			name: "PlayFeature",
