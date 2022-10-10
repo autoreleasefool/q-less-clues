@@ -28,6 +28,7 @@ let package = Package(
 	],
 	dependencies: [
 		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.40.2"),
+		.package(url: "https://github.com/realm/realm-swift.git", from: "10.31.0"),
 	],
 	targets: [
 		.target(

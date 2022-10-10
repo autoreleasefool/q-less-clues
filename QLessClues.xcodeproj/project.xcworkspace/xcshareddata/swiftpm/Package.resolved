@@ -10,21 +10,12 @@
       }
     },
     {
-      "identity" : "keychainaccess",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/kishikawakatsumi/KeychainAccess",
-      "state" : {
-        "revision" : "84e546727d66f1adc5439debad16270d0fdd04e7",
-        "version" : "4.2.2"
-      }
-    },
-    {
       "identity" : "realm-core",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-core",
       "state" : {
-        "revision" : "5da7744b4056ad185c025bccf0924f17f73f7a91",
-        "version" : "12.6.0"
+        "revision" : "b86d2107fec4246b55af24a3b11e00275575f808",
+        "version" : "12.9.0"
       }
     },
     {
@@ -32,8 +23,8 @@
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/realm/realm-swift",
       "state" : {
-        "revision" : "28c488974f544c9affc4eacdd5b9dfc6785ebbc0",
-        "version" : "10.29.0"
+        "revision" : "ae4278abe1fcdcd616b410e098a744c1cc73e0bd",
+        "version" : "10.31.0"
       }
     },
     {

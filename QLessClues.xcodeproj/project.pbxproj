@@ -159,8 +159,6 @@
 			);
 			mainGroup = CA1867AC28C5095100DD75C7;
 			packageReferences = (
-				CA24656928D6838F001BFF71 /* XCRemoteSwiftPackageReference "realm-swift" */,
-				CAB3CC8128DC41A00035DD1E /* XCRemoteSwiftPackageReference "KeychainAccess" */,
 				CA61328828F050970095A972 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = CA1867B628C5095100DD75C7 /* Products */;
@@ -421,28 +419,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
-		CA24656928D6838F001BFF71 /* XCRemoteSwiftPackageReference "realm-swift" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/realm/realm-swift";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 10.29.0;
-			};
-		};
 		CA61328828F050970095A972 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
 			requirement = {
 				kind = upToNextMinorVersion;
 				minimumVersion = 0.40.2;
-			};
-		};
-		CAB3CC8128DC41A00035DD1E /* XCRemoteSwiftPackageReference "KeychainAccess" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/kishikawakatsumi/KeychainAccess";
-			requirement = {
-				kind = upToNextMajorVersion;
-				minimumVersion = 4.2.2;
 			};
 		};
 /* End XCRemoteSwiftPackageReference section */
