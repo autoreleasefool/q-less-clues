@@ -1,5 +1,5 @@
 import ComposableArchitecture
-import StatisticsFeature
+import PlaysListFeature
 import SwiftUI
 
 public struct AppView: View {
@@ -16,7 +16,7 @@ public struct AppView: View {
 	public var body: some View {
 		WithViewStore(store, observe: { $0 }, send: AppAction.init) { viewStore in
 			NavigationStack {
-				StatisticsView(store: store.scope(state: \.statistics, action: AppAction.statistics))
+				PlaysList(store: store.scope(state: \.playsList, action: AppAction.playsList))
 					.onAppear { viewStore.send(.onAppear) }
 			}
 		}

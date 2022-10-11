@@ -1,6 +1,7 @@
 import ComposableArchitecture
 import PlayFeature
 import SharedModelsLibrary
+import StatisticsFeature
 import SwiftUI
 
 public struct PlaysList: View {
@@ -25,27 +26,31 @@ public struct PlaysList: View {
 
 	public var body: some View {
 		WithViewStore(store, observe: ViewState.init, send: PlaysListAction.init) { viewStore in
-			Section("Recent Plays") {
-				if viewStore.plays.isEmpty {
-					Text("You haven't added any plays yet")
-				} else {
-					ForEach(viewStore.plays) { play in
-						NavigationLink(
-							destination: IfLetStore(
-								store.scope(
-									state: \.play,
-									action: PlaysListAction.play
-								)
+			List {
+				StatisticsView(store: store.scope(state: \.statistics, action: PlaysListAction.statistics))
+
+				Section("Recent Plays") {
+					if viewStore.plays.isEmpty {
+						Text("You haven't added any plays yet")
+					} else {
+						ForEach(viewStore.plays) { play in
+							NavigationLink(
+								destination: IfLetStore(
+									store.scope(
+										state: \.play,
+										action: PlaysListAction.play
+									)
+								) {
+									PlayView(store: $0)
+								}
 							) {
-								PlayView(store: $0)
+								Text(play.letters)
+									.frame(maxWidth: .infinity, alignment: .leading)
+								Text(String(play.outcome.rawValue.first ?? "❓"))
 							}
-						) {
-							Text(play.letters)
-								.frame(maxWidth: .infinity, alignment: .leading)
-							Text(String(play.outcome.rawValue.first ?? "❓"))
 						}
+						.onDelete { viewStore.send(.delete($0)) }
 					}
-					.onDelete { viewStore.send(.delete($0)) }
 				}
 			}
 			.toolbar {

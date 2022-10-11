@@ -18,6 +18,7 @@
 		CA64550928F58FD600FFE0B1 /* ValidatorService in Frameworks */ = {isa = PBXBuildFile; productRef = CA64550828F58FD600FFE0B1 /* ValidatorService */; };
 		CAB1C71628F5AF78000DA81D /* PersistenceService in Frameworks */ = {isa = PBXBuildFile; productRef = CAB1C71528F5AF78000DA81D /* PersistenceService */; };
 		CAB1C71828F5AF7F000DA81D /* PlaysDataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = CAB1C71728F5AF7F000DA81D /* PlaysDataProvider */; };
+		CAB1C71A28F5D85F000DA81D /* StatisticsDataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = CAB1C71928F5D85F000DA81D /* StatisticsDataProvider */; };
 		CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3628D7E6380035DD1E /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -39,6 +40,7 @@
 			files = (
 				CA64550728F58FD300FFE0B1 /* SolverService in Frameworks */,
 				CA61328A28F050970095A972 /* ComposableArchitecture in Frameworks */,
+				CAB1C71A28F5D85F000DA81D /* StatisticsDataProvider in Frameworks */,
 				CA5F51D528F2DC9C000FC561 /* AppFeature in Frameworks */,
 				CAB1C71828F5AF7F000DA81D /* PlaysDataProvider in Frameworks */,
 				CA64550928F58FD600FFE0B1 /* ValidatorService in Frameworks */,
@@ -135,6 +137,7 @@
 				CA64550828F58FD600FFE0B1 /* ValidatorService */,
 				CAB1C71528F5AF78000DA81D /* PersistenceService */,
 				CAB1C71728F5AF7F000DA81D /* PlaysDataProvider */,
+				CAB1C71928F5D85F000DA81D /* StatisticsDataProvider */,
 			);
 			productName = QLessClues;
 			productReference = CA1867B528C5095100DD75C7 /* QLessClues.app */;
@@ -460,6 +463,10 @@
 		CAB1C71728F5AF7F000DA81D /* PlaysDataProvider */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PlaysDataProvider;
+		};
+		CAB1C71928F5D85F000DA81D /* StatisticsDataProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StatisticsDataProvider;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

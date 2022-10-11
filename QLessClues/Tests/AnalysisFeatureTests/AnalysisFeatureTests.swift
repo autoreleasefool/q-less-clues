@@ -3,7 +3,6 @@ import ComposableArchitecture
 import SharedModelsLibrary
 import SharedModelsLibraryMocks
 import SolverServiceInterface
-import ValidatorServiceInterface
 import XCTest
 
 @MainActor

@@ -1,59 +1,36 @@
 import ComposableArchitecture
-import PlaysDataProviderInterface
-import PlaysListFeature
 import SharedModelsLibrary
-import SolverServiceInterface
-import ValidatorServiceInterface
+import StatisticsDataProviderInterface
 
 public struct StatisticsState: Equatable {
-	public var statistics: Statistics = .init(plays: [])
-	public var plays: [Play]?
-	public var playsList: PlaysListState?
+	public var statistics: Statistics?
 
 	public init() {}
 }
 
 public enum StatisticsAction: Equatable {
-	case onAppear
-	case playsResponse([Play])
-	case playsList(PlaysListAction)
+	case load
+	case statisticsResponse(Statistics)
 }
 
 public struct StatisticsEnvironment: Sendable {
-	public var playsDataProvider: PlaysDataProvider
-	public var solverService: SolverService
+	public var statisticsDataProvider: StatisticsDataProvider
 
-	public init(playsDataProvider: PlaysDataProvider, solverService: SolverService) {
-		self.playsDataProvider = playsDataProvider
-		self.solverService = solverService
+	public init(statisticsDataProvider: StatisticsDataProvider) {
+		self.statisticsDataProvider = statisticsDataProvider
 	}
 }
 
-public let statisticsReducer = Reducer<StatisticsState, StatisticsAction, StatisticsEnvironment>.combine(
-	playsListReducer
-		.optional()
-		.pullback(
-			state: \.playsList,
-			action: /StatisticsAction.playsList,
-			environment: {
-				PlaysListEnvironment(solverService: $0.solverService)
-			}
-		),
-	.init { state, action, environment in
+public let statisticsReducer =
+	Reducer<StatisticsState, StatisticsAction, StatisticsEnvironment> { state, action, environment in
 		switch action {
-		case .onAppear:
+		case .load:
 			return .task {
-				await .playsResponse(environment.playsDataProvider.fetchAll())
+				await .statisticsResponse(environment.statisticsDataProvider.fetch())
 			}
 
-		case let .playsResponse(plays):
-			state.plays = plays
-			state.statistics = .init(plays: plays)
-			state.playsList = .init(plays: plays)
-			return .none
-
-		case .playsList:
+		case let .statisticsResponse(statistics):
+			state.statistics = statistics
 			return .none
 		}
 	}
-)

@@ -3,13 +3,11 @@ import RealmSwift
 import SharedModelsLibrary
 
 public class PersistentPlay: Object, ObjectKeyIdentifiable {
-	@Persisted(primaryKey: true) var _id: UUID
-	@Persisted var createdAt = Date()
-	@Persisted var letters = ""
-	@Persisted var outcome: PersistentOutcome = .unsolved
-	@Persisted var difficulty: PersistentDifficulty?
-
-	@Persisted(originProperty: "plays") var group: LinkingObjects<PersistentPlayGroup>
+	@Persisted(primaryKey: true) public var _id: UUID
+	@Persisted public var createdAt = Date()
+	@Persisted public var letters = ""
+	@Persisted public var outcome: PersistentOutcome = .unsolved
+	@Persisted public var difficulty: PersistentDifficulty?
 
 	public func asPlay() -> Play {
 		.init(

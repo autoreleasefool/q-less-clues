@@ -1,12 +1,12 @@
 import ComposableArchitecture
-import PlaysListFeature
+import SharedModelsLibrary
 import SwiftUI
 
 public struct StatisticsView: View {
 	let store: Store<StatisticsState, StatisticsAction>
 
 	struct ViewState: Equatable {
-		let statistics: Statistics
+		let statistics: Statistics?
 
 		init(state: StatisticsState) {
 			self.statistics = state.statistics
@@ -14,7 +14,7 @@ public struct StatisticsView: View {
 	}
 
 	enum ViewAction {
-		case onAppear
+		case load
 	}
 
 	public init(store: Store<StatisticsState, StatisticsAction>) {
@@ -23,33 +23,32 @@ public struct StatisticsView: View {
 
 	public var body: some View {
 		WithViewStore(store, observe: ViewState.init, send: StatisticsAction.init) { viewStore in
-			List {
-				HStack {
-					Spacer()
-					VStack(alignment: .center) {
-						Text(viewStore.statistics.pureWinPercentage)
-							.font(.largeTitle)
-						Text("Wins")
+			Section {
+				if let statistics = viewStore.statistics {
+					HStack {
+						Spacer()
+						VStack(alignment: .center) {
+							Text(statistics.pureWinPercentage)
+								.font(.largeTitle)
+							Text("Wins")
+						}
+						Spacer()
+						VStack(alignment: .center) {
+							Text(statistics.overallWinPercentage)
+								.font(.largeTitle)
+							Text("With hints")
+						}
+						Spacer()
 					}
-					Spacer()
-					VStack(alignment: .center) {
-						Text(viewStore.statistics.overallWinPercentage)
-							.font(.largeTitle)
-						Text("With hints")
-					}
-					Spacer()
-				}
-				LabeledContent("Wins", value: "\(viewStore.statistics.pureWins)")
-				LabeledContent("Wins (with hints)", value: "\(viewStore.statistics.winsWithHints)")
-				LabeledContent("Losses", value: "\(viewStore.statistics.losses)")
-				LabeledContent("Total Plays", value: "\(viewStore.statistics.totalPlays)")
-
-				IfLetStore(store.scope(state: \.playsList, action: StatisticsAction.playsList)) {
-					PlaysList(store: $0)
+					LabeledContent("Wins", value: "\(statistics.pureWins)")
+					LabeledContent("Wins (with hints)", value: "\(statistics.winsWithHints)")
+					LabeledContent("Losses", value: "\(statistics.losses)")
+					LabeledContent("Total Plays", value: "\(statistics.totalPlays)")
+				} else {
+					ProgressView()
 				}
 			}
-			.navigationTitle("Statistics")
-			.onAppear { viewStore.send(.onAppear) }
+			.onAppear { viewStore.send(.load) }
 		}
 	}
 }
@@ -57,8 +56,8 @@ public struct StatisticsView: View {
 extension StatisticsAction {
 	init(action: StatisticsView.ViewAction) {
 		switch action {
-		case .onAppear:
-			self = .onAppear
+		case .load:
+			self = .load
 		}
 	}
 }

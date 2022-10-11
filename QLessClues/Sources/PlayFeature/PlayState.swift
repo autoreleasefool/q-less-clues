@@ -2,7 +2,6 @@ import AnalysisFeature
 import ComposableArchitecture
 import SharedModelsLibrary
 import SolverServiceInterface
-import ValidatorServiceInterface
 
 public struct PlayState: Equatable {
 	public var play: Play

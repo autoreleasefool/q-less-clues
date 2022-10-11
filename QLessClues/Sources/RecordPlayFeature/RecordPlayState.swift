@@ -2,7 +2,6 @@ import AnalysisFeature
 import ComposableArchitecture
 import SharedModelsLibrary
 import SolverServiceInterface
-import ValidatorServiceInterface
 
 public struct RecordPlayState: Equatable {
 	public var letters = ""

@@ -1,6 +1,5 @@
 import Combine
 import SharedModelsLibrary
-import ValidatorServiceInterface
 
 public struct SolverService: Sendable {
 	public var findSolutions: @Sendable (String) -> AsyncStream<Event>

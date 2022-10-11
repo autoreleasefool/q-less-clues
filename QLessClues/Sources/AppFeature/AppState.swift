@@ -1,39 +1,46 @@
 import ComposableArchitecture
 import DictionaryLibrary
+import PlaysListFeature
 import PlaysDataProviderInterface
 import SolverServiceInterface
-import StatisticsFeature
-import ValidatorServiceInterface
+import StatisticsDataProviderInterface
 
 public struct AppState: Equatable {
-	public var statistics = StatisticsState()
+	public var playsList = PlaysListState()
 
 	public init() {}
 }
 
 public enum AppAction: Equatable {
 	case onAppear
-	case statistics(StatisticsAction)
+	case playsList(PlaysListAction)
 }
 
 public struct AppEnvironment: Sendable {
 	public var playsDataProvider: PlaysDataProvider
+	public var statisticsDataProvider: StatisticsDataProvider
 	public var solverService: SolverService
 
-	public init(playsDataProvider: PlaysDataProvider, solverService: SolverService) {
+	public init(
+		playsDataProvider: PlaysDataProvider,
+		statisticsDataProvider: StatisticsDataProvider,
+		solverService: SolverService
+	) {
 		self.playsDataProvider = playsDataProvider
+		self.statisticsDataProvider = statisticsDataProvider
 		self.solverService = solverService
 	}
 }
 
 public let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
-	statisticsReducer
+	playsListReducer
 		.pullback(
-			state: \.statistics,
-			action: /AppAction.statistics,
+			state: \.playsList,
+			action: /AppAction.playsList,
 			environment: {
-				StatisticsEnvironment(
+				PlaysListEnvironment(
 					playsDataProvider: $0.playsDataProvider,
+					statisticsDataProvider: $0.statisticsDataProvider,
 					solverService: $0.solverService
 				)
 			}
@@ -46,7 +53,7 @@ public let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
 				_ = WordFrequency.englishFrequencies
 			}
 
-		case .statistics:
+		case .playsList:
 			return .none
 		}
 	}

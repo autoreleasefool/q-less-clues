@@ -23,6 +23,8 @@ let package = Package(
 		.library(name: "RecordPlayFeature", targets: ["RecordPlayFeature"]),
 		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
 		.library(name: "SharedModelsLibraryMocks", targets: ["SharedModelsLibraryMocks"]),
+		.library(name: "StatisticsDataProvider", targets: ["StatisticsDataProvider"]),
+		.library(name: "StatisticsDataProviderInterface", targets: ["StatisticsDataProviderInterface"]),
 		.library(name: "StatisticsFeature", targets: ["StatisticsFeature"]),
 		.library(name: "SolverService", targets: ["SolverService"]),
 		.library(name: "SolverServiceInterface", targets: ["SolverServiceInterface"]),
@@ -52,7 +54,7 @@ let package = Package(
 		),
 		.target(
 			name: "AppFeature",
-			dependencies: ["StatisticsFeature"]
+			dependencies: ["PlaysListFeature"]
 		),
 		.testTarget(
 			name: "AppFeatureTests",
@@ -145,6 +147,7 @@ let package = Package(
 			dependencies: [
 				"PlayFeature",
 				"RecordPlayFeature",
+				"StatisticsFeature",
 			]
 		),
 		.testTarget(
@@ -178,10 +181,26 @@ let package = Package(
 			]
 		),
 		.target(
+			name: "StatisticsDataProvider",
+			dependencies: [
+				"PersistenceServiceInterface",
+				"PersistentModelsLibrary",
+				"StatisticsDataProviderInterface",
+			]
+		),
+		.testTarget(
+			name: "StatisticsDataProviderTests",
+			dependencies: ["StatisticsDataProvider"]
+		),
+		.target(
+			name: "StatisticsDataProviderInterface",
+			dependencies: ["PersistentModelsLibrary"]
+		),
+		.target(
 			name: "StatisticsFeature",
 			dependencies: [
-				"PlaysListFeature",
-				"RecordPlayFeature",
+				"StatisticsDataProviderInterface",
+				.product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
 			]
 		),
 		.testTarget(

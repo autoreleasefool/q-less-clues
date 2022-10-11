@@ -1,32 +1,44 @@
 import ComposableArchitecture
 import Foundation
 import PlayFeature
+import PlaysDataProviderInterface
 import RecordPlayFeature
 import SharedModelsLibrary
 import SolverServiceInterface
-import ValidatorServiceInterface
+import StatisticsDataProviderInterface
+import StatisticsFeature
 
 public struct PlaysListState: Equatable {
-	public var plays: [Play]
+	public var plays: [Play] = []
 	public var recordPlay: RecordPlayState?
 	public var play: PlayState?
+	public var statistics = StatisticsState()
 
-	public init(plays: [Play]) {
-		self.plays = plays
-	}
+	public init() {}
 }
 
 public enum PlaysListAction: Equatable {
+	case onAppear
+	case playsResponse([Play])
 	case addButtonTapped
 	case delete(IndexSet)
 	case recordPlay(RecordPlayAction)
 	case play(PlayAction)
+	case statistics(StatisticsAction)
 }
 
 public struct PlaysListEnvironment: Sendable {
+	public var playsDataProvider: PlaysDataProvider
+	public var statisticsDataProvider: StatisticsDataProvider
 	public var solverService: SolverService
 
-	public init(solverService: SolverService) {
+	public init(
+		playsDataProvider: PlaysDataProvider,
+		statisticsDataProvider: StatisticsDataProvider,
+		solverService: SolverService
+	) {
+		self.playsDataProvider = playsDataProvider
+		self.statisticsDataProvider = statisticsDataProvider
 		self.solverService = solverService
 	}
 }
@@ -50,8 +62,25 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 				PlayEnvironment(solverService: $0.solverService)
 			}
 		),
-	.init { state, action, _ in
+	statisticsReducer
+		.pullback(
+			state: \.statistics,
+			action: /PlaysListAction.statistics,
+			environment: {
+				StatisticsEnvironment(statisticsDataProvider: $0.statisticsDataProvider)
+			}
+		),
+	.init { state, action, environment in
 		switch action {
+		case .onAppear:
+			return .task {
+				await .playsResponse(environment.playsDataProvider.fetchAll())
+			}
+
+		case let .playsResponse(plays):
+			state.plays = plays
+			return .none
+
 		case let .delete(indexSet):
 			state.plays.remove(atOffsets: indexSet)
 			// TODO: persist deletion
@@ -66,7 +95,7 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 			state.recordPlay = .init()
 			return .none
 
-		case .recordPlay, .play:
+		case .recordPlay, .play, .statistics:
 			return .none
 		}
 	}

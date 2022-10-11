@@ -3,7 +3,6 @@ import HintsFeature
 import SharedModelsLibrary
 import SolutionsListFeature
 import SolverServiceInterface
-import ValidatorServiceInterface
 
 public struct AnalysisState: Equatable {
 	public var letters: String

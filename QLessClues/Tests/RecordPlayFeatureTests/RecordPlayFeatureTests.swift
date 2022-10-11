@@ -1,7 +1,6 @@
 import ComposableArchitecture
 import RecordPlayFeature
 import SolverServiceInterface
-import ValidatorServiceInterface
 import XCTest
 
 @MainActor
