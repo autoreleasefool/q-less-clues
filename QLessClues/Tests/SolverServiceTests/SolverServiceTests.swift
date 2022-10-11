@@ -1,13 +1,12 @@
-import SolverServiceLive
+import SolverService
 import XCTest
 @testable import SolverServiceInterface
 @testable import ValidatorServiceInterface
 
-final class SolverServiceLiveTests: XCTestCase {
+final class SolverServiceTests: XCTestCase {
 	func testsReturnsAllSolutions() async {
-		let solver: SolverService = .live
-
-		var validator = ValidatorService { _, _ in true }
+		let validator = ValidatorService { _, _ in true }
+		let solver: SolverService = .live(with: .init(validatorService: validator))
 
 		let possibleSolutions = Set([
 			["ART"],
@@ -15,7 +14,7 @@ final class SolverServiceLiveTests: XCTestCase {
 			["TAR"],
 		])
 
-		for await event in solver.findSolutions("ART", validator) {
+		for await event in solver.findSolutions("ART") {
 			switch event {
 			case .progress:
 				break

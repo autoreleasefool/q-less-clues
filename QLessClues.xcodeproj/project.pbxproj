@@ -12,10 +12,10 @@
 		CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BC28C5095200DD75C7 /* Assets.xcassets */; };
 		CA1867C028C5095200DD75C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BF28C5095200DD75C7 /* Preview Assets.xcassets */; };
 		CA5F51D528F2DC9C000FC561 /* AppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = CA5F51D428F2DC9C000FC561 /* AppFeature */; };
-		CA5F51D728F2DEB1000FC561 /* SolverServiceLive in Frameworks */ = {isa = PBXBuildFile; productRef = CA5F51D628F2DEB1000FC561 /* SolverServiceLive */; };
-		CA5F51D928F2DEB1000FC561 /* ValidatorServiceLive in Frameworks */ = {isa = PBXBuildFile; productRef = CA5F51D828F2DEB1000FC561 /* ValidatorServiceLive */; };
 		CA61328A28F050970095A972 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = CA61328928F050970095A972 /* ComposableArchitecture */; };
 		CA6452BE28C5DFA200738762 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = CA6452BD28C5DFA200738762 /* words.txt */; };
+		CA64550728F58FD300FFE0B1 /* SolverService in Frameworks */ = {isa = PBXBuildFile; productRef = CA64550628F58FD300FFE0B1 /* SolverService */; };
+		CA64550928F58FD600FFE0B1 /* ValidatorService in Frameworks */ = {isa = PBXBuildFile; productRef = CA64550828F58FD600FFE0B1 /* ValidatorService */; };
 		CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3628D7E6380035DD1E /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -35,10 +35,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				CA64550728F58FD300FFE0B1 /* SolverService in Frameworks */,
 				CA61328A28F050970095A972 /* ComposableArchitecture in Frameworks */,
 				CA5F51D528F2DC9C000FC561 /* AppFeature in Frameworks */,
-				CA5F51D728F2DEB1000FC561 /* SolverServiceLive in Frameworks */,
-				CA5F51D928F2DEB1000FC561 /* ValidatorServiceLive in Frameworks */,
+				CA64550928F58FD600FFE0B1 /* ValidatorService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -127,8 +127,8 @@
 			packageProductDependencies = (
 				CA61328928F050970095A972 /* ComposableArchitecture */,
 				CA5F51D428F2DC9C000FC561 /* AppFeature */,
-				CA5F51D628F2DEB1000FC561 /* SolverServiceLive */,
-				CA5F51D828F2DEB1000FC561 /* ValidatorServiceLive */,
+				CA64550628F58FD300FFE0B1 /* SolverService */,
+				CA64550828F58FD600FFE0B1 /* ValidatorService */,
 			);
 			productName = QLessClues;
 			productReference = CA1867B528C5095100DD75C7 /* QLessClues.app */;
@@ -434,18 +434,18 @@
 			isa = XCSwiftPackageProductDependency;
 			productName = AppFeature;
 		};
-		CA5F51D628F2DEB1000FC561 /* SolverServiceLive */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SolverServiceLive;
-		};
-		CA5F51D828F2DEB1000FC561 /* ValidatorServiceLive */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ValidatorServiceLive;
-		};
 		CA61328928F050970095A972 /* ComposableArchitecture */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = CA61328828F050970095A972 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
 			productName = ComposableArchitecture;
+		};
+		CA64550628F58FD300FFE0B1 /* SolverService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = SolverService;
+		};
+		CA64550828F58FD600FFE0B1 /* ValidatorService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ValidatorService;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

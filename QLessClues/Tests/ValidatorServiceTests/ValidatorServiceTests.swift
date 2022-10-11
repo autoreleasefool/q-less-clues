@@ -1,10 +1,10 @@
 import DictionaryLibrary
 import SharedModelsLibrary
 import XCTest
-import ValidatorServiceLive
+import ValidatorService
 import ValidatorServiceInterface
 
-final class ValidatorServiceLiveTests: XCTestCase {
+final class ValidatorServiceTests: XCTestCase {
 	let dictionary = WordSet(letterSet: .fullAlphabet, baseDictionary: ["HIP", "RAT"])
 
 	func testAcceptsValidSolution() async {

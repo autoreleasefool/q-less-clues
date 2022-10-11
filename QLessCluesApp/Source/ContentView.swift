@@ -1,15 +1,15 @@
 import AppFeature
 import ComposableArchitecture
-import SolverServiceLive
+import SolverService
 import SwiftUI
-import ValidatorServiceLive
+import ValidatorService
 
 struct ContentView: View {
 	let store = Store(
 		initialState: AppState(),
 		reducer: appReducer,
 		environment: AppEnvironment(
-			solverService: .live(solverServiceLive: .init(validatorService: .live)),
+			solverService: .live(with: .init(validatorService: .live)),
 			validatorService: .live
 		)
 	)

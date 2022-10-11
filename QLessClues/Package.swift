@@ -20,11 +20,11 @@ let package = Package(
 		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
 		.library(name: "SharedModelsLibraryMocks", targets: ["SharedModelsLibraryMocks"]),
 		.library(name: "StatisticsFeature", targets: ["StatisticsFeature"]),
+		.library(name: "SolverService", targets: ["SolverService"]),
 		.library(name: "SolverServiceInterface", targets: ["SolverServiceInterface"]),
-		.library(name: "SolverServiceLive", targets: ["SolverServiceLive"]),
 		.library(name: "SolutionsListFeature", targets: ["SolutionsListFeature"]),
+		.library(name: "ValidatorService", targets: ["ValidatorService"]),
 		.library(name: "ValidatorServiceInterface", targets: ["ValidatorServiceInterface"]),
-		.library(name: "ValidatorServiceLive", targets: ["ValidatorServiceLive"]),
 	],
 	dependencies: [
 		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.40.2"),
@@ -155,19 +155,19 @@ let package = Package(
 			]
 		),
 		.target(
-			name: "SolverServiceInterface",
-			dependencies: ["ValidatorServiceInterface"]
-		),
-		.target(
-			name: "SolverServiceLive",
+			name: "SolverService",
 			dependencies: [
 				"SolverServiceInterface",
-				"ValidatorServiceLive",
+				"ValidatorService",
 			]
 		),
 		.testTarget(
-			name: "SolverServiceLiveTests",
-			dependencies: ["SolverServiceLive"]
+			name: "SolverServiceTests",
+			dependencies: ["SolverService"]
+		),
+		.target(
+			name: "SolverServiceInterface",
+			dependencies: ["ValidatorServiceInterface"]
 		),
 		.target(
 			name: "SolutionsListFeature",
@@ -181,19 +181,19 @@ let package = Package(
 			dependencies: ["SolutionsListFeature"]
 		),
 		.target(
+			name: "ValidatorService",
+			dependencies: ["ValidatorServiceInterface"]
+		),
+		.testTarget(
+			name: "ValidatorServiceTests",
+			dependencies: ["ValidatorService"]
+		),
+		.target(
 			name: "ValidatorServiceInterface",
 			dependencies: [
 				"DictionaryLibrary",
 				"SharedModelsLibrary",
 			]
-		),
-		.target(
-			name: "ValidatorServiceLive",
-			dependencies: ["ValidatorServiceInterface"]
-		),
-		.testTarget(
-			name: "ValidatorServiceLiveTests",
-			dependencies: ["ValidatorServiceLive"]
 		),
 	]
 )
