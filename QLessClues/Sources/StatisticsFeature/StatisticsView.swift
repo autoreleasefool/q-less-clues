@@ -49,6 +49,7 @@ public struct StatisticsView: View {
 				}
 			}
 			.navigationTitle("Statistics")
+			.onAppear { viewStore.send(.onAppear) }
 		}
 	}
 }

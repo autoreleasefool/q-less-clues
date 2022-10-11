@@ -1,26 +1,33 @@
+import Foundation
 import PersistenceServiceInterface
 import RealmSwift
 
 extension PersistenceService {
-	public struct Live {
+	public class Live {
 
-		private let realm: Realm
+		private var realm: Realm!
+		private let queue: DispatchQueue
 
-		public init() {
-			do {
-				realm = try Realm()
-			} catch {
-				fatalError("Failed to open Realm")
+		public init(queue: DispatchQueue = .init(label: "PersistenceService")) {
+			self.queue = queue
+			queue.sync {
+				do {
+					self.realm = try Realm(queue: queue)
+				} catch {
+					fatalError("Failed to open Realm")
+				}
 			}
 		}
 
 		@Sendable func read(_ block: @escaping (Realm) -> Void) {
-			block(realm)
+			queue.async {
+				block(self.realm)
+			}
 		}
 
 		@Sendable func writeAsync(_ block: @escaping (Realm) -> Void, _ onComplete: ((Error?) -> Void)?) {
 			realm.writeAsync({
-				block(realm)
+				block(self.realm)
 			}, onComplete: onComplete)
 		}
 	}
