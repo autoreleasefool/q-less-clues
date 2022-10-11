@@ -1,5 +1,6 @@
 import ComposableArchitecture
 import DictionaryLibrary
+import PlaysDataProviderInterface
 import SolverServiceInterface
 import StatisticsFeature
 import ValidatorServiceInterface
@@ -16,12 +17,12 @@ public enum AppAction: Equatable {
 }
 
 public struct AppEnvironment: Sendable {
+	public var playsDataProvider: PlaysDataProvider
 	public var solverService: SolverService
-	public var validatorService: ValidatorService
 
-	public init(solverService: SolverService, validatorService: ValidatorService) {
+	public init(playsDataProvider: PlaysDataProvider, solverService: SolverService) {
+		self.playsDataProvider = playsDataProvider
 		self.solverService = solverService
-		self.validatorService = validatorService
 	}
 }
 
@@ -31,7 +32,10 @@ public let appReducer = Reducer<AppState, AppAction, AppEnvironment>.combine(
 			state: \.statistics,
 			action: /AppAction.statistics,
 			environment: {
-				StatisticsEnvironment(solverService: $0.solverService)
+				StatisticsEnvironment(
+					playsDataProvider: $0.playsDataProvider,
+					solverService: $0.solverService
+				)
 			}
 		),
 	.init { _, action, _ in

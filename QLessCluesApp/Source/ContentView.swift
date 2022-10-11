@@ -1,5 +1,7 @@
 import AppFeature
 import ComposableArchitecture
+import PersistenceService
+import PlaysDataProvider
 import SolverService
 import SwiftUI
 import ValidatorService
@@ -9,8 +11,8 @@ struct ContentView: View {
 		initialState: AppState(),
 		reducer: appReducer,
 		environment: AppEnvironment(
-			solverService: .live(with: .init(validatorService: .live)),
-			validatorService: .live
+			playsDataProvider: .live(with: .init(persistenceService: .live(with: .init()))),
+			solverService: .live(with: .init(validatorService: .live))
 		)
 	)
 

@@ -14,7 +14,11 @@ let package = Package(
 		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
 		.library(name: "HintsFeature", targets: ["HintsFeature"]),
 		.library(name: "PersistentModelsLibrary", targets: ["PersistentModelsLibrary"]),
+		.library(name: "PersistenceService", targets: ["PersistenceService"]),
+		.library(name: "PersistenceServiceInterface", targets: ["PersistenceServiceInterface"]),
 		.library(name: "PlayFeature", targets: ["PlayFeature"]),
+		.library(name: "PlaysDataProvider", targets: ["PlaysDataProvider"]),
+		.library(name: "PlaysDataProviderInterface", targets: ["PlaysDataProviderInterface"]),
 		.library(name: "PlaysListFeature", targets: ["PlaysListFeature"]),
 		.library(name: "RecordPlayFeature", targets: ["RecordPlayFeature"]),
 		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
@@ -86,6 +90,23 @@ let package = Package(
 			]
 		),
 		.target(
+			name: "PersistenceService",
+			dependencies: [
+				"PersistentModelsLibrary",
+				"PersistenceServiceInterface",
+			]
+		),
+		.testTarget(
+			name: "PersistenceServiceTests",
+			dependencies: ["PersistenceService"]
+		),
+		.target(
+			name: "PersistenceServiceInterface",
+			dependencies: [
+				.product(name: "RealmSwift", package: "realm-swift"),
+			]
+		),
+		.target(
 			name: "PersistentModelsLibrary",
 			dependencies: [
 				"SharedModelsLibrary",
@@ -102,6 +123,22 @@ let package = Package(
 				"PlayFeature",
 				"SharedModelsLibraryMocks",
 			]
+		),
+		.target(
+			name: "PlaysDataProvider",
+			dependencies: [
+				"PersistenceServiceInterface",
+				"PersistentModelsLibrary",
+				"PlaysDataProviderInterface",
+			]
+		),
+		.testTarget(
+			name: "PlaysDataProviderTests",
+			dependencies: ["PlaysDataProvider"]
+		),
+		.target(
+			name: "PlaysDataProviderInterface",
+			dependencies: ["PersistentModelsLibrary"]
 		),
 		.target(
 			name: "PlaysListFeature",

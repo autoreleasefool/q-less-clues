@@ -16,6 +16,8 @@
 		CA6452BE28C5DFA200738762 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = CA6452BD28C5DFA200738762 /* words.txt */; };
 		CA64550728F58FD300FFE0B1 /* SolverService in Frameworks */ = {isa = PBXBuildFile; productRef = CA64550628F58FD300FFE0B1 /* SolverService */; };
 		CA64550928F58FD600FFE0B1 /* ValidatorService in Frameworks */ = {isa = PBXBuildFile; productRef = CA64550828F58FD600FFE0B1 /* ValidatorService */; };
+		CAB1C71628F5AF78000DA81D /* PersistenceService in Frameworks */ = {isa = PBXBuildFile; productRef = CAB1C71528F5AF78000DA81D /* PersistenceService */; };
+		CAB1C71828F5AF7F000DA81D /* PlaysDataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = CAB1C71728F5AF7F000DA81D /* PlaysDataProvider */; };
 		CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3628D7E6380035DD1E /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,7 +40,9 @@
 				CA64550728F58FD300FFE0B1 /* SolverService in Frameworks */,
 				CA61328A28F050970095A972 /* ComposableArchitecture in Frameworks */,
 				CA5F51D528F2DC9C000FC561 /* AppFeature in Frameworks */,
+				CAB1C71828F5AF7F000DA81D /* PlaysDataProvider in Frameworks */,
 				CA64550928F58FD600FFE0B1 /* ValidatorService in Frameworks */,
+				CAB1C71628F5AF78000DA81D /* PersistenceService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -129,6 +133,8 @@
 				CA5F51D428F2DC9C000FC561 /* AppFeature */,
 				CA64550628F58FD300FFE0B1 /* SolverService */,
 				CA64550828F58FD600FFE0B1 /* ValidatorService */,
+				CAB1C71528F5AF78000DA81D /* PersistenceService */,
+				CAB1C71728F5AF7F000DA81D /* PlaysDataProvider */,
 			);
 			productName = QLessClues;
 			productReference = CA1867B528C5095100DD75C7 /* QLessClues.app */;
@@ -446,6 +452,14 @@
 		CA64550828F58FD600FFE0B1 /* ValidatorService */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = ValidatorService;
+		};
+		CAB1C71528F5AF78000DA81D /* PersistenceService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PersistenceService;
+		};
+		CAB1C71728F5AF7F000DA81D /* PlaysDataProvider */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = PlaysDataProvider;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

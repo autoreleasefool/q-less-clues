@@ -2,14 +2,14 @@ import ExtensionsLibrary
 import Foundation
 
 public struct Play: Identifiable, Equatable {
-	public let id: String
+	public let id: UUID
 	public let createdAt: Date
 	public let letters: String
 	public let outcome: Outcome
 	public let difficulty: Difficulty?
 
 	public init(
-		id: String = UUID().uuidString,
+		id: UUID = UUID(),
 		createdAt: Date = Date(),
 		letters: String,
 		outcome: Outcome,

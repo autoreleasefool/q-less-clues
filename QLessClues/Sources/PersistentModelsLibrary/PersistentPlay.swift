@@ -3,7 +3,7 @@ import RealmSwift
 import SharedModelsLibrary
 
 public class PersistentPlay: Object, ObjectKeyIdentifiable {
-	@Persisted(primaryKey: true) var _id: ObjectId
+	@Persisted(primaryKey: true) var _id: UUID
 	@Persisted var createdAt = Date()
 	@Persisted var letters = ""
 	@Persisted var outcome: PersistentOutcome = .unsolved
@@ -13,7 +13,7 @@ public class PersistentPlay: Object, ObjectKeyIdentifiable {
 
 	public func asPlay() -> Play {
 		.init(
-			id: _id.stringValue,
+			id: _id,
 			createdAt: createdAt,
 			letters: letters,
 			outcome: outcome.asOutcome(),
@@ -23,9 +23,9 @@ public class PersistentPlay: Object, ObjectKeyIdentifiable {
 }
 
 extension Play {
-	public func asPersistent() throws -> PersistentPlay {
+	public func asPersistent() -> PersistentPlay {
 		let play = PersistentPlay()
-		play._id = try ObjectId(string: self.id)
+		play._id = self.id
 		play.createdAt = self.createdAt
 		play.letters = self.letters
 		play.outcome = self.outcome.asPersistent()

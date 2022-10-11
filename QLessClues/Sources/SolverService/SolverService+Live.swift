@@ -11,7 +11,7 @@ extension SolverService {
 			self.validatorService = validatorService
 		}
 
-		@Sendable public func findSolutions(letters: String) -> AsyncStream<SolverService.Event> {
+		@Sendable func findSolutions(letters: String) -> AsyncStream<SolverService.Event> {
 			.init { continutation in
 				Task {
 					await BacktrackingSolver(validator: validatorService)
