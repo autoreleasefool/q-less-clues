@@ -25,8 +25,10 @@ public let statisticsReducer =
 	Reducer<StatisticsState, StatisticsAction, StatisticsEnvironment> { state, action, environment in
 		switch action {
 		case .load:
-			return .task {
-				await .statisticsResponse(environment.statisticsDataProvider.fetch())
+			return .run { send in
+				for try await statistics in environment.statisticsDataProvider.fetch() {
+					await send(.statisticsResponse(statistics))
+				}
 			}
 
 		case let .statisticsResponse(statistics):

@@ -1,5 +1,7 @@
+import Combine
 import PersistenceServiceInterface
 import PersistentModelsLibrary
+import RealmSwift
 import SharedModelsLibrary
 import StatisticsDataProviderInterface
 
@@ -11,20 +13,24 @@ extension StatisticsDataProvider {
 			self.persistenceService = persistenceService
 		}
 
-		@Sendable func fetch() async -> Statistics {
-			await withCheckedContinuation { continuation in
-				persistenceService.read { realm in
-					let plays = realm.objects(PersistentPlay.self)
+		private func calculateStatistics(for plays: Results<PersistentPlay>) -> Statistics {
+			let pureWins = plays.where { $0.outcome.equals(.solved) }.count
+			let winsWithHints = plays.where { $0.outcome.equals(.solvedWithHints) }.count
+			let losses = plays.where { $0.outcome.equals(.unsolved) }.count
+			return .init(pureWins: pureWins, winsWithHints: winsWithHints, losses: losses)
+		}
 
-					let pureWins = plays.where { $0.outcome.equals(.solved) }.count
-					let winsWithHints = plays.where { $0.outcome.equals(.solvedWithHints) }.count
-					let losses = plays.where { $0.outcome.equals(.unsolved) }.count
+		@Sendable func fetch() -> AsyncStream<Statistics> {
+			.init { continuation in
+				persistenceService.read {
+					let plays = $0.objects(PersistentPlay.self)
+					let token = plays.observe { _ in
+						continuation.yield(calculateStatistics(for: plays))
+					}
 
-					continuation.resume(returning: .init(
-						pureWins: pureWins,
-						winsWithHints: winsWithHints,
-						losses: losses
-					))
+					continuation.onTermination = { _ in
+						token.invalidate()
+					}
 				}
 			}
 		}

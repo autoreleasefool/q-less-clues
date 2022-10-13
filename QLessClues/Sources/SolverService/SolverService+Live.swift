@@ -12,10 +12,10 @@ extension SolverService {
 		}
 
 		@Sendable func findSolutions(letters: String) -> AsyncStream<SolverService.Event> {
-			.init { continutation in
+			.init { continuation in
 				Task {
 					await BacktrackingSolver(validator: validatorService)
-						.findSolutions(forLetters: letters, to: continutation)
+						.findSolutions(forLetters: letters, to: continuation)
 				}
 			}
 		}

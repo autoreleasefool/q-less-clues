@@ -2,6 +2,7 @@ import Foundation
 import PersistenceServiceInterface
 import PersistentModelsLibrary
 import PlaysDataProviderInterface
+import RealmSwift
 import SharedModelsLibrary
 
 extension PlaysDataProvider {
@@ -21,9 +22,9 @@ extension PlaysDataProvider {
 			}
 		}
 
-		@Sendable func save(play: Play) async throws {
+		@Sendable func save(_ play: Play) async throws {
 			try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-				persistenceService.writeAsync({ realm in
+				persistenceService.write({ realm in
 					realm.add(play.asPersistent())
 				}, {
 					resumeOrThrow($0, continuation: continuation)
@@ -33,7 +34,7 @@ extension PlaysDataProvider {
 
 		@Sendable func delete(play: Play) async throws {
 			try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-				persistenceService.writeAsync({ realm in
+				persistenceService.write({ realm in
 					realm.delete(play.asPersistent())
 				}, {
 					resumeOrThrow($0, continuation: continuation)
@@ -43,7 +44,7 @@ extension PlaysDataProvider {
 
 		@Sendable func update(play: Play) async throws {
 			try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-				persistenceService.writeAsync({ realm in
+				persistenceService.write({ realm in
 					realm.create(PersistentPlay.self, value: play.asPersistent(), update: .modified)
 				}, {
 					resumeOrThrow($0, continuation: continuation)
@@ -51,22 +52,40 @@ extension PlaysDataProvider {
 			}
 		}
 
-		@Sendable func fetchAll() async -> [Play] {
-			await withCheckedContinuation { continuation in
-				persistenceService.read { realm in
-					let plays = realm.objects(PersistentPlay.self)
-					continuation.resume(returning: plays.map { $0.asPlay() })
+		@Sendable func fetchAll() -> AsyncStream<[Play]> {
+			.init { continuation in
+				persistenceService.read {
+					let plays = $0.objects(PersistentPlay.self)
+					let token = plays.observe { _ in
+						continuation.yield(plays.map { $0.asPlay() })
+					}
+
+					continuation.onTermination = { _ in
+						token.invalidate()
+					}
 				}
 			}
 		}
 
-		@Sendable func fetchOne(id: UUID) async -> Play? {
-			await withCheckedContinuation { continuation in
-				persistenceService.read { realm in
-					let play = realm.objects(PersistentPlay.self)
-						.filter("id = %@", id).first
+		@Sendable func fetchOne(id: UUID) -> AsyncStream<Play> {
+			.init { continuation in
+				persistenceService.read {
+					let play = $0.objects(PersistentPlay.self)
+						.filter("id = %@", id)
+						.first
 
-					continuation.resume(returning: play?.asPlay())
+					var token: NotificationToken?
+					if let play {
+						token = play.observe { _ in
+							continuation.yield(play.asPlay())
+						}
+					} else {
+						continuation.finish()
+					}
+
+					continuation.onTermination = { [token = token] _ in
+						token?.invalidate()
+					}
 				}
 			}
 		}

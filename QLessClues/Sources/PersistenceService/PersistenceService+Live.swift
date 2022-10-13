@@ -19,13 +19,13 @@ extension PersistenceService {
 			}
 		}
 
-		@Sendable func read(_ block: @escaping (Realm) -> Void) {
-			queue.async {
+		@Sendable func read(_ block: (Realm) -> Void) {
+			queue.sync {
 				block(self.realm)
 			}
 		}
 
-		@Sendable func writeAsync(_ block: @escaping (Realm) -> Void, _ onComplete: ((Error?) -> Void)?) {
+		@Sendable func write(_ block: @escaping (Realm) -> Void, _ onComplete: ((Error?) -> Void)?) {
 			realm.writeAsync({
 				block(self.realm)
 			}, onComplete: onComplete)
@@ -37,7 +37,7 @@ extension PersistenceService {
 	public static func live(with persistenceServiceLive: Live) -> Self {
 		.init(
 			read: persistenceServiceLive.read,
-			writeAsync: persistenceServiceLive.writeAsync
+			write: persistenceServiceLive.write
 		)
 	}
 }

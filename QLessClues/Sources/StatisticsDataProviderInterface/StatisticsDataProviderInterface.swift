@@ -1,10 +1,9 @@
-import Foundation
 import SharedModelsLibrary
 
 public struct StatisticsDataProvider: Sendable {
-	public var fetch: @Sendable () async -> Statistics
+	public var fetch: @Sendable () -> AsyncStream<Statistics>
 
-	public init(fetch: @escaping @Sendable () async -> Statistics) {
+	public init(fetch: @escaping @Sendable () -> AsyncStream<Statistics>) {
 		self.fetch = fetch
 	}
 }

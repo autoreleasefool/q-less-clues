@@ -73,8 +73,10 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 	.init { state, action, environment in
 		switch action {
 		case .onAppear:
-			return .task {
-				await .playsResponse(environment.playsDataProvider.fetchAll())
+			return .run { send in
+				for await plays in environment.playsDataProvider.fetchAll() {
+					await send(.playsResponse(plays))
+				}
 			}
 
 		case let .playsResponse(plays):
