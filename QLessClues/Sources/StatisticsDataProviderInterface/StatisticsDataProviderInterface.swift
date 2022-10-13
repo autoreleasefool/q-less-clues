@@ -7,3 +7,11 @@ public struct StatisticsDataProvider: Sendable {
 		self.fetch = fetch
 	}
 }
+
+#if DEBUG
+extension StatisticsDataProvider {
+	public static func mock() -> Self {
+		.init(fetch: { fatalError("\(Self.self).fetch") })
+	}
+}
+#endif

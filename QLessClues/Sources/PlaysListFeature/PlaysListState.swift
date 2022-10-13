@@ -111,14 +111,13 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 			}
 
 			let play = state.plays[index]
-			state.plays.remove(atOffsets: indexSet)
+			state.plays.remove(at: index)
 			return .task { [play = play] in
 				try await environment.playsDataProvider.delete(play)
 				return .playDeleted
 			}
 
 		case .play(.playDeleted):
-			state.selection = nil
 			return .none
 
 		case .play(.onDisappear):

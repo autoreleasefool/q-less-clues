@@ -5,7 +5,7 @@ import SolutionsListFeature
 import SolverServiceInterface
 
 public struct AnalysisState: Equatable {
-	public var letters = ""
+	public var letters: String
 	public var solutions: [Solution] = []
 	public var mode: Mode = .notStarted
 	public var difficulty: Play.Difficulty?
@@ -16,7 +16,9 @@ public struct AnalysisState: Equatable {
 		self.letters.count == 12
 	}
 
-	public init() {}
+	public init(letters: String = "") {
+		self.letters = letters
+	}
 }
 
 public enum Mode: Equatable {

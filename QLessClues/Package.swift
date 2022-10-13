@@ -117,7 +117,10 @@ let package = Package(
 		),
 		.target(
 			name: "PlayFeature",
-			dependencies: ["AnalysisFeature"]
+			dependencies: [
+				"AnalysisFeature",
+				"PlaysDataProviderInterface",
+			]
 		),
 		.testTarget(
 			name: "PlayFeatureTests",

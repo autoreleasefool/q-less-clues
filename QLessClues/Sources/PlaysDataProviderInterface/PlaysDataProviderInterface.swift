@@ -22,3 +22,17 @@ public struct PlaysDataProvider: Sendable {
 		self.fetchOne = fetchOne
 	}
 }
+
+#if DEBUG
+extension PlaysDataProvider {
+	public static func mock() -> Self {
+		.init(
+			save: { _ in fatalError("\(Self.self).save") },
+			delete: { _ in fatalError("\(Self.self).delete") },
+			update: { _ in fatalError("\(Self.self).update") },
+			fetchAll: { fatalError("\(Self.self).fetchAll") },
+			fetchOne: { _ in fatalError("\(Self.self).fetchOne") }
+		)
+	}
+}
+#endif

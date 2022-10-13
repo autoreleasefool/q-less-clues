@@ -13,3 +13,13 @@ public struct SolverService: Sendable {
 		case progress(Double)
 	}
 }
+
+#if DEBUG
+extension SolverService {
+	public static func mock() -> Self {
+		.init(
+			findSolutions: { _ in fatalError("\(Self.self).findSolutions") }
+		)
+	}
+}
+#endif

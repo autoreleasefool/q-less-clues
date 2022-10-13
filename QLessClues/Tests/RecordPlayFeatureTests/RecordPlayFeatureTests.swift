@@ -5,28 +5,27 @@ import XCTest
 
 @MainActor
 final class RecordPlayFeatureTests: XCTestCase {
-	let mockEnvironment: RecordPlayEnvironment = .init(
-		solverService: .init { _ in
-			XCTFail("Unimplemented")
-			return AsyncStream<SolverService.Event>.streamWithContinuation().stream
-		}
-	)
+	func mockEnvironment() -> RecordPlayEnvironment {
+		.init(playsDataProvider: .mock(), solverService: .mock())
+	}
 
 	func testChangeLetters() async {
 		let store = TestStore(
 			initialState: .init(),
 			reducer: recordPlayReducer,
-			environment: mockEnvironment
+			environment: mockEnvironment()
 		)
 
 		_ = await store.send(.lettersChanged(""))
 
 		_ = await store.send(.lettersChanged("a")) {
 			$0.letters = "A"
+			$0.analysis.letters = "A"
 		}
 
 		_ = await store.send(.lettersChanged("AB")) {
 			$0.letters = "AB"
+			$0.analysis.letters = "AB"
 		}
 	}
 
@@ -34,12 +33,12 @@ final class RecordPlayFeatureTests: XCTestCase {
 		let store = TestStore(
 			initialState: .init(),
 			reducer: recordPlayReducer,
-			environment: mockEnvironment
+			environment: mockEnvironment()
 		)
 
 		_ = await store.send(.lettersChanged("ABCDEFGHIJKL")) {
 			$0.letters = "ABCDEFGHIJKL"
-			$0.analysisState = .init(letters: "ABCDEFGHIJKL")
+			$0.analysis.letters = "ABCDEFGHIJKL"
 		}
 	}
 
@@ -47,7 +46,7 @@ final class RecordPlayFeatureTests: XCTestCase {
 		let store = TestStore(
 			initialState: .init(),
 			reducer: recordPlayReducer,
-			environment: mockEnvironment
+			environment: mockEnvironment()
 		)
 
 		_ = await store.send(.outcomeChanged(.unsolved))
