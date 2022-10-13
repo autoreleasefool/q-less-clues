@@ -9,9 +9,9 @@ import StatisticsDataProviderInterface
 import StatisticsFeature
 
 public struct PlaysListState: Equatable {
-	public var plays: [Play] = []
+	public var plays: IdentifiedArrayOf<Play> = []
+	public var selection: Identified<Play.ID, PlayState>?
 	public var recordPlay: RecordPlayState?
-	public var play: PlayState?
 	public var statistics = StatisticsState()
 
 	public init() {}
@@ -20,7 +20,8 @@ public struct PlaysListState: Equatable {
 public enum PlaysListAction: Equatable {
 	case onAppear
 	case playsResponse([Play])
-	case addButtonTapped
+	case setRecordSheet(isPresented: Bool)
+	case setPlaySelection(selection: Play.ID?)
 	case delete(IndexSet)
 	case recordPlay(RecordPlayAction)
 	case play(PlayAction)
@@ -54,9 +55,14 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 			}
 		),
 	playReducer
+		.pullback(
+			state: \Identified.value,
+			action: .self,
+			environment: { $0 }
+		)
 		.optional()
 		.pullback(
-			state: \.play,
+			state: \.selection,
 			action: /PlaysListAction.play,
 			environment: {
 				PlayEnvironment(solverService: $0.solverService)
@@ -80,7 +86,7 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 			}
 
 		case let .playsResponse(plays):
-			state.plays = plays
+			state.plays = IdentifiedArrayOf(uniqueElements: plays)
 			return .none
 
 		case let .delete(indexSet):
@@ -90,11 +96,25 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 
 		case .play(.alert(.deleteButtonTapped)):
 			// TODO: delete the given play
-			state.play = nil
+			state.selection = nil
 			return .none
 
-		case .addButtonTapped:
+		case let .setPlaySelection(.some(id)):
+			if let play = state.plays[id: id] {
+				state.selection = Identified(PlayState(play: play), id: id)
+			}
+			return .none
+
+		case .setPlaySelection(selection: .none):
+			state.selection = nil
+			return .none
+
+		case .setRecordSheet(isPresented: true):
 			state.recordPlay = .init()
+			return .none
+
+		case .setRecordSheet(isPresented: false):
+			state.recordPlay = nil
 			return .none
 
 		case .recordPlay, .play, .statistics:

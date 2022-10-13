@@ -1,5 +1,6 @@
 import ComposableArchitecture
 import PlayFeature
+import RecordPlayFeature
 import SharedModelsLibrary
 import StatisticsFeature
 import SwiftUI
@@ -9,14 +10,19 @@ public struct PlaysList: View {
 
 	struct ViewState: Equatable {
 		let plays: IdentifiedArrayOf<Play>
+		let selection: Identified<Play.ID, PlayState>?
+		let isSheetPresented: Bool
 
 		init(state: PlaysListState) {
-			self.plays = .init(uniqueElements: state.plays)
+			self.plays = state.plays
+			self.selection = state.selection
+			self.isSheetPresented = state.recordPlay != nil
 		}
 	}
 
 	enum ViewAction {
-		case addButtonTapped
+		case setRecordSheet(isPresented: Bool)
+		case setPlaySelection(selection: Play.ID?)
 		case delete(IndexSet)
 	}
 
@@ -28,39 +34,60 @@ public struct PlaysList: View {
 		WithViewStore(store, observe: ViewState.init, send: PlaysListAction.init) { viewStore in
 			List {
 				StatisticsView(store: store.scope(state: \.statistics, action: PlaysListAction.statistics))
-
-				Section("Recent Plays") {
-					if viewStore.plays.isEmpty {
-						Text("You haven't added any plays yet")
-					} else {
-						ForEach(viewStore.plays) { play in
-							NavigationLink(
-								destination: IfLetStore(
-									store.scope(
-										state: \.play,
-										action: PlaysListAction.play
-									)
-								) {
-									PlayView(store: $0)
-								}
-							) {
-								Text(play.letters)
-									.frame(maxWidth: .infinity, alignment: .leading)
-								Text(String(play.outcome.rawValue.first ?? "❓"))
-							}
-						}
-						.onDelete { viewStore.send(.delete($0)) }
-					}
-				}
+				recentPlaysSection(viewStore: viewStore)
 			}
+			.navigationTitle("Plays")
 			.toolbar {
 				ToolbarItem(placement: .navigationBarTrailing) {
 					Button {
-						viewStore.send(.addButtonTapped)
+						viewStore.send(.setRecordSheet(isPresented: true))
 					} label: {
 						Image(systemName: "plus")
 					}
 				}
+			}
+			.sheet(
+				isPresented: viewStore.binding(
+					get: \.isSheetPresented,
+					send: ViewAction.setRecordSheet(isPresented:)
+				)
+			) {
+				IfLetStore(store.scope(state: \.recordPlay, action: PlaysListAction.recordPlay)) { scopedStore in
+					NavigationStack {
+						RecordPlayView(store: scopedStore)
+					}
+				}
+			}
+		}
+	}
+
+	private func recentPlaysSection(viewStore: ViewStore<ViewState, ViewAction>) -> some View {
+		Section("Recent Plays") {
+			if viewStore.plays.isEmpty {
+				Text("You haven't added any plays yet")
+			} else {
+				ForEach(viewStore.plays) { play in
+					NavigationLink(
+						destination: IfLetStore(
+							store.scope(
+								state: \.selection?.value,
+								action: PlaysListAction.play
+							)
+						) {
+							PlayView(store: $0)
+						},
+						tag: play.id,
+						selection: viewStore.binding(
+							get: \.selection?.id,
+							send: ViewAction.setPlaySelection(selection:)
+						)
+					) {
+						Text(play.letters)
+							.frame(maxWidth: .infinity, alignment: .leading)
+						Text(String(play.outcome.rawValue.first ?? "❓"))
+					}
+				}
+				.onDelete { viewStore.send(.delete($0)) }
 			}
 		}
 	}
@@ -71,8 +98,10 @@ extension PlaysListAction {
 		switch action {
 		case let .delete(indexSet):
 			self = .delete(indexSet)
-		case .addButtonTapped:
-			self = .addButtonTapped
+		case let .setRecordSheet(isPresented):
+			self = .setRecordSheet(isPresented: isPresented)
+		case let .setPlaySelection(selection):
+			self = .setPlaySelection(selection: selection)
 		}
 	}
 }

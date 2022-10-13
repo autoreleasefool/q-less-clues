@@ -24,6 +24,10 @@ public struct RecordPlayView: View {
 		case outcomeChanged(Play.Outcome)
 	}
 
+	public init(store: Store<RecordPlayState, RecordPlayAction>) {
+		self.store = store
+	}
+
 	public var body: some View {
 		WithViewStore(store, observe: ViewState.init, send: RecordPlayAction.init) { viewStore in
 			List {

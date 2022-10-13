@@ -23,7 +23,7 @@ public struct StatisticsView: View {
 
 	public var body: some View {
 		WithViewStore(store, observe: ViewState.init, send: StatisticsAction.init) { viewStore in
-			Section {
+			Section("Statistics") {
 				if let statistics = viewStore.statistics {
 					HStack {
 						Spacer()
