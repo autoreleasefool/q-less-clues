@@ -46,9 +46,7 @@ public struct RecordPlayView: View {
 					}
 				}
 
-				IfLetStore(store.scope(state: \.analysisState, action: RecordPlayAction.analysis)) {
-					AnalysisView(store: $0)
-				}
+				AnalysisView(store: store.scope(state: \.analysis, action: RecordPlayAction.analysis))
 			}
 			.navigationTitle("New Play")
 			.toolbar {

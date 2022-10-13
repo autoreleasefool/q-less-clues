@@ -14,7 +14,8 @@ public struct StatisticsView: View {
 	}
 
 	enum ViewAction {
-		case load
+		case onAppear
+		case onDisappear
 	}
 
 	public init(store: Store<StatisticsState, StatisticsAction>) {
@@ -48,7 +49,8 @@ public struct StatisticsView: View {
 					ProgressView()
 				}
 			}
-			.onAppear { viewStore.send(.load) }
+			.onAppear { viewStore.send(.onAppear) }
+			.onDisappear { viewStore.send(.onDisappear) }
 		}
 	}
 }
@@ -56,8 +58,10 @@ public struct StatisticsView: View {
 extension StatisticsAction {
 	init(action: StatisticsView.ViewAction) {
 		switch action {
-		case .load:
-			self = .load
+		case .onAppear:
+			self = .onAppear
+		case .onDisappear:
+			self = .onDisappear
 		}
 	}
 }

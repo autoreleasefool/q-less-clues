@@ -1,16 +1,17 @@
 import AnalysisFeature
 import ComposableArchitecture
+import PlaysDataProviderInterface
 import SharedModelsLibrary
 import SolverServiceInterface
 
 public struct PlayState: Equatable {
 	public var play: Play
 	public var deleteAlert: AlertState<DeletePlayAlertAction>?
-	public var analysis: AnalysisState
+	public var analysis = AnalysisState()
 
 	public init(play: Play) {
 		self.play = play
-		self.analysis = AnalysisState(letters: play.letters)
+		self.analysis.letters = play.letters
 	}
 }
 
@@ -18,12 +19,16 @@ public enum PlayAction: Equatable {
 	case alert(DeletePlayAlertAction)
 	case deleteButtonTapped
 	case analysis(AnalysisAction)
+	case playDeleted
+	case onDisappear
 }
 
 public struct PlayEnvironment: Sendable {
+	public var playsDataProvider: PlaysDataProvider
 	public var solverService: SolverService
 
-	public init(solverService: SolverService) {
+	public init(playsDataProvider: PlaysDataProvider, solverService: SolverService) {
+		self.playsDataProvider = playsDataProvider
 		self.solverService = solverService
 	}
 }
@@ -37,10 +42,20 @@ public let playReducer = Reducer<PlayState, PlayAction, PlayEnvironment>.combine
 				AnalysisEnvironment(solverService: $0.solverService)
 			}
 		),
-	.init { state, action, _ in
+	.init { state, action, environment in
 		switch action {
-		case .alert(.nevermindButtonTapped), .alert(.dismissed), .alert(.deleteButtonTapped):
+		case .alert(.nevermindButtonTapped), .alert(.dismissed):
 			state.deleteAlert = nil
+			return .none
+
+		case .alert(.deleteButtonTapped):
+			state.deleteAlert = nil
+			return .task { [play = state.play] in
+				try await environment.playsDataProvider.delete(play)
+				return .playDeleted
+			}
+
+		case .playDeleted:
 			return .none
 
 		case .deleteButtonTapped:
@@ -48,6 +63,9 @@ public let playReducer = Reducer<PlayState, PlayAction, PlayEnvironment>.combine
 			return .none
 
 		case .analysis:
+			return .none
+
+		case .onDisappear:
 			return .none
 		}
 	}

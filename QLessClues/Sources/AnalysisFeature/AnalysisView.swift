@@ -8,21 +8,24 @@ public struct AnalysisView: View {
 	let store: Store<AnalysisState, AnalysisAction>
 
 	struct ViewState: Equatable {
-		var solutions: [Solution]
-		var difficulty: Play.Difficulty?
-		var progress: Double
-		var hasStarted: Bool
+		let solutions: [Solution]
+		let difficulty: Play.Difficulty?
+		let progress: Double
+		let hasStarted: Bool
+		let isPlayable: Bool
 
 		init(state: AnalysisState) {
 			self.solutions = state.solutions
 			self.difficulty = state.difficulty
 			self.progress = state.mode.progress
-			self.hasStarted = !state.mode.hasStarted
+			self.hasStarted = state.mode.hasStarted
+			self.isPlayable = state.isPlayable
 		}
 	}
 
 	enum ViewAction {
 		case beginButtonTapped
+		case onDisappear
 	}
 
 	public init(store: Store<AnalysisState, AnalysisAction>) {
@@ -34,8 +37,9 @@ public struct AnalysisView: View {
 			Section {
 				Button("Analyze") { viewStore.send(.beginButtonTapped) }
 					.frame(maxWidth: .infinity)
-					.disabled(!viewStore.hasStarted)
+					.disabled(viewStore.hasStarted || !viewStore.isPlayable)
 			}
+			.onDisappear { viewStore.send(.onDisappear) }
 
 			IfLetStore(store.scope(state: \.hints, action: AnalysisAction.hints)) {
 				HintsView(store: $0)
@@ -66,6 +70,8 @@ extension AnalysisAction {
 		switch action {
 		case .beginButtonTapped:
 			self = .beginButtonTapped
+		case .onDisappear:
+			self = .onDisappear
 		}
 	}
 }

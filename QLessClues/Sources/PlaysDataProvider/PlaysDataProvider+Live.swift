@@ -35,7 +35,9 @@ extension PlaysDataProvider {
 		@Sendable func delete(play: Play) async throws {
 			try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
 				persistenceService.write({ realm in
-					realm.delete(play.asPersistent())
+					if let persistent = realm.object(ofType: PersistentPlay.self, forPrimaryKey: play.id) {
+						realm.delete(persistent)
+					}
 				}, {
 					resumeOrThrow($0, continuation: continuation)
 				})
@@ -71,11 +73,12 @@ extension PlaysDataProvider {
 			.init { continuation in
 				persistenceService.read {
 					let play = $0.objects(PersistentPlay.self)
-						.filter("id = %@", id)
+						.filter("_id = %@", id)
 						.first
 
 					var token: NotificationToken?
 					if let play {
+						continuation.yield(play.asPlay())
 						token = play.observe { _ in
 							continuation.yield(play.asPlay())
 						}

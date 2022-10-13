@@ -1,7 +1,7 @@
 import ExtensionsLibrary
 import Foundation
 
-public struct Play: Identifiable, Equatable {
+public struct Play: Hashable, Identifiable, Equatable {
 	public let id: UUID
 	public let createdAt: Date
 	public let letters: String

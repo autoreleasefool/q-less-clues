@@ -21,7 +21,7 @@ final class AnalysisFeatureTests: XCTestCase {
 			$0.mode = .solving(progress: 0)
 		}
 
-		_ = await store.send(.analysisCancelled)
+		_ = await store.send(.onDisappear)
 	}
 
 	func testHandlesSolutions() async {
@@ -49,7 +49,7 @@ final class AnalysisFeatureTests: XCTestCase {
 			$0.mode = .solving(progress: 0.2)
 		}
 
-		_ = await store.send(.analysisCancelled)
+		_ = await store.send(.onDisappear)
 	}
 
 	func testHandlesSolverFinishes() async {

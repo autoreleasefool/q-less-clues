@@ -159,7 +159,10 @@ let package = Package(
 		),
 		.target(
 			name: "RecordPlayFeature",
-			dependencies: ["AnalysisFeature"]
+			dependencies: [
+				"AnalysisFeature",
+				"PlaysDataProviderInterface",
+			]
 		),
 		.testTarget(
 			name: "RecordPlayFeatureTests",

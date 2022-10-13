@@ -2,6 +2,8 @@ import ComposableArchitecture
 import SharedModelsLibrary
 import StatisticsDataProviderInterface
 
+private enum StatisticsCancellable {}
+
 public struct StatisticsState: Equatable {
 	public var statistics: Statistics?
 
@@ -9,7 +11,8 @@ public struct StatisticsState: Equatable {
 }
 
 public enum StatisticsAction: Equatable {
-	case load
+	case onAppear
+	case onDisappear
 	case statisticsResponse(Statistics)
 }
 
@@ -24,12 +27,16 @@ public struct StatisticsEnvironment: Sendable {
 public let statisticsReducer =
 	Reducer<StatisticsState, StatisticsAction, StatisticsEnvironment> { state, action, environment in
 		switch action {
-		case .load:
+		case .onAppear:
 			return .run { send in
 				for try await statistics in environment.statisticsDataProvider.fetch() {
 					await send(.statisticsResponse(statistics))
 				}
 			}
+			.cancellable(id: StatisticsCancellable.self)
+
+		case .onDisappear:
+			return .cancel(id: StatisticsCancellable.self)
 
 		case let .statisticsResponse(statistics):
 			state.statistics = statistics

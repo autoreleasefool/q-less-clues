@@ -8,6 +8,9 @@ import SolverServiceInterface
 import StatisticsDataProviderInterface
 import StatisticsFeature
 
+private enum PlaysCancellable {}
+private enum PlayCancellable {}
+
 public struct PlaysListState: Equatable {
 	public var plays: IdentifiedArrayOf<Play> = []
 	public var selection: Identified<Play.ID, PlayState>?
@@ -19,10 +22,13 @@ public struct PlaysListState: Equatable {
 
 public enum PlaysListAction: Equatable {
 	case onAppear
+	case onDisappear
 	case playsResponse([Play])
 	case setRecordSheet(isPresented: Bool)
 	case setPlaySelection(selection: Play.ID?)
+	case playResponse(Play)
 	case delete(IndexSet)
+	case playDeleted
 	case recordPlay(RecordPlayAction)
 	case play(PlayAction)
 	case statistics(StatisticsAction)
@@ -51,7 +57,10 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 			state: \.recordPlay,
 			action: /PlaysListAction.recordPlay,
 			environment: {
-				RecordPlayEnvironment(solverService: $0.solverService)
+				RecordPlayEnvironment(
+					playsDataProvider: $0.playsDataProvider,
+					solverService: $0.solverService
+				)
 			}
 		),
 	playReducer
@@ -65,7 +74,10 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 			state: \.selection,
 			action: /PlaysListAction.play,
 			environment: {
-				PlayEnvironment(solverService: $0.solverService)
+				PlayEnvironment(
+					playsDataProvider: $0.playsDataProvider,
+					solverService: $0.solverService
+				)
 			}
 		),
 	statisticsReducer
@@ -84,29 +96,50 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 					await send(.playsResponse(plays))
 				}
 			}
+			.cancellable(id: PlaysCancellable.self)
+
+		case .onDisappear:
+			return .cancel(ids: [PlaysCancellable.self, PlayCancellable.self])
 
 		case let .playsResponse(plays):
 			state.plays = IdentifiedArrayOf(uniqueElements: plays)
 			return .none
 
 		case let .delete(indexSet):
-			state.plays.remove(atOffsets: indexSet)
-			// TODO: persist deletion
-			return .none
+			guard let index = indexSet.first, index < state.plays.count else {
+				return .none
+			}
 
-		case .play(.alert(.deleteButtonTapped)):
-			// TODO: delete the given play
+			let play = state.plays[index]
+			state.plays.remove(atOffsets: indexSet)
+			return .task { [play = play] in
+				try await environment.playsDataProvider.delete(play)
+				return .playDeleted
+			}
+
+		case .play(.playDeleted):
 			state.selection = nil
 			return .none
 
-		case let .setPlaySelection(.some(id)):
-			if let play = state.plays[id: id] {
-				state.selection = Identified(PlayState(play: play), id: id)
-			}
+		case .play(.onDisappear):
+			state.selection = nil
 			return .none
+
+		case let .setPlaySelection(selection: .some(id)):
+			return .task {
+				for await play in environment.playsDataProvider.fetchOne(id) {
+					return .playResponse(play)
+				}
+				return .setPlaySelection(selection: nil)
+			}
+			.cancellable(id: PlayCancellable.self)
 
 		case .setPlaySelection(selection: .none):
 			state.selection = nil
+			return .none
+
+		case let .playResponse(play):
+			state.selection = Identified(PlayState(play: play), id: play.id)
 			return .none
 
 		case .setRecordSheet(isPresented: true):
@@ -117,7 +150,11 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 			state.recordPlay = nil
 			return .none
 
-		case .recordPlay, .play, .statistics:
+		case .recordPlay(.playSaved):
+			state.recordPlay = nil
+			return .none
+
+		case .recordPlay, .play, .statistics, .playDeleted:
 			return .none
 		}
 	}

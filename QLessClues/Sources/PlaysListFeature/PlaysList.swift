@@ -21,6 +21,8 @@ public struct PlaysList: View {
 	}
 
 	enum ViewAction {
+		case onAppear
+		case onDisappear
 		case setRecordSheet(isPresented: Bool)
 		case setPlaySelection(selection: Play.ID?)
 		case delete(IndexSet)
@@ -58,6 +60,8 @@ public struct PlaysList: View {
 					}
 				}
 			}
+			.onAppear { viewStore.send(.onAppear) }
+			.onDisappear { viewStore.send(.onDisappear) }
 		}
 	}
 
@@ -102,6 +106,10 @@ extension PlaysListAction {
 			self = .setRecordSheet(isPresented: isPresented)
 		case let .setPlaySelection(selection):
 			self = .setPlaySelection(selection: selection)
+		case .onAppear:
+			self = .onAppear
+		case .onDisappear:
+			self = .onDisappear
 		}
 	}
 }

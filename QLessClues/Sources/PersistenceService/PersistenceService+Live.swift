@@ -26,9 +26,11 @@ extension PersistenceService {
 		}
 
 		@Sendable func write(_ block: @escaping (Realm) -> Void, _ onComplete: ((Error?) -> Void)?) {
-			realm.writeAsync({
-				block(self.realm)
-			}, onComplete: onComplete)
+			queue.async {
+				self.realm.writeAsync({
+					block(self.realm)
+				}, onComplete: onComplete)
+			}
 		}
 	}
 }

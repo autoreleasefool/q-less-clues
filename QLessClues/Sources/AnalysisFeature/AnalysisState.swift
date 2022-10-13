@@ -5,16 +5,18 @@ import SolutionsListFeature
 import SolverServiceInterface
 
 public struct AnalysisState: Equatable {
-	public var letters: String
+	public var letters = ""
 	public var solutions: [Solution] = []
 	public var mode: Mode = .notStarted
 	public var difficulty: Play.Difficulty?
 	public var hints: HintsState?
 	public var solutionsList: SolutionsListState = .init(solutions: [])
 
-	public init(letters: String) {
-		self.letters = letters
+	var isPlayable: Bool {
+		self.letters.count == 12
 	}
+
+	public init() {}
 }
 
 public enum Mode: Equatable {
@@ -39,7 +41,7 @@ public enum Mode: Equatable {
 
 public enum AnalysisAction: Equatable {
 	case beginButtonTapped
-	case analysisCancelled
+	case onDisappear
 	case solverService(SolverService.Event)
 	case solverServiceFinished
 	case hints(HintsAction)
@@ -72,9 +74,6 @@ public let analysisReducer = Reducer<AnalysisState, AnalysisAction, AnalysisEnvi
 		),
 	.init { state, action, environment in
 		switch action {
-		case .analysisCancelled:
-			return .cancel(id: AnalysisTearDown.self)
-
 		case .beginButtonTapped:
 			state.mode = .solving(progress: 0)
 			return .run { [letters = state.letters] send in
@@ -98,6 +97,9 @@ public let analysisReducer = Reducer<AnalysisState, AnalysisAction, AnalysisEnvi
 		case let .solverService(.progress(progress)):
 			state.mode = .solving(progress: progress)
 			return .none
+
+		case .onDisappear:
+			return .cancel(id: AnalysisTearDown.self)
 
 		case .hints, .solutionsList:
 			return .none
