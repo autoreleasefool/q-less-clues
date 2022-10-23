@@ -1,45 +1,59 @@
 import Foundation
+import GRDB
 import PersistenceServiceInterface
-import RealmSwift
 
 extension PersistenceService {
-	public class Live {
+	public static let liveValue: Self = {
+		let appDb: AppDatabase
+		do {
+			let fileManager = FileManager.default
+			let folderUrl = try fileManager
+				.url(for: .documentDirectory, in: .userDomainMask, appropriateFor: nil, create: true)
+				.appending(path: "database", directoryHint: .isDirectory)
 
-		private var realm: Realm!
-		private let queue: DispatchQueue
+			try fileManager.createDirectory(at: folderUrl, withIntermediateDirectories: true)
 
-		public init(queue: DispatchQueue = .init(label: "PersistenceService")) {
-			self.queue = queue
-			queue.sync {
-				do {
-					self.realm = try Realm(queue: queue)
-				} catch {
-					fatalError("Failed to open Realm")
-				}
-			}
+			let dbUrl = folderUrl.appending(path: "db.sqlite")
+			let dbPool = try DatabasePool(path: dbUrl.path())
+
+			appDb = try AppDatabase(dbPool)
+		} catch {
+			// TODO: should notify user of failure to open DB
+			fatalError("Unable to access persistence service, \(error)")
 		}
 
-		@Sendable func read(_ block: (Realm) -> Void) {
-			queue.sync {
-				block(self.realm)
+		return Self(
+			reader: {
+				appDb.dbReader
+			},
+			write: { block in
+				try await block(appDb.dbWriter)
 			}
-		}
-
-		@Sendable func write(_ block: @escaping (Realm) -> Void, _ onComplete: ((Error?) -> Void)?) {
-			queue.async {
-				self.realm.writeAsync({
-					block(self.realm)
-				}, onComplete: onComplete)
-			}
-		}
-	}
+		)
+	}()
 }
 
-extension PersistenceService {
-	public static func live(with persistenceServiceLive: Live) -> Self {
-		.init(
-			read: persistenceServiceLive.read,
-			write: persistenceServiceLive.write
-		)
+struct AppDatabase {
+	let dbWriter: any DatabaseWriter
+
+	var dbReader: DatabaseReader {
+		dbWriter
+	}
+
+	init(_ dbWriter: any DatabaseWriter) throws {
+		self.dbWriter = dbWriter
+		try migrator.migrate(dbWriter)
+	}
+
+	private var migrator: DatabaseMigrator {
+		var migrator = DatabaseMigrator()
+
+		#if DEBUG
+		migrator.eraseDatabaseOnSchemaChange = true
+		#endif
+
+		migrator.registerMigration(Migration20221022CreatePlay.self)
+
+		return migrator
 	}
 }

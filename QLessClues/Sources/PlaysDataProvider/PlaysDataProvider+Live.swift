@@ -1,93 +1,82 @@
 import Foundation
+import GRDB
 import PersistenceServiceInterface
 import PersistentModelsLibrary
 import PlaysDataProviderInterface
-import RealmSwift
 import SharedModelsLibrary
 
 extension PlaysDataProvider {
 	public struct Live {
 
 		private let persistenceService: PersistenceService
+		private let playsPersistenceService: PlaysPersistenceService
 
-		public init(persistenceService: PersistenceService) {
+		public init(persistenceService: PersistenceService, playsPersistenceService: PlaysPersistenceService) {
 			self.persistenceService = persistenceService
+			self.playsPersistenceService = playsPersistenceService
 		}
 
-		private func resumeOrThrow(_ error: Error?, continuation: CheckedContinuation<Void, Error>) {
-			if let error {
-				continuation.resume(throwing: error)
-			} else {
-				continuation.resume(returning: ())
-			}
-		}
-
-		@Sendable func save(_ play: Play) async throws {
-			try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-				persistenceService.write({ realm in
-					realm.add(play.asPersistent())
-				}, {
-					resumeOrThrow($0, continuation: continuation)
-				})
+		@Sendable func save(play: Play) async throws {
+			try await persistenceService.write {
+				try await $0.write { db in
+					try playsPersistenceService.create(play, db)
+				}
 			}
 		}
 
 		@Sendable func delete(play: Play) async throws {
-			try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-				persistenceService.write({ realm in
-					if let persistent = realm.object(ofType: PersistentPlay.self, forPrimaryKey: play.id) {
-						realm.delete(persistent)
-					}
-				}, {
-					resumeOrThrow($0, continuation: continuation)
-				})
+			try await persistenceService.write {
+				try await $0.write { db in
+					try playsPersistenceService.delete(play, db)
+				}
 			}
 		}
 
 		@Sendable func update(play: Play) async throws {
-			try await withCheckedThrowingContinuation { (continuation: CheckedContinuation<Void, Error>) in
-				persistenceService.write({ realm in
-					realm.create(PersistentPlay.self, value: play.asPersistent(), update: .modified)
-				}, {
-					resumeOrThrow($0, continuation: continuation)
-				})
+			try await persistenceService.write {
+				try await $0.write { db in
+					try playsPersistenceService.update(play, db)
+				}
 			}
 		}
 
-		@Sendable func fetchAll() -> AsyncStream<[Play]> {
+		@Sendable func fetchAll(request: Play.FetchRequest) -> AsyncThrowingStream<[Play], Error> {
 			.init { continuation in
-				persistenceService.read {
-					let plays = $0.objects(PersistentPlay.self)
-					let token = plays.observe { _ in
-						continuation.yield(plays.map { $0.asPlay() })
-					}
+				Task {
+					do {
+						let db = persistenceService.reader()
+						let observation = ValueObservation.tracking(request.fetchValue(_:))
 
-					continuation.onTermination = { _ in
-						token.invalidate()
+						for try await plays in observation.values(in: db) {
+							continuation.yield(plays)
+						}
+
+						continuation.finish()
+					} catch {
+						continuation.finish(throwing: error)
 					}
 				}
 			}
 		}
 
-		@Sendable func fetchOne(id: UUID) -> AsyncStream<Play> {
+		@Sendable func fetchOne(request: Play.SingleFetchRequest) -> AsyncThrowingStream<Play, Error> {
 			.init { continuation in
-				persistenceService.read {
-					let play = $0.objects(PersistentPlay.self)
-						.filter("_id = %@", id)
-						.first
+				Task {
+					do {
+						let db = persistenceService.reader()
+						let observation = ValueObservation.tracking(request.fetchValue(_:))
 
-					var token: NotificationToken?
-					if let play {
-						continuation.yield(play.asPlay())
-						token = play.observe { _ in
-							continuation.yield(play.asPlay())
+						for try await play in observation.values(in: db) {
+							if let play {
+								continuation.yield(play)
+							} else {
+								break
+							}
 						}
-					} else {
-						continuation.finish()
-					}
 
-					continuation.onTermination = { [token = token] _ in
-						token?.invalidate()
+						continuation.finish()
+					} catch {
+						continuation.finish(throwing: error)
 					}
 				}
 			}

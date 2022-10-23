@@ -40,8 +40,8 @@ public struct RecordPlayView: View {
 						"Outcome",
 						selection: viewStore.binding(get: \.outcome, send: ViewAction.outcomeChanged)
 					) {
-						ForEach(Play.Outcome.allCases, id: \.hashValue) {
-							Text($0.rawValue).tag($0)
+						ForEach(Play.Outcome.allCases) {
+							Text($0.description).tag($0)
 						}
 					}
 				}

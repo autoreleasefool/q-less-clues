@@ -1,7 +1,7 @@
 import ExtensionsLibrary
 import Foundation
 
-public struct Play: Hashable, Identifiable, Equatable {
+public struct Play: Equatable, Identifiable, Hashable, Codable {
 	public let id: UUID
 	public let createdAt: Date
 	public let letters: String
@@ -9,8 +9,8 @@ public struct Play: Hashable, Identifiable, Equatable {
 	public let difficulty: Difficulty?
 
 	public init(
-		id: UUID = UUID(),
-		createdAt: Date = Date(),
+		id: UUID,
+		createdAt: Date,
 		letters: String,
 		outcome: Outcome,
 		difficulty: Difficulty?
@@ -28,17 +28,35 @@ public struct Play: Hashable, Identifiable, Equatable {
 }
 
 extension Play {
-	public enum Outcome: String, CaseIterable {
-		case unsolved = "❌ Unsolved"
-		case solved = "✅ Solved"
-		case solvedWithHints = "📝 Solved (with hints)"
+	public enum Outcome: Int, CaseIterable, Codable, CustomStringConvertible, Identifiable {
+		case unsolved
+		case solved
+		case solvedWithHints
+
+		public var id: Int { rawValue }
+
+		public var description: String {
+			switch self {
+			case .unsolved: return "❌ Unsolved"
+			case .solved: return "✅ Solved"
+			case .solvedWithHints: return "📝 Solved (with hints)"
+			}
+		}
 	}
 }
 
 extension Play {
-	public enum Difficulty: String {
-		case novice = "🟢 Novice"
-		case intermediate = "🟡 Intermediate"
-		case advanced = "🔴 Advanced"
+	public enum Difficulty: Int, CaseIterable, Codable, CustomStringConvertible {
+		case novice
+		case intermediate
+		case advanced
+
+		public var description: String {
+			switch self {
+			case .novice: return "🟢 Novice"
+			case .intermediate: return "🟡 Intermediate"
+			case .advanced: return "🔴 Advanced"
+			}
+		}
 	}
 }

@@ -88,7 +88,7 @@ public struct PlaysList: View {
 					) {
 						Text(play.letters)
 							.frame(maxWidth: .infinity, alignment: .leading)
-						Text(String(play.outcome.rawValue.first ?? "❓"))
+						Text(String(play.outcome.description.first ?? "❓"))
 					}
 				}
 				.onDelete { viewStore.send(.delete($0)) }

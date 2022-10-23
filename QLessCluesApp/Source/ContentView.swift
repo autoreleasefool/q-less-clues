@@ -14,8 +14,12 @@ import ValidatorServiceInterface
 
 struct ContentView: View {
 	let store: Store<AppState, AppAction> = {
-		let persistenceService: PersistenceService = .live(with: .init())
-		let playsDataProvider: PlaysDataProvider = .live(with: .init(persistenceService: persistenceService))
+		let persistenceService: PersistenceService = .liveValue
+		let playsPersistenceService: PlaysPersistenceService = .live
+		let playsDataProvider: PlaysDataProvider = .live(with: .init(
+			persistenceService: persistenceService,
+			playsPersistenceService: playsPersistenceService
+		))
 		let statisticsDataProvider: StatisticsDataProvider = .live(with: .init(persistenceService: persistenceService))
 		let validatorService: ValidatorService = .live
 		let solverService: SolverService = .live(with: .init(validatorService: validatorService))

@@ -1,5 +1,6 @@
 import AnalysisFeature
 import ComposableArchitecture
+import Foundation
 import PlaysDataProviderInterface
 import SharedModelsLibrary
 import SolverServiceInterface
@@ -10,7 +11,7 @@ public struct RecordPlayState: Equatable {
 	public var analysis = AnalysisState()
 
 	public var play: Play {
-		.init(letters: letters, outcome: outcome, difficulty: nil)
+		.init(id: UUID(), createdAt: Date(), letters: letters, outcome: outcome, difficulty: nil)
 	}
 
 	public init() {}

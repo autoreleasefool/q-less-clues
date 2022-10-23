@@ -92,7 +92,7 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 		switch action {
 		case .onAppear:
 			return .run { send in
-				for await plays in environment.playsDataProvider.fetchAll() {
+				for try await plays in environment.playsDataProvider.fetchAll(.init(ordering: .byDate)) {
 					await send(.playsResponse(plays))
 				}
 			}
@@ -126,7 +126,7 @@ public let playsListReducer = Reducer<PlaysListState, PlaysListAction, PlaysList
 
 		case let .setPlaySelection(selection: .some(id)):
 			return .task {
-				for await play in environment.playsDataProvider.fetchOne(id) {
+				for try await play in environment.playsDataProvider.fetchOne(.init(id: id)) {
 					return .playResponse(play)
 				}
 				return .setPlaySelection(selection: nil)

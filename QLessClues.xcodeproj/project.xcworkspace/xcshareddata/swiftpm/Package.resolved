@@ -10,21 +10,12 @@
       }
     },
     {
-      "identity" : "realm-core",
+      "identity" : "grdb.swift",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-core",
+      "location" : "https://github.com/groue/GRDB.swift.git",
       "state" : {
-        "revision" : "b86d2107fec4246b55af24a3b11e00275575f808",
-        "version" : "12.9.0"
-      }
-    },
-    {
-      "identity" : "realm-swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/realm/realm-swift",
-      "state" : {
-        "revision" : "ae4278abe1fcdcd616b410e098a744c1cc73e0bd",
-        "version" : "10.31.0"
+        "revision" : "13e1f4d7c2896a6a9293102f664e5311e017ffb2",
+        "version" : "6.1.0"
       }
     },
     {

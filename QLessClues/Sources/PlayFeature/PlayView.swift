@@ -32,7 +32,7 @@ public struct PlayView: View {
 			List {
 				Section {
 					Text(viewStore.letters)
-					LabeledContent("Outcome", value: viewStore.outcome.rawValue)
+					LabeledContent("Outcome", value: "\(viewStore.outcome)")
 					LabeledContent("Played", value: viewStore.playedOn.formattedRelative)
 				}
 
