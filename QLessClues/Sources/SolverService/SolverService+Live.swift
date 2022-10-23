@@ -1,29 +1,18 @@
+import Dependencies
 import SharedModelsLibrary
 import SolverServiceInterface
 import ValidatorServiceInterface
-import ValidatorService
 
-extension SolverService {
-	public struct Live {
-		private let validatorService: ValidatorService
-
-		public init(validatorService: ValidatorService) {
-			self.validatorService = validatorService
-		}
-
-		@Sendable func findSolutions(letters: String) -> AsyncStream<SolverService.Event> {
-			.init { continuation in
+extension SolverService: DependencyKey {
+	public static let liveValue = Self(
+		findSolutions: { letters in
+			.init {continuation in
 				Task {
+					@Dependency(\.validatorService) var validatorService: ValidatorService
 					await BacktrackingSolver(validator: validatorService)
 						.findSolutions(forLetters: letters, to: continuation)
 				}
 			}
 		}
-	}
-}
-
-extension SolverService {
-	public static func live(with solverServiceLive: SolverService.Live) -> Self {
-		.init(findSolutions: solverServiceLive.findSolutions(letters:))
-	}
+	)
 }

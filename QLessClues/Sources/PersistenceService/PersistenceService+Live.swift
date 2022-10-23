@@ -1,8 +1,9 @@
+import Dependencies
 import Foundation
 import GRDB
 import PersistenceServiceInterface
 
-extension PersistenceService {
+extension PersistenceService: DependencyKey {
 	public static let liveValue: Self = {
 		let appDb: AppDatabase
 		do {

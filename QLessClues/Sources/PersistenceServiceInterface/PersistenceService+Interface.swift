@@ -1,3 +1,4 @@
+import Dependencies
 import GRDB
 
 public struct PersistenceService: Sendable {
@@ -10,5 +11,19 @@ public struct PersistenceService: Sendable {
 	) {
 		self.reader = reader
 		self.write = write
+	}
+}
+
+extension PersistenceService: TestDependencyKey {
+	public static var testValue = Self(
+		reader: { fatalError("\(Self.self).reader") },
+		write: { _ in fatalError("\(Self.self).write") }
+	)
+}
+
+extension DependencyValues {
+	public var persistenceService: PersistenceService {
+		get { self[PersistenceService.self] }
+		set { self[PersistenceService.self] = newValue }
 	}
 }

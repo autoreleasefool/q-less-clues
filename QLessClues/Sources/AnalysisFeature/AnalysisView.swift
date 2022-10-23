@@ -5,7 +5,7 @@ import SolutionsListFeature
 import SwiftUI
 
 public struct AnalysisView: View {
-	let store: Store<AnalysisState, AnalysisAction>
+	let store: StoreOf<Analysis>
 
 	struct ViewState: Equatable {
 		let solutions: [Solution]
@@ -14,7 +14,7 @@ public struct AnalysisView: View {
 		let hasStarted: Bool
 		let isPlayable: Bool
 
-		init(state: AnalysisState) {
+		init(state: Analysis.State) {
 			self.solutions = state.solutions
 			self.difficulty = state.difficulty
 			self.progress = state.mode.progress
@@ -28,12 +28,12 @@ public struct AnalysisView: View {
 		case onDisappear
 	}
 
-	public init(store: Store<AnalysisState, AnalysisAction>) {
+	public init(store: StoreOf<Analysis>) {
 		self.store = store
 	}
 
 	public var body: some View {
-		WithViewStore(store, observe: ViewState.init, send: AnalysisAction.init) { viewStore in
+		WithViewStore(store, observe: ViewState.init, send: Analysis.Action.init) { viewStore in
 			Section {
 				Button("Analyze") { viewStore.send(.beginButtonTapped) }
 					.frame(maxWidth: .infinity)
@@ -41,7 +41,7 @@ public struct AnalysisView: View {
 			}
 			.onDisappear { viewStore.send(.onDisappear) }
 
-			IfLetStore(store.scope(state: \.hints, action: AnalysisAction.hints)) {
+			IfLetStore(store.scope(state: \.hints, action: Analysis.Action.hints)) {
 				HintsView(store: $0)
 			}
 
@@ -50,10 +50,10 @@ public struct AnalysisView: View {
 					ProgressView(value: viewStore.progress)
 					// TODO: difficulty view goes here
 					NavigationLink {
-						SolutionsList(
+						SolutionsListView(
 							store: store.scope(
 								state: \.solutionsList,
-								action: AnalysisAction.solutionsList
+								action: Analysis.Action.solutionsList
 							)
 						)
 					} label: {
@@ -65,7 +65,7 @@ public struct AnalysisView: View {
 	}
 }
 
-extension AnalysisAction {
+extension Analysis.Action {
 	init(action: AnalysisView.ViewAction) {
 		switch action {
 		case .beginButtonTapped:

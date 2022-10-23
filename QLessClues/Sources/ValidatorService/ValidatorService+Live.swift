@@ -1,10 +1,11 @@
+import Dependencies
 import DictionaryLibrary
 import Foundation
 import SharedModelsLibrary
 import ValidatorServiceInterface
 
-extension ValidatorService {
-	public static let live = Self(
+extension ValidatorService: DependencyKey {
+	public static let liveValue = Self(
 		validate: { solution, dictionary in
 			guard solution.words.allSatisfy({ dictionary.contains($0) }) else {
 				return false

@@ -1,3 +1,4 @@
+import Dependencies
 import SharedModelsLibrary
 
 public struct PlaysDataProvider: Sendable {
@@ -23,16 +24,19 @@ public struct PlaysDataProvider: Sendable {
 	}
 }
 
-#if DEBUG
-extension PlaysDataProvider {
-	public static func mock() -> Self {
-		.init(
-			save: { _ in fatalError("\(Self.self).save") },
-			delete: { _ in fatalError("\(Self.self).delete") },
-			update: { _ in fatalError("\(Self.self).update") },
-			fetchAll: { _ in fatalError("\(Self.self).fetchAll") },
-			fetchOne: { _ in fatalError("\(Self.self).fetchOne") }
-		)
+extension PlaysDataProvider: TestDependencyKey {
+	public static var testValue = Self(
+		save: { _ in fatalError("\(Self.self).save") },
+		delete: { _ in fatalError("\(Self.self).delete") },
+		update: { _ in fatalError("\(Self.self).update") },
+		fetchAll: { _ in fatalError("\(Self.self).fetchAll") },
+		fetchOne: { _ in fatalError("\(Self.self).fetchOne") }
+	)
+}
+
+extension DependencyValues {
+	public var playsDataProvider: PlaysDataProvider {
+		get { self[PlaysDataProvider.self] }
+		set { self[PlaysDataProvider.self] = newValue }
 	}
 }
-#endif

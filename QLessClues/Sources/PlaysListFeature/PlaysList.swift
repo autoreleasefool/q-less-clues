@@ -1,115 +1,125 @@
 import ComposableArchitecture
-import PlayFeature
+import Foundation
+import PlayDetailsFeature
+import PlaysDataProviderInterface
 import RecordPlayFeature
 import SharedModelsLibrary
+import SolverServiceInterface
+import StatisticsDataProviderInterface
 import StatisticsFeature
-import SwiftUI
 
-public struct PlaysList: View {
-	let store: Store<PlaysListState, PlaysListAction>
+public struct PlaysList: ReducerProtocol {
+	public struct State: Equatable {
+		public var plays: IdentifiedArrayOf<Play> = []
+		public var selection: Identified<Play.ID, PlayDetails.State>?
+		public var recordPlay: RecordPlay.State?
+		public var statistics = StatisticsReducer.State()
 
-	struct ViewState: Equatable {
-		let plays: IdentifiedArrayOf<Play>
-		let selection: Identified<Play.ID, PlayState>?
-		let isSheetPresented: Bool
-
-		init(state: PlaysListState) {
-			self.plays = state.plays
-			self.selection = state.selection
-			self.isSheetPresented = state.recordPlay != nil
-		}
+		public init() {}
 	}
 
-	enum ViewAction {
+	public enum Action: Equatable {
 		case onAppear
 		case onDisappear
+		case playsResponse([Play])
 		case setRecordSheet(isPresented: Bool)
 		case setPlaySelection(selection: Play.ID?)
+		case playResponse(Play)
 		case delete(IndexSet)
+		case playDeleted
+		case recordPlay(RecordPlay.Action)
+		case play(PlayDetails.Action)
+		case statistics(StatisticsReducer.Action)
 	}
 
-	public init(store: Store<PlaysListState, PlaysListAction>) {
-		self.store = store
-	}
+	private enum PlaysCancellable {}
+	private enum PlayCancellable {}
 
-	public var body: some View {
-		WithViewStore(store, observe: ViewState.init, send: PlaysListAction.init) { viewStore in
-			List {
-				StatisticsView(store: store.scope(state: \.statistics, action: PlaysListAction.statistics))
-				recentPlaysSection(viewStore: viewStore)
-			}
-			.navigationTitle("Plays")
-			.toolbar {
-				ToolbarItem(placement: .navigationBarTrailing) {
-					Button {
-						viewStore.send(.setRecordSheet(isPresented: true))
-					} label: {
-						Image(systemName: "plus")
-					}
-				}
-			}
-			.sheet(
-				isPresented: viewStore.binding(
-					get: \.isSheetPresented,
-					send: ViewAction.setRecordSheet(isPresented:)
-				)
-			) {
-				IfLetStore(store.scope(state: \.recordPlay, action: PlaysListAction.recordPlay)) { scopedStore in
-					NavigationStack {
-						RecordPlayView(store: scopedStore)
-					}
-				}
-			}
-			.onAppear { viewStore.send(.onAppear) }
-			.onDisappear { viewStore.send(.onDisappear) }
+	public init() {}
+
+	@Dependency(\.playsDataProvider) var playsDataProvider
+
+	public var body: some ReducerProtocol<State, Action> {
+		Scope(state: \.statistics, action: /PlaysList.Action.statistics) {
+			StatisticsReducer()
 		}
-	}
 
-	private func recentPlaysSection(viewStore: ViewStore<ViewState, ViewAction>) -> some View {
-		Section("Recent Plays") {
-			if viewStore.plays.isEmpty {
-				Text("You haven't added any plays yet")
-			} else {
-				ForEach(viewStore.plays) { play in
-					NavigationLink(
-						destination: IfLetStore(
-							store.scope(
-								state: \.selection?.value,
-								action: PlaysListAction.play
-							)
-						) {
-							PlayView(store: $0)
-						},
-						tag: play.id,
-						selection: viewStore.binding(
-							get: \.selection?.id,
-							send: ViewAction.setPlaySelection(selection:)
-						)
-					) {
-						Text(play.letters)
-							.frame(maxWidth: .infinity, alignment: .leading)
-						Text(String(play.outcome.description.first ?? "❓"))
+		Reduce { state, action in
+			switch action {
+			case .onAppear:
+				return .run { send in
+					for try await plays in playsDataProvider.fetchAll(.init(ordering: .byDate)) {
+						await send(.playsResponse(plays))
 					}
 				}
-				.onDelete { viewStore.send(.delete($0)) }
+				.cancellable(id: PlaysCancellable.self)
+
+			case .onDisappear:
+				return .cancel(ids: [PlaysCancellable.self, PlayCancellable.self])
+
+			case let .playsResponse(plays):
+				state.plays = IdentifiedArrayOf(uniqueElements: plays)
+				return .none
+
+			case let .delete(indexSet):
+				guard let index = indexSet.first, index < state.plays.count else {
+					return .none
+				}
+
+				let play = state.plays[index]
+				state.plays.remove(at: index)
+				return .task { [play = play] in
+					try await playsDataProvider.delete(play)
+					return .playDeleted
+				}
+
+			case .play(.playDeleted):
+				return .none
+
+			case .play(.onDisappear):
+				state.selection = nil
+				return .none
+
+			case let .setPlaySelection(selection: .some(id)):
+				return .task {
+					for try await play in playsDataProvider.fetchOne(.init(id: id)) {
+						return .playResponse(play)
+					}
+					return .setPlaySelection(selection: nil)
+				}
+				.cancellable(id: PlayCancellable.self)
+
+			case .setPlaySelection(selection: .none):
+				state.selection = nil
+				return .none
+
+			case let .playResponse(play):
+				state.selection = Identified(PlayDetails.State(play: play), id: play.id)
+				return .none
+
+			case .setRecordSheet(isPresented: true):
+				state.recordPlay = .init()
+				return .none
+
+			case .setRecordSheet(isPresented: false):
+				state.recordPlay = nil
+				return .none
+
+			case .recordPlay(.playSaved):
+				state.recordPlay = nil
+				return .none
+
+			case .recordPlay, .play, .statistics, .playDeleted:
+				return .none
 			}
 		}
-	}
-}
-
-extension PlaysListAction {
-	init(action: PlaysList.ViewAction) {
-		switch action {
-		case let .delete(indexSet):
-			self = .delete(indexSet)
-		case let .setRecordSheet(isPresented):
-			self = .setRecordSheet(isPresented: isPresented)
-		case let .setPlaySelection(selection):
-			self = .setPlaySelection(selection: selection)
-		case .onAppear:
-			self = .onAppear
-		case .onDisappear:
-			self = .onDisappear
+		.ifLet(\.recordPlay, action: /PlaysList.Action.recordPlay) {
+			RecordPlay()
+		}
+		.ifLet(\.selection, action: /PlaysList.Action.play) {
+			Scope(state: \Identified<Play.ID, PlayDetails.State>.value, action: /.self) {
+				PlayDetails()
+			}
 		}
 	}
 }

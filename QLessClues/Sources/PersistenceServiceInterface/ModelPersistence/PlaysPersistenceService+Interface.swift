@@ -1,3 +1,4 @@
+import Dependencies
 import GRDB
 import SharedModelsLibrary
 
@@ -14,5 +15,20 @@ public struct PlaysPersistenceService: Sendable {
 		self.create = create
 		self.update = update
 		self.delete = delete
+	}
+}
+
+extension PlaysPersistenceService: TestDependencyKey {
+	public static var testValue = Self(
+		create: { _, _ in fatalError("\(Self.self).create") },
+		update: { _, _ in fatalError("\(Self.self).update") },
+		delete: { _, _ in fatalError("\(Self.self).delete") }
+	)
+}
+
+extension DependencyValues {
+	public var playsPersistenceService: PlaysPersistenceService {
+		get { self[PlaysPersistenceService.self] }
+		set { self[PlaysPersistenceService.self] = newValue }
 	}
 }

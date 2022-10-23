@@ -4,14 +4,14 @@ import SharedModelsLibrary
 import SwiftUI
 
 public struct RecordPlayView: View {
-	let store: Store<RecordPlayState, RecordPlayAction>
+	let store: StoreOf<RecordPlay>
 
 	struct ViewState: Equatable {
 		let letters: String
 		let outcome: Play.Outcome
 		let isPlayable: Bool
 
-		init(state: RecordPlayState) {
+		init(state: RecordPlay.State) {
 			self.letters = state.letters
 			self.outcome = state.outcome
 			self.isPlayable = state.letters.count == 12
@@ -24,12 +24,12 @@ public struct RecordPlayView: View {
 		case outcomeChanged(Play.Outcome)
 	}
 
-	public init(store: Store<RecordPlayState, RecordPlayAction>) {
+	public init(store: StoreOf<RecordPlay>) {
 		self.store = store
 	}
 
 	public var body: some View {
-		WithViewStore(store, observe: ViewState.init, send: RecordPlayAction.init) { viewStore in
+		WithViewStore(store, observe: ViewState.init, send: RecordPlay.Action.init) { viewStore in
 			List {
 				Section("Game") {
 					TextField(
@@ -46,7 +46,7 @@ public struct RecordPlayView: View {
 					}
 				}
 
-				AnalysisView(store: store.scope(state: \.analysis, action: RecordPlayAction.analysis))
+				AnalysisView(store: store.scope(state: \.analysis, action: RecordPlay.Action.analysis))
 			}
 			.navigationTitle("New Play")
 			.toolbar {
@@ -59,7 +59,7 @@ public struct RecordPlayView: View {
 	}
 }
 
-extension RecordPlayAction {
+extension RecordPlay.Action {
 	init(action: RecordPlayView.ViewAction) {
 		switch action {
 		case .saveButtonTapped:

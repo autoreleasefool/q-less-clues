@@ -1,12 +1,12 @@
 import ComposableArchitecture
-import PlayFeature
+import PlayDetailsFeature
 import SharedModelsLibrary
 import SharedModelsLibraryMocks
 import SolverServiceInterface
 import XCTest
 
 @MainActor
-final class PlayFeatureTests: XCTestCase {
+final class PlayDetailsFeatureTests: XCTestCase {
 	func mockEnvironment() -> PlayEnvironment {
 		.init(playsDataProvider: .mock(), solverService: .mock())
 	}

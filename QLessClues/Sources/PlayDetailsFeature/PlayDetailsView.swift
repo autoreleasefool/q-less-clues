@@ -3,15 +3,15 @@ import ComposableArchitecture
 import SharedModelsLibrary
 import SwiftUI
 
-public struct PlayView: View {
-	let store: Store<PlayState, PlayAction>
+public struct PlayDetailsView: View {
+	let store: StoreOf<PlayDetails>
 
 	struct ViewState: Equatable {
 		let playedOn: Date
 		let letters: String
 		let outcome: Play.Outcome
 
-		init(state: PlayState) {
+		init(state: PlayDetails.State) {
 			self.playedOn = state.play.createdAt
 			self.letters = state.play.letters
 			self.outcome = state.play.outcome
@@ -23,12 +23,12 @@ public struct PlayView: View {
 		case onDisappear
 	}
 
-	public init(store: Store<PlayState, PlayAction>) {
+	public init(store: StoreOf<PlayDetails>) {
 		self.store = store
 	}
 
 	public var body: some View {
-		WithViewStore(store, observe: ViewState.init, send: PlayAction.init) { viewStore in
+		WithViewStore(store, observe: ViewState.init, send: PlayDetails.Action.init) { viewStore in
 			List {
 				Section {
 					Text(viewStore.letters)
@@ -36,7 +36,7 @@ public struct PlayView: View {
 					LabeledContent("Played", value: viewStore.playedOn.formattedRelative)
 				}
 
-				AnalysisView(store: store.scope(state: \.analysis, action: PlayAction.analysis))
+				AnalysisView(store: store.scope(state: \.analysis, action: PlayDetails.Action.analysis))
 
 				Section {
 					Button("Delete", role: .destructive) { viewStore.send(.deleteButtonTapped) }
@@ -46,15 +46,15 @@ public struct PlayView: View {
 			.navigationBarTitleDisplayMode(.inline)
 			.onDisappear { viewStore.send(.onDisappear) }
 			.alert(
-				store.scope(state: \.deleteAlert, action: PlayAction.alert),
+				store.scope(state: \.deleteAlert, action: PlayDetails.Action.alert),
 				dismiss: .dismissed
 			)
 		}
 	}
 }
 
-extension PlayAction {
-	init(action: PlayView.ViewAction) {
+extension PlayDetails.Action {
+	init(action: PlayDetailsView.ViewAction) {
 		switch action {
 		case .deleteButtonTapped:
 			self = .deleteButtonTapped

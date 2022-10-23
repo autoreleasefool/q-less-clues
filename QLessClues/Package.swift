@@ -12,7 +12,7 @@ let package = Package(
 		.library(name: "AnalysisFeature", targets: ["AnalysisFeature"]),
 		.library(name: "AppFeature", targets: ["AppFeature"]),
 		.library(name: "HintsFeature", targets: ["HintsFeature"]),
-		.library(name: "PlayFeature", targets: ["PlayFeature"]),
+		.library(name: "PlayDetailsFeature", targets: ["PlayDetailsFeature"]),
 		.library(name: "PlaysListFeature", targets: ["PlaysListFeature"]),
 		.library(name: "RecordPlayFeature", targets: ["RecordPlayFeature"]),
 		.library(name: "StatisticsFeature", targets: ["StatisticsFeature"]),
@@ -40,7 +40,7 @@ let package = Package(
 		.library(name: "SharedModelsLibraryMocks", targets: ["SharedModelsLibraryMocks"]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.40.2"),
+		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.43.0"),
 		.package(url: "https://github.com/groue/GRDB.swift.git", from: "6.1.0"),
 	],
 	targets: [
@@ -66,17 +66,17 @@ let package = Package(
 		),
 		.testTarget(name: "HintsFeatureTests", dependencies: ["HintsFeature", "SharedModelsLibraryMocks"]),
 		.target(
-			name: "PlayFeature",
+			name: "PlayDetailsFeature",
 			dependencies: [
 				"AnalysisFeature",
 				"PlaysDataProviderInterface",
 			]
 		),
-		.testTarget(name: "PlayFeatureTests", dependencies: ["PlayFeature", "SharedModelsLibraryMocks"]),
+		.testTarget(name: "PlayDetailsFeatureTests", dependencies: ["PlayDetailsFeature", "SharedModelsLibraryMocks"]),
 		.target(
 			name: "PlaysListFeature",
 			dependencies: [
-				"PlayFeature",
+				"PlayDetailsFeature",
 				"RecordPlayFeature",
 				"StatisticsFeature",
 			]
@@ -117,7 +117,13 @@ let package = Package(
 			]
 		),
 		.testTarget(name: "PlaysDataProviderTests", dependencies: ["PlaysDataProvider"]),
-		.target(name: "PlaysDataProviderInterface", dependencies: ["PersistentModelsLibrary"]),
+		.target(
+			name: "PlaysDataProviderInterface",
+			dependencies: [
+				"SharedModelsLibrary",
+				.product(name: "Dependencies", package: "swift-composable-architecture"),
+			]
+		),
 		.target(
 			name: "StatisticsDataProvider",
 			dependencies: [
@@ -127,7 +133,13 @@ let package = Package(
 			]
 		),
 		.testTarget(name: "StatisticsDataProviderTests", dependencies: ["StatisticsDataProvider"]),
-		.target(name: "StatisticsDataProviderInterface", dependencies: ["PersistentModelsLibrary"]),
+		.target(
+			name: "StatisticsDataProviderInterface",
+			dependencies: [
+				"SharedModelsLibrary",
+				.product(name: "Dependencies", package: "swift-composable-architecture"),
+			]
+		),
 
 		// MARK: - Services
 		.target(
@@ -137,20 +149,38 @@ let package = Package(
 				"PersistenceServiceInterface",
 			]
 		),
-		.target(name: "PersistenceServiceInterface", dependencies: [.product(name: "GRDB", package: "grdb.swift")]),
+		.target(
+			name: "PersistenceServiceInterface",
+			dependencies: [
+				.product(name: "GRDB", package: "grdb.swift"),
+				.product(name: "Dependencies", package: "swift-composable-architecture"),
+			]
+		),
 		.testTarget(name: "PersistenceServiceTests", dependencies: ["PersistenceService"]),
 		.target(
 			name: "SolverService",
 			dependencies: [
 				"SolverServiceInterface",
-				"ValidatorService",
+				"ValidatorServiceInterface",
 			]
 		),
-		.target(name: "SolverServiceInterface", dependencies: ["ValidatorServiceInterface"]),
+		.target(
+			name: "SolverServiceInterface",
+			dependencies: [
+				"SharedModelsLibrary",
+				.product(name: "Dependencies", package: "swift-composable-architecture"),
+			]
+		),
 		.testTarget(name: "SolverServiceTests", dependencies: ["SolverService"]),
 		.target(name: "ValidatorService", dependencies: ["ValidatorServiceInterface"]),
 		.testTarget(name: "ValidatorServiceTests", dependencies: ["ValidatorService"]),
-		.target(name: "ValidatorServiceInterface", dependencies: ["DictionaryLibrary", "SharedModelsLibrary"]),
+		.target(
+			name: "ValidatorServiceInterface",
+			dependencies: [
+				"DictionaryLibrary",
+				"SharedModelsLibrary",
+				.product(name: "Dependencies", package: "swift-composable-architecture"),
+			]),
 
 		// MARK: - Libraries
 		.target(name: "DictionaryLibrary", dependencies: []),

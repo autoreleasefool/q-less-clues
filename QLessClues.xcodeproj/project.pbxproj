@@ -12,7 +12,6 @@
 		CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BC28C5095200DD75C7 /* Assets.xcassets */; };
 		CA1867C028C5095200DD75C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BF28C5095200DD75C7 /* Preview Assets.xcassets */; };
 		CA5F51D528F2DC9C000FC561 /* AppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = CA5F51D428F2DC9C000FC561 /* AppFeature */; };
-		CA61328A28F050970095A972 /* ComposableArchitecture in Frameworks */ = {isa = PBXBuildFile; productRef = CA61328928F050970095A972 /* ComposableArchitecture */; };
 		CA6452BE28C5DFA200738762 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = CA6452BD28C5DFA200738762 /* words.txt */; };
 		CA64550728F58FD300FFE0B1 /* SolverService in Frameworks */ = {isa = PBXBuildFile; productRef = CA64550628F58FD300FFE0B1 /* SolverService */; };
 		CA64550928F58FD600FFE0B1 /* ValidatorService in Frameworks */ = {isa = PBXBuildFile; productRef = CA64550828F58FD600FFE0B1 /* ValidatorService */; };
@@ -39,7 +38,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				CA64550728F58FD300FFE0B1 /* SolverService in Frameworks */,
-				CA61328A28F050970095A972 /* ComposableArchitecture in Frameworks */,
 				CAB1C71A28F5D85F000DA81D /* StatisticsDataProvider in Frameworks */,
 				CA5F51D528F2DC9C000FC561 /* AppFeature in Frameworks */,
 				CAB1C71828F5AF7F000DA81D /* PlaysDataProvider in Frameworks */,
@@ -131,7 +129,6 @@
 			);
 			name = QLessClues;
 			packageProductDependencies = (
-				CA61328928F050970095A972 /* ComposableArchitecture */,
 				CA5F51D428F2DC9C000FC561 /* AppFeature */,
 				CA64550628F58FD300FFE0B1 /* SolverService */,
 				CA64550828F58FD600FFE0B1 /* ValidatorService */,
@@ -168,7 +165,6 @@
 			);
 			mainGroup = CA1867AC28C5095100DD75C7;
 			packageReferences = (
-				CA61328828F050970095A972 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */,
 			);
 			productRefGroup = CA1867B628C5095100DD75C7 /* Products */;
 			projectDirPath = "";
@@ -427,26 +423,10 @@
 		};
 /* End XCConfigurationList section */
 
-/* Begin XCRemoteSwiftPackageReference section */
-		CA61328828F050970095A972 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */ = {
-			isa = XCRemoteSwiftPackageReference;
-			repositoryURL = "https://github.com/pointfreeco/swift-composable-architecture";
-			requirement = {
-				kind = upToNextMinorVersion;
-				minimumVersion = 0.40.2;
-			};
-		};
-/* End XCRemoteSwiftPackageReference section */
-
 /* Begin XCSwiftPackageProductDependency section */
 		CA5F51D428F2DC9C000FC561 /* AppFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppFeature;
-		};
-		CA61328928F050970095A972 /* ComposableArchitecture */ = {
-			isa = XCSwiftPackageProductDependency;
-			package = CA61328828F050970095A972 /* XCRemoteSwiftPackageReference "swift-composable-architecture" */;
-			productName = ComposableArchitecture;
 		};
 		CA64550628F58FD300FFE0B1 /* SolverService */ = {
 			isa = XCSwiftPackageProductDependency;

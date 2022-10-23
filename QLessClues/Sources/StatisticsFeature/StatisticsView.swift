@@ -3,12 +3,12 @@ import SharedModelsLibrary
 import SwiftUI
 
 public struct StatisticsView: View {
-	let store: Store<StatisticsState, StatisticsAction>
+	let store: StoreOf<StatisticsReducer>
 
 	struct ViewState: Equatable {
 		let statistics: Statistics?
 
-		init(state: StatisticsState) {
+		init(state: StatisticsReducer.State) {
 			self.statistics = state.statistics
 		}
 	}
@@ -18,12 +18,12 @@ public struct StatisticsView: View {
 		case onDisappear
 	}
 
-	public init(store: Store<StatisticsState, StatisticsAction>) {
+	public init(store: StoreOf<StatisticsReducer>) {
 		self.store = store
 	}
 
 	public var body: some View {
-		WithViewStore(store, observe: ViewState.init, send: StatisticsAction.init) { viewStore in
+		WithViewStore(store, observe: ViewState.init, send: StatisticsReducer.Action.init) { viewStore in
 			Section("Statistics") {
 				if let statistics = viewStore.statistics {
 					HStack {
@@ -55,7 +55,7 @@ public struct StatisticsView: View {
 	}
 }
 
-extension StatisticsAction {
+extension StatisticsReducer.Action {
 	init(action: StatisticsView.ViewAction) {
 		switch action {
 		case .onAppear:

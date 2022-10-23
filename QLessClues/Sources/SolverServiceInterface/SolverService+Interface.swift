@@ -1,4 +1,5 @@
 import Combine
+import Dependencies
 import SharedModelsLibrary
 
 public struct SolverService: Sendable {
@@ -14,12 +15,15 @@ public struct SolverService: Sendable {
 	}
 }
 
-#if DEBUG
-extension SolverService {
-	public static func mock() -> Self {
-		.init(
-			findSolutions: { _ in fatalError("\(Self.self).findSolutions") }
-		)
+extension SolverService: TestDependencyKey {
+	public static var testValue = Self(
+		findSolutions: { _ in fatalError("\(Self.self).findSolutions") }
+	)
+}
+
+extension DependencyValues {
+	public var solverService: SolverService {
+		get { self[SolverService.self] }
+		set { self[SolverService.self] = newValue }
 	}
 }
-#endif

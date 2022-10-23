@@ -2,28 +2,28 @@ import ComposableArchitecture
 import SwiftUI
 
 public struct HintsView: View {
-	let store: Store<HintsState, HintsAction>
+	let store: StoreOf<Hints>
 
 	struct ViewState: Equatable {
 		var hints: [String]
 		var hasMoreHints: Bool
 
-		init(state: HintsState) {
+		init(state: Hints.State) {
 			self.hints = state.hints
 			self.hasMoreHints = state.hasMoreHints
 		}
 	}
 
-	enum ViewAction: Equatable {
+	enum ViewAction {
 		case hintButtonTapped
 	}
 
-	public init(store: Store<HintsState, HintsAction>) {
+	public init(store: StoreOf<Hints>) {
 		self.store = store
 	}
 
 	public var body: some View {
-		WithViewStore(store, observe: ViewState.init, send: HintsAction.init) { viewStore in
+		WithViewStore(store, observe: ViewState.init, send: Hints.Action.init) { viewStore in
 			Section {
 				ForEach(viewStore.hints, id: \.self) {
 					Text($0)
@@ -45,7 +45,7 @@ public struct HintsView: View {
 	}
 }
 
-extension HintsAction {
+extension Hints.Action {
 	init(action: HintsView.ViewAction) {
 		switch action {
 		case .hintButtonTapped:
