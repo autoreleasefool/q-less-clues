@@ -55,7 +55,7 @@ public struct PlaysListView: View {
 				)
 			) {
 				IfLetStore(store.scope(state: \.recordPlay, action: PlaysList.Action.recordPlay)) { scopedStore in
-					NavigationStack {
+					NavigationView {
 						RecordPlayView(store: scopedStore)
 					}
 				}

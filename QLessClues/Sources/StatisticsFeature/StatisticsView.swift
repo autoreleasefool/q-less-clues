@@ -7,15 +7,18 @@ public struct StatisticsView: View {
 
 	struct ViewState: Equatable {
 		let statistics: Statistics?
+		let isShowingList: Bool
 
 		init(state: StatisticsReducer.State) {
 			self.statistics = state.statistics
+			self.isShowingList = state.statisticsList != nil
 		}
 	}
 
 	enum ViewAction {
-		case onAppear
-		case onDisappear
+		case viewAllButtonTapped
+		case subscribeToStatistics
+		case dismissList
 	}
 
 	public init(store: StoreOf<StatisticsReducer>) {
@@ -24,33 +27,33 @@ public struct StatisticsView: View {
 
 	public var body: some View {
 		WithViewStore(store, observe: ViewState.init, send: StatisticsReducer.Action.init) { viewStore in
-			Section("Statistics") {
+			Section {
 				if let statistics = viewStore.statistics {
-					HStack {
-						Spacer()
-						VStack(alignment: .center) {
-							Text(statistics.pureWinPercentage)
-								.font(.largeTitle)
-							Text("Wins")
-						}
-						Spacer()
-						VStack(alignment: .center) {
-							Text(statistics.overallWinPercentage)
-								.font(.largeTitle)
-							Text("With hints")
-						}
-						Spacer()
-					}
-					LabeledContent("Wins", value: "\(statistics.pureWins)")
-					LabeledContent("Wins (with hints)", value: "\(statistics.winsWithHints)")
-					LabeledContent("Losses", value: "\(statistics.losses)")
-					LabeledContent("Total Plays", value: "\(statistics.totalPlays)")
+					StatisticsOverview(statistics: statistics)
 				} else {
 					ProgressView()
 				}
+			} header: {
+				Text("Statistics")
+			} footer: {
+				NavigationLink(
+					destination: IfLetStore(
+						store.scope(
+							state: \.statisticsList,
+							action: StatisticsReducer.Action.statisticsList
+						)
+					) {
+						StatisticsListView(store: $0)
+					},
+					isActive: viewStore.binding(
+						get: \.isShowingList,
+						send: { $0 ? .viewAllButtonTapped : .dismissList }
+					)
+				) {
+					Text("View All")
+				}
 			}
-			.onAppear { viewStore.send(.onAppear) }
-			.onDisappear { viewStore.send(.onDisappear) }
+			.task { await viewStore.send(.subscribeToStatistics).finish() }
 		}
 	}
 }
@@ -58,10 +61,12 @@ public struct StatisticsView: View {
 extension StatisticsReducer.Action {
 	init(action: StatisticsView.ViewAction) {
 		switch action {
-		case .onAppear:
-			self = .onAppear
-		case .onDisappear:
-			self = .onDisappear
+		case .subscribeToStatistics:
+			self = .subscribeToStatistics
+		case .viewAllButtonTapped:
+			self = .viewAllButtonTapped
+		case .dismissList:
+			self = .dismissList
 		}
 	}
 }

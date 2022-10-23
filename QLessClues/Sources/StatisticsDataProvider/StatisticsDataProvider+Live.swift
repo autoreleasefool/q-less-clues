@@ -8,28 +8,39 @@ import StatisticsDataProviderInterface
 
 extension StatisticsDataProvider: DependencyKey {
 	public static let liveValue = Self(
-		fetch: {
-			return .init { continuation in
-				@Sendable func calculateStatistics(_ db: Database) throws -> Statistics {
-					let outcome = Column("outcome")
-					let pureWins = try Play
-						.filter(outcome == Play.Outcome.solved.rawValue)
-						.fetchCount(db)
-					let winsWithHints = try Play
-						.filter(outcome == Play.Outcome.solvedWithHints.rawValue)
-						.fetchCount(db)
-					let losses = try Play
-						.filter(outcome == Play.Outcome.unsolved.rawValue)
-						.fetchCount(db)
+		fetchCounts: {
+			.init { continuation in
+				Task {
+					func fetchCounts(_ db: Database) throws -> [String: Int] {
+						try "ABCDEFGHIJKLMNOPQRSTUVWXYZ".reduce(into: [:]) { results, letter in
+							let count = try Play.all().filter(Column("letters").like("%\(letter)%")).fetchCount(db)
+							results[String(letter)] = count
+						}
+					}
 
-					return .init(pureWins: pureWins, winsWithHints: winsWithHints, losses: losses)
+					do {
+						@Dependency(\.persistenceService) var persistenceService: PersistenceService
+						let db = persistenceService.reader()
+						let observation = ValueObservation.tracking(fetchCounts(_:))
+
+						for try await statistics in observation.values(in: db) {
+							continuation.yield(statistics)
+						}
+
+						continuation.finish()
+					} catch {
+						continuation.finish(throwing: error)
+					}
 				}
-
+			}
+		},
+		fetch: { request in
+			return .init { continuation in
 				Task {
 					do {
 						@Dependency(\.persistenceService) var persistenceService: PersistenceService
 						let db = persistenceService.reader()
-						let observation = ValueObservation.tracking(calculateStatistics(_:))
+						let observation = ValueObservation.tracking(request.fetchValue(_:))
 
 						for try await statistics in observation.values(in: db) {
 							continuation.yield(statistics)

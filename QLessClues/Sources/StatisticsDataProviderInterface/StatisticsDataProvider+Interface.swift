@@ -2,16 +2,22 @@ import Dependencies
 import SharedModelsLibrary
 
 public struct StatisticsDataProvider: Sendable {
-	public var fetch: @Sendable () -> AsyncThrowingStream<Statistics, Error>
+	public var fetchCounts: @Sendable () -> AsyncThrowingStream<[String: Int], Error>
+	public var fetch: @Sendable (Statistics.FetchRequest) -> AsyncThrowingStream<Statistics, Error>
 
-	public init(fetch: @escaping @Sendable () -> AsyncThrowingStream<Statistics, Error>) {
+	public init(
+		fetchCounts: @escaping @Sendable () -> AsyncThrowingStream<[String: Int], Error>,
+		fetch: @escaping @Sendable (Statistics.FetchRequest) -> AsyncThrowingStream<Statistics, Error>
+	) {
+		self.fetchCounts = fetchCounts
 		self.fetch = fetch
 	}
 }
 
 extension StatisticsDataProvider: TestDependencyKey {
 	public static var testValue = Self(
-		fetch: { fatalError("\(Self.self).fetch") }
+		fetchCounts: { fatalError("\(Self.self).fetchCounts") },
+		fetch: { _ in fatalError("\(Self.self).fetch") }
 	)
 }
 

@@ -15,7 +15,7 @@ public struct AppView: View {
 
 	public var body: some View {
 		WithViewStore(store, observe: { $0 }, send: App.Action.init) { viewStore in
-			NavigationStack {
+			NavigationView {
 				PlaysListView(store: store.scope(state: \.playsList, action: App.Action.playsList))
 					.onAppear { viewStore.send(.onAppear) }
 			}
