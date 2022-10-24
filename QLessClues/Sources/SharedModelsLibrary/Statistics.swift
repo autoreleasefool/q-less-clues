@@ -26,6 +26,13 @@ public struct Statistics: Equatable {
 		return "\(rounded ?? "0")%"
 	}
 
+	public var lossPercentage: String {
+		let percent = totalPlays > 0 ? Float(losses) / Float(totalPlays) * 100 : 0
+		let formatted = Self.formatter.string(from: NSNumber(value: percent))
+		let rounded = formatted?.replacingOccurrences(of: ".0", with: "")
+		return "\(rounded ?? "0")%"
+	}
+
 	public var totalPlays: Int {
 		pureWins + winsWithHints + losses
 	}

@@ -27,15 +27,13 @@ public struct StatisticsView: View {
 
 	public var body: some View {
 		WithViewStore(store, observe: ViewState.init, send: StatisticsReducer.Action.init) { viewStore in
-			Section {
+			Group {
 				if let statistics = viewStore.statistics {
 					StatisticsOverview(statistics: statistics)
 				} else {
 					ProgressView()
 				}
-			} header: {
-				Text("Statistics")
-			} footer: {
+
 				NavigationLink(
 					destination: IfLetStore(
 						store.scope(
@@ -50,10 +48,7 @@ public struct StatisticsView: View {
 						send: { $0 ? .viewAllButtonTapped : .dismissList }
 					)
 				) {
-					HStack {
-						Spacer()
-						Text("View All")
-					}
+					Text("View more")
 				}
 			}
 			.task { await viewStore.send(.subscribeToStatistics).finish() }
