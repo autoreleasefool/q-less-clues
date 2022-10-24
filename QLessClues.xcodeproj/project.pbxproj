@@ -23,6 +23,7 @@
 
 /* Begin PBXFileReference section */
 		CA0BF46B28C9C7ED00EE3E58 /* freq.csv */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = freq.csv; sourceTree = "<group>"; };
+		CA117507290645A6008E3B17 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		CA1867B528C5095100DD75C7 /* QLessClues.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QLessClues.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QLessCluesApp.swift; sourceTree = "<group>"; };
 		CA1867BC28C5095200DD75C7 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -71,6 +72,7 @@
 			isa = PBXGroup;
 			children = (
 				CA1867BC28C5095200DD75C7 /* Assets.xcassets */,
+				CA117507290645A6008E3B17 /* Info.plist */,
 				CA1867BE28C5095200DD75C7 /* Preview Content */,
 				CA1867C728C5096F00DD75C7 /* Resources */,
 				CA1867C628C5096A00DD75C7 /* Source */,
@@ -349,6 +351,7 @@
 				DEVELOPMENT_TEAM = 3UBRXR267C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QLessClues/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Clueless;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -380,6 +383,7 @@
 				DEVELOPMENT_TEAM = 3UBRXR267C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = QLessClues/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Clueless;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
