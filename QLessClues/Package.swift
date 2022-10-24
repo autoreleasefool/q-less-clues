@@ -86,6 +86,7 @@ let package = Package(
 			name: "RecordPlayFeature",
 			dependencies: [
 				"AnalysisFeature",
+				"PlayDetailsFeature",
 				"PlaysDataProviderInterface",
 			]
 		),
