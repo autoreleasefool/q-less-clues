@@ -9,11 +9,12 @@ import SolverServiceInterface
 public struct RecordPlay: ReducerProtocol {
 	public struct State: Equatable {
 		public var letters = ""
+		public var date = Date()
 		public var outcome: Play.Outcome = .unsolved
 		public var analysis = Analysis.State()
 
 		public var play: Play {
-			.init(id: UUID(), createdAt: Date(), letters: letters, outcome: outcome, difficulty: nil)
+			.init(id: UUID(), createdAt: date, letters: letters, outcome: outcome, difficulty: nil)
 		}
 
 		public init() {}
@@ -21,6 +22,7 @@ public struct RecordPlay: ReducerProtocol {
 
 	public enum Action: Equatable {
 		case lettersChanged(String)
+		case dateChanged(Date)
 		case outcomeChanged(Play.Outcome)
 		case analysis(Analysis.Action)
 		case saveButtonTapped
@@ -42,6 +44,10 @@ public struct RecordPlay: ReducerProtocol {
 				// TODO: replace non-A-Z characters
 				state.letters = String(letters.uppercased().prefix(12))
 				state.analysis.letters = state.letters
+				return .none
+
+			case let .dateChanged(date):
+				state.date = date
 				return .none
 
 			case let .outcomeChanged(outcome):

@@ -50,7 +50,10 @@ public struct StatisticsView: View {
 						send: { $0 ? .viewAllButtonTapped : .dismissList }
 					)
 				) {
-					Text("View All")
+					HStack {
+						Spacer()
+						Text("View All")
+					}
 				}
 			}
 			.task { await viewStore.send(.subscribeToStatistics).finish() }

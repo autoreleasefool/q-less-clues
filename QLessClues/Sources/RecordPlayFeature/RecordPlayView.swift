@@ -1,5 +1,6 @@
 import AnalysisFeature
 import ComposableArchitecture
+import Foundation
 import SharedModelsLibrary
 import SwiftUI
 
@@ -8,12 +9,14 @@ public struct RecordPlayView: View {
 
 	struct ViewState: Equatable {
 		let letters: String
+		let date: Date
 		let outcome: Play.Outcome
 		let isPlayable: Bool
 
 		init(state: RecordPlay.State) {
 			self.letters = state.letters
 			self.outcome = state.outcome
+			self.date = state.date
 			self.isPlayable = state.letters.count == 12
 		}
 	}
@@ -21,6 +24,7 @@ public struct RecordPlayView: View {
 	enum ViewAction {
 		case saveButtonTapped
 		case lettersChanged(String)
+		case dateChanged(Date)
 		case outcomeChanged(Play.Outcome)
 	}
 
@@ -35,6 +39,11 @@ public struct RecordPlayView: View {
 					TextField(
 						"Letters",
 						text: viewStore.binding(get: \.letters, send: ViewAction.lettersChanged)
+					)
+					DatePicker(
+						"Played On",
+						selection: viewStore.binding(get: \.date, send: ViewAction.dateChanged),
+						displayedComponents: [.date]
 					)
 					Picker(
 						"Outcome",
@@ -68,6 +77,8 @@ extension RecordPlay.Action {
 			self = .lettersChanged(letters)
 		case let .outcomeChanged(outcome):
 			self = .outcomeChanged(outcome)
+		case let .dateChanged(date):
+			self = .dateChanged(date)
 		}
 	}
 }
