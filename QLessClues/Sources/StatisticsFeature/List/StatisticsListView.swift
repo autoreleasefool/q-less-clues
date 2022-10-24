@@ -1,12 +1,12 @@
 import ComposableArchitecture
+import SharedModelsLibrary
 import SwiftUI
 
 public struct StatisticsListView: View {
-	static let letters = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map { String($0) }
 	let store: StoreOf<StatisticsList>
 
 	struct ViewState: Equatable {
-		let gamesPlayed: [String: Int]
+		let gamesPlayed: IdentifiedArrayOf<LetterPlayCount>
 		let selection: String?
 
 		init(state: StatisticsList.State) {
@@ -22,29 +22,27 @@ public struct StatisticsListView: View {
 
 	public var body: some View {
 		WithViewStore(store, observe: ViewState.init, send: StatisticsList.Action.init) { viewStore in
-			List {
-				ForEach(Self.letters, id: \.self) { letter in
-					NavigationLink(
-						destination: IfLetStore(
-							store.scope(
-								state: \.selection?.value,
-								action: StatisticsList.Action.detailedStatistics
-							)
-						) {
-							DetailedStatisticsView(store: $0)
-						},
-						tag: letter,
-						selection: viewStore.binding(
-							get: \.selection,
-							send: StatisticsListView.ViewAction.setNavigation(selection:)
+			List(viewStore.gamesPlayed) { letter in
+				NavigationLink(
+					destination: IfLetStore(
+						store.scope(
+							state: \.selection?.value,
+							action: StatisticsList.Action.detailedStatistics
 						)
 					) {
-						LabeledContent(letter, value: "\(viewStore.gamesPlayed[letter] ?? 0)")
-					}
+						DetailedStatisticsView(store: $0)
+					},
+					tag: letter.id,
+					selection: viewStore.binding(
+						get: \.selection,
+						send: StatisticsListView.ViewAction.setNavigation(selection:)
+					)
+				) {
+					LabeledContent(letter.letter, value: "\(letter.plays)")
 				}
 			}
-			.task { await viewStore.send(.subscribeToCounts).finish() }
 			.navigationTitle("Statistics by Letter")
+			.task { await viewStore.send(.subscribeToCounts).finish() }
 		}
 	}
 }

@@ -19,8 +19,7 @@ public struct PlaysList: ReducerProtocol {
 	}
 
 	public enum Action: Equatable {
-		case onAppear
-		case onDisappear
+		case subscribeToPlays
 		case playsResponse([Play])
 		case setRecordSheet(isPresented: Bool)
 		case setPlaySelection(selection: Play.ID?)
@@ -31,9 +30,6 @@ public struct PlaysList: ReducerProtocol {
 		case play(PlayDetails.Action)
 		case statistics(StatisticsReducer.Action)
 	}
-
-	private enum PlaysCancellable {}
-	private enum PlayCancellable {}
 
 	public init() {}
 
@@ -46,16 +42,12 @@ public struct PlaysList: ReducerProtocol {
 
 		Reduce { state, action in
 			switch action {
-			case .onAppear:
+			case .subscribeToPlays:
 				return .run { send in
 					for try await plays in playsDataProvider.fetchAll(.init(ordering: .byDate)) {
 						await send(.playsResponse(plays))
 					}
 				}
-				.cancellable(id: PlaysCancellable.self)
-
-			case .onDisappear:
-				return .cancel(ids: [PlaysCancellable.self, PlayCancellable.self])
 
 			case let .playsResponse(plays):
 				state.plays = IdentifiedArrayOf(uniqueElements: plays)
@@ -81,13 +73,10 @@ public struct PlaysList: ReducerProtocol {
 				return .none
 
 			case let .setPlaySelection(selection: .some(id)):
-				return .task {
-					for try await play in playsDataProvider.fetchOne(.init(id: id)) {
-						return .playResponse(play)
-					}
-					return .setPlaySelection(selection: nil)
+				if let selection = state.plays[id: id] {
+					state.selection = Identified(.init(play: selection), id: selection.id)
 				}
-				.cancellable(id: PlayCancellable.self)
+				return .none
 
 			case .setPlaySelection(selection: .none):
 				state.selection = nil

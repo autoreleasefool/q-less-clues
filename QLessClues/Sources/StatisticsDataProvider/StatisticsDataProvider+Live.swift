@@ -11,10 +11,10 @@ extension StatisticsDataProvider: DependencyKey {
 		fetchCounts: {
 			.init { continuation in
 				Task {
-					func fetchCounts(_ db: Database) throws -> [String: Int] {
-						try "ABCDEFGHIJKLMNOPQRSTUVWXYZ".reduce(into: [:]) { results, letter in
-							let count = try Play.all().filter(Column("letters").like("%\(letter)%")).fetchCount(db)
-							results[String(letter)] = count
+					func fetchCounts(_ db: Database) throws -> [LetterPlayCount] {
+						try "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map {
+							let count = try Play.all().filter(Column("letters").like("%\($0)%")).fetchCount(db)
+							return .init(letter: String($0), plays: count)
 						}
 					}
 

@@ -1,8 +1,9 @@
 import ComposableArchitecture
+import SharedModelsLibrary
 
 public struct StatisticsList: ReducerProtocol {
 	public struct State: Equatable {
-		public var gamesPlayed: [String: Int] = [:]
+		public var gamesPlayed: IdentifiedArrayOf<LetterPlayCount> = []
 		public var selection: Identified<String, DetailedStatistics.State>?
 
 		public init() {}
@@ -10,7 +11,7 @@ public struct StatisticsList: ReducerProtocol {
 
 	public enum Action: Equatable {
 		case subscribeToCounts
-		case countsResponse([String: Int])
+		case countsResponse([LetterPlayCount])
 		case setNavigation(selection: String?)
 		case detailedStatistics(DetailedStatistics.Action)
 	}
@@ -30,11 +31,10 @@ public struct StatisticsList: ReducerProtocol {
 				}
 
 			case let .countsResponse(counts):
-				state.gamesPlayed = counts
+				state.gamesPlayed = .init(uniqueElements: counts)
 				return .none
 
 			case let .setNavigation(selection: .some(letter)):
-				print("navigated to \(letter)")
 				state.selection = Identified(.init(letter: letter), id: letter)
 				return .none
 

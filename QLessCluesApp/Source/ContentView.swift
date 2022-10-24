@@ -15,7 +15,7 @@ import ValidatorServiceInterface
 struct ContentView: View {
 	let store = Store(
 		initialState: App.State(),
-		reducer: App()
+		reducer: App()._printChanges()
 	)
 
 	var body: some View {

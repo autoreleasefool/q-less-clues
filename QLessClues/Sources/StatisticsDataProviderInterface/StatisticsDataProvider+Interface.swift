@@ -2,11 +2,11 @@ import Dependencies
 import SharedModelsLibrary
 
 public struct StatisticsDataProvider: Sendable {
-	public var fetchCounts: @Sendable () -> AsyncThrowingStream<[String: Int], Error>
+	public var fetchCounts: @Sendable () -> AsyncThrowingStream<[LetterPlayCount], Error>
 	public var fetch: @Sendable (Statistics.FetchRequest) -> AsyncThrowingStream<Statistics, Error>
 
 	public init(
-		fetchCounts: @escaping @Sendable () -> AsyncThrowingStream<[String: Int], Error>,
+		fetchCounts: @escaping @Sendable () -> AsyncThrowingStream<[LetterPlayCount], Error>,
 		fetch: @escaping @Sendable (Statistics.FetchRequest) -> AsyncThrowingStream<Statistics, Error>
 	) {
 		self.fetchCounts = fetchCounts
