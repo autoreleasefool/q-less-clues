@@ -42,9 +42,9 @@ public struct SolutionsListView: View {
 							Text(solution.description)
 						}
 					}
-					.searchable(text: viewStore.binding(get: \.filter, send: ViewAction.listSearched))
 				}
 			}
+			.searchable(text: viewStore.binding(get: \.filter, send: ViewAction.listSearched))
 			.navigationTitle("Solutions")
 		}
 	}
