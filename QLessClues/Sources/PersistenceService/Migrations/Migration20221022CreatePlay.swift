@@ -11,4 +11,3 @@ struct Migration20221022CreatePlay: Migration {
 		}
 	}
 }
-

@@ -20,7 +20,6 @@ public struct PlayDetailsView: View {
 
 	enum ViewAction {
 		case deleteButtonTapped
-		case onDisappear
 	}
 
 	public init(store: StoreOf<PlayDetails>) {
@@ -44,7 +43,6 @@ public struct PlayDetailsView: View {
 				}
 			}
 			.navigationBarTitleDisplayMode(.inline)
-			.onDisappear { viewStore.send(.onDisappear) }
 			.alert(
 				store.scope(state: \.deleteAlert, action: PlayDetails.Action.alert),
 				dismiss: .dismissed
@@ -58,8 +56,6 @@ extension PlayDetails.Action {
 		switch action {
 		case .deleteButtonTapped:
 			self = .deleteButtonTapped
-		case .onDisappear:
-			self = .onDisappear
 		}
 	}
 }

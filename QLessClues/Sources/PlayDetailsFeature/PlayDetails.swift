@@ -21,7 +21,6 @@ public struct PlayDetails: ReducerProtocol {
 		case deleteButtonTapped
 		case analysis(Analysis.Action)
 		case playDeleted
-		case onDisappear
 	}
 
 	public init() {}
@@ -54,9 +53,6 @@ public struct PlayDetails: ReducerProtocol {
 				return .none
 
 			case .analysis:
-				return .none
-
-			case .onDisappear:
 				return .none
 			}
 		}

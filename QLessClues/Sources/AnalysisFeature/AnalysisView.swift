@@ -8,6 +8,7 @@ public struct AnalysisView: View {
 	let store: StoreOf<Analysis>
 
 	struct ViewState: Equatable {
+		let letters: String
 		let solutions: [Solution]
 		let difficulty: Play.Difficulty?
 		let progress: Double
@@ -15,6 +16,7 @@ public struct AnalysisView: View {
 		let isPlayable: Bool
 
 		init(state: Analysis.State) {
+			self.letters = state.letters
 			self.solutions = state.solutions
 			self.difficulty = state.difficulty
 			self.progress = state.mode.progress
@@ -25,7 +27,7 @@ public struct AnalysisView: View {
 
 	enum ViewAction {
 		case beginButtonTapped
-		case onDisappear
+		case lettersChanged(String)
 	}
 
 	public init(store: StoreOf<Analysis>) {
@@ -39,7 +41,7 @@ public struct AnalysisView: View {
 					.frame(maxWidth: .infinity)
 					.disabled(viewStore.hasStarted || !viewStore.isPlayable)
 			}
-			.onDisappear { viewStore.send(.onDisappear) }
+			.onChange(of: viewStore.letters) { viewStore.send(.lettersChanged($0)) }
 
 			IfLetStore(store.scope(state: \.hints, action: Analysis.Action.hints)) {
 				HintsView(store: $0)
@@ -70,8 +72,8 @@ extension Analysis.Action {
 		switch action {
 		case .beginButtonTapped:
 			self = .beginButtonTapped
-		case .onDisappear:
-			self = .onDisappear
+		case let .lettersChanged(letters):
+			self = .lettersChanged(letters)
 		}
 	}
 }

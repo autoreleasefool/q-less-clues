@@ -1,3 +1,4 @@
+import AnalysisFeature
 import ComposableArchitecture
 import Foundation
 import PlayDetailsFeature
@@ -68,10 +69,6 @@ public struct PlaysList: ReducerProtocol {
 			case .play(.playDeleted):
 				return .none
 
-			case .play(.onDisappear):
-				state.selection = nil
-				return .none
-
 			case let .setPlaySelection(selection: .some(id)):
 				if let selection = state.plays[id: id] {
 					state.selection = Identified(.init(play: selection), id: selection.id)
@@ -80,7 +77,7 @@ public struct PlaysList: ReducerProtocol {
 
 			case .setPlaySelection(selection: .none):
 				state.selection = nil
-				return .none
+				return .cancel(id: Analysis.TearDown.self)
 
 			case let .playResponse(play):
 				state.selection = Identified(PlayDetails.State(play: play), id: play.id)
@@ -92,7 +89,7 @@ public struct PlaysList: ReducerProtocol {
 
 			case .setRecordSheet(isPresented: false):
 				state.recordPlay = nil
-				return .none
+				return .cancel(id: Analysis.TearDown.self)
 
 			case .recordPlay(.playSaved):
 				state.recordPlay = nil

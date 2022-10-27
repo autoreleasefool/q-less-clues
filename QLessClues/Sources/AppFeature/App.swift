@@ -24,7 +24,7 @@ public struct App: ReducerProtocol {
 			PlaysList()
 		}
 
-		Reduce { state, action in
+		Reduce { _, action in
 			switch action {
 			case .onAppear:
 				return .fireAndForget {

@@ -46,9 +46,9 @@ public struct Analysis: ReducerProtocol {
 
 	public enum Action: Equatable {
 		case beginButtonTapped
-		case onDisappear
 		case solverService(SolverService.Event)
 		case solverServiceFinished
+		case lettersChanged(String)
 		case hints(Hints.Action)
 		case solutionsList(SolutionsList.Action)
 	}
@@ -64,6 +64,16 @@ public struct Analysis: ReducerProtocol {
 
 		Reduce { state, action in
 			switch action {
+			case let .lettersChanged(letters):
+				if letters.count != 12 {
+					state.mode = .notStarted
+					state.solutions = []
+					state.difficulty = nil
+					return .cancel(id: TearDown.self)
+				} else {
+					return .none
+				}
+
 			case .beginButtonTapped:
 				state.mode = .solving(progress: 0)
 				return .run { [letters = state.letters] send in
@@ -87,9 +97,6 @@ public struct Analysis: ReducerProtocol {
 			case let .solverService(.progress(progress)):
 				state.mode = .solving(progress: progress)
 				return .none
-
-			case .onDisappear:
-				return .cancel(id: TearDown.self)
 
 			case .hints, .solutionsList:
 				return .none

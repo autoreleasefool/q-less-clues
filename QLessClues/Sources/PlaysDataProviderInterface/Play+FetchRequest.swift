@@ -18,7 +18,6 @@ extension Play.FetchRequest {
 	}
 }
 
-
 // MARK: SingleFetchRequest
 
 extension Play {
