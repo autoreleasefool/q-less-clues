@@ -1,4 +1,5 @@
 import DictionaryLibrary
+import Foundation
 import SharedModelsLibrary
 import SolverServiceInterface
 import ValidatorServiceInterface
@@ -25,6 +26,8 @@ struct BacktrackingSolver {
 	}
 
 	private func generateSolutions(state: inout State) async {
+		guard !Task.isCancelled else { return }
+
 		if state.remainingLetters.isEmpty {
 			let solution = Solution(board: state.board)
 			if await validator.validate(solution, WordSet.englishSet) {
@@ -49,6 +52,8 @@ struct BacktrackingSolver {
 		print("Total first words: \(firstWords.count), \(firstWords)")
 
 		for (index, word) in firstWords.enumerated() {
+			guard !Task.isCancelled else { return }
+
 			print("Solving with firstWord \(index)")
 
 			insertFirstWord(word, in: &state)
@@ -76,6 +81,8 @@ struct BacktrackingSolver {
 		let expressions = enumerateRowsAndColumns(for: state)
 
 		for word in state.wordSet.limitBy(.mostPopular).words {
+			guard !Task.isCancelled else { return }
+
 			for rowColumn in expressions {
 				guard word.firstMatch(of: rowColumn.regex) != nil else {
 					continue

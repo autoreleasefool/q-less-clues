@@ -38,7 +38,7 @@ extension PlaysDataProvider: DependencyKey {
 		fetchAll: { request in
 			@Dependency(\.persistenceService) var persistenceService: PersistenceService
 			return .init { continuation in
-				Task {
+				let task = Task {
 					do {
 						let db = persistenceService.reader()
 						let observation = ValueObservation.tracking(request.fetchValue(_:))
@@ -52,12 +52,14 @@ extension PlaysDataProvider: DependencyKey {
 						continuation.finish(throwing: error)
 					}
 				}
+
+				continuation.onTermination = { _ in task.cancel() }
 			}
 		},
 		fetchOne: { request in
 			@Dependency(\.persistenceService) var persistenceService: PersistenceService
 			return .init { continuation in
-				Task {
+				let task = Task {
 					do {
 						let db = persistenceService.reader()
 						let observation = ValueObservation.tracking(request.fetchValue(_:))
@@ -75,6 +77,8 @@ extension PlaysDataProvider: DependencyKey {
 						continuation.finish(throwing: error)
 					}
 				}
+
+				continuation.onTermination = { _ in task.cancel() }
 			}
 		}
 	)

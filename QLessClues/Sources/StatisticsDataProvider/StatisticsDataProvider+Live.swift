@@ -10,7 +10,7 @@ extension StatisticsDataProvider: DependencyKey {
 	public static let liveValue = Self(
 		fetchCounts: {
 			.init { continuation in
-				Task {
+				let task = Task {
 					func fetchCounts(_ db: Database) throws -> [LetterPlayCount] {
 						try "ABCDEFGHIJKLMNOPQRSTUVWXYZ".map {
 							let count = try Play.all().filter(Column("letters").like("%\($0)%")).fetchCount(db)
@@ -32,11 +32,13 @@ extension StatisticsDataProvider: DependencyKey {
 						continuation.finish(throwing: error)
 					}
 				}
+
+				continuation.onTermination = { _ in task.cancel() }
 			}
 		},
 		fetch: { request in
 			return .init { continuation in
-				Task {
+				let task = Task {
 					do {
 						@Dependency(\.persistenceService) var persistenceService: PersistenceService
 						let db = persistenceService.reader()
@@ -51,6 +53,8 @@ extension StatisticsDataProvider: DependencyKey {
 						continuation.finish(throwing: error)
 					}
 				}
+
+				continuation.onTermination = { _ in task.cancel() }
 			}
 		}
 	)
