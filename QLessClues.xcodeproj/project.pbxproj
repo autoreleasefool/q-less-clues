@@ -351,7 +351,7 @@
 				DEVELOPMENT_TEAM = 3UBRXR267C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = QLessClues/Info.plist;
+				INFOPLIST_FILE = QLessCluesApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Clueless;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -383,7 +383,7 @@
 				DEVELOPMENT_TEAM = 3UBRXR267C;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = QLessClues/Info.plist;
+				INFOPLIST_FILE = QLessCluesApp/Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = Clueless;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.utilities";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
