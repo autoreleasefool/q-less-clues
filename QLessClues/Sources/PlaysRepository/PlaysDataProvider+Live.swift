@@ -3,7 +3,7 @@ import Foundation
 import GRDB
 import PersistenceServiceInterface
 import PersistentModelsLibrary
-import PlaysDataProviderInterface
+import PlaysRepositoryInterface
 import SharedModelsLibrary
 
 extension PlaysDataProvider: DependencyKey {

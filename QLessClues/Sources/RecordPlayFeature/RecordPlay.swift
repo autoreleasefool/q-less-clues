@@ -2,7 +2,7 @@ import AnalysisFeature
 import ComposableArchitecture
 import Foundation
 import PlayDetailsFeature
-import PlaysDataProviderInterface
+import PlaysRepositoryInterface
 import SharedModelsLibrary
 import SolverServiceInterface
 
@@ -34,9 +34,9 @@ public struct RecordPlay: ReducerProtocol {
 	@Dependency(\.playsDataProvider) var playsDataProvider
 
 	public var body: some ReducerProtocol<State, Action> {
-		Scope(state: \.analysis, action: /RecordPlay.Action.analysis) {
-			Analysis()
-		}
+//		Scope(state: \.analysis, action: /RecordPlay.Action.analysis) {
+//			Analysis()
+//		}
 
 		Reduce { state, action in
 			switch action {

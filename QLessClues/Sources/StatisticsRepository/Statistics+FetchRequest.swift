@@ -1,6 +1,6 @@
 import GRDB
 import SharedModelsLibrary
-import StatisticsDataProviderInterface
+import StatisticsRepositoryInterface
 
 extension Statistics.FetchRequest {
 	func fetchValue(_ db: Database) throws -> Statistics {

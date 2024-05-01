@@ -1,0 +1,107 @@
+name = "Approach"
+tools_version = "5.9"
+default_localization = "en"
+
+# Platforms
+
+[platforms.iOS]
+supported = [ "\"17.0\"" ]
+
+# Features
+
+[features.Analysis]
+features = [ "Hints", "SolutionsList" ]
+services = [ "Solver" ]
+
+[features.App]
+features = [ "PlaysList" ]
+
+[features.Hints]
+libraries = [ "Dictionary", "SharedModels" ]
+dependencies = [ "ComposableArchitecture" ]
+
+[features.PlayDetails]
+features = [ "Analysis" ]
+repositories = [ "Plays" ]
+
+[features.PlaysList]
+features = [ "RecordPlay", "Statistics" ]
+
+[features.RecordPlay]
+features = [ "PlayDetails" ]
+
+[features.Statistics]
+repositories = [ "Statistics" ]
+
+[features.SolutionsList]
+libraries = [ "SharedModels" ]
+
+# Repositories
+
+[repositories.Plays]
+
+[repositories.Statistics]
+
+# Services
+
+[services.Persistence]
+libraries = [ "PersistentModels" ]
+
+[services.Persistence.interface]
+libraries = [ "SharedModels" ]
+dependencies = [ "GRDB" ]
+
+[services.Solver]
+services = [ "Validator" ]
+
+[services.Solver.interface]
+libraries = [ "SharedModels" ]
+
+[services.Validator]
+
+[services.Validator.interface]
+libraries = [ "Dictionary", "SharedModels" ]
+
+# Libraries
+
+[libraries.Dictionary]
+
+[libraries.Extensions]
+
+[libraries.PersistentModels]
+skip_tests = true
+libraries = [ "SharedModels" ]
+dependencies = [ "GRDB" ]
+
+[libraries.SharedModels]
+libraries = [ "Extensions" ]
+
+# Dependencies
+
+[dependencies.ComposableArchitecture]
+url = "https://github.com/pointfreeco/swift-composable-architecture.git"
+from = "0.43.0"
+
+[dependencies.Dependencies]
+url = "https://github.com/pointfreeco/swift-composable-architecture.git"
+from = "0.43.0"
+
+[dependencies.GRDB]
+url = "https://github.com/groue/GRDB.swift.git"
+from = "6.21.0"
+
+# Defaults
+
+[defaults.features]
+dependencies = [ "ComposableArchitecture" ]
+
+[defaults.repositories]
+services = [ "Persistence" ]
+libraries = [ "PersistentModels" ]
+
+[defaults.repositories.interface]
+libraries = [ "SharedModels" ]
+dependencies = [ "Dependencies" ]
+
+[defaults.services.interface]
+dependencies = [ "Dependencies" ]

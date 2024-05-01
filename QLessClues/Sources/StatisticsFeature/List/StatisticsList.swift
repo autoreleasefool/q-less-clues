@@ -46,10 +46,10 @@ public struct StatisticsList: ReducerProtocol {
 				return .none
 			}
 		}
-		.ifLet(\.selection, action: /StatisticsList.Action.detailedStatistics) {
-			Scope(state: \Identified<String, DetailedStatistics.State>.value, action: /.self) {
-				DetailedStatistics()
-			}
-		}
+//		.ifLet(\.selection, action: /StatisticsList.Action.detailedStatistics) {
+//			Scope(state: \Identified<String, DetailedStatistics.State>.value, action: /.self) {
+//				DetailedStatistics()
+//			}
+//		}
 	}
 }

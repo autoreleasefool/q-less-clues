@@ -2,11 +2,11 @@ import AnalysisFeature
 import ComposableArchitecture
 import Foundation
 import PlayDetailsFeature
-import PlaysDataProviderInterface
+import PlaysRepositoryInterface
 import RecordPlayFeature
 import SharedModelsLibrary
 import SolverServiceInterface
-import StatisticsDataProviderInterface
+import StatisticsRepositoryInterface
 import StatisticsFeature
 
 public struct PlaysList: ReducerProtocol {
@@ -37,9 +37,9 @@ public struct PlaysList: ReducerProtocol {
 	@Dependency(\.playsDataProvider) var playsDataProvider
 
 	public var body: some ReducerProtocol<State, Action> {
-		Scope(state: \.statistics, action: /PlaysList.Action.statistics) {
-			StatisticsReducer()
-		}
+//		Scope(state: \.statistics, action: /PlaysList.Action.statistics) {
+//			StatisticsReducer()
+//		}
 
 		Reduce { state, action in
 			switch action {
@@ -99,13 +99,13 @@ public struct PlaysList: ReducerProtocol {
 				return .none
 			}
 		}
-		.ifLet(\.recordPlay, action: /PlaysList.Action.recordPlay) {
-			RecordPlay()
-		}
-		.ifLet(\.selection, action: /PlaysList.Action.play) {
-			Scope(state: \Identified<Play.ID, PlayDetails.State>.value, action: /.self) {
-				PlayDetails()
-			}
-		}
+//		.ifLet(\.recordPlay, action: /PlaysList.Action.recordPlay) {
+//			RecordPlay()
+//		}
+//		.ifLet(\.selection, action: /PlaysList.Action.play) {
+//			Scope(state: \Identified<Play.ID, PlayDetails.State>.value, action: /.self) {
+//				PlayDetails()
+//			}
+//		}
 	}
 }

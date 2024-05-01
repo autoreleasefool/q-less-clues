@@ -1,5 +1,5 @@
 import GRDB
-import PlaysDataProviderInterface
+import PlaysRepositoryInterface
 import PersistentModelsLibrary
 import SharedModelsLibrary
 

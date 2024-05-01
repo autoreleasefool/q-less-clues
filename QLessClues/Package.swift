@@ -1,11 +1,12 @@
-// swift-tools-version: 5.7
+// swift-tools-version: 5.9
 
 import PackageDescription
 
 let package = Package(
-	name: "QLessClues",
+	name: "Approach",
+	defaultLocalization: "en",
 	platforms: [
-		.iOS(.v16),
+		.iOS("17.0"),
 	],
 	products: [
 		// MARK: - Features
@@ -15,14 +16,16 @@ let package = Package(
 		.library(name: "PlayDetailsFeature", targets: ["PlayDetailsFeature"]),
 		.library(name: "PlaysListFeature", targets: ["PlaysListFeature"]),
 		.library(name: "RecordPlayFeature", targets: ["RecordPlayFeature"]),
-		.library(name: "StatisticsFeature", targets: ["StatisticsFeature"]),
 		.library(name: "SolutionsListFeature", targets: ["SolutionsListFeature"]),
+		.library(name: "StatisticsFeature", targets: ["StatisticsFeature"]),
 
-		// MARK: - DataProviders
-		.library(name: "PlaysDataProvider", targets: ["PlaysDataProvider"]),
-		.library(name: "PlaysDataProviderInterface", targets: ["PlaysDataProviderInterface"]),
-		.library(name: "StatisticsDataProvider", targets: ["StatisticsDataProvider"]),
-		.library(name: "StatisticsDataProviderInterface", targets: ["StatisticsDataProviderInterface"]),
+		// MARK: - Repositories
+		.library(name: "PlaysRepository", targets: ["PlaysRepository"]),
+		.library(name: "PlaysRepositoryInterface", targets: ["PlaysRepositoryInterface"]),
+		.library(name: "StatisticsRepository", targets: ["StatisticsRepository"]),
+		.library(name: "StatisticsRepositoryInterface", targets: ["StatisticsRepositoryInterface"]),
+
+		// MARK: - Data Providers
 
 		// MARK: - Services
 		.library(name: "PersistenceService", targets: ["PersistenceService"]),
@@ -37,11 +40,10 @@ let package = Package(
 		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
 		.library(name: "PersistentModelsLibrary", targets: ["PersistentModelsLibrary"]),
 		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
-		.library(name: "SharedModelsLibraryMocks", targets: ["SharedModelsLibraryMocks"]),
 	],
 	dependencies: [
+		.package(url: "https://github.com/groue/GRDB.swift.git", from: "6.21.0"),
 		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.43.0"),
-		.package(url: "https://github.com/groue/GRDB.swift.git", from: "6.1.0"),
 	],
 	targets: [
 		// MARK: - Features
@@ -53,111 +55,171 @@ let package = Package(
 				"SolverServiceInterface",
 			]
 		),
-		.testTarget(name: "AnalysisFeatureTests", dependencies: ["AnalysisFeature", "SharedModelsLibraryMocks"]),
-		.target(name: "AppFeature", dependencies: ["PlaysListFeature"]),
-		.testTarget(name: "AppFeatureTests", dependencies: ["AppFeature"]),
+		.testTarget(
+			name: "AnalysisFeatureTests",
+			dependencies: [
+				"AnalysisFeature",
+			]
+		),
+		.target(
+			name: "AppFeature",
+			dependencies: [
+				"PlaysListFeature",
+			]
+		),
+		.testTarget(
+			name: "AppFeatureTests",
+			dependencies: [
+				"AppFeature",
+			]
+		),
 		.target(
 			name: "HintsFeature",
 			dependencies: [
+				.product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
 				"DictionaryLibrary",
 				"SharedModelsLibrary",
-				.product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
 			]
 		),
-		.testTarget(name: "HintsFeatureTests", dependencies: ["HintsFeature", "SharedModelsLibraryMocks"]),
+		.testTarget(
+			name: "HintsFeatureTests",
+			dependencies: [
+				"HintsFeature",
+			]
+		),
 		.target(
 			name: "PlayDetailsFeature",
 			dependencies: [
 				"AnalysisFeature",
-				"PlaysDataProviderInterface",
+				"PlaysRepositoryInterface",
 			]
 		),
-		.testTarget(name: "PlayDetailsFeatureTests", dependencies: ["PlayDetailsFeature", "SharedModelsLibraryMocks"]),
+		.testTarget(
+			name: "PlayDetailsFeatureTests",
+			dependencies: [
+				"PlayDetailsFeature",
+			]
+		),
 		.target(
 			name: "PlaysListFeature",
 			dependencies: [
-				"PlayDetailsFeature",
 				"RecordPlayFeature",
 				"StatisticsFeature",
 			]
 		),
-		.testTarget(name: "PlaysListFeatureTests", dependencies: ["PlaysListFeature", "SharedModelsLibraryMocks"]),
+		.testTarget(
+			name: "PlaysListFeatureTests",
+			dependencies: [
+				"PlaysListFeature",
+			]
+		),
 		.target(
 			name: "RecordPlayFeature",
 			dependencies: [
-				"AnalysisFeature",
 				"PlayDetailsFeature",
-				"PlaysDataProviderInterface",
 			]
 		),
-		.testTarget(name: "RecordPlayFeatureTests", dependencies: ["RecordPlayFeature"]),
-		.target(
-			name: "StatisticsFeature",
+		.testTarget(
+			name: "RecordPlayFeatureTests",
 			dependencies: [
-				"StatisticsDataProviderInterface",
-				.product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+				"RecordPlayFeature",
 			]
 		),
-		.testTarget(name: "StatisticsFeatureTests", dependencies: ["StatisticsFeature", "SharedModelsLibraryMocks"]),
 		.target(
 			name: "SolutionsListFeature",
 			dependencies: [
-				"SharedModelsLibrary",
 				.product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+				"SharedModelsLibrary",
 			]
 		),
-		.testTarget(name: "SolutionsListFeatureTests", dependencies: ["SolutionsListFeature"]),
+		.testTarget(
+			name: "SolutionsListFeatureTests",
+			dependencies: [
+				"SolutionsListFeature",
+			]
+		),
+		.target(
+			name: "StatisticsFeature",
+			dependencies: [
+				.product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
+				"StatisticsRepositoryInterface",
+			]
+		),
+		.testTarget(
+			name: "StatisticsFeatureTests",
+			dependencies: [
+				"StatisticsFeature",
+			]
+		),
+
+		// MARK: - Repositories
+		.target(
+			name: "PlaysRepository",
+			dependencies: [
+				"PersistenceServiceInterface",
+				"PersistentModelsLibrary",
+				"PlaysRepositoryInterface",
+			]
+		),
+		.target(
+			name: "PlaysRepositoryInterface",
+			dependencies: [
+				.product(name: "Dependencies", package: "swift-composable-architecture"),
+				"SharedModelsLibrary",
+			]
+		),
+		.testTarget(
+			name: "PlaysRepositoryTests",
+			dependencies: [
+				"PlaysRepository",
+			]
+		),
+		.target(
+			name: "StatisticsRepository",
+			dependencies: [
+				"PersistenceServiceInterface",
+				"PersistentModelsLibrary",
+				"StatisticsRepositoryInterface",
+			]
+		),
+		.target(
+			name: "StatisticsRepositoryInterface",
+			dependencies: [
+				.product(name: "Dependencies", package: "swift-composable-architecture"),
+				"SharedModelsLibrary",
+			]
+		),
+		.testTarget(
+			name: "StatisticsRepositoryTests",
+			dependencies: [
+				"StatisticsRepository",
+			]
+		),
 
 		// MARK: - Data Providers
-		.target(
-			name: "PlaysDataProvider",
-			dependencies: [
-				"PersistenceServiceInterface",
-				"PersistentModelsLibrary",
-				"PlaysDataProviderInterface",
-			]
-		),
-		.testTarget(name: "PlaysDataProviderTests", dependencies: ["PlaysDataProvider"]),
-		.target(
-			name: "PlaysDataProviderInterface",
-			dependencies: [
-				"SharedModelsLibrary",
-				.product(name: "Dependencies", package: "swift-composable-architecture"),
-			]
-		),
-		.target(
-			name: "StatisticsDataProvider",
-			dependencies: [
-				"PersistenceServiceInterface",
-				"PersistentModelsLibrary",
-				"StatisticsDataProviderInterface",
-			]
-		),
-		.testTarget(name: "StatisticsDataProviderTests", dependencies: ["StatisticsDataProvider"]),
-		.target(
-			name: "StatisticsDataProviderInterface",
-			dependencies: [
-				"SharedModelsLibrary",
-				.product(name: "Dependencies", package: "swift-composable-architecture"),
-			]
-		),
 
 		// MARK: - Services
 		.target(
 			name: "PersistenceService",
 			dependencies: [
-				"PersistentModelsLibrary",
 				"PersistenceServiceInterface",
+				"PersistentModelsLibrary",
 			]
 		),
 		.target(
 			name: "PersistenceServiceInterface",
 			dependencies: [
-				.product(name: "GRDB", package: "grdb.swift"),
 				.product(name: "Dependencies", package: "swift-composable-architecture"),
+				.product(name: "GRDB", package: "GRDB.swift"),
+				"SharedModelsLibrary",
 			]
 		),
-		.testTarget(name: "PersistenceServiceTests", dependencies: ["PersistenceService"]),
+		.testTarget(
+			name: "PersistenceServiceTests",
+			dependencies: [
+				"PersistenceService",
+			]
+		),
 		.target(
 			name: "SolverService",
 			dependencies: [
@@ -168,35 +230,76 @@ let package = Package(
 		.target(
 			name: "SolverServiceInterface",
 			dependencies: [
-				"SharedModelsLibrary",
 				.product(name: "Dependencies", package: "swift-composable-architecture"),
+				"SharedModelsLibrary",
 			]
 		),
-		.testTarget(name: "SolverServiceTests", dependencies: ["SolverService"]),
-		.target(name: "ValidatorService", dependencies: ["ValidatorServiceInterface"]),
-		.testTarget(name: "ValidatorServiceTests", dependencies: ["ValidatorService"]),
+		.testTarget(
+			name: "SolverServiceTests",
+			dependencies: [
+				"SolverService",
+			]
+		),
+		.target(
+			name: "ValidatorService",
+			dependencies: [
+				"ValidatorServiceInterface",
+			]
+		),
 		.target(
 			name: "ValidatorServiceInterface",
 			dependencies: [
+				.product(name: "Dependencies", package: "swift-composable-architecture"),
 				"DictionaryLibrary",
 				"SharedModelsLibrary",
-				.product(name: "Dependencies", package: "swift-composable-architecture"),
-			]),
+			]
+		),
+		.testTarget(
+			name: "ValidatorServiceTests",
+			dependencies: [
+				"ValidatorService",
+			]
+		),
 
 		// MARK: - Libraries
-		.target(name: "DictionaryLibrary", dependencies: []),
-		.testTarget(name: "DictionaryLibraryTests", dependencies: ["DictionaryLibrary"]),
-		.target(name: "ExtensionsLibrary", dependencies: []),
-		.testTarget(name: "ExtensionsLibraryTests", dependencies: ["ExtensionsLibrary"]),
+		.target(
+			name: "DictionaryLibrary",
+			dependencies: []
+		),
+		.testTarget(
+			name: "DictionaryLibraryTests",
+			dependencies: [
+				"DictionaryLibrary",
+			]
+		),
+		.target(
+			name: "ExtensionsLibrary",
+			dependencies: []
+		),
+		.testTarget(
+			name: "ExtensionsLibraryTests",
+			dependencies: [
+				"ExtensionsLibrary",
+			]
+		),
 		.target(
 			name: "PersistentModelsLibrary",
 			dependencies: [
+				.product(name: "GRDB", package: "GRDB.swift"),
 				"SharedModelsLibrary",
-				.product(name: "GRDB", package: "grdb.swift"),
 			]
 		),
-		.target(name: "SharedModelsLibrary", dependencies: ["ExtensionsLibrary"]),
-		.target(name: "SharedModelsLibraryMocks", dependencies: ["SharedModelsLibrary"]),
-		.testTarget(name: "SharedModelsLibraryTests", dependencies: ["SharedModelsLibrary", "SharedModelsLibraryMocks"]),
+		.target(
+			name: "SharedModelsLibrary",
+			dependencies: [
+				"ExtensionsLibrary",
+			]
+		),
+		.testTarget(
+			name: "SharedModelsLibraryTests",
+			dependencies: [
+				"SharedModelsLibrary",
+			]
+		),
 	]
 )

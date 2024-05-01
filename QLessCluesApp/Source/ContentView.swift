@@ -2,12 +2,12 @@ import AppFeature
 import ComposableArchitecture
 import PersistenceService
 import PersistenceServiceInterface
-import PlaysDataProvider
-import PlaysDataProviderInterface
+import PlaysRepository
+import PlaysRepositoryInterface
 import SolverService
 import SolverServiceInterface
-import StatisticsDataProvider
-import StatisticsDataProviderInterface
+import StatisticsRepository
+import StatisticsRepositoryInterface
 import SwiftUI
 import ValidatorService
 import ValidatorServiceInterface

@@ -1,6 +1,6 @@
 import ComposableArchitecture
 import SharedModelsLibrary
-import StatisticsDataProviderInterface
+import StatisticsRepositoryInterface
 
 public struct DetailedStatistics: ReducerProtocol {
 	public struct State: Equatable {

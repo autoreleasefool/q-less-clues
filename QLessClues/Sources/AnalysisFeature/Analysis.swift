@@ -58,9 +58,9 @@ public struct Analysis: ReducerProtocol {
 	@Dependency(\.solverService) var solverService
 
 	public var body: some ReducerProtocol<State, Action> {
-		Scope(state: \.solutionsList, action: /Action.solutionsList) {
-			SolutionsList()
-		}
+//		Scope(state: \.solutionsList, action: /Action.solutionsList) {
+//			SolutionsList()
+//		}
 
 		Reduce { state, action in
 			switch action {

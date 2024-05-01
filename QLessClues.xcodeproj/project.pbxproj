@@ -11,13 +11,13 @@
 		CA1867B928C5095100DD75C7 /* QLessCluesApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = CA1867B828C5095100DD75C7 /* QLessCluesApp.swift */; };
 		CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BC28C5095200DD75C7 /* Assets.xcassets */; };
 		CA1867C028C5095200DD75C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BF28C5095200DD75C7 /* Preview Assets.xcassets */; };
-		CA5F51D528F2DC9C000FC561 /* AppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = CA5F51D428F2DC9C000FC561 /* AppFeature */; };
 		CA6452BE28C5DFA200738762 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = CA6452BD28C5DFA200738762 /* words.txt */; };
-		CA64550728F58FD300FFE0B1 /* SolverService in Frameworks */ = {isa = PBXBuildFile; productRef = CA64550628F58FD300FFE0B1 /* SolverService */; };
-		CA64550928F58FD600FFE0B1 /* ValidatorService in Frameworks */ = {isa = PBXBuildFile; productRef = CA64550828F58FD600FFE0B1 /* ValidatorService */; };
-		CAB1C71628F5AF78000DA81D /* PersistenceService in Frameworks */ = {isa = PBXBuildFile; productRef = CAB1C71528F5AF78000DA81D /* PersistenceService */; };
-		CAB1C71828F5AF7F000DA81D /* PlaysDataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = CAB1C71728F5AF7F000DA81D /* PlaysDataProvider */; };
-		CAB1C71A28F5D85F000DA81D /* StatisticsDataProvider in Frameworks */ = {isa = PBXBuildFile; productRef = CAB1C71928F5D85F000DA81D /* StatisticsDataProvider */; };
+		CA904E032BE2260700AA3C30 /* AppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = CA904E022BE2260700AA3C30 /* AppFeature */; };
+		CA904E052BE2260700AA3C30 /* PersistenceService in Frameworks */ = {isa = PBXBuildFile; productRef = CA904E042BE2260700AA3C30 /* PersistenceService */; };
+		CA904E072BE2260700AA3C30 /* PlaysRepository in Frameworks */ = {isa = PBXBuildFile; productRef = CA904E062BE2260700AA3C30 /* PlaysRepository */; };
+		CA904E092BE2260700AA3C30 /* SolverService in Frameworks */ = {isa = PBXBuildFile; productRef = CA904E082BE2260700AA3C30 /* SolverService */; };
+		CA904E0B2BE2260700AA3C30 /* StatisticsRepository in Frameworks */ = {isa = PBXBuildFile; productRef = CA904E0A2BE2260700AA3C30 /* StatisticsRepository */; };
+		CA904E0D2BE2260700AA3C30 /* ValidatorService in Frameworks */ = {isa = PBXBuildFile; productRef = CA904E0C2BE2260700AA3C30 /* ValidatorService */; };
 		CAB3CC3728D7E6380035DD1E /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = CAB3CC3628D7E6380035DD1E /* ContentView.swift */; };
 /* End PBXBuildFile section */
 
@@ -38,12 +38,12 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				CA64550728F58FD300FFE0B1 /* SolverService in Frameworks */,
-				CAB1C71A28F5D85F000DA81D /* StatisticsDataProvider in Frameworks */,
-				CA5F51D528F2DC9C000FC561 /* AppFeature in Frameworks */,
-				CAB1C71828F5AF7F000DA81D /* PlaysDataProvider in Frameworks */,
-				CA64550928F58FD600FFE0B1 /* ValidatorService in Frameworks */,
-				CAB1C71628F5AF78000DA81D /* PersistenceService in Frameworks */,
+				CA904E0B2BE2260700AA3C30 /* StatisticsRepository in Frameworks */,
+				CA904E072BE2260700AA3C30 /* PlaysRepository in Frameworks */,
+				CA904E092BE2260700AA3C30 /* SolverService in Frameworks */,
+				CA904E052BE2260700AA3C30 /* PersistenceService in Frameworks */,
+				CA904E032BE2260700AA3C30 /* AppFeature in Frameworks */,
+				CA904E0D2BE2260700AA3C30 /* ValidatorService in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -131,12 +131,12 @@
 			);
 			name = QLessClues;
 			packageProductDependencies = (
-				CA5F51D428F2DC9C000FC561 /* AppFeature */,
-				CA64550628F58FD300FFE0B1 /* SolverService */,
-				CA64550828F58FD600FFE0B1 /* ValidatorService */,
-				CAB1C71528F5AF78000DA81D /* PersistenceService */,
-				CAB1C71728F5AF7F000DA81D /* PlaysDataProvider */,
-				CAB1C71928F5D85F000DA81D /* StatisticsDataProvider */,
+				CA904E022BE2260700AA3C30 /* AppFeature */,
+				CA904E042BE2260700AA3C30 /* PersistenceService */,
+				CA904E062BE2260700AA3C30 /* PlaysRepository */,
+				CA904E082BE2260700AA3C30 /* SolverService */,
+				CA904E0A2BE2260700AA3C30 /* StatisticsRepository */,
+				CA904E0C2BE2260700AA3C30 /* ValidatorService */,
 			);
 			productName = QLessClues;
 			productReference = CA1867B528C5095100DD75C7 /* QLessClues.app */;
@@ -150,7 +150,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1400;
-				LastUpgradeCheck = 1400;
+				LastUpgradeCheck = 1530;
 				TargetAttributes = {
 					CA1867B428C5095100DD75C7 = {
 						CreatedOnToolsVersion = 14.0;
@@ -262,6 +262,7 @@
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -276,7 +277,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -322,6 +323,7 @@
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = NO;
 				GCC_C_LANGUAGE_STANDARD = gnu11;
 				GCC_NO_COMMON_BLOCKS = YES;
 				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
@@ -330,7 +332,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
@@ -359,6 +361,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -366,6 +369,10 @@
 				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.josephroque.clueless;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -391,6 +398,7 @@
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -398,6 +406,10 @@
 				MARKETING_VERSION = 1.2.1;
 				PRODUCT_BUNDLE_IDENTIFIER = ca.josephroque.clueless;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
+				SUPPORTS_XR_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -428,29 +440,29 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
-		CA5F51D428F2DC9C000FC561 /* AppFeature */ = {
+		CA904E022BE2260700AA3C30 /* AppFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppFeature;
 		};
-		CA64550628F58FD300FFE0B1 /* SolverService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = SolverService;
-		};
-		CA64550828F58FD600FFE0B1 /* ValidatorService */ = {
-			isa = XCSwiftPackageProductDependency;
-			productName = ValidatorService;
-		};
-		CAB1C71528F5AF78000DA81D /* PersistenceService */ = {
+		CA904E042BE2260700AA3C30 /* PersistenceService */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = PersistenceService;
 		};
-		CAB1C71728F5AF7F000DA81D /* PlaysDataProvider */ = {
+		CA904E062BE2260700AA3C30 /* PlaysRepository */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = PlaysDataProvider;
+			productName = PlaysRepository;
 		};
-		CAB1C71928F5D85F000DA81D /* StatisticsDataProvider */ = {
+		CA904E082BE2260700AA3C30 /* SolverService */ = {
 			isa = XCSwiftPackageProductDependency;
-			productName = StatisticsDataProvider;
+			productName = SolverService;
+		};
+		CA904E0A2BE2260700AA3C30 /* StatisticsRepository */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = StatisticsRepository;
+		};
+		CA904E0C2BE2260700AA3C30 /* ValidatorService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = ValidatorService;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

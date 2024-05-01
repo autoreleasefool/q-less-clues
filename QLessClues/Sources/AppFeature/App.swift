@@ -1,9 +1,9 @@
 import ComposableArchitecture
 import DictionaryLibrary
 import PlaysListFeature
-import PlaysDataProviderInterface
+import PlaysRepositoryInterface
 import SolverServiceInterface
-import StatisticsDataProviderInterface
+import StatisticsRepositoryInterface
 
 public struct App: ReducerProtocol {
 	public struct State: Equatable {
@@ -20,9 +20,9 @@ public struct App: ReducerProtocol {
 	public init() {}
 
 	public var body: some ReducerProtocol<State, Action> {
-		Scope(state: \.playsList, action: /App.Action.playsList) {
-			PlaysList()
-		}
+//		Scope(state: \.playsList, action: /App.Action.playsList) {
+//			PlaysList()
+//		}
 
 		Reduce { _, action in
 			switch action {

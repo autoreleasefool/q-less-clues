@@ -4,7 +4,7 @@ import GRDB
 import PersistenceServiceInterface
 import PersistentModelsLibrary
 import SharedModelsLibrary
-import StatisticsDataProviderInterface
+import StatisticsRepositoryInterface
 
 extension StatisticsDataProvider: DependencyKey {
 	public static let liveValue = Self(
