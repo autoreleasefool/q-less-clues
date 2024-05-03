@@ -43,7 +43,7 @@ public struct RecordPlay: Reducer {
 	public init() {}
 
 	@Dependency(\.dismiss) var dismiss
-	@Dependency(\.playsDataProvider) var playsDataProvider
+	@Dependency(\.plays) var plays
 
 	public var body: some ReducerOf<Self> {
 		BindingReducer()
@@ -59,7 +59,7 @@ public struct RecordPlay: Reducer {
 				case .didTapSaveButton:
 					return .run { [play = state.play] send in
 						await send(.internal(.savedPlayResponse(Result {
-							try await playsDataProvider.save(play)
+							try await plays.save(play)
 						})))
 					}
 				}

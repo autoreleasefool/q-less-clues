@@ -6,7 +6,7 @@ import PersistentModelsLibrary
 import SharedModelsLibrary
 import StatisticsRepositoryInterface
 
-extension StatisticsDataProvider: DependencyKey {
+extension StatisticsRepository: DependencyKey {
 	public static var liveValue = Self(
 		fetchCounts: {
 			.init { continuation in
@@ -19,8 +19,8 @@ extension StatisticsDataProvider: DependencyKey {
 					}
 
 					do {
-						@Dependency(\.persistenceService) var persistenceService: PersistenceService
-						let db = persistenceService.reader()
+						@Dependency(\.persistence) var persistence
+						let db = persistence.reader()
 						let observation = ValueObservation.tracking(fetchCounts(_:))
 
 						for try await statistics in observation.values(in: db) {
@@ -40,8 +40,8 @@ extension StatisticsDataProvider: DependencyKey {
 			return .init { continuation in
 				let task = Task {
 					do {
-						@Dependency(\.persistenceService) var persistenceService: PersistenceService
-						let db = persistenceService.reader()
+						@Dependency(\.persistence) var persistence
+						let db = persistence.reader()
 						let observation = ValueObservation.tracking(request.fetchValue(_:))
 
 						for try await statistics in observation.values(in: db) {

@@ -49,8 +49,8 @@ public struct PlaysList: Reducer {
 
 	public init() {}
 
-	@Dependency(\.playsDataProvider) var playsDataProvider // TODO: rename to repository
-	@Dependency(\.statisticsDataProvider) var statisticsDataProvider
+	@Dependency(\.plays) var plays
+	@Dependency(\.statistics) var statistics
 
 	public var body: some ReducerOf<Self> {
 		Reduce { state, action in
@@ -60,14 +60,14 @@ public struct PlaysList: Reducer {
 				case .task:
 					return .merge(
 						.run { send in
-							for try await plays in playsDataProvider.fetchAll(.init(ordering: .byDate)) {
+							for try await plays in self.plays.fetchAll(.init(ordering: .byDate)) {
 								await send(.internal(.playsResponse(.success(plays))))
 							}
 						} catch: { error, send in
 							await send(.internal(.playsResponse(.failure(error))))
 						},
 						.run { send in
-							for try await statistics in statisticsDataProvider.fetch(.init()) {
+							for try await statistics in self.statistics.fetch(.init()) {
 								await send(.internal(.didReceiveStatistics(.success(statistics))))
 							}
 						} catch: { error, send in
@@ -96,7 +96,7 @@ public struct PlaysList: Reducer {
 					state.plays.remove(at: index)
 					return .run { [play = play] send in
 						await send(.internal(.deletedPlayResponse(Result {
-							try await playsDataProvider.delete(play)
+							try await plays.delete(play)
 						})))
 					}
 				}

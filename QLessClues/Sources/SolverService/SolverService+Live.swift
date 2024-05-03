@@ -6,8 +6,6 @@ import ValidatorServiceInterface
 extension SolverService: DependencyKey {
 	public static var liveValue = Self(
 		findSolutions: { letters in
-			@Dependency(\.validatorService) var validatorService: ValidatorService
-
 			return .init { continuation in
 				let task = Task(priority: .background) {
 					continuation.yield(.progress(0.1))

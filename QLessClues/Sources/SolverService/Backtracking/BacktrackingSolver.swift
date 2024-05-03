@@ -7,7 +7,7 @@ import SolverServiceInterface
 import ValidatorServiceInterface
 
 struct BacktrackingSolver {
-	@Dependency(\.validatorService) private var validator
+	@Dependency(\.validator) private var validator
 	@Dependency(\.dictionary) private var dictionary
 
 	func findSolutions(

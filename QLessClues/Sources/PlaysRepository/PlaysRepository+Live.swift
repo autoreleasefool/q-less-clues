@@ -6,41 +6,41 @@ import PersistentModelsLibrary
 import PlaysRepositoryInterface
 import SharedModelsLibrary
 
-extension PlaysDataProvider: DependencyKey {
+extension PlaysRepository: DependencyKey {
 	public static var liveValue = Self(
 		save: { play in
-			@Dependency(\.persistenceService) var persistenceService: PersistenceService
-			@Dependency(\.playsPersistenceService) var playsPersistenceService: PlaysPersistenceService
-			try await persistenceService.write {
+			@Dependency(\.persistence) var persistence
+			@Dependency(\.playsPersistence) var playsPersistence
+			try await persistence.write {
 				try await $0.write { db in
-					try playsPersistenceService.create(play, db)
+					try playsPersistence.create(play, db)
 				}
 			}
 		},
 		delete: { play in
-			@Dependency(\.persistenceService) var persistenceService: PersistenceService
-			@Dependency(\.playsPersistenceService) var playsPersistenceService: PlaysPersistenceService
-			try await persistenceService.write {
+			@Dependency(\.persistence) var persistence
+			@Dependency(\.playsPersistence) var playsPersistence
+			try await persistence.write {
 				try await $0.write { db in
-					try playsPersistenceService.delete(play, db)
+					try playsPersistence.delete(play, db)
 				}
 			}
 		},
 		update: { play in
-			@Dependency(\.persistenceService) var persistenceService: PersistenceService
-			@Dependency(\.playsPersistenceService) var playsPersistenceService: PlaysPersistenceService
-			try await persistenceService.write {
+			@Dependency(\.persistence) var persistence
+			@Dependency(\.playsPersistence) var playsPersistence
+			try await persistence.write {
 				try await $0.write { db in
-					try playsPersistenceService.update(play, db)
+					try playsPersistence.update(play, db)
 				}
 			}
 		},
 		fetchAll: { request in
-			@Dependency(\.persistenceService) var persistenceService: PersistenceService
+			@Dependency(\.persistence) var persistence
 			return .init { continuation in
 				let task = Task {
 					do {
-						let db = persistenceService.reader()
+						let db = persistence.reader()
 						let observation = ValueObservation.tracking(request.fetchValue(_:))
 
 						for try await plays in observation.values(in: db) {
@@ -57,11 +57,11 @@ extension PlaysDataProvider: DependencyKey {
 			}
 		},
 		fetchOne: { request in
-			@Dependency(\.persistenceService) var persistenceService: PersistenceService
+			@Dependency(\.persistence) var persistence
 			return .init { continuation in
 				let task = Task {
 					do {
-						let db = persistenceService.reader()
+						let db = persistence.reader()
 						let observation = ValueObservation.tracking(request.fetchValue(_:))
 
 						for try await play in observation.values(in: db) {

@@ -20,14 +20,14 @@ public struct PlaysPersistenceService: Sendable {
 
 extension PlaysPersistenceService: TestDependencyKey {
 	public static var testValue = Self(
-		create: { _, _ in fatalError("\(Self.self).create") },
-		update: { _, _ in fatalError("\(Self.self).update") },
-		delete: { _, _ in fatalError("\(Self.self).delete") }
+		create: { _, _ in unimplemented("\(Self.self).create") },
+		update: { _, _ in unimplemented("\(Self.self).update") },
+		delete: { _, _ in unimplemented("\(Self.self).delete") }
 	)
 }
 
 extension DependencyValues {
-	public var playsPersistenceService: PlaysPersistenceService {
+	public var playsPersistence: PlaysPersistenceService {
 		get { self[PlaysPersistenceService.self] }
 		set { self[PlaysPersistenceService.self] = newValue }
 	}

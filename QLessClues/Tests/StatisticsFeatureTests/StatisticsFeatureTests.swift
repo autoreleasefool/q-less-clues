@@ -10,7 +10,7 @@ final class StatisticsFeatureTests: XCTestCase {
 	func testLoadsPlays() async {
 		let (statistics, continuation) = AsyncStream<Statistics>.streamWithContinuation()
 		let mockEnvironment: StatisticsEnvironment = .init(
-			statisticsDataProvider: .init { statistics }
+			statistics: .init { statistics }
 		)
 
 		let mockStatistics = Statistics(pureWins: 1, winsWithHints: 1, losses: 1)

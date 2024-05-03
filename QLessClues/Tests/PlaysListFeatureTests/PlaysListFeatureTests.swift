@@ -9,9 +9,9 @@ import XCTest
 final class PlaysListFeatureTests: XCTestCase {
 	func mockEnvironment() -> PlaysListEnvironment {
 		.init(
-			playsDataProvider: .mock(),
-			statisticsDataProvider: .mock(),
-			solverService: .mock()
+			plays: .mock(),
+			statistics: .mock(),
+			solver: .mock()
 		)
 	}
 
@@ -23,7 +23,7 @@ final class PlaysListFeatureTests: XCTestCase {
 		)
 
 		let expectation = self.expectation(description: "deleted")
-		store.environment.playsDataProvider.delete = { play in
+		store.environment.plays.delete = { play in
 			XCTAssertEqual(play, Play.mock)
 			expectation.fulfill()
 		}

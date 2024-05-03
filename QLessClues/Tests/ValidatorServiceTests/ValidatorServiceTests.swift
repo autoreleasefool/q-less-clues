@@ -6,7 +6,7 @@ import ValidatorServiceInterface
 import XCTest
 
 final class ValidatorServiceTests: XCTestCase {
-	@Dependency(\.validatorService) private var validator
+	@Dependency(\.validator) private var validator
 
 	let dictionary = WordSet(letterSet: .fullAlphabet, baseDictionary: ["HIP", "RAT"], baseFrequences: [:])
 
@@ -18,7 +18,7 @@ final class ValidatorServiceTests: XCTestCase {
 		])
 
 		let result = await withDependencies {
-			$0.validatorService.validate = ValidatorService.liveValue.validate
+			$0.validator.validate = ValidatorService.liveValue.validate
 		} operation: {
 			await self.validator.validate(solution, dictionary)
 		}
@@ -33,7 +33,7 @@ final class ValidatorServiceTests: XCTestCase {
 		])
 
 		let result = await withDependencies {
-			$0.validatorService.validate = ValidatorService.liveValue.validate
+			$0.validator.validate = ValidatorService.liveValue.validate
 		} operation: {
 			await self.validator.validate(solution, dictionary)
 		}
@@ -52,7 +52,7 @@ final class ValidatorServiceTests: XCTestCase {
 		])
 
 		let result = await withDependencies {
-			$0.validatorService.validate = ValidatorService.liveValue.validate
+			$0.validator.validate = ValidatorService.liveValue.validate
 		} operation: {
 			await self.validator.validate(solution, dictionary)
 		}

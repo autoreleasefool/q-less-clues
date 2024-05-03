@@ -28,7 +28,7 @@ public struct DetailedStatistics: Reducer {
 
 	public init() {}
 
-	@Dependency(\.statisticsDataProvider) var statisticsDataProvider
+	@Dependency(\.statistics) var statistics
 
 	public var body: some ReducerOf<Self> {
 		Reduce { state, action in
@@ -37,7 +37,7 @@ public struct DetailedStatistics: Reducer {
 				switch viewAction {
 				case .task:
 					return .run { [letter = state.letter] send in
-						for try await statistics in statisticsDataProvider.fetch(.init(letter: letter)) {
+						for try await statistics in statistics.fetch(.init(letter: letter)) {
 							await send(.internal(.didReceiveStatistics(.success(statistics))))
 						}
 					} catch: { error, send in

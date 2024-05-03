@@ -3,7 +3,7 @@ import DependenciesMacros
 import GRDB
 
 public struct PersistenceService: Sendable {
-	public var reader: @Sendable () -> DatabaseReader // TODO: make throwing
+	public var reader: @Sendable () -> DatabaseReader
 	public var write: @Sendable (@escaping (any DatabaseWriter) async throws -> Void) async throws -> Void
 
 	public init(
@@ -17,13 +17,13 @@ public struct PersistenceService: Sendable {
 
 extension PersistenceService: TestDependencyKey {
 	public static var testValue = Self(
-		reader: { fatalError("\(Self.self).reader") },
-		write: { _ in fatalError("\(Self.self).write") }
+		reader: { unimplemented("\(Self.self).reader") },
+		write: { _ in unimplemented("\(Self.self).write") }
 	)
 }
 
 extension DependencyValues {
-	public var persistenceService: PersistenceService {
+	public var persistence: PersistenceService {
 		get { self[PersistenceService.self] }
 		set { self[PersistenceService.self] = newValue }
 	}

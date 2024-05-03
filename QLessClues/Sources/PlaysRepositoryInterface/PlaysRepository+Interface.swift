@@ -1,7 +1,7 @@
 import Dependencies
 import SharedModelsLibrary
 
-public struct PlaysDataProvider: Sendable {
+public struct PlaysRepository: Sendable {
 	public var save: @Sendable (Play) async throws -> Void
 	public var delete: @Sendable (Play) async throws -> Void
 	public var update: @Sendable (Play) async throws -> Void
@@ -24,19 +24,19 @@ public struct PlaysDataProvider: Sendable {
 	}
 }
 
-extension PlaysDataProvider: TestDependencyKey {
+extension PlaysRepository: TestDependencyKey {
 	public static var testValue = Self(
-		save: { _ in fatalError("\(Self.self).save") },
-		delete: { _ in fatalError("\(Self.self).delete") },
-		update: { _ in fatalError("\(Self.self).update") },
-		fetchAll: { _ in fatalError("\(Self.self).fetchAll") },
-		fetchOne: { _ in fatalError("\(Self.self).fetchOne") }
+		save: { _ in unimplemented("\(Self.self).save") },
+		delete: { _ in unimplemented("\(Self.self).delete") },
+		update: { _ in unimplemented("\(Self.self).update") },
+		fetchAll: { _ in unimplemented("\(Self.self).fetchAll") },
+		fetchOne: { _ in unimplemented("\(Self.self).fetchOne") }
 	)
 }
 
 extension DependencyValues {
-	public var playsDataProvider: PlaysDataProvider {
-		get { self[PlaysDataProvider.self] }
-		set { self[PlaysDataProvider.self] = newValue }
+	public var plays: PlaysRepository {
+		get { self[PlaysRepository.self] }
+		set { self[PlaysRepository.self] = newValue }
 	}
 }

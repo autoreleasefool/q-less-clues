@@ -8,7 +8,7 @@ import XCTest
 @MainActor
 final class PlayDetailsFeatureTests: XCTestCase {
 	func mockEnvironment() -> PlayEnvironment {
-		.init(playsDataProvider: .mock(), solverService: .mock())
+		.init(plays: .mock(), solverService: .mock())
 	}
 
 	func testDeletePlay() async {
@@ -19,7 +19,7 @@ final class PlayDetailsFeatureTests: XCTestCase {
 		)
 
 		let expectation = self.expectation(description: "deleted")
-		store.environment.playsDataProvider.delete = { play in
+		store.environment.plays.delete = { play in
 			XCTAssertEqual(play.id, Play.mock.id)
 			expectation.fulfill()
 		}

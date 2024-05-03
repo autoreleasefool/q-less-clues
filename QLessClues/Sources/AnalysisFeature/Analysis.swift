@@ -67,7 +67,7 @@ public struct Analysis: Reducer {
 
 	public init() {}
 
-	@Dependency(\.solverService) var solverService
+	@Dependency(\.solver) var solver
 
 	public var body: some ReducerOf<Self> {
 		Scope(state: \.solutionsList, action: \.internal.solutionsList) {
@@ -95,7 +95,7 @@ public struct Analysis: Reducer {
 				case .didTapBeginButton:
 					state.mode = .solving(progress: 0)
 					return .run { [letters = state.letters] send in
-						for await event in solverService.findSolutions(letters) {
+						for await event in solver.findSolutions(letters) {
 							await send(.internal(.didReceiveSolverEvent(event)))
 						}
 

@@ -23,7 +23,7 @@ extension SolverService: TestDependencyKey {
 }
 
 extension DependencyValues {
-	public var solverService: SolverService {
+	public var solver: SolverService {
 		get { self[SolverService.self] }
 		set { self[SolverService.self] = newValue }
 	}

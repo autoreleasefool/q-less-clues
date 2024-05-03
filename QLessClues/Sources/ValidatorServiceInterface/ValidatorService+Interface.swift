@@ -18,7 +18,7 @@ extension ValidatorService: TestDependencyKey {
 }
 
 extension DependencyValues {
-	public var validatorService: ValidatorService {
+	public var validator: ValidatorService {
 		get { self[ValidatorService.self] }
 		set { self[ValidatorService.self] = newValue }
 	}

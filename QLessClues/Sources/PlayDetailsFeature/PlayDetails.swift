@@ -38,7 +38,7 @@ public struct PlayDetails: Reducer {
 	public init() {}
 
 	@Dependency(\.dismiss) var dismiss
-	@Dependency(\.playsDataProvider) var playsDataProvider
+	@Dependency(\.plays) var plays
 
 	public var body: some ReducerOf<Self> {
 		Scope(state: \.analysis, action: \.internal.analysis) {
@@ -67,7 +67,7 @@ public struct PlayDetails: Reducer {
 					state.alert = nil
 					return .run { [play = state.play] send in
 						await send(.internal(.deletedPlayResponse(Result {
-							try await playsDataProvider.delete(play)
+							try await plays.delete(play)
 						})))
 					}
 

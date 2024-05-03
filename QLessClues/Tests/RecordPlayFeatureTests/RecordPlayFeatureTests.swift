@@ -6,7 +6,7 @@ import XCTest
 @MainActor
 final class RecordPlayFeatureTests: XCTestCase {
 	func mockEnvironment() -> RecordPlayEnvironment {
-		.init(playsDataProvider: .mock(), solverService: .mock())
+		.init(plays: .mock(), solverService: .mock())
 	}
 
 	func testChangeLetters() async {

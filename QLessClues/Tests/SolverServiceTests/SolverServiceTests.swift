@@ -1,16 +1,19 @@
 import Dependencies
+import DictionaryServiceInterface
 import SolverService
 @testable import SolverServiceInterface
 @testable import ValidatorServiceInterface
 import XCTest
 
 final class SolverServiceTests: XCTestCase {
-	@Dependency(\.solverService) private var solver
+	@Dependency(\.solver) private var solver
 
 	func testsReturnsAllSolutions() async {
 		let solutions = withDependencies {
-			$0.validatorService.validate = { _, _ in true }
-			$0.solverService.findSolutions = SolverService.liveValue.findSolutions
+			$0.dictionary.englishWords = { [] }
+			$0.dictionary.englishFrequencies = { [:] }
+			$0.validator.validate = { _, _ in true }
+			$0.solver.findSolutions = SolverService.liveValue.findSolutions
 		} operation: {
 			self.solver.findSolutions("ART")
 		}
