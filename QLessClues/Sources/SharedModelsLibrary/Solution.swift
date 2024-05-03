@@ -1,5 +1,5 @@
-import Foundation
 import ExtensionsLibrary
+import Foundation
 
 public struct Solution: Identifiable, Codable, Equatable, Hashable {
 	public let id: UUID

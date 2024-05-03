@@ -1,5 +1,5 @@
-import XCTest
 @testable import SharedModelsLibrary
+import XCTest
 
 final class PositionTests: XCTestCase {
 	func testSurrounding() {

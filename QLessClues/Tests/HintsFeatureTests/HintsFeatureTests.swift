@@ -1,7 +1,7 @@
 import ComposableArchitecture
 import HintsFeature
 import SharedModelsLibrary
-import SharedModelsLibraryMocks
+import SharedModelsMocksLibrary
 import XCTest
 
 @MainActor

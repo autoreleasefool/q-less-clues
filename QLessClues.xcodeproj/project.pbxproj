@@ -12,6 +12,7 @@
 		CA1867BD28C5095200DD75C7 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BC28C5095200DD75C7 /* Assets.xcassets */; };
 		CA1867C028C5095200DD75C7 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = CA1867BF28C5095200DD75C7 /* Preview Assets.xcassets */; };
 		CA6452BE28C5DFA200738762 /* words.txt in Resources */ = {isa = PBXBuildFile; fileRef = CA6452BD28C5DFA200738762 /* words.txt */; };
+		CA88942B2BE2CF0F00B311C2 /* DictionaryService in Frameworks */ = {isa = PBXBuildFile; productRef = CA88942A2BE2CF0F00B311C2 /* DictionaryService */; };
 		CA904E032BE2260700AA3C30 /* AppFeature in Frameworks */ = {isa = PBXBuildFile; productRef = CA904E022BE2260700AA3C30 /* AppFeature */; };
 		CA904E052BE2260700AA3C30 /* PersistenceService in Frameworks */ = {isa = PBXBuildFile; productRef = CA904E042BE2260700AA3C30 /* PersistenceService */; };
 		CA904E072BE2260700AA3C30 /* PlaysRepository in Frameworks */ = {isa = PBXBuildFile; productRef = CA904E062BE2260700AA3C30 /* PlaysRepository */; };
@@ -41,6 +42,7 @@
 				CA904E0B2BE2260700AA3C30 /* StatisticsRepository in Frameworks */,
 				CA904E072BE2260700AA3C30 /* PlaysRepository in Frameworks */,
 				CA904E092BE2260700AA3C30 /* SolverService in Frameworks */,
+				CA88942B2BE2CF0F00B311C2 /* DictionaryService in Frameworks */,
 				CA904E052BE2260700AA3C30 /* PersistenceService in Frameworks */,
 				CA904E032BE2260700AA3C30 /* AppFeature in Frameworks */,
 				CA904E0D2BE2260700AA3C30 /* ValidatorService in Frameworks */,
@@ -137,6 +139,7 @@
 				CA904E082BE2260700AA3C30 /* SolverService */,
 				CA904E0A2BE2260700AA3C30 /* StatisticsRepository */,
 				CA904E0C2BE2260700AA3C30 /* ValidatorService */,
+				CA88942A2BE2CF0F00B311C2 /* DictionaryService */,
 			);
 			productName = QLessClues;
 			productReference = CA1867B528C5095100DD75C7 /* QLessClues.app */;
@@ -440,6 +443,10 @@
 /* End XCConfigurationList section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		CA88942A2BE2CF0F00B311C2 /* DictionaryService */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = DictionaryService;
+		};
 		CA904E022BE2260700AA3C30 /* AppFeature */ = {
 			isa = XCSwiftPackageProductDependency;
 			productName = AppFeature;

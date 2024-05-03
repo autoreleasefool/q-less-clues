@@ -28,6 +28,8 @@ let package = Package(
 		// MARK: - Data Providers
 
 		// MARK: - Services
+		.library(name: "DictionaryService", targets: ["DictionaryService"]),
+		.library(name: "DictionaryServiceInterface", targets: ["DictionaryServiceInterface"]),
 		.library(name: "PersistenceService", targets: ["PersistenceService"]),
 		.library(name: "PersistenceServiceInterface", targets: ["PersistenceServiceInterface"]),
 		.library(name: "SolverService", targets: ["SolverService"]),
@@ -40,10 +42,13 @@ let package = Package(
 		.library(name: "ExtensionsLibrary", targets: ["ExtensionsLibrary"]),
 		.library(name: "PersistentModelsLibrary", targets: ["PersistentModelsLibrary"]),
 		.library(name: "SharedModelsLibrary", targets: ["SharedModelsLibrary"]),
+		.library(name: "SharedModelsMocksLibrary", targets: ["SharedModelsMocksLibrary"]),
+		.library(name: "ViewsLibrary", targets: ["ViewsLibrary"]),
 	],
 	dependencies: [
-		.package(url: "https://github.com/groue/GRDB.swift.git", from: "6.21.0"),
-		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "0.43.0"),
+		.package(url: "https://github.com/groue/GRDB.swift.git", from: "6.27.0"),
+		.package(url: "https://github.com/pointfreeco/swift-composable-architecture.git", from: "1.10.2"),
+		.package(url: "https://github.com/pointfreeco/swift-dependencies.git", from: "1.2.2"),
 	],
 	targets: [
 		// MARK: - Features
@@ -59,6 +64,7 @@ let package = Package(
 			name: "AnalysisFeatureTests",
 			dependencies: [
 				"AnalysisFeature",
+				"SharedModelsMocksLibrary",
 			]
 		),
 		.target(
@@ -71,6 +77,7 @@ let package = Package(
 			name: "AppFeatureTests",
 			dependencies: [
 				"AppFeature",
+				"SharedModelsMocksLibrary",
 			]
 		),
 		.target(
@@ -85,6 +92,7 @@ let package = Package(
 			name: "HintsFeatureTests",
 			dependencies: [
 				"HintsFeature",
+				"SharedModelsMocksLibrary",
 			]
 		),
 		.target(
@@ -98,6 +106,7 @@ let package = Package(
 			name: "PlayDetailsFeatureTests",
 			dependencies: [
 				"PlayDetailsFeature",
+				"SharedModelsMocksLibrary",
 			]
 		),
 		.target(
@@ -111,6 +120,7 @@ let package = Package(
 			name: "PlaysListFeatureTests",
 			dependencies: [
 				"PlaysListFeature",
+				"SharedModelsMocksLibrary",
 			]
 		),
 		.target(
@@ -123,6 +133,7 @@ let package = Package(
 			name: "RecordPlayFeatureTests",
 			dependencies: [
 				"RecordPlayFeature",
+				"SharedModelsMocksLibrary",
 			]
 		),
 		.target(
@@ -135,6 +146,7 @@ let package = Package(
 		.testTarget(
 			name: "SolutionsListFeatureTests",
 			dependencies: [
+				"SharedModelsMocksLibrary",
 				"SolutionsListFeature",
 			]
 		),
@@ -143,11 +155,13 @@ let package = Package(
 			dependencies: [
 				.product(name: "ComposableArchitecture", package: "swift-composable-architecture"),
 				"StatisticsRepositoryInterface",
+				"ViewsLibrary",
 			]
 		),
 		.testTarget(
 			name: "StatisticsFeatureTests",
 			dependencies: [
+				"SharedModelsMocksLibrary",
 				"StatisticsFeature",
 			]
 		),
@@ -164,7 +178,7 @@ let package = Package(
 		.target(
 			name: "PlaysRepositoryInterface",
 			dependencies: [
-				.product(name: "Dependencies", package: "swift-composable-architecture"),
+				.product(name: "Dependencies", package: "swift-dependencies"),
 				"SharedModelsLibrary",
 			]
 		),
@@ -185,7 +199,7 @@ let package = Package(
 		.target(
 			name: "StatisticsRepositoryInterface",
 			dependencies: [
-				.product(name: "Dependencies", package: "swift-composable-architecture"),
+				.product(name: "Dependencies", package: "swift-dependencies"),
 				"SharedModelsLibrary",
 			]
 		),
@@ -200,6 +214,26 @@ let package = Package(
 
 		// MARK: - Services
 		.target(
+			name: "DictionaryService",
+			dependencies: [
+				"DictionaryServiceInterface",
+			]
+		),
+		.target(
+			name: "DictionaryServiceInterface",
+			dependencies: [
+				.product(name: "Dependencies", package: "swift-dependencies"),
+				.product(name: "DependenciesMacros", package: "swift-dependencies"),
+				"DictionaryLibrary",
+			]
+		),
+		.testTarget(
+			name: "DictionaryServiceTests",
+			dependencies: [
+				"DictionaryService",
+			]
+		),
+		.target(
 			name: "PersistenceService",
 			dependencies: [
 				"PersistenceServiceInterface",
@@ -209,7 +243,8 @@ let package = Package(
 		.target(
 			name: "PersistenceServiceInterface",
 			dependencies: [
-				.product(name: "Dependencies", package: "swift-composable-architecture"),
+				.product(name: "Dependencies", package: "swift-dependencies"),
+				.product(name: "DependenciesMacros", package: "swift-dependencies"),
 				.product(name: "GRDB", package: "GRDB.swift"),
 				"SharedModelsLibrary",
 			]
@@ -223,6 +258,7 @@ let package = Package(
 		.target(
 			name: "SolverService",
 			dependencies: [
+				"DictionaryServiceInterface",
 				"SolverServiceInterface",
 				"ValidatorServiceInterface",
 			]
@@ -230,7 +266,8 @@ let package = Package(
 		.target(
 			name: "SolverServiceInterface",
 			dependencies: [
-				.product(name: "Dependencies", package: "swift-composable-architecture"),
+				.product(name: "Dependencies", package: "swift-dependencies"),
+				.product(name: "DependenciesMacros", package: "swift-dependencies"),
 				"SharedModelsLibrary",
 			]
 		),
@@ -249,7 +286,8 @@ let package = Package(
 		.target(
 			name: "ValidatorServiceInterface",
 			dependencies: [
-				.product(name: "Dependencies", package: "swift-composable-architecture"),
+				.product(name: "Dependencies", package: "swift-dependencies"),
+				.product(name: "DependenciesMacros", package: "swift-dependencies"),
 				"DictionaryLibrary",
 				"SharedModelsLibrary",
 			]
@@ -299,7 +337,18 @@ let package = Package(
 			name: "SharedModelsLibraryTests",
 			dependencies: [
 				"SharedModelsLibrary",
+				"SharedModelsMocksLibrary",
 			]
+		),
+		.target(
+			name: "SharedModelsMocksLibrary",
+			dependencies: [
+				"SharedModelsLibrary",
+			]
+		),
+		.target(
+			name: "ViewsLibrary",
+			dependencies: []
 		),
 	]
 )

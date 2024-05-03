@@ -1,10 +1,14 @@
 import SharedModelsLibrary
 import SwiftUI
 
-struct StatisticsOverview: View {
+public struct StatisticsOverview: View {
 	let statistics: Statistics
 
-	var body: some View {
+	public init(statistics: Statistics) {
+		self.statistics = statistics
+	}
+
+	public var body: some View {
 		Section {
 			HStack {
 				VStack(alignment: .center) {

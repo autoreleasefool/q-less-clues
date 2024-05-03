@@ -4,9 +4,9 @@ import SharedModelsLibrary
 import SolutionsListFeature
 import SolverServiceInterface
 
-public struct Analysis: ReducerProtocol {
-	public enum TearDown {}
-
+@Reducer
+public struct Analysis: Reducer {
+	@ObservableState
 	public struct State: Equatable {
 		public var letters: String
 		public var solutions: [Solution] = []
@@ -44,65 +44,93 @@ public struct Analysis: ReducerProtocol {
 		}
 	}
 
-	public enum Action: Equatable {
-		case beginButtonTapped
-		case solverService(SolverService.Event)
-		case solverServiceFinished
-		case lettersChanged(String)
-		case hints(Hints.Action)
-		case solutionsList(SolutionsList.Action)
+	public enum Action: ViewAction, BindableAction {
+		@CasePathable public enum View {
+			case didTapBeginButton
+		}
+
+		@CasePathable public enum Internal {
+			case didReceiveSolverEvent(SolverService.Event)
+			case solverDidFinish
+			case hints(Hints.Action)
+			case solutionsList(SolutionsList.Action)
+		}
+
+		case view(View)
+		case `internal`(Internal)
+		case binding(BindingAction<State>)
+	}
+
+	public enum CancelID: Hashable {
+		case solver
 	}
 
 	public init() {}
 
 	@Dependency(\.solverService) var solverService
 
-	public var body: some ReducerProtocol<State, Action> {
-//		Scope(state: \.solutionsList, action: /Action.solutionsList) {
-//			SolutionsList()
-//		}
+	public var body: some ReducerOf<Self> {
+		Scope(state: \.solutionsList, action: \.internal.solutionsList) {
+			SolutionsList()
+		}
+
+		BindingReducer()
+			.onChange(of: \.letters) { _, letters in
+				Reduce { state, _ in
+					if letters.count != 12 {
+						state.mode = .notStarted
+						state.solutions = []
+						state.difficulty = nil
+						return .cancel(id: CancelID.solver)
+					} else {
+						return .none
+					}
+				}
+			}
 
 		Reduce { state, action in
 			switch action {
-			case let .lettersChanged(letters):
-				if letters.count != 12 {
-					state.mode = .notStarted
-					state.solutions = []
-					state.difficulty = nil
-					return .cancel(id: TearDown.self)
-				} else {
+			case let .view(viewAction):
+				switch viewAction {
+				case .didTapBeginButton:
+					state.mode = .solving(progress: 0)
+					return .run { [letters = state.letters] send in
+						for await event in solverService.findSolutions(letters) {
+							await send(.internal(.didReceiveSolverEvent(event)))
+						}
+
+						await send(.internal(.solverDidFinish))
+					}
+					.cancellable(id: CancelID.solver)
+				}
+
+			case let .internal(internalAction):
+				switch internalAction {
+				case let .didReceiveSolverEvent(event):
+					switch event {
+					case let .progress(progress):
+						state.mode = .solving(progress: progress)
+						return .none
+
+					case let .solution(solution):
+						state.solutions.append(solution)
+						state.solutionsList.solutions.append(solution)
+						return .none
+					}
+
+				case .solverDidFinish:
+					state.mode = .solved
+					return .none
+
+				case .hints(.view), .solutionsList(.binding), .solutionsList(.view):
 					return .none
 				}
 
-			case .beginButtonTapped:
-				state.mode = .solving(progress: 0)
-				return .run { [letters = state.letters] send in
-					for await event in solverService.findSolutions(letters) {
-						await send(.solverService(event))
-					}
-
-					await send(.solverServiceFinished)
-				}
-				.cancellable(id: TearDown.self)
-
-			case .solverServiceFinished:
-				state.mode = .solved
-				return .none
-
-			case let .solverService(.solution(solution)):
-				state.solutions.append(solution)
-				state.solutionsList.solutions.append(solution)
-				return .none
-
-			case let .solverService(.progress(progress)):
-				state.mode = .solving(progress: progress)
-				return .none
-
-			case .hints, .solutionsList:
+			case .binding:
 				return .none
 			}
 		}
-		.ifLet(\.hints, action: /Analysis.Action.hints) {
+		.ifLet(\.hints, action: \.internal.hints) {
 			Hints()
 		}
 	}

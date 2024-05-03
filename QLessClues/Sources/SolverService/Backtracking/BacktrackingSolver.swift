@@ -1,23 +1,30 @@
+import Dependencies
 import DictionaryLibrary
+import DictionaryServiceInterface
 import Foundation
 import SharedModelsLibrary
 import SolverServiceInterface
 import ValidatorServiceInterface
 
 struct BacktrackingSolver {
-	private let validator: ValidatorService
+	@Dependency(\.validatorService) private var validator
+	@Dependency(\.dictionary) private var dictionary
 
-	init(validator: ValidatorService) {
-		self.validator = validator
-	}
-
-	func findSolutions(forLetters letters: String, to continuation: AsyncStream<SolverService.Event>.Continuation) async {
+	func findSolutions(
+		forLetters letters: String,
+		to continuation: AsyncStream<SolverService.Event>.Continuation
+	) async throws {
 		guard !letters.isEmpty else {
 			continuation.finish()
 			return
 		}
 
-		var state = State(initialLetters: letters, continuation: continuation)
+		var state = State(
+			initialLetters: letters,
+			dictionary: try dictionary.englishWords(),
+			frequencies: try dictionary.englishFrequencies(),
+			continuation: continuation
+		)
 
 		continuation.yield(.progress(0))
 		await generateSolutions(state: &state)
@@ -30,7 +37,7 @@ struct BacktrackingSolver {
 
 		if state.remainingLetters.isEmpty {
 			let solution = Solution(board: state.board)
-			if await validator.validate(solution, WordSet.englishSet) {
+			if (try? await validator.validate(solution, dictionary.englishWordSet())) == true {
 				state.continuation.yield(.solution(solution))
 			}
 			return

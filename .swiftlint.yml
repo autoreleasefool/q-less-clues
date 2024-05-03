@@ -1,8 +1,24 @@
+included:
+  - QLessClues/Sources
+  - QLessClues/Tests
+
 excluded:
   - .build
+  - QLessClues/Package.swift
+  - QLessClues/Sources/StringsLibrary
 
 trailing_comma:
   mandatory_comma: true
 
+type_name:
+  excluded:
+    - ID
+
 disabled_rules:
+  - cyclomatic_complexity
   - identifier_name
+  - large_tuple
+  - nesting
+
+opt_in_rules:
+  - sorted_imports

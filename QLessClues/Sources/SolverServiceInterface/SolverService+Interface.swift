@@ -1,5 +1,6 @@
 import Combine
 import Dependencies
+import DependenciesMacros
 import SharedModelsLibrary
 
 public struct SolverService: Sendable {

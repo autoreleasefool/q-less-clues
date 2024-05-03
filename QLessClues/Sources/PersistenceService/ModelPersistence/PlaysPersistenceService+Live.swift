@@ -1,11 +1,11 @@
 import Dependencies
 import GRDB
-import PersistentModelsLibrary
 import PersistenceServiceInterface
+import PersistentModelsLibrary
 import SharedModelsLibrary
 
 extension PlaysPersistenceService: DependencyKey {
-	public static let liveValue = Self(
+	public static var liveValue = Self(
 		create: { play, db in
 			try play.insert(db)
 		},

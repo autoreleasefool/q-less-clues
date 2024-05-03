@@ -5,7 +5,6 @@
 //  Created by Joseph Roque on 2022-09-04.
 //
 
-import DictionaryLibrary
 import SwiftUI
 
 @main

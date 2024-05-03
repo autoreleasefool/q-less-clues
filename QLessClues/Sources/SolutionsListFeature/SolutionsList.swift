@@ -1,29 +1,36 @@
 import ComposableArchitecture
 import SharedModelsLibrary
 
-public struct SolutionsList: ReducerProtocol {
+@Reducer
+public struct SolutionsList: Reducer {
+	@ObservableState
 	public struct State: Equatable {
 		public var solutions: [Solution]
 		public var solutionsFilter: String = ""
+
+		var filteredSolutions: [Solution] {
+			let filter = solutionsFilter.uppercased()
+			return solutions
+				.filter { filter.isEmpty || $0.description.contains(filter) }
+		}
 
 		public init(solutions: [Solution]) {
 			self.solutions = solutions
 		}
 	}
 
-	public enum Action: Equatable {
-		case listSearched(String)
+	public enum Action: BindableAction, ViewAction {
+		@CasePathable public enum View {
+			case didSearchList(String)
+		}
+
+		case view(View)
+		case binding(BindingAction<State>)
 	}
 
 	public init() {}
 
-	public var body: some ReducerProtocol<State, Action> {
-		Reduce { state, action in
-			switch action {
-			case let .listSearched(filter):
-				state.solutionsFilter = filter
-				return .none
-			}
-		}
+	public var body: some ReducerOf<Self> {
+		BindingReducer()
 	}
 }

@@ -1,55 +1,75 @@
 import ComposableArchitecture
 import SharedModelsLibrary
 
-public struct StatisticsList: ReducerProtocol {
+@Reducer
+public struct StatisticsList: Reducer {
+	@ObservableState
 	public struct State: Equatable {
 		public var gamesPlayed: IdentifiedArrayOf<LetterPlayCount> = []
-		public var selection: Identified<String, DetailedStatistics.State>?
+
+		@Presents public var destination: Destination.State?
 
 		public init() {}
 	}
 
-	public enum Action: Equatable {
-		case subscribeToCounts
-		case countsResponse([LetterPlayCount])
-		case setNavigation(selection: String?)
-		case detailedStatistics(DetailedStatistics.Action)
+	public enum Action: ViewAction {
+		@CasePathable public enum View {
+			case task
+			case didTapGame(LetterPlayCount.ID)
+		}
+		@CasePathable public enum Internal {
+			case didReceiveCounts(Result<[LetterPlayCount], Error>)
+			case destination(PresentationAction<Destination.Action>)
+		}
+
+		case view(View)
+		case `internal`(Internal)
+	}
+
+	@Reducer(state: .equatable)
+	public enum Destination {
+		case details(DetailedStatistics)
 	}
 
 	public init() {}
 
 	@Dependency(\.statisticsDataProvider) var statisticsDataProvider
 
-	public var body: some ReducerProtocol<State, Action> {
+	public var body: some ReducerOf<Self> {
 		Reduce { state, action in
 			switch action {
-			case .subscribeToCounts:
-				return .run { send in
-					for try await counts in statisticsDataProvider.fetchCounts() {
-						await send(.countsResponse(counts))
+			case let .view(viewAction):
+				switch viewAction {
+				case .task:
+					return .run { send in
+						for try await counts in statisticsDataProvider.fetchCounts() {
+							await send(.internal(.didReceiveCounts(.success(counts))))
+						}
+					} catch: { error, send in
+						await send(.internal(.didReceiveCounts(.failure(error))))
 					}
+
+				case let .didTapGame(id):
+					state.destination = .details(.init(letter: id))
+					return .none
 				}
 
-			case let .countsResponse(counts):
-				state.gamesPlayed = .init(uniqueElements: counts)
-				return .none
+			case let .internal(internalAction):
+				switch internalAction {
+				case let .didReceiveCounts(.success(counts)):
+					state.gamesPlayed = .init(uniqueElements: counts)
+					return .none
 
-			case let .setNavigation(selection: .some(letter)):
-				state.selection = Identified(.init(letter: letter), id: letter)
-				return .none
+				case .didReceiveCounts(.failure):
+					// TODO: Error handling
+					return .none
 
-			case .setNavigation(selection: .none):
-				state.selection = nil
-				return .none
-
-			case .detailedStatistics:
-				return .none
+				case .destination(.dismiss),
+						.destination(.presented(.details(.internal))), .destination(.presented(.details(.view))):
+					return .none
+				}
 			}
 		}
-//		.ifLet(\.selection, action: /StatisticsList.Action.detailedStatistics) {
-//			Scope(state: \Identified<String, DetailedStatistics.State>.value, action: /.self) {
-//				DetailedStatistics()
-//			}
-//		}
+		.ifLet(\.$destination, action: \.internal.destination)
 	}
 }

@@ -1,7 +1,7 @@
 import ComposableArchitecture
 import PlaysListFeature
 import SharedModelsLibrary
-import SharedModelsLibraryMocks
+import SharedModelsMocksLibrary
 import SolverServiceInterface
 import XCTest
 

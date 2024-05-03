@@ -6,7 +6,9 @@ import PlaysRepositoryInterface
 import SharedModelsLibrary
 import SolverServiceInterface
 
-public struct RecordPlay: ReducerProtocol {
+@Reducer
+public struct RecordPlay: Reducer {
+	@ObservableState
 	public struct State: Equatable {
 		public var letters = ""
 		public var date = Date()
@@ -17,57 +19,71 @@ public struct RecordPlay: ReducerProtocol {
 			.init(id: UUID(), createdAt: date, letters: letters, outcome: outcome, difficulty: nil)
 		}
 
+		var isPlayable: Bool {
+			letters.count == 12
+		}
+
 		public init() {}
 	}
 
-	public enum Action: Equatable {
-		case lettersChanged(String)
-		case dateChanged(Date)
-		case outcomeChanged(Play.Outcome)
-		case analysis(Analysis.Action)
-		case saveButtonTapped
-		case playSaved
+	public enum Action: ViewAction, BindableAction {
+		@CasePathable public enum View {
+			case didTapSaveButton
+		}
+		@CasePathable public enum Internal {
+			case savedPlayResponse(Result<Void, Error>)
+			case analysis(Analysis.Action)
+		}
+
+		case view(View)
+		case `internal`(Internal)
+		case binding(BindingAction<State>)
 	}
 
 	public init() {}
 
+	@Dependency(\.dismiss) var dismiss
 	@Dependency(\.playsDataProvider) var playsDataProvider
 
-	public var body: some ReducerProtocol<State, Action> {
-//		Scope(state: \.analysis, action: /RecordPlay.Action.analysis) {
-//			Analysis()
-//		}
+	public var body: some ReducerOf<Self> {
+		BindingReducer()
+
+		Scope(state: \.analysis, action: \.internal.analysis) {
+			Analysis()
+		}
 
 		Reduce { state, action in
 			switch action {
-			case let .lettersChanged(letters):
-				// TODO: replace non-A-Z characters
-				state.letters = String(letters.uppercased().prefix(12))
+			case let .view(viewAction):
+				switch viewAction {
+				case .didTapSaveButton:
+					return .run { [play = state.play] send in
+						await send(.internal(.savedPlayResponse(Result {
+							try await playsDataProvider.save(play)
+						})))
+					}
+				}
+
+			case let .internal(internalAction):
+				switch internalAction {
+				case .savedPlayResponse(.success):
+					return .run { _ in await dismiss() }
+
+				case .savedPlayResponse(.failure):
+					// TODO: Error handling
+					return .none
+
+				case .analysis(.binding), .analysis(.view), .analysis(.internal):
+					return .none
+				}
+
+			case .binding(\.letters):
+				state.letters = String(state.letters.uppercased().prefix(12))
+				// TODO: Used @Shared for letters?
 				state.analysis.letters = state.letters
 				return .none
 
-			case let .dateChanged(date):
-				state.date = date
-				return .none
-
-			case let .outcomeChanged(outcome):
-				state.outcome = outcome
-				return .none
-
-			case .saveButtonTapped:
-				return .task { [play = state.play] in
-					do {
-						try await playsDataProvider.save(play)
-					} catch {
-						print(error)
-					}
-					return .playSaved
-				}
-
-			case .playSaved:
-				return .none
-
-			case .analysis:
+			case .binding:
 				return .none
 			}
 		}

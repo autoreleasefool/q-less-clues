@@ -1,8 +1,8 @@
 import ComposableArchitecture
-import StatisticsFeature
 import SharedModelsLibrary
-import SharedModelsLibraryMocks
+import SharedModelsMocksLibrary
 import SolverServiceInterface
+import StatisticsFeature
 import XCTest
 
 @MainActor

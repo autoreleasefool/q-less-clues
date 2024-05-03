@@ -32,6 +32,7 @@ features = [ "PlayDetails" ]
 
 [features.Statistics]
 repositories = [ "Statistics" ]
+libraries = [ "Views" ]
 
 [features.SolutionsList]
 libraries = [ "SharedModels" ]
@@ -44,6 +45,10 @@ libraries = [ "SharedModels" ]
 
 # Services
 
+[services.Dictionary]
+[services.Dictionary.interface]
+libraries = [ "Dictionary" ]
+
 [services.Persistence]
 libraries = [ "PersistentModels" ]
 
@@ -52,7 +57,7 @@ libraries = [ "SharedModels" ]
 dependencies = [ "GRDB" ]
 
 [services.Solver]
-services = [ "Validator" ]
+services = [ "Dictionary", "Validator" ]
 
 [services.Solver.interface]
 libraries = [ "SharedModels" ]
@@ -75,25 +80,41 @@ dependencies = [ "GRDB" ]
 
 [libraries.SharedModels]
 libraries = [ "Extensions" ]
+[libraries.SharedModels.tests]
+libraries = [ "SharedModelsMocks" ]
+
+[libraries.SharedModelsMocks]
+skip_tests = true
+libraries = [ "SharedModels" ]
+
+[libraries.Views]
+skip_tests = true
 
 # Dependencies
 
 [dependencies.ComposableArchitecture]
 url = "https://github.com/pointfreeco/swift-composable-architecture.git"
-from = "0.43.0"
+from = "1.10.2"
 
 [dependencies.Dependencies]
-url = "https://github.com/pointfreeco/swift-composable-architecture.git"
-from = "0.43.0"
+url = "https://github.com/pointfreeco/swift-dependencies.git"
+from = "1.2.2"
+
+[dependencies.DependenciesMacros]
+url = "https://github.com/pointfreeco/swift-dependencies.git"
+from = "1.2.2"
 
 [dependencies.GRDB]
 url = "https://github.com/groue/GRDB.swift.git"
-from = "6.21.0"
+from = "6.27.0"
 
 # Defaults
 
 [defaults.features]
 dependencies = [ "ComposableArchitecture" ]
+
+[defaults.features.tests]
+libraries = [ "SharedModelsMocks" ]
 
 [defaults.repositories]
 services = [ "Persistence" ]
@@ -104,4 +125,4 @@ libraries = [ "SharedModels" ]
 dependencies = [ "Dependencies" ]
 
 [defaults.services.interface]
-dependencies = [ "Dependencies" ]
+dependencies = [ "Dependencies", "DependenciesMacros" ]

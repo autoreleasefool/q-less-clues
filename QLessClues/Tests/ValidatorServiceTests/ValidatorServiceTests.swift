@@ -1,37 +1,47 @@
+import Dependencies
 import DictionaryLibrary
 import SharedModelsLibrary
-import XCTest
 import ValidatorService
 import ValidatorServiceInterface
+import XCTest
 
 final class ValidatorServiceTests: XCTestCase {
-	let dictionary = WordSet(letterSet: .fullAlphabet, baseDictionary: ["HIP", "RAT"])
+	@Dependency(\.validatorService) private var validator
+
+	let dictionary = WordSet(letterSet: .fullAlphabet, baseDictionary: ["HIP", "RAT"], baseFrequences: [:])
 
 	func testAcceptsValidSolution() async {
-		let validator: ValidatorService = .live
 		let solution = Solution(board: [
 			Position(0, 0): "R",
 			Position(0, 1): "A",
 			Position(0, 2): "T",
 		])
 
-		let result = await validator.validate(solution, dictionary)
+		let result = await withDependencies {
+			$0.validatorService.validate = ValidatorService.liveValue.validate
+		} operation: {
+			await self.validator.validate(solution, dictionary)
+		}
+
 		XCTAssertTrue(result)
 	}
 
 	func testRejectsSolutionWithInvalidWords() async {
-		let validator: ValidatorService = .live
 		let solution = Solution(board: [
 			Position(0, 0): "H",
 			Position(0, 1): "I",
 		])
 
-		let result = await validator.validate(solution, dictionary)
+		let result = await withDependencies {
+			$0.validatorService.validate = ValidatorService.liveValue.validate
+		} operation: {
+			await self.validator.validate(solution, dictionary)
+		}
+
 		XCTAssertFalse(result)
 	}
 
 	func testRejectsSolutionWithDisconnectedWords() async {
-		let validator: ValidatorService = .live
 		let solution = Solution(board: [
 			Position(0, 0): "H",
 			Position(0, 1): "I",
@@ -41,7 +51,12 @@ final class ValidatorServiceTests: XCTestCase {
 			Position(2, 2): "T",
 		])
 
-		let result = await validator.validate(solution, dictionary)
+		let result = await withDependencies {
+			$0.validatorService.validate = ValidatorService.liveValue.validate
+		} operation: {
+			await self.validator.validate(solution, dictionary)
+		}
+
 		XCTAssertFalse(result)
 	}
 }

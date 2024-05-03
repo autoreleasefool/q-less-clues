@@ -1,59 +1,31 @@
 import ComposableArchitecture
 import SharedModelsLibrary
 import SwiftUI
+import ViewsLibrary
 
+@ViewAction(for: StatisticsList.self)
 public struct StatisticsListView: View {
-	let store: StoreOf<StatisticsList>
+	@Bindable public var store: StoreOf<StatisticsList>
 
-	struct ViewState: Equatable {
-		let gamesPlayed: IdentifiedArrayOf<LetterPlayCount>
-		let selection: String?
-
-		init(state: StatisticsList.State) {
-			self.gamesPlayed = state.gamesPlayed
-			self.selection = state.selection?.id
-		}
-	}
-
-	enum ViewAction {
-		case subscribeToCounts
-		case setNavigation(selection: String?)
+	public init(store: StoreOf<StatisticsList>) {
+		self.store = store
 	}
 
 	public var body: some View {
-		WithViewStore(store, observe: ViewState.init, send: StatisticsList.Action.init) { viewStore in
-			List(viewStore.gamesPlayed) { letter in
-				NavigationLink(
-					destination: IfLetStore(
-						store.scope(
-							state: \.selection?.value,
-							action: StatisticsList.Action.detailedStatistics
-						)
-					) {
-						DetailedStatisticsView(store: $0)
-					},
-					tag: letter.id,
-					selection: viewStore.binding(
-						get: \.selection,
-						send: StatisticsListView.ViewAction.setNavigation(selection:)
-					)
-				) {
-					LabeledContent(letter.letter, value: "\(letter.plays)")
-				}
+		List(store.gamesPlayed) { letter in
+			Button {
+				send(.didTapGame(letter.id))
+			} label: {
+				LabeledContent(letter.letter, value: "\(letter.plays)")
 			}
-			.navigationTitle("Statistics by Letter")
-			.task { await viewStore.send(.subscribeToCounts).finish() }
+			.buttonStyle(.navigation)
 		}
-	}
-}
-
-extension StatisticsList.Action {
-	init(action: StatisticsListView.ViewAction) {
-		switch action {
-		case .subscribeToCounts:
-			self = .subscribeToCounts
-		case let .setNavigation(selection):
-			self = .setNavigation(selection: selection)
+		.navigationTitle("Statistics by Letter")
+		.navigationDestination(
+			item: $store.scope(state: \.destination?.details, action: \.internal.destination.details)
+		) {
+			DetailedStatisticsView(store: $0)
 		}
+		.task { await send(.task).finish() }
 	}
 }

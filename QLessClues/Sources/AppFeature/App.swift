@@ -1,39 +1,52 @@
 import ComposableArchitecture
 import DictionaryLibrary
 import PlaysListFeature
-import PlaysRepositoryInterface
-import SolverServiceInterface
-import StatisticsRepositoryInterface
 
-public struct App: ReducerProtocol {
+@Reducer
+public struct App: Reducer {
+	@ObservableState
 	public struct State: Equatable {
 		public var playsList = PlaysList.State()
 
 		public init() {}
 	}
 
-	public enum Action: Equatable {
-		case onAppear
-		case playsList(PlaysList.Action)
+	public enum Action: ViewAction {
+		@CasePathable public enum View {
+			case onAppear
+		}
+		@CasePathable public enum Internal {
+			case playsList(PlaysList.Action)
+		}
+
+		case view(View)
+		case `internal`(Internal)
 	}
 
 	public init() {}
 
-	public var body: some ReducerProtocol<State, Action> {
-//		Scope(state: \.playsList, action: /App.Action.playsList) {
-//			PlaysList()
-//		}
+	public var body: some ReducerOf<Self> {
+		Scope(state: \.playsList, action: \.internal.playsList) {
+			PlaysList()
+		}
 
-		Reduce { _, action in
+		Reduce<State, Action> { _, action in
 			switch action {
-			case .onAppear:
-				return .fireAndForget {
-					_ = WordSet.englishSet
-					_ = WordFrequency.englishFrequencies
+			case let .view(viewAction):
+				switch viewAction {
+				case .onAppear:
+					return .run { _ in
+
+//						_ = WordSet.englishSet
+//						_ = WordFrequency.englishFrequencies
+					}
 				}
 
-			case .playsList:
-				return .none
+			case let .internal(internalAction):
+				switch internalAction {
+				case .playsList(.view), .playsList(.internal):
+					return .none
+				}
 			}
 		}
 	}

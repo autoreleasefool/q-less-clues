@@ -4,7 +4,7 @@ import GRDB
 import PersistenceServiceInterface
 
 extension PersistenceService: DependencyKey {
-	public static let liveValue: Self = {
+	public static var liveValue: Self = {
 		let appDb: AppDatabase
 		do {
 			let fileManager = FileManager.default

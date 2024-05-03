@@ -5,7 +5,7 @@ import SharedModelsLibrary
 import ValidatorServiceInterface
 
 extension ValidatorService: DependencyKey {
-	public static let liveValue = Self(
+	public static var liveValue = Self(
 		validate: { solution, dictionary in
 			guard solution.words.allSatisfy({ dictionary.contains($0) }) else {
 				return false

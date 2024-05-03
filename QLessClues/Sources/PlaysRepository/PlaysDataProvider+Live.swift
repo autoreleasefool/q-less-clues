@@ -7,7 +7,7 @@ import PlaysRepositoryInterface
 import SharedModelsLibrary
 
 extension PlaysDataProvider: DependencyKey {
-	public static let liveValue = Self(
+	public static var liveValue = Self(
 		save: { play in
 			@Dependency(\.persistenceService) var persistenceService: PersistenceService
 			@Dependency(\.playsPersistenceService) var playsPersistenceService: PlaysPersistenceService

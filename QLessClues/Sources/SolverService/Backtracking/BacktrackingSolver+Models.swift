@@ -12,12 +12,17 @@ extension BacktrackingSolver {
 		var remainingLetters: LetterSet
 		var wordSet: WordSet
 
-		init(initialLetters: String, continuation: AsyncStream<SolverService.Event>.Continuation) {
+		init(
+			initialLetters: String,
+			dictionary: [String],
+			frequencies: [String: Int],
+			continuation: AsyncStream<SolverService.Event>.Continuation
+		) {
 			self.initialLetters = initialLetters
 			self.continuation = continuation
 			let remainingLetters = LetterSet(letters: initialLetters)
 			self.remainingLetters = remainingLetters
-			self.wordSet = WordSet(letterSet: remainingLetters)
+			self.wordSet = WordSet(letterSet: remainingLetters, baseDictionary: dictionary, baseFrequences: frequencies)
 		}
 	}
 }

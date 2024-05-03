@@ -1,12 +1,19 @@
+import Dependencies
 import SolverService
-import XCTest
 @testable import SolverServiceInterface
 @testable import ValidatorServiceInterface
+import XCTest
 
 final class SolverServiceTests: XCTestCase {
+	@Dependency(\.solverService) private var solver
+
 	func testsReturnsAllSolutions() async {
-		let validator = ValidatorService { _, _ in true }
-		let solver: SolverService = .live(with: .init(validatorService: validator))
+		let solutions = withDependencies {
+			$0.validatorService.validate = { _, _ in true }
+			$0.solverService.findSolutions = SolverService.liveValue.findSolutions
+		} operation: {
+			self.solver.findSolutions("ART")
+		}
 
 		let possibleSolutions = Set([
 			["ART"],
@@ -14,13 +21,19 @@ final class SolverServiceTests: XCTestCase {
 			["TAR"],
 		])
 
-		for await event in solver.findSolutions("ART") {
+		let expectation = self.expectation(description: "did receive solutions")
+
+		var iterator = solutions.makeAsyncIterator()
+		while let event = await iterator.next() {
 			switch event {
 			case .progress:
 				break
 			case let .solution(solution):
 				XCTAssertTrue(possibleSolutions.contains(solution.words))
+				expectation.fulfill()
 			}
 		}
+
+		await fulfillment(of: [expectation])
 	}
 }

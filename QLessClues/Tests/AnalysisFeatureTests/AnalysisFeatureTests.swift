@@ -1,7 +1,7 @@
 import AnalysisFeature
 import ComposableArchitecture
 import SharedModelsLibrary
-import SharedModelsLibraryMocks
+import SharedModelsMocksLibrary
 import SolverServiceInterface
 import XCTest
 

@@ -2,7 +2,9 @@ import ComposableArchitecture
 import DictionaryLibrary
 import SharedModelsLibrary
 
-public struct Hints: ReducerProtocol {
+@Reducer
+public struct Hints: Reducer {
+	@ObservableState
 	public struct State: Equatable {
 		public var solution: Solution?
 		public var hints: [String] = []
@@ -19,25 +21,32 @@ public struct Hints: ReducerProtocol {
 		}
 	}
 
-	public enum Action: Equatable {
-		case hintButtonTapped
+	public enum Action: ViewAction {
+		@CasePathable public enum View {
+			case didTapHintButton
+		}
+
+		case view(View)
 	}
 
 	public init() {}
 
-	public var body: some ReducerProtocol<State, Action> {
+	public var body: some ReducerOf<Self> {
 		Reduce { state, action in
 			switch action {
-			case .hintButtonTapped:
-				guard let solution = state.solution,
-							state.hasMoreHints,
-							let hint = Set(solution.words).subtracting(state.hints).sorted().first
-				else {
+			case let .view(viewAction):
+				switch viewAction {
+				case .didTapHintButton:
+					guard let solution = state.solution,
+								state.hasMoreHints,
+								let hint = Set(solution.words).subtracting(state.hints).sorted().first
+					else {
+						return .none
+					}
+
+					state.hints.append(hint)
 					return .none
 				}
-
-				state.hints.append(hint)
-				return .none
 			}
 		}
 	}

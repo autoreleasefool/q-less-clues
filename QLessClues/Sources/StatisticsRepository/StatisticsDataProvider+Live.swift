@@ -7,7 +7,7 @@ import SharedModelsLibrary
 import StatisticsRepositoryInterface
 
 extension StatisticsDataProvider: DependencyKey {
-	public static let liveValue = Self(
+	public static var liveValue = Self(
 		fetchCounts: {
 			.init { continuation in
 				let task = Task {

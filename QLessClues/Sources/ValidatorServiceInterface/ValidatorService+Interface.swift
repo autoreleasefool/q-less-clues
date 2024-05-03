@@ -1,4 +1,5 @@
 import Dependencies
+import DependenciesMacros
 import DictionaryLibrary
 import SharedModelsLibrary
 

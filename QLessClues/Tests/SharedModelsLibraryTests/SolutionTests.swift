@@ -1,6 +1,6 @@
-import XCTest
 import SharedModelsLibrary
-import SharedModelsLibraryMocks
+import SharedModelsMocksLibrary
+import XCTest
 
 final class SolutionTests: XCTestCase {
 	func testCharacterAtIsCorrect() {

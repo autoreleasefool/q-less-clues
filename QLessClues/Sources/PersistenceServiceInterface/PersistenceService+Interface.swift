@@ -1,8 +1,9 @@
 import Dependencies
+import DependenciesMacros
 import GRDB
 
 public struct PersistenceService: Sendable {
-	public var reader: @Sendable () -> DatabaseReader
+	public var reader: @Sendable () -> DatabaseReader // TODO: make throwing
 	public var write: @Sendable (@escaping (any DatabaseWriter) async throws -> Void) async throws -> Void
 
 	public init(

@@ -1,5 +1,5 @@
-import XCTest
 @testable import ExtensionsLibrary
+import XCTest
 
 final class DateExtensionsTests: XCTestCase {
 	func testFormattedRelative() {
