@@ -11,7 +11,7 @@ struct ContentView: View {
 	#else
 	let store = Store(
 		initialState: App.State(),
-		reducer: App()
+		reducer: { App() }
 	)
 	#endif
 
